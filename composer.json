@@ -1,0 +1,29 @@
+{
+    "name": "kudashevs/accept-language",
+    "description": "An Accept-Language HTTP header parser.",
+    "type": "library",
+    "keywords": ["php", "http", "accept-language"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Kudashev",
+            "email": "kudashevs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kudashevs\\AcceptLanguage\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kudashevs\\AcceptLanguage\\Tests\\": "tests/"
+        }
+    }
+}
