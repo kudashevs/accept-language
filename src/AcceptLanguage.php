@@ -6,10 +6,20 @@ class AcceptLanguage
 {
     public const DEFAULT_LANGUAGE = 'en';
 
+    /**
+     * @var string Contains raw Accept-Language string.
+     */
+    private $raw;
+
+    /**
+     * @var string Contains the found language.
+     */
     private $language = '';
 
     public function __construct(string $rawAcceptLanguage = '', array $options = [])
     {
+        $this->raw = $rawAcceptLanguage;
+
         $this->setLanguage($rawAcceptLanguage);
     }
 
@@ -31,6 +41,16 @@ class AcceptLanguage
         if ($rawAcceptLanguage === '*') {
             return self::DEFAULT_LANGUAGE;
         }
+
+        return $rawAcceptLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRaw(): string
+    {
+        return $this->raw;
     }
 
     /**
