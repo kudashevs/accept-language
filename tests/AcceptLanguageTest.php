@@ -7,10 +7,10 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
-    public function testCreatesExpectedInstance()
+    public function testGetLanguageReturnsDefaultIfAnyLanguageProvided()
     {
-        $acceptLanguage = new AcceptLanguage();
+        $service = new AcceptLanguage('*');
 
-        $this->assertInstanceOf(AcceptLanguage::class, $acceptLanguage);
+        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 }
