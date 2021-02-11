@@ -80,11 +80,11 @@ class AcceptLanguage
         $language = array_search(max($languages), $languages, true);
         $language = $this->trimLanguageTag($language);
 
-        if (!$this->isAcceptableLanguage($language)) {
-            return $this->resolveDefaultLanguage();
+        if ($this->isAcceptableLanguage($language)) {
+            return $language;
         }
 
-        return $language;
+        return $this->resolveDefaultLanguage();
     }
 
     /**
