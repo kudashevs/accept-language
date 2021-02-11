@@ -61,10 +61,31 @@ class AcceptLanguage
         foreach (explode(',', $languageInformation) as $rawLanguageTag) {
             $splitTagAndQuality = array_pad(explode(';q=', trim($rawLanguageTag)), 2, 1);
 
-            $languages[(string)$splitTagAndQuality[0]] = (float)$splitTagAndQuality[1];
+            $langTag = $this->normalizeTag($splitTagAndQuality[0]);
+            $langQuality = $this->normalizeQuality($splitTagAndQuality[1]);
+
+            $languages[$langTag] = $langQuality;
         }
 
         return $this->retrieveLanguage($languages);
+    }
+
+    /**
+     * @param string $tag
+     * @return string
+     */
+    private function normalizeTag(string $tag): string
+    {
+        return explode('-', $tag)[0];
+    }
+
+    /**
+     * @param string $quality
+     * @return float
+     */
+    private function normalizeQuality(string $quality): float
+    {
+        return (float)$quality;
     }
 
     /**
