@@ -62,10 +62,10 @@ class AcceptLanguage
         }
 
         $languages = [];
-        foreach (explode(',', $languageInformation) as $langTags) {
-            $langTag = array_pad(explode(';q=', trim($langTags)), 2, 1);
+        foreach (explode(',', $languageInformation) as $rawLanguageTag) {
+            $languageTagAndQuality = array_pad(explode(';q=', trim($rawLanguageTag)), 2, 1);
 
-            $languages[(string)$langTag[0]] = (float)$langTag[1];
+            $languages[(string)$languageTagAndQuality[0]] = (float)$languageTagAndQuality[1];
         }
 
         return $this->retrieveLanguage($languages);
