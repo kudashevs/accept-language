@@ -11,7 +11,7 @@ class AcceptLanguage
      *
      * @var string
      */
-    private $language = '';
+    private $language;
 
     /**
      * Contains various options if any.
