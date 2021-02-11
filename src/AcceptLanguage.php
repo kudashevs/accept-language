@@ -61,7 +61,27 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        return self::DEFAULT_LANGUAGE;
+        $languages = [];
+        foreach (explode(',', $languageInformation) as $langTags) {
+            $langTag = array_pad(explode(';q=', trim($langTags)), 2, 1);
+
+            $languages[(string)$langTag[0]] = (float)$langTag[1];
+        }
+
+        return $this->retrieveLanguage($languages);
+    }
+
+    /**
+     * @param array $languages
+     * @return string
+     */
+    private function retrieveLanguage(array $languages): string
+    {
+        if (empty($languages)) {
+            return $this->resolveDefaultLanguage();
+        }
+
+        return array_search(max($languages), $languages, true);
     }
 
     /**
