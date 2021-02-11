@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
-    public function testSetRawSetsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testSetsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $service = new AcceptLanguage();
 
