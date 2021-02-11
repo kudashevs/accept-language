@@ -56,6 +56,12 @@ class AcceptLanguage
         if (empty($languageInformation)) {
             return $this->resolveDefaultLanguage();
         }
+
+        if ($languageInformation === '*') {
+            return $this->resolveDefaultLanguage();
+        }
+
+        return self::DEFAULT_LANGUAGE;
     }
 
     /**
