@@ -33,6 +33,14 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
+    public function testSetsDefatulLanguageWhenAcceptedLanguagesContainsGarbage()
+    {
+        $options = ['accept_language' => 'pp', 'accepted_languages' => 'wrong_type'];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
+    }
+
     /**
      * @dataProvider provideLanguageInformation
      */
