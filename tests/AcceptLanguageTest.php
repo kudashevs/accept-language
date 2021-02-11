@@ -22,6 +22,17 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
+    public function testSetsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
+    {
+        /**
+         * According to ISO 639 the pp short code does not exist and cannot be supported.
+         */
+        $options = ['accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
+    }
+
     /**
      * @dataProvider provideLanguageInformation
      */

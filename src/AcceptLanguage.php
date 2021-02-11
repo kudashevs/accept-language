@@ -82,8 +82,28 @@ class AcceptLanguage
         }
 
         $language = array_search(max($languages), $languages, true);
+        $language = $this->trimLanguageTag($language);
 
-        return $this->trimLanguageTag($language);
+        if (!$this->isAcceptableLanguage($language)) {
+            return $this->resolveDefaultLanguage();
+        }
+
+        return $language;
+    }
+
+    /**
+     * @param string $language
+     * @return bool
+     */
+    private function isAcceptableLanguage(string $language)
+    {
+        $acceptedLanguages = $this->options['accepted_languages'] ?? null;
+
+        if (is_array($acceptedLanguages) && !empty($acceptedLanguages)) {
+            return in_array($language, $acceptedLanguages, true);
+        }
+
+        return true;
     }
 
     /**
