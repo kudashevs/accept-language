@@ -42,7 +42,7 @@ class AcceptLanguage
      */
     private function retrieveAcceptLanguage(): string
     {
-        return $this->options['accept_language'] ?? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        return trim($this->options['accept_language'] ?? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE']);
     }
 
     /**
