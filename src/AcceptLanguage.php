@@ -7,11 +7,11 @@ class AcceptLanguage
     public const DEFAULT_LANGUAGE = 'en';
 
     /**
-     * Contains the found language or the default one.
+     * Contains the found language.
      *
      * @var string
      */
-    private $language = self::DEFAULT_LANGUAGE;
+    private $language = '';
 
     /**
      * Contains various options if any.
