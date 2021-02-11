@@ -53,11 +53,7 @@ class AcceptLanguage
      */
     private function parse(string $languageInformation): string
     {
-        if (empty($languageInformation)) {
-            return $this->resolveDefaultLanguage();
-        }
-
-        if ($languageInformation === '*') {
+        if (empty($languageInformation) || $languageInformation === '*') {
             return $this->resolveDefaultLanguage();
         }
 
