@@ -94,40 +94,30 @@ class AcceptLanguage
      */
     private function retrieveLanguage(array $languages): string
     {
+        $languages = $this->retrieveAcceptableLanguagesIntersection($languages);
+
         if (empty($languages)) {
             return $this->resolveDefaultLanguage();
         }
 
-        $language = array_search(max($languages), $languages, true);
-
-        if ($this->isAcceptableLanguage($language)) {
-            return $language;
-        }
-
-        return $this->resolveDefaultLanguage();
+        return array_search(max($languages), $languages, true);
     }
 
     /**
-     * @param string $language
-     * @return bool
+     * @param array $languages
+     * @return array
      */
-    private function isAcceptableLanguage(string $language)
+    private function retrieveAcceptableLanguagesIntersection(array $languages): array
     {
-        /**
-         * Any language is accepted when 'accepted_languages' is not defined.
-         */
         if (!array_key_exists('accepted_languages', $this->options)) {
-            return true;
+            return $languages;
         }
 
-        /**
-         * Better silently return default value when 'accepted_languages' is wrong.
-         */
         if (!is_array($this->options['accepted_languages'])) {
-            return false;
+            return [];
         }
 
-        return in_array($language, $this->options['accepted_languages'], true);
+        return array_intersect_key(array_flip($this->options['accepted_languages']), $languages);
     }
 
     /**
