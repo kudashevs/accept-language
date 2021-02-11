@@ -93,13 +93,14 @@ class AcceptLanguage
      */
     private function isAcceptableLanguage(string $language)
     {
-        $acceptedLanguages = $this->options['accepted_languages'] ?? null;
-
-        if (is_array($acceptedLanguages) && !empty($acceptedLanguages)) {
-            return in_array($language, $acceptedLanguages, true);
+        if (
+            empty($this->options['accepted_languages']) ||
+            !is_array($this->options['accepted_languages'])
+        ) {
+            return true;
         }
 
-        return true;
+        return in_array($language, $this->options['accepted_languages'], true);
     }
 
     /**
