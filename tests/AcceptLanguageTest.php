@@ -14,14 +14,6 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
-    public function testGetLanguageReturnsDefaultIfAnyLanguageProvided()
-    {
-        $service = new AcceptLanguage();
-        $service->process('*');
-
-        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
-    }
-
     /**
      * @dataProvider provideLanguageInformation
      */
@@ -36,6 +28,10 @@ class AcceptLanguageTest extends TestCase
     public function provideLanguageInformation()
     {
         return [
+            'any language return default' => [
+                AcceptLanguage::DEFAULT_LANGUAGE,
+                ['accept_language' => '*'],
+            ],
             'two letters primary langtag' => [
                 'en',
                 ['accept_language' => 'en'],
