@@ -54,7 +54,7 @@ class AcceptLanguage
     private function parse(string $languageInformation): string
     {
         if (empty($languageInformation)) {
-            return $this->resolveEmptyInformation();
+            return $this->resolveDefaultLanguage();
         }
     }
 
@@ -62,7 +62,7 @@ class AcceptLanguage
      * @param string $information
      * @return string
      */
-    private function resolveEmptyInformation(): string
+    private function resolveDefaultLanguage(): string
     {
         return self::DEFAULT_LANGUAGE;
     }
