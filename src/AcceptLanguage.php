@@ -99,7 +99,6 @@ class AcceptLanguage
         }
 
         $language = array_search(max($languages), $languages, true);
-        $language = $this->trimLanguageTag($language);
 
         if ($this->isAcceptableLanguage($language)) {
             return $language;
@@ -129,15 +128,6 @@ class AcceptLanguage
         }
 
         return in_array($language, $this->options['accepted_languages'], true);
-    }
-
-    /**
-     * @param string $tag
-     * @return string
-     */
-    private function trimLanguageTag(string $tag): string
-    {
-        return explode('-', $tag)[0];
     }
 
     /**
