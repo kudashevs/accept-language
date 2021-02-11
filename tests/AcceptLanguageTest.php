@@ -27,7 +27,7 @@ class AcceptLanguageTest extends TestCase
         /**
          * According to ISO 639 the pp short code does not exist and cannot be supported.
          */
-        $options = ['accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
+        $options = ['http_accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
         $service = new AcceptLanguage($options);
 
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
@@ -35,7 +35,7 @@ class AcceptLanguageTest extends TestCase
 
     public function testSetsDefatulLanguageWhenAcceptedLanguagesContainsGarbage()
     {
-        $options = ['accept_language' => 'pp', 'accepted_languages' => 'wrong_type'];
+        $options = ['http_accept_language' => 'pp', 'accepted_languages' => 'wrong_type'];
         $service = new AcceptLanguage($options);
 
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
@@ -57,28 +57,28 @@ class AcceptLanguageTest extends TestCase
         return [
             'any language return default' => [
                 AcceptLanguage::DEFAULT_LANGUAGE,
-                ['accept_language' => '*'],
+                ['http_accept_language' => '*'],
             ],
             'two letters primary langtag' => [
                 'en',
-                ['accept_language' => 'en'],
+                ['http_accept_language' => 'en'],
             ],
             'three letters primary langtag' => [
                 'sgn',
-                ['accept_language' => 'sgn'],
+                ['http_accept_language' => 'sgn'],
             ],
             'sequence of primary tags' => [
                 'de',
-                ['accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
+                ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
             ],
             'example all lowercase de,en-us;q=0.7...' => [
-                'de', ['accept_language' => 'de,en-us;q=0.7,en;q=0.3']
+                'de', ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3']
             ],
             'example part uppercase de-DE,de;q=0.9...' => [
-                'de', ['accept_language' => 'de-DE,de;q=0.9,en;q=0.8']
+                'de', ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8']
             ],
             'mozilla example with space fr-CH, fr;q=0.9, en;q=0.8...' => [
-                'fr', ['accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5']
+                'fr', ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5']
             ],
         ];
     }
