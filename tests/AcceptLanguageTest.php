@@ -14,6 +14,14 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
+    public function testSetsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    {
+        $options = ['default_language' => 'de'];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame($options['default_language'], $service->getLanguage());
+    }
+
     /**
      * @dataProvider provideLanguageInformation
      */

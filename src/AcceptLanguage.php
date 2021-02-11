@@ -85,11 +85,14 @@ class AcceptLanguage
     }
 
     /**
-     * @param string $information
      * @return string
      */
     private function resolveDefaultLanguage(): string
     {
+        if (!empty($this->options['default_language'])) { // todo add check with supported languages
+            return $this->options['default_language'];
+        }
+
         return self::DEFAULT_LANGUAGE;
     }
 
