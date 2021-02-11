@@ -81,7 +81,18 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        return array_search(max($languages), $languages, true);
+        $language = array_search(max($languages), $languages, true);
+
+        return $this->trimLanguageTag($language);
+    }
+
+    /**
+     * @param string $tag
+     * @return string
+     */
+    private function trimLanguageTag(string $tag): string
+    {
+        return explode('-', $tag)[0];
     }
 
     /**

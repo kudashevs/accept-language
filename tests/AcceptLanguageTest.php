@@ -52,6 +52,15 @@ class AcceptLanguageTest extends TestCase
                 'de',
                 ['accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
             ],
+            'example all lowercase de,en-us;q=0.7...' => [
+                'de', ['accept_language' => 'de,en-us;q=0.7,en;q=0.3']
+            ],
+            'example part uppercase de-DE,de;q=0.9...' => [
+                'de', ['accept_language' => 'de-DE,de;q=0.9,en;q=0.8']
+            ],
+            'mozilla example with space fr-CH, fr;q=0.9, en;q=0.8...' => [
+                'fr', ['accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5']
+            ],
         ];
     }
 }
