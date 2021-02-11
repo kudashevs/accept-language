@@ -7,50 +7,64 @@ class AcceptLanguage
     public const DEFAULT_LANGUAGE = 'en';
 
     /**
-     * @var string Contains raw Accept-Language string.
-     */
-    private $raw;
-
-    /**
-     * @var string Contains the found language.
-     */
-    private $language = '';
-
-    public function __construct(string $rawAcceptLanguage = '', array $options = [])
-    {
-        $this->raw = $rawAcceptLanguage;
-
-        $this->setLanguage($rawAcceptLanguage);
-    }
-
-    /**
-     * @param string $rawAcceptLanguage
-     */
-    private function setLanguage(string $rawAcceptLanguage): void
-    {
-        $this->language = $this->parse($rawAcceptLanguage);
-    }
-
-    /**
-     * Parse HTTP Accept-Language string.
+     * Contains the found language or the default one.
      *
-     * @param string $rawAcceptLanguage
+     * @var string
      */
-    private function parse(string $rawAcceptLanguage): string
-    {
-        if ($rawAcceptLanguage === '*') {
-            return self::DEFAULT_LANGUAGE;
-        }
+    private $language = self::DEFAULT_LANGUAGE;
 
-        return $rawAcceptLanguage;
+    /**
+     * Contains various options if any.
+     *
+     * @var array
+     */
+    private $options;
+
+    public function __construct(array $options = [])
+    {
+        $this->options = $options;
+
+        $this->process();
+    }
+
+    /**
+     * Processes HTTP Accept-Language information.
+     */
+    public function process(): void
+    {
+        $languageInformation = $this->retrieveAcceptLanguage();
+
+        $this->language = $this->parse($languageInformation);
     }
 
     /**
      * @return string
      */
-    public function getRaw(): string
+    private function retrieveAcceptLanguage(): string
     {
-        return $this->raw;
+        return $this->options['accept_language'] ?? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE'];
+    }
+
+    /**
+     * Parse HTTP Accept-Language string.
+     *
+     * @param string $languageInformation
+     * @return string
+     */
+    private function parse(string $languageInformation): string
+    {
+        if (empty($languageInformation)) {
+            return $this->resolveEmptyInformation();
+        }
+    }
+
+    /**
+     * @param string $information
+     * @return string
+     */
+    private function resolveEmptyInformation(): string
+    {
+        return self::DEFAULT_LANGUAGE;
     }
 
     /**
