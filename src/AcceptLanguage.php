@@ -126,13 +126,24 @@ class AcceptLanguage
      */
     private function retrieveProperLanguage(array $languages): string
     {
-        $language = (string)array_search(max($languages), $languages, true);
+        $highestQualityLanguages = array_keys($languages, max($languages));
 
-        if (strlen($language) < 2) {
-            return $this->resolveDefaultLanguage();
+        return $this->findProperLanguage($highestQualityLanguages);
+    }
+
+    /**
+     * @param array $languages
+     * @return string
+     */
+    private function findProperLanguage(array $languages): string
+    {
+        foreach ($languages as $language) {
+            if (strlen($language) >= 2) {
+                return $language;
+            }
         }
 
-        return $language;
+        return $this->resolveDefaultLanguage();
     }
 
     /**
