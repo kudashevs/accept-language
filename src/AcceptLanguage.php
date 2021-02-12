@@ -58,11 +58,11 @@ class AcceptLanguage
         }
 
         $languages = [];
-        foreach (explode(',', $languageInformation) as $rawLanguageTag) {
-            $splitTagAndQuality = array_pad(explode(';q=', trim($rawLanguageTag)), 2, 1);
+        foreach (explode(',', $languageInformation) as $decoupledLangTag) {
+            $splitLangTagAndQuality = array_pad(explode(';q=', trim($decoupledLangTag)), 2, 1);
 
-            $langTag = $this->normalizeTag($splitTagAndQuality[0]);
-            $langQuality = $this->normalizeQuality($splitTagAndQuality[1]);
+            $langTag = $this->normalizeTag($splitLangTagAndQuality[0]);
+            $langQuality = $this->normalizeQuality($splitLangTagAndQuality[1]);
 
             $languages[$langTag] = $langQuality;
         }
