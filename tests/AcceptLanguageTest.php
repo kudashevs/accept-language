@@ -49,6 +49,17 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame('de', $service->getLanguage());
     }
 
+    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersect()
+    {
+        $options = [
+            'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+            'accepted_languages' => ['de', 'fr'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame('fr', $service->getLanguage());
+    }
+
     /**
      * @dataProvider provideLanguageInformation
      */
