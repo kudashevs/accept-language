@@ -7,14 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
-    public function testSetsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testGetLanguageReturnsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $service = new AcceptLanguage();
 
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
-    public function testSetsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testGetLanguageReturnsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
@@ -22,7 +22,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
-    public function testSetsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
+    public function testGetLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
     {
         $options = ['http_accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
         $service = new AcceptLanguage($options);
@@ -30,7 +30,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
-    public function testSetsDefatulLanguageWhenAcceptedLanguagesContainsGarbage()
+    public function testGetLanguageReturnsDefatulLanguageWhenAcceptedLanguagesContainsGarbage()
     {
         $options = ['http_accept_language' => 'pp', 'accepted_languages' => 'wrong_type'];
         $service = new AcceptLanguage($options);
@@ -38,7 +38,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
-    public function testSetsTheHighestLanguageFromAcceptedLanguages()
+    public function testGetLanguageReturnsExpectedLanguageWhenLanguagesIntersectOnce()
     {
         $options = [
             'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
