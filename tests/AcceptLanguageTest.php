@@ -49,7 +49,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame('de', $service->getLanguage());
     }
 
-    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersect()
+    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersectWithQuality1()
     {
         $options = [
             'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
@@ -58,6 +58,17 @@ class AcceptLanguageTest extends TestCase
         $service = new AcceptLanguage($options);
 
         $this->assertSame('fr', $service->getLanguage());
+    }
+
+    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersectWithQualityBelow1()
+    {
+        $options = [
+            'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
+            'accepted_languages' => ['en', 'es'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame('es', $service->getLanguage());
     }
 
     /**
@@ -81,6 +92,10 @@ class AcceptLanguageTest extends TestCase
             'any language tag with highest quality results default' => [
                 AcceptLanguage::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*,de;q=0.7'],
+            ],
+            'any language tag and lang tag with equal quality results language' => [
+                'es',
+                ['http_accept_language' => '*,es,de;q=0.7'],
             ],
             'two letters primary langtag' => [
                 'en',
