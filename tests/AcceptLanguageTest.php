@@ -24,9 +24,6 @@ class AcceptLanguageTest extends TestCase
 
     public function testSetsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
     {
-        /**
-         * According to ISO 639 the pp short code does not exist and cannot be supported.
-         */
         $options = ['http_accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
         $service = new AcceptLanguage($options);
 
