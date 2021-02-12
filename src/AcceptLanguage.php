@@ -100,7 +100,7 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        return array_search(max($languages), $languages, true);
+        return $this->retrieveProperLanguage($languages);
     }
 
     /**
@@ -118,6 +118,21 @@ class AcceptLanguage
         }
 
         return array_intersect_key(array_flip($this->options['accepted_languages']), $languages);
+    }
+
+    /**
+     * @param array $languages
+     * @return string
+     */
+    private function retrieveProperLanguage(array $languages): string
+    {
+        $language = (string)array_search(max($languages), $languages, true);
+
+        if (strlen($language) < 2) {
+            return $this->resolveDefaultLanguage();
+        }
+
+        return $language;
     }
 
     /**
