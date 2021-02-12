@@ -74,9 +74,13 @@ class AcceptLanguageTest extends TestCase
     public function provideLanguageInformation()
     {
         return [
-            'any language return default' => [
+            'any language tag results default' => [
                 AcceptLanguage::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*'],
+            ],
+            'any language tag with highest quality results default' => [
+                AcceptLanguage::DEFAULT_LANGUAGE,
+                ['http_accept_language' => '*,de;q=0.7'],
             ],
             'two letters primary langtag' => [
                 'en',
