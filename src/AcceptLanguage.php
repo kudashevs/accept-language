@@ -64,6 +64,14 @@ class AcceptLanguage
             $langTag = $this->normalizeTag($splitLangTagAndQuality[0]);
             $langQuality = $this->normalizeQuality($splitLangTagAndQuality[1]);
 
+            /**
+             * The first registered language tag has the highest quality value.
+             * All other similar tags will overwrite it and should be skipped.
+             */
+            if (array_key_exists($langTag, $languages)) {
+                continue;
+            }
+
             $languages[$langTag] = $langQuality;
         }
 
