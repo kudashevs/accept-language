@@ -120,4 +120,18 @@ class AcceptLanguageTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * Caught bugs.
+     */
+    public function testGetLanguageCaughtTheIntersectionBugInRetrieveAcceptableLanguagesIntersection()
+    {
+        $options = [
+            'http_accept_language' => 'fr-CH,fr;q=0.8,en-US;q=0.5,en;q=0.3',
+            'accepted_languages' => ['fr', 'en'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame('fr', $service->getLanguage());
+    }
 }
