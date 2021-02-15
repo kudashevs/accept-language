@@ -16,7 +16,7 @@ class AcceptLanguage
     private $language;
 
     /**
-     * Contains various options if any.
+     * Contains various options.
      *
      * @var array[
      *  'http_accept_language' string Defines the HTTP Accept-Language information string.
@@ -51,7 +51,7 @@ class AcceptLanguage
     }
 
     /**
-     * Processes HTTP Accept-Language information.
+     * Retrieves and processes the HTTP Accept-Language information.
      */
     public function process(): void
     {
@@ -69,8 +69,6 @@ class AcceptLanguage
     }
 
     /**
-     * Parse HTTP Accept-Language string.
-     *
      * @param string $languageInformation
      * @return string
      */
