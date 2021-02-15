@@ -188,11 +188,30 @@ class AcceptLanguage
      */
     private function resolveDefaultLanguage(): string
     {
-        if (!empty($this->options['default_language'])) { // todo add check with supported languages
+        if ($this->canUseDefaultOptions()) {
             return $this->options['default_language'];
         }
 
         return self::DEFAULT_LANGUAGE;
+    }
+
+    /**
+     * @return bool
+     */
+    private function canUseDefaultOptions(): bool
+    {
+        if (empty($this->options['default_language'])) {
+            return false;
+        }
+
+        if (
+            !empty($this->options['accepted_languages']) &&
+            !in_array($this->options['default_language'], $this->options['accepted_languages'], true)
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

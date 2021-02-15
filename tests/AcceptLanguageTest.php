@@ -96,6 +96,28 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame('es', $service->getLanguage());
     }
 
+    public function testGetLanguageReturnsOptionalDefaultLanguageWhenAcceptedLanguagesContainsOptionalLanguage()
+    {
+        $options = [
+            'default_language' => 'es',
+            'accepted_languages' => ['en', 'de', 'es'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame($options['default_language'], $service->getLanguage());
+    }
+
+    public function testGetLanguageReturnsDefaultLanguageWhenOptionalDefaultLanguageIsNotAccepted()
+    {
+        $options = [
+            'default_language' => 'pp',
+            'accepted_languages' => ['en', 'de'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
+    }
+
     /**
      * @dataProvider provideLanguageInformation
      */
