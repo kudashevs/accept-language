@@ -76,7 +76,21 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
+        $languages = $this->parseLanguageInformation($languageInformation);
+
+        return $this->retrieveLanguage($languages);
+    }
+
+    /**
+     * Parses an HTTP Accept-Language string.
+     *
+     * @param string $languageInformation
+     * @return array
+     */
+    private function parseLanguageInformation(string $languageInformation): array
+    {
         $languages = [];
+
         foreach (explode(',', $languageInformation) as $decoupledLangTag) {
             $splitLangTagAndQuality = array_pad(explode(';q=', trim($decoupledLangTag)), 2, 1);
 
@@ -94,7 +108,7 @@ class AcceptLanguage
             $languages[$langTag] = $langQuality;
         }
 
-        return $this->retrieveLanguage($languages);
+        return $languages;
     }
 
     /**
