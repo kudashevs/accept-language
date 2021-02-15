@@ -162,9 +162,21 @@ class AcceptLanguageTest extends TestCase
             'example part uppercase de-DE,de;q=0.9...' => [
                 'de', ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8']
             ],
-            'mozilla example with space fr-CH, fr;q=0.9, en;q=0.8...' => [
+            'mozilla Accept-Language page examples basic' => [
+                'de', ['http_accept_language' => 'de']
+            ],
+            'mozilla Accept-Language page examples hyphenated' => [
+                'de', ['http_accept_language' => 'de-CH']
+            ],
+            'mozilla Accept-Language page examples complex' => [
+                'de', ['http_accept_language' => 'de-CH']
+            ],
+            'mozilla Accept-Language page examples complex with space' => [
                 'fr', ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5']
             ],
+            'RFC 2616 14.4 Accept-Language example' => [
+                'da', ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7']
+            ]
         ];
     }
 
