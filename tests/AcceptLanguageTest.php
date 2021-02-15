@@ -3,10 +3,43 @@
 namespace Kudashevs\AcceptLanguage\Tests;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
+    /**
+     * @dataProvider provideWrongOptions
+     */
+    public function testSetOptionsThrowsExceptionOnWrongOptionParameterType($option)
+    {
+        $this->expectException(InvalidOptionArgumentException::class);
+        $this->expectExceptionMessageRegExp('/The option ' . key($option) . ' has a wrong value type .+/');
+
+        new AcceptLanguage($option);
+    }
+
+    public function provideWrongOptions()
+    {
+        return [
+            'http_accept_language wrong value' => [
+                [
+                    'http_accept_language' => null,
+                ],
+            ],
+            'default_language wrong value' => [
+                [
+                    'default_language' => null,
+                ],
+            ],
+            'accepted_languages wrong value' => [
+                [
+                    'accepted_languages' => null,
+                ],
+            ],
+        ];
+    }
+
     public function testGetLanguageReturnsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $service = new AcceptLanguage();
@@ -25,14 +58,6 @@ class AcceptLanguageTest extends TestCase
     public function testGetLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
     {
         $options = ['http_accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
-        $service = new AcceptLanguage($options);
-
-        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
-    }
-
-    public function testGetLanguageReturnsDefatulLanguageWhenAcceptedLanguagesContainsGarbage()
-    {
-        $options = ['http_accept_language' => 'pp', 'accepted_languages' => 'wrong_type'];
         $service = new AcceptLanguage($options);
 
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
