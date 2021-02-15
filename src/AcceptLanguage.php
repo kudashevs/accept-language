@@ -2,6 +2,8 @@
 
 namespace Kudashevs\AcceptLanguage;
 
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
+
 class AcceptLanguage
 {
     public const DEFAULT_LANGUAGE = 'en';
@@ -18,13 +20,30 @@ class AcceptLanguage
      *
      * @var array
      */
-    private $options;
+    private $options = [
+        'http_accept_language' => '',
+        'default_language' => '',
+        'accepted_languages' => [],
+    ];
 
     public function __construct(array $options = [])
     {
-        $this->options = $options;
+        $this->setOptions($options);
 
         $this->process();
+    }
+
+    private function setOptions(array $options): void
+    {
+        $supportedOptions = array_intersect_key($options, $this->options);
+
+        foreach ($supportedOptions as $key => $value) {
+            if (gettype($value) !== gettype($this->options[$key])) {
+                throw new InvalidOptionArgumentException('The option ' . $key . ' has a wrong value type ' . gettype($value) . '. Option requires a value of the type ' . gettype($this->options[$key]) . '.');
+            }
+        }
+
+        $this->options = $supportedOptions;
     }
 
     /**
