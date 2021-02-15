@@ -18,7 +18,11 @@ class AcceptLanguage
     /**
      * Contains various options if any.
      *
-     * @var array
+     * @var array[
+     *  'http_accept_language' string Defines the HTTP Accept-Language information string.
+     *  'default_language' string Overrides the default language value.
+     *  'accepted_languages' array Defines the supported languages.
+     * ]
      */
     private $options = [
         'http_accept_language' => '',
