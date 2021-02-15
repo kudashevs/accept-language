@@ -154,10 +154,6 @@ class AcceptLanguage
             return $languages;
         }
 
-        if (!is_array($this->options['accepted_languages'])) {
-            return [];
-        }
-
         return array_intersect_key($languages, array_flip($this->options['accepted_languages']));
     }
 
