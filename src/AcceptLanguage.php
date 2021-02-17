@@ -190,7 +190,7 @@ class AcceptLanguage
      */
     private function resolveDefaultLanguage(): string
     {
-        if ($this->canUseDefaultOptions()) {
+        if ($this->canUseDefaultLanguageOption()) {
             return $this->options['default_language'];
         }
 
@@ -200,7 +200,7 @@ class AcceptLanguage
     /**
      * @return bool
      */
-    private function canUseDefaultOptions(): bool
+    private function canUseDefaultLanguageOption(): bool
     {
         if (empty($this->options['default_language'])) {
             return false;
