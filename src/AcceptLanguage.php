@@ -53,7 +53,7 @@ class AcceptLanguage
     /**
      * Retrieves and processes the HTTP Accept-Language information.
      */
-    public function process(): void
+    protected function process(): void
     {
         $languageInformation = $this->retrieveAcceptLanguage();
 
