@@ -22,17 +22,17 @@ class AcceptLanguageTest extends TestCase
     public function provideWrongOptions()
     {
         return [
-            'http_accept_language wrong value' => [
+            'http_accept_language wrong not string value' => [
                 [
                     'http_accept_language' => null,
                 ],
             ],
-            'default_language wrong value' => [
+            'default_language wrong not string value' => [
                 [
                     'default_language' => null,
                 ],
             ],
-            'accepted_languages wrong value' => [
+            'accepted_languages wrong not array value' => [
                 [
                     'accepted_languages' => null,
                 ],
