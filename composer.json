@@ -25,5 +25,12 @@
         "psr-4": {
             "Kudashevs\\AcceptLanguage\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kudashevs\\AcceptLanguage\\Providers\\AcceptLanguageServiceProvider"
+            ]
+        }
     }
 }
