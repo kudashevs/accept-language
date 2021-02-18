@@ -57,7 +57,10 @@ class AcceptLanguageTest extends TestCase
 
     public function testGetLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
     {
-        $options = ['http_accept_language' => 'pp', 'accepted_languages' => ['en', 'de', 'fr']];
+        $options = [
+            'http_accept_language' => 'pp',
+            'accepted_languages' => ['en', 'de', 'fr']
+        ];
         $service = new AcceptLanguage($options);
 
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
@@ -179,7 +182,7 @@ class AcceptLanguageTest extends TestCase
             ]
         ];
     }
-
+    
     /**
      * Caught bugs.
      */
