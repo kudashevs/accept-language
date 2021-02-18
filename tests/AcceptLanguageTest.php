@@ -155,6 +155,10 @@ class AcceptLanguageTest extends TestCase
                 'sgn',
                 ['http_accept_language' => 'sgn'],
             ],
+            'four letters primary langtag results default' => [
+                AcceptLanguage::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'test'],
+            ],
             'sequence of primary tags results language' => [
                 'de',
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],

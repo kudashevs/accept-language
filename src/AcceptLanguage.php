@@ -177,7 +177,8 @@ class AcceptLanguage
     private function findProperLanguage(array $languages): string
     {
         foreach ($languages as $language) {
-            if (strlen($language) >= 2) {
+            $length = strlen($language);
+            if ($length >= 2 && $length <= 3) {
                 return $language;
             }
         }
