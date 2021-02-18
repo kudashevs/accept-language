@@ -66,39 +66,6 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
-    public function testGetLanguageReturnsExpectedLanguageWhenLanguagesIntersectOnce()
-    {
-        $options = [
-            'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
-            'accepted_languages' => ['de'],
-        ];
-        $service = new AcceptLanguage($options);
-
-        $this->assertSame('de', $service->getLanguage());
-    }
-
-    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersectWithQuality1()
-    {
-        $options = [
-            'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
-            'accepted_languages' => ['de', 'fr'],
-        ];
-        $service = new AcceptLanguage($options);
-
-        $this->assertSame('fr', $service->getLanguage());
-    }
-
-    public function testGetLanguageReturnsLanguageWithTheHighestQualityWhenLanguagesIntersectWithQualityBelow1()
-    {
-        $options = [
-            'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
-            'accepted_languages' => ['en', 'es'],
-        ];
-        $service = new AcceptLanguage($options);
-
-        $this->assertSame('es', $service->getLanguage());
-    }
-
     public function testGetLanguageReturnsOptionalDefaultLanguageWhenAcceptedLanguagesContainsOptionalLanguage()
     {
         $options = [
@@ -190,6 +157,43 @@ class AcceptLanguageTest extends TestCase
             'RFC 2616 14.4 Accept-Language example results language' => [
                 'da',
                 ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7'],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider provideLanguageInformationWithAcceptedLanguages
+     */
+    public function testGetLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
+    {
+        $service = new AcceptLanguage($options);
+        $result = $service->getLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideLanguageInformationWithAcceptedLanguages()
+    {
+        return [
+            'language in accepted intersects once results language' => [
+                'de',
+                [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de'], ],
+            ],
+            'language in accepted intersects once results language when it is of quality 1' => [
+                'fr',
+                [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de', 'fr'], ],
+            ],
+            'language in accepted intersects once results language when it is of quality below 1' => [
+                'es',
+                [ 'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333', 'accepted_languages' => ['en', 'es'], ],
+            ],
+            'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality 1' => [
+                'en',
+                [ 'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7', 'accepted_languages' => ['en'], ],
+            ],
+            'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality below 1' => [
+                'fr',
+                [ 'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7', 'accepted_languages' => ['fr'], ],
             ],
         ];
     }
