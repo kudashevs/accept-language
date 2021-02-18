@@ -147,42 +147,49 @@ class AcceptLanguageTest extends TestCase
                 'es',
                 ['http_accept_language' => '*,es,de;q=0.7'],
             ],
-            'two letters primary langtag' => [
+            'two letters primary langtag results language' => [
                 'en',
                 ['http_accept_language' => 'en'],
             ],
-            'three letters primary langtag' => [
+            'three letters primary langtag results language' => [
                 'sgn',
                 ['http_accept_language' => 'sgn'],
             ],
-            'sequence of primary tags' => [
+            'sequence of primary tags results language' => [
                 'de',
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
             ],
-            'example all lowercase de,en-us;q=0.7...' => [
-                'de', ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3']
+            'example all lowercase results language' => [
+                'de',
+                ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
             ],
-            'example part uppercase de-DE,de;q=0.9...' => [
-                'de', ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8']
+            'example part uppercase results language' => [
+                'de',
+                ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8'],
             ],
-            'mozilla Accept-Language page examples basic' => [
-                'de', ['http_accept_language' => 'de']
+            'mozilla Accept-Language page examples basic results language' => [
+                'de',
+                ['http_accept_language' => 'de'],
             ],
-            'mozilla Accept-Language page examples hyphenated' => [
-                'de', ['http_accept_language' => 'de-CH']
+            'mozilla Accept-Language page examples hyphenated results language' => [
+                'de',
+                ['http_accept_language' => 'de-CH'],
             ],
-            'mozilla Accept-Language page examples complex' => [
-                'de', ['http_accept_language' => 'de-CH']
+            'mozilla Accept-Language page examples complex results language' => [
+                'en',
+                ['http_accept_language' => 'en-US,en;q=0.5'],
             ],
-            'mozilla Accept-Language page examples complex with space' => [
-                'fr', ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5']
+            'mozilla Accept-Language page examples complex with space results language' => [
+                'fr',
+                ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'],
             ],
-            'RFC 2616 14.4 Accept-Language example' => [
-                'da', ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7']
-            ]
+            'RFC 2616 14.4 Accept-Language example results language' => [
+                'da',
+                ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7'],
+            ],
         ];
     }
-    
+
     /**
      * Caught bugs.
      */
