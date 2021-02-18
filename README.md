@@ -1,4 +1,7 @@
-# HTTP Accept-Language
+# HTTP Accept-Language 
+
+[![Build Status](https://travis-ci.org/kudashevs/accept-language.svg?branch=master)](https://travis-ci.org/kudashevs/accept-language)
+[![License](https://img.shields.io/github/license/kudashevs/accept-language)](https://packagist.org/packages/kudashevs/accept-language)
 
 This PHP package recognizes the preferred language from an HTTP Accept-Language request-header field. It can be used
 in many cases, for example, to identify the user's language of choice on their first site visit. Then this information
