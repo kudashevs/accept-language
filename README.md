@@ -3,9 +3,9 @@
 [![Build Status](https://travis-ci.org/kudashevs/accept-language.svg?branch=master)](https://travis-ci.org/kudashevs/accept-language)
 [![License](https://img.shields.io/github/license/kudashevs/accept-language)](https://packagist.org/packages/kudashevs/accept-language)
 
-This PHP package recognizes the preferred language from an HTTP Accept-Language request-header field. It can be used
-in many cases, for example, to identify the user's language of choice on their first site visit. Then this information
-might be used to make some decisions (set locale, redirect user on the specific page or section, etc.).
+This PHP package retrieves the preferred language from an HTTP Accept-Language request-header field. The package can
+be used to identify the user's language of choice on their first site visit. Later this information might be used
+to make various decisions (set locale, redirect the user to the specific page or section, etc.).
 
 At the moment, the package goes with Laravel framework support (it includes a service provider and a facade).
 
