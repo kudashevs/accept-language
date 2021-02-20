@@ -74,10 +74,6 @@ class AcceptLanguage
      */
     private function parse(string $languageInformation): string
     {
-        if (empty($languageInformation) || $languageInformation === '*') {
-            return $this->resolveDefaultLanguage();
-        }
-
         $languages = $this->parseLanguageInformation($languageInformation);
 
         return $this->retrieveLanguage($languages);
@@ -91,6 +87,10 @@ class AcceptLanguage
      */
     private function parseLanguageInformation(string $languageInformation): array
     {
+        if ($this->isSpecialRange($languageInformation)) {
+            return [];
+        }
+
         $languages = [];
 
         foreach (explode(',', $languageInformation) as $decoupledLangTag) {
@@ -111,6 +111,21 @@ class AcceptLanguage
         }
 
         return $languages;
+    }
+
+    /**
+     * @param string $languageInformation
+     * @return bool
+     */
+    private function isSpecialRange(string $languageInformation): bool
+    {
+        if (
+            $languageInformation === '*'
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -137,6 +152,10 @@ class AcceptLanguage
      */
     private function retrieveLanguage(array $languages): string
     {
+        if (empty($languages)) {
+            return $this->resolveDefaultLanguage();
+        }
+
         $languages = $this->retrieveAcceptableLanguagesIntersection($languages);
 
         if (empty($languages)) {
