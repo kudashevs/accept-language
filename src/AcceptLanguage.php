@@ -164,7 +164,7 @@ class AcceptLanguage
 
         $languages = $this->retrieveLanguagesSortedByQuality($languages);
 
-        return $this->findProperLanguage($languages);
+        return $this->retrieveProperLanguage($languages);
     }
 
     /**
@@ -193,7 +193,7 @@ class AcceptLanguage
      * @param array $languages
      * @return string
      */
-    private function findProperLanguage(array $languages): string
+    private function retrieveProperLanguage(array $languages): string
     {
         foreach ($languages as $language) {
             $length = strlen($language);
