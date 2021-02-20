@@ -7,6 +7,15 @@ This PHP package retrieves the preferred language from an HTTP Accept-Language r
 be used to identify the user's language of choice on their first site visit. Later this information might be used
 to make various decisions (set locale, redirect the user to the specific page or section, etc.).
 
+## Features
+
+The HTTP Accept-Language retrieves a 2-letter tag with the highest priority (the highest language associated quality value)
+from an HTTP Accept-Language request-header field. 
+
+- Can return the default language value if a client accepts any language 
+- Can override the default value with the option `default_language`
+- Can restrict the search by values in the option `accepted_languages` 
+
 At the moment, the package goes with Laravel framework support (it includes a service provider and a facade).
 
 ## Installation
