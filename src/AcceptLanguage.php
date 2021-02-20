@@ -51,7 +51,7 @@ class AcceptLanguage
     }
 
     /**
-     * Retrieves and processes the HTTP Accept-Language information.
+     * Retrieves the HTTP Accept-Language information and processes it.
      */
     protected function process(): void
     {
