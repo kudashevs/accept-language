@@ -74,7 +74,7 @@ class AcceptLanguage
      */
     private function findLanguage(string $languageInformation): string
     {
-        $languages = $this->parseLanguageInformation($languageInformation);
+        $languages = $this->parse($languageInformation);
 
         return $this->retrieveLanguage($languages);
     }
@@ -85,7 +85,7 @@ class AcceptLanguage
      * @param string $languageInformation
      * @return array
      */
-    private function parseLanguageInformation(string $languageInformation): array
+    private function parse(string $languageInformation): array
     {
         if ($this->isSpecialRange($languageInformation)) {
             return [];
