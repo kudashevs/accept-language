@@ -37,7 +37,7 @@ class AcceptLanguage
         $this->process();
     }
 
-    private function setOptions(array $options): void
+    protected function setOptions(array $options): void
     {
         $supportedOptions = array_intersect_key($options, $this->options);
 
