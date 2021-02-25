@@ -162,7 +162,7 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        $languages = $this->retrieveLanguagesSortedByQuality($languages);
+        $languages = $this->retrieveLanguagesWithHighestQuality($languages);
 
         return $this->retrieveProperLanguage($languages);
     }
@@ -184,7 +184,7 @@ class AcceptLanguage
      * @param array $languages
      * @return array
      */
-    private function retrieveLanguagesSortedByQuality(array $languages): array
+    private function retrieveLanguagesWithHighestQuality(array $languages): array
     {
         return array_keys($languages, max($languages));
     }
