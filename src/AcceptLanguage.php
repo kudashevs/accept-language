@@ -156,7 +156,7 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        $languages = $this->retrieveAcceptableLanguagesIntersection($languages);
+        $languages = $this->retrieveIntersectionWithAcceptableLanguages($languages);
 
         if (empty($languages)) {
             return $this->resolveDefaultLanguage();
@@ -171,7 +171,7 @@ class AcceptLanguage
      * @param array $languages
      * @return array
      */
-    private function retrieveAcceptableLanguagesIntersection(array $languages): array
+    private function retrieveIntersectionWithAcceptableLanguages(array $languages): array
     {
         if (!array_key_exists('accepted_languages', $this->options)) {
             return $languages;

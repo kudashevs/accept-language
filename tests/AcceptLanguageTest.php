@@ -201,7 +201,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * Caught bugs.
      */
-    public function testGetLanguageCaughtTheIntersectionBugInRetrieveAcceptableLanguagesIntersection()
+    public function testGetLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.8,en-US;q=0.5,en;q=0.3',
