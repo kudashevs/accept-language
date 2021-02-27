@@ -9,8 +9,8 @@ to make various decisions (set locale, redirect the user to the specific page or
 
 ## Features
 
-The HTTP Accept-Language retrieves a 2-letter tag with the highest priority (the highest language associated quality value)
-from an HTTP Accept-Language request-header field. 
+The HTTP Accept-Language retrieves a 2-letter/3-letter tag with the highest priority (the highest language associated
+quality value) from an HTTP Accept-Language request-header field. 
 
 - Can return the default language value if a client accepts any language 
 - Can override the default value with the option `default_language`
