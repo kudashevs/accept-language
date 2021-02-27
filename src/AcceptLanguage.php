@@ -26,7 +26,7 @@ class AcceptLanguage
      */
     private $options = [
         'http_accept_language' => '',
-        'default_language' => '',
+        'default_language' => 'en',
         'accepted_languages' => [],
     ];
 
@@ -47,7 +47,7 @@ class AcceptLanguage
             }
         }
 
-        $this->options = $supportedOptions;
+        $this->options = array_merge($this->options, $supportedOptions);
     }
 
     /**
@@ -177,7 +177,7 @@ class AcceptLanguage
      */
     private function retrieveIntersectionWithAcceptableLanguages(array $languages): array
     {
-        if (!array_key_exists('accepted_languages', $this->options)) {
+        if (empty($this->options['accepted_languages'])) {
             return $languages;
         }
 
