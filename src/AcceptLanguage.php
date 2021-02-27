@@ -37,15 +37,15 @@ class AcceptLanguage
 
     protected function setOptions(array $options): void
     {
-        $supportedOptions = array_intersect_key($options, $this->options);
+        $matchingOptions = array_intersect_key($options, $this->options);
 
-        foreach ($supportedOptions as $key => $value) {
+        foreach ($matchingOptions as $key => $value) {
             if (gettype($value) !== gettype($this->options[$key])) {
                 throw new InvalidOptionArgumentException('The option ' . $key . ' has a wrong value type ' . gettype($value) . '. Option requires a value of the type ' . gettype($this->options[$key]) . '.');
             }
         }
 
-        $this->options = array_merge($this->options, $supportedOptions);
+        $this->options = array_merge($this->options, $matchingOptions);
     }
 
     /**
