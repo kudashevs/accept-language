@@ -6,8 +6,6 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 
 class AcceptLanguage
 {
-    public const DEFAULT_LANGUAGE = 'en';
-
     /**
      * Contains the found language.
      *
@@ -214,30 +212,7 @@ class AcceptLanguage
      */
     private function resolveDefaultLanguage(): string
     {
-        if ($this->canUseDefaultLanguageOption()) {
-            return $this->options['default_language'];
-        }
-
-        return self::DEFAULT_LANGUAGE;
-    }
-
-    /**
-     * @return bool
-     */
-    private function canUseDefaultLanguageOption(): bool
-    {
-        if (empty($this->options['default_language'])) {
-            return false;
-        }
-
-        if (
-            !empty($this->options['accepted_languages']) &&
-            !in_array($this->options['default_language'], $this->options['accepted_languages'], true)
-        ) {
-            return false;
-        }
-
-        return true;
+        return $this->options['default_language'];
     }
 
     /**

@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
+    const DEFAULT_LANGUAGE = 'en';
+
     /**
      * @dataProvider provideWrongOptions
      */
@@ -44,7 +46,7 @@ class AcceptLanguageTest extends TestCase
     {
         $service = new AcceptLanguage();
 
-        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
     public function testGetLanguageReturnsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
@@ -63,7 +65,7 @@ class AcceptLanguageTest extends TestCase
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame(AcceptLanguage::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
     public function testGetLanguageReturnsOptionalDefaultLanguageWhenAcceptedLanguagesContainsOptionalLanguage()
@@ -103,11 +105,11 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'any language tag results default' => [
-                AcceptLanguage::DEFAULT_LANGUAGE,
+                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*'],
             ],
             'any language tag with highest quality results default' => [
-                AcceptLanguage::DEFAULT_LANGUAGE,
+                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*,de;q=0.7'],
             ],
             'any language tag and lang tag with equal quality results language' => [
@@ -123,7 +125,7 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'sgn'],
             ],
             'four letters primary langtag results default' => [
-                AcceptLanguage::DEFAULT_LANGUAGE,
+                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'test'],
             ],
             'sequence of primary tags results language' => [
