@@ -16,7 +16,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('acceptlanguage', function ($app) {
-            return (new AcceptLanguage($this->getLanguageSettings($app)));
+            return (new AcceptLanguage($this->getConfig($app)));
         });
 
         $this->app->alias('acceptlanguage', AcceptLanguage::class);
@@ -36,7 +36,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      * @param Container $app
      * @return array
      */
-    private function getLanguageSettings(Container $app): array
+    private function getConfig(Container $app): array
     {
         return array_filter([
             'default_language' => $app['config']['app.locale'] ?? false,
