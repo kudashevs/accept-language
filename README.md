@@ -34,7 +34,7 @@ General usage of the package:
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
 $service = new AcceptLanguage();
-$language = $service->getLanguage();
+$language = $service->getPreferredLanguage();
 ```
 
 ## References
