@@ -216,6 +216,7 @@ class AcceptLanguage
     }
 
     /**
+     * @deprecated 2.0.0 The name does not provide the real meaning.
      * @return string
      */
     public function getLanguage(): string
