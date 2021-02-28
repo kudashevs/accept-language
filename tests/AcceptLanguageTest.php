@@ -42,22 +42,29 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function testGetLanguageReturnsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testGetPreferredLanguageReturnsNotEmpty()
     {
         $service = new AcceptLanguage();
 
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertNotEmpty($service->getPreferredLanguage());
     }
 
-    public function testGetLanguageReturnsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testGetPreferredLanguageReturnsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    {
+        $service = new AcceptLanguage();
+
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
+    }
+
+    public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame($options['default_language'], $service->getLanguage());
+        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
     }
 
-    public function testGetLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
+    public function testGetPreferredLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotAccepted()
     {
         $options = [
             'http_accept_language' => 'pp',
@@ -65,10 +72,10 @@ class AcceptLanguageTest extends TestCase
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
     }
 
-    public function testGetLanguageReturnsOptionalDefaultLanguageWhenAcceptedLanguagesContainsOptionalLanguage()
+    public function testGetPreferredLanguageReturnsOptionalDefaultLanguageWhenAcceptedLanguagesContainsOptionalLanguage()
     {
         $options = [
             'default_language' => 'es',
@@ -76,16 +83,16 @@ class AcceptLanguageTest extends TestCase
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame($options['default_language'], $service->getLanguage());
+        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
     }
 
     /**
      * @dataProvider provideLanguageInformation
      */
-    public function testGetLanguageReturnsExpected($expected, $options)
+    public function testGetPreferredLanguageReturnsExpected($expected, $options)
     {
         $service = new AcceptLanguage($options);
-        $result = $service->getLanguage();
+        $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
     }
@@ -155,10 +162,10 @@ class AcceptLanguageTest extends TestCase
     /**
      * @dataProvider provideLanguageInformationWithAcceptedLanguages
      */
-    public function testGetLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
+    public function testGetPreferredLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
     {
         $service = new AcceptLanguage($options);
-        $result = $service->getLanguage();
+        $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
     }
@@ -192,7 +199,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * Caught bugs.
      */
-    public function testGetLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
+    public function testGetPreferredLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.8,en-US;q=0.5,en;q=0.3',
@@ -200,6 +207,6 @@ class AcceptLanguageTest extends TestCase
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame('fr', $service->getLanguage());
+        $this->assertSame('fr', $service->getPreferredLanguage());
     }
 }

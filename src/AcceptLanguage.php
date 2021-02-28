@@ -222,4 +222,12 @@ class AcceptLanguage
     {
         return $this->language;
     }
+
+    /**
+     * @return string
+     */
+    public function getPreferredLanguage(): string
+    {
+        return $this->language;
+    }
 }
