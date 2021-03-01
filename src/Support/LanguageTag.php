@@ -90,10 +90,11 @@ class LanguageTag
 
     /**
      * @param string $value
+     * @param int $position
      * @return bool
      */
-    private function isRegion(string $value): bool
+    private function isRegion(string $value, int $position): bool
     {
-        return (2 === strlen($value));
+        return (2 === strlen($value) && ($position === 1 || $position === 2));
     }
 }
