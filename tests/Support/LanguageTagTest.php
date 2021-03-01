@@ -35,10 +35,14 @@ class LanguageTagTest extends TestCase
                 'dum',
                 'dum',
             ],
-            'two-letter primary with extlang remove extlang' => [
+            'two-letter hyphenated with extlang remove extlang' => [
                 'zh-yue',
                 'zh',
-            ]
+            ],
+            'two-letter underscored with extlang remove extlang' => [
+                'zh_yue',
+                'zh',
+            ],
         ];
     }
 }

@@ -42,7 +42,7 @@ class LanguageTag
      */
     private function separateLanguageTag($rawTag): array
     {
-        return explode('-', $rawTag);
+        return explode('-', str_replace('_', '-', $rawTag));
     }
 
     /**
