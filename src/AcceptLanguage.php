@@ -63,11 +63,11 @@ class AcceptLanguage
      */
     private function retrieveAcceptLanguage(): string
     {
-        $languageInformation = empty($this->options['http_accept_language'])
+        $value = empty($this->options['http_accept_language'])
             ? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE']
             : $this->options['http_accept_language'];
 
-        return trim($languageInformation);
+        return trim($value);
     }
 
     /**
