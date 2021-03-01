@@ -32,13 +32,13 @@ class LanguageTag
      */
     private function normalizeLanguageTag($tag): string
     {
-        $parts = $this->splitLanguageTag($tag);
+        $subtags = $this->splitLanguageTag($tag);
 
-        if (count($parts) > 1) {
-            $parts = $this->normalizeLanguageTagParts($parts);
+        if (count($subtags) > 1) {
+            $subtags = $this->normalizeSubtags($subtags);
         }
 
-        return implode('-', $parts);
+        return implode('-', $subtags);
     }
 
     /**
@@ -54,7 +54,7 @@ class LanguageTag
      * @param array $parts
      * @return array
      */
-    private function normalizeLanguageTagParts(array $parts): array
+    private function normalizeSubtags(array $parts): array
     {
         $normalized = [];
 
