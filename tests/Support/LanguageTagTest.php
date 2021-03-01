@@ -59,6 +59,22 @@ class LanguageTagTest extends TestCase
                 'de_AT',
                 'de_AT',
             ],
+            'two-letter primary hyphenated with script and region append both' => [
+                'sr_Latn_RS',
+                'sr-Latn-RS',
+            ],
+            'two-letter primary underscored with script and region append both' => [
+                'sr_Latn_RS',
+                'sr_Latn_RS',
+            ],
+            'two-letter primary hyphenated with extlang, script, and region append expected' => [
+                'zh_Hant_CN',
+                'zh-yue-Hant-CN',
+            ],
+            'two-letter primary underscored with extlang, script, and region append expected' => [
+                'zh_Hant_CN',
+                'zh_yue_Hant_CN',
+            ],
         ];
     }
 }
