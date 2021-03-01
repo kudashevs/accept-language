@@ -5,14 +5,9 @@ namespace Kudashevs\AcceptLanguage\Support;
 class LanguageTag
 {
     /**
-     * @var bool
+     * @var int
      */
-    private $hasExtlang = 0;
-
-    /**
-     * @var bool
-     */
-    private $hasScript = 0;
+    private $processed = 0;
 
     public function __construct()
     {
@@ -70,12 +65,12 @@ class LanguageTag
             }
 
             if ($this->isExtlang($part, $index)) {
-                $this->hasExtlang++;
+                $this->processed++;
                 continue;
             }
 
             if ($this->isScript($part, $index)) {
-                $this->hasScript++;
+                $this->processed++;
                 $normalized[] = $part;
             }
 
@@ -104,13 +99,11 @@ class LanguageTag
      */
     private function isScript(string $value, int $position): bool
     {
-        return (
-            strlen($value) === 4 &&
+        return strlen($value) === 4 &&
             (
                 $position === 1 ||
-                ($this->hasExtlang && $position === 2)
-            )
-        );
+                ($this->processed === 1 && $position === 2)
+            );
     }
 
     /**
@@ -120,14 +113,11 @@ class LanguageTag
      */
     private function isRegion(string $value, int $position): bool
     {
-        return (
-            strlen($value) === 2 &&
+        return strlen($value) === 2 &&
             (
                 $position === 1 ||
-                ($this->hasExtlang && $position === 2) ||
-                ($this->hasScript && $position === 2) ||
-                ($this->hasExtlang && $this->hasScript && $position === 3)
-            )
-        );
+                ($this->processed === 1 && $position === 2) ||
+                ($this->processed === 2 && $position === 3)
+            );
     }
 }
