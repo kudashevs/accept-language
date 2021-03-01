@@ -4,6 +4,11 @@ namespace Kudashevs\AcceptLanguage\Support;
 
 class LanguageTag
 {
+    /**
+     * @var int
+     */
+    private $skipped = 0;
+
     public function __construct()
     {
     }
@@ -58,6 +63,7 @@ class LanguageTag
             }
 
             if ($this->isExtlang($part, $index)) {
+                $this->skipped++;
                 continue;
             }
 
@@ -86,6 +92,8 @@ class LanguageTag
      */
     private function isScript(string $value, int $position): bool
     {
+        $position -= $this->skipped;
+
         return (4 === strlen($value) && ($position === 1 || $position === 2));
     }
 
@@ -96,6 +104,8 @@ class LanguageTag
      */
     private function isRegion(string $value, int $position): bool
     {
+        $position -= $this->skipped;
+
         return (2 === strlen($value) && ($position === 1 || $position === 2));
     }
 }
