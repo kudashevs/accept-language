@@ -19,9 +19,7 @@ class LanguageTag
      */
     public function normalize(string $tag): string
     {
-        $normalizedLanguageTag = $this->normalizeLanguageTag($tag);
-
-        return $normalizedLanguageTag;
+        return $this->normalizeLanguageTag($tag);
     }
 
     /**
