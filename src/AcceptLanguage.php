@@ -93,6 +93,30 @@ class AcceptLanguage
             return [];
         }
 
+        return $this->parseHeaderValue($languageInformation);
+    }
+
+    /**
+     * @param string $languageInformation
+     * @return bool
+     */
+    private function isSpecialRange(string $languageInformation): bool
+    {
+        if (
+            $languageInformation === '*'
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $languageInformation
+     * @return array
+     */
+    private function parseHeaderValue(string $languageInformation): array
+    {
         $languages = [];
 
         foreach (explode(',', $languageInformation) as $decoupledLangTag) {
@@ -113,21 +137,6 @@ class AcceptLanguage
         }
 
         return $languages;
-    }
-
-    /**
-     * @param string $languageInformation
-     * @return bool
-     */
-    private function isSpecialRange(string $languageInformation): bool
-    {
-        if (
-            $languageInformation === '*'
-        ) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
