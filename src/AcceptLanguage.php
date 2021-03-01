@@ -3,6 +3,7 @@
 namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
+use Kudashevs\AcceptLanguage\Support\LanguageTagNormalizer;
 
 class AcceptLanguage
 {
@@ -12,6 +13,11 @@ class AcceptLanguage
      * @var string
      */
     private $language;
+
+    /**
+     * @var LanguageTagNormalizer
+     */
+    private $normalizer;
 
     /**
      * Contains various options.
@@ -34,6 +40,7 @@ class AcceptLanguage
      */
     public function __construct(array $options = [])
     {
+        $this->normalizer = new LanguageTagNormalizer();
         $this->setOptions($options);
 
         $this->process();
@@ -151,7 +158,7 @@ class AcceptLanguage
      */
     private function normalizeTag(string $tag): string
     {
-        return explode('-', $tag)[0];
+        return $this->normalizer->normalize($tag);
     }
 
     /**
