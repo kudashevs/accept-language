@@ -98,7 +98,10 @@ class AcceptLanguage
      */
     private function parse(string $languageInformation): array
     {
-        if ($this->isSpecialRange($languageInformation)) {
+        if (
+            empty($languageInformation) ||
+            $this->isSpecialRange($languageInformation)
+        ) {
             return [];
         }
 
