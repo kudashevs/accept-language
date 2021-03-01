@@ -131,18 +131,18 @@ class AcceptLanguage
         foreach (explode(',', $headerValue) as $separateLanguageTag) {
             $splitTagAndQuality = array_pad(explode(';q=', trim($separateLanguageTag)), 2, 1);
 
-            $languageTag = $this->normalizeTag($splitTagAndQuality[0]);
+            $languageValue = $this->normalizeTag($splitTagAndQuality[0]);
             $languageQuality = $this->normalizeQuality($splitTagAndQuality[1]);
 
             /**
              * The first registered language tag has the highest quality value.
              * All other similar tags will overwrite it and should be skipped.
              */
-            if (array_key_exists($languageTag, $languages)) {
+            if (array_key_exists($languageValue, $languages)) {
                 continue;
             }
 
-            $languages[$languageTag] = $languageQuality;
+            $languages[$languageValue] = $languageQuality;
         }
 
         return $languages;
