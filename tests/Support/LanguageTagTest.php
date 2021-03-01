@@ -17,7 +17,7 @@ class LanguageTagTest extends TestCase
     /**
      * @dataProvider provideLanguageTag
      */
-    public function testGetPreferredLanguageReturnsNormalizedLanguageTag($expected, $raw)
+    public function testNormalizeReturnsNormalizedLanguageTag($expected, $raw)
     {
         $languageTag = new LanguageTag();
 
