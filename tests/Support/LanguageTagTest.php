@@ -51,6 +51,14 @@ class LanguageTagTest extends TestCase
                 'sr_Latn',
                 'sr_Latn',
             ],
+            'two-letter primary hyphenated with region append region' => [
+                'de_AT',
+                'de-AT',
+            ],
+            'two-letter primary underscored with region append region' => [
+                'de_AT',
+                'de_AT',
+            ],
         ];
     }
 }
