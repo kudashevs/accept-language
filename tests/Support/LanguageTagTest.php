@@ -116,8 +116,8 @@ class LanguageTagTest extends TestCase
                 'zh-cmn-CN-Latn',
             ],
             'two-letter tag hyphenated with region out of its scope' => [
-                'de_Latn',
-                'de-ext-Latn-CH-1901',
+                'de',
+                'de-ext-ext-Latn-CH-1901',
             ],
         ];
     }
