@@ -87,7 +87,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideLanguageInformation
+     * @dataProvider provideHeaderValue
      */
     public function testGetPreferredLanguageReturnsExpected($expected, $options)
     {
@@ -97,7 +97,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideLanguageInformation()
+    public function provideHeaderValue()
     {
         return [
             'any language tag results default' => [
@@ -160,7 +160,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideLanguageInformationWithAcceptedLanguages
+     * @dataProvider provideHeaderValueAndAcceptedLanguagesOption
      */
     public function testGetPreferredLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
     {
@@ -170,7 +170,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideLanguageInformationWithAcceptedLanguages()
+    public function provideHeaderValueAndAcceptedLanguagesOption()
     {
         return [
             'language in accepted intersects once results language' => [

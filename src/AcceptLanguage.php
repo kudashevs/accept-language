@@ -53,9 +53,9 @@ class AcceptLanguage
      */
     protected function process(): void
     {
-        $languageInformation = $this->retrieveAcceptLanguage();
+        $headerValue = $this->retrieveAcceptLanguage();
 
-        $this->language = $this->findLanguage($languageInformation);
+        $this->language = $this->findLanguage($headerValue);
     }
 
     /**
@@ -71,12 +71,12 @@ class AcceptLanguage
     }
 
     /**
-     * @param string $languageInformation
+     * @param string $headerValue
      * @return string
      */
-    private function findLanguage(string $languageInformation): string
+    private function findLanguage(string $headerValue): string
     {
-        $languages = $this->parse($languageInformation);
+        $languages = $this->parse($headerValue);
 
         return $this->retrieveLanguage($languages);
     }
