@@ -111,13 +111,7 @@ class AcceptLanguage
      */
     private function isSpecialRange(string $languageInformation): bool
     {
-        if (
-            $languageInformation === '*'
-        ) {
-            return true;
-        }
-
-        return false;
+        return $languageInformation === '*';
     }
 
     /**
