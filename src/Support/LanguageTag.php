@@ -89,7 +89,7 @@ class LanguageTag
      */
     private function isExtlang(string $value, int $position): bool
     {
-        return (3 === strlen($value) && ($position === 1));
+        return (strlen($value) === 3 && ($position === 1));
     }
 
     /**
