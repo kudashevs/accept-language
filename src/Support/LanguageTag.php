@@ -51,14 +51,17 @@ class LanguageTag
      */
     private function normalizeLanguageTagParts(array $parts): array
     {
-        $normalized[] = array_shift($parts);
+        foreach ($parts as $index => $part) {
+            if ($index === 0) {
+                $normalized[] = $part;
+                continue;
+            }
 
-        foreach ($parts as $part) {
             if ($this->isExtlang($part)) {
                 continue;
             }
 
-            if ($this->isScript($part) || $this->isRegion($part)) {
+            if ($this->isScript($part, $index) || $this->isRegion($part, $index)) {
                 $normalized[] = $part;
             }
         }
@@ -77,11 +80,12 @@ class LanguageTag
 
     /**
      * @param string $value
+     * @param int $position
      * @return bool
      */
-    private function isScript(string $value): bool
+    private function isScript(string $value, int $position): bool
     {
-        return (4 === strlen($value));
+        return (4 === strlen($value) && ($position === 1 || $position === 2));
     }
 
     /**
