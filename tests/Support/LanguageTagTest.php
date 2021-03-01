@@ -59,6 +59,14 @@ class LanguageTagTest extends TestCase
                 'de_AT',
                 'de_AT',
             ],
+            'two-letter tag hyphenated with region in digits remove region' => [
+                'es',
+                'es-005',
+            ],
+            'two-letter tag underscored with region in digits remove region' => [
+                'es',
+                'es-005',
+            ],
             'two-letter tag hyphenated with extlang and region append only region' => [
                 'zh_CN',
                 'zh-cmn-CN',
