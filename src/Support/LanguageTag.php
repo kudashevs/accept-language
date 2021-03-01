@@ -51,31 +51,31 @@ class LanguageTag
     }
 
     /**
-     * @param array $parts
+     * @param array $subtags
      * @return array
      */
-    private function normalizeSubtags(array $parts): array
+    private function normalizeSubtags(array $subtags): array
     {
         $normalized = [];
 
-        foreach ($parts as $index => $part) {
+        foreach ($subtags as $index => $subtag) {
             if ($index === 0) {
-                $normalized[] = $part;
+                $normalized[] = $subtag;
                 continue;
             }
 
-            if ($this->isExtlang($part, $index)) {
+            if ($this->isExtlang($subtag, $index)) {
                 $this->processed++;
                 continue;
             }
 
-            if ($this->isScript($part, $index)) {
+            if ($this->isScript($subtag, $index)) {
                 $this->processed++;
-                $normalized[] = $part;
+                $normalized[] = $subtag;
             }
 
-            if ($this->isRegion($part, $index)) {
-                $normalized[] = $part;
+            if ($this->isRegion($subtag, $index)) {
+                $normalized[] = $subtag;
             }
         }
 
