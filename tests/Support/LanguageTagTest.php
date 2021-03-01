@@ -17,7 +17,7 @@ class LanguageTagTest extends TestCase
     /**
      * @dataProvider provideLanguageTag
      */
-    public function testGetPreferredLanguageReturnsNormalizedLanguageTag($raw, $expected)
+    public function testGetPreferredLanguageReturnsNormalizedLanguageTag($expected, $raw)
     {
         $languageTag = new LanguageTag();
 
@@ -36,12 +36,12 @@ class LanguageTagTest extends TestCase
                 'dum',
             ],
             'two-letter hyphenated with extlang remove extlang' => [
-                'zh-yue',
                 'zh',
+                'zh-yue',
             ],
             'two-letter underscored with extlang remove extlang' => [
-                'zh_yue',
                 'zh',
+                'zh_yue',
             ],
         ];
     }
