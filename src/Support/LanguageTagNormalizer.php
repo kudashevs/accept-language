@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Support;
 
-class LanguageTag
+class LanguageTagNormalizer
 {
     /**
      * @var int

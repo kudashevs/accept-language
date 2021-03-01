@@ -2,14 +2,14 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Support;
 
-use Kudashevs\AcceptLanguage\Support\LanguageTag;
+use Kudashevs\AcceptLanguage\Support\LanguageTagNormalizer;
 use PHPUnit\Framework\TestCase;
 
-class LanguageTagTest extends TestCase
+class LanguageTagNormalizerTest extends TestCase
 {
     public function testNormalizeReturnsNotEmpty()
     {
-        $languageTag = new LanguageTag();
+        $languageTag = new LanguageTagNormalizer();
 
         $this->assertNotEmpty($languageTag->normalize('en'));
     }
@@ -19,7 +19,7 @@ class LanguageTagTest extends TestCase
      */
     public function testNormalizeReturnsNormalizedLanguageTag($expected, $raw)
     {
-        $languageTag = new LanguageTag();
+        $languageTag = new LanguageTagNormalizer();
 
         $this->assertSame($expected, $languageTag->normalize($raw));
     }
@@ -99,7 +99,7 @@ class LanguageTagTest extends TestCase
      */
     public function testGetNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
     {
-        $languageTag = new LanguageTag();
+        $languageTag = new LanguageTagNormalizer();
 
         $this->assertSame($expected, $languageTag->normalize($raw));
     }
