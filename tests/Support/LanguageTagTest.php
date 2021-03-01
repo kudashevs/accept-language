@@ -119,6 +119,18 @@ class LanguageTagTest extends TestCase
                 'de',
                 'de-ext-ext-Latn-CH-1901',
             ],
+            'two-letter tag BCP47 section 2.1.1 example 1 return formatted' => [
+                'mn-Cyrl-MN',
+                'mn-Cyrl-MN',
+            ],
+            'two-letter tag BCP47 section 2.1.1 example 2 return formatted' => [
+                'mn-Cyrl-MN',
+                'MN-cYRL-mn',
+            ],
+            'two-letter tag BCP47 section 2.1.1 example 3 return formatted' => [
+                'mn-Cyrl-MN',
+                'mN-cYrL-Mn',
+            ],
         ];
     }
 }

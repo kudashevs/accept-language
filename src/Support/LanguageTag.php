@@ -60,7 +60,7 @@ class LanguageTag
 
         foreach ($subtags as $index => $subtag) {
             if ($index === 0) {
-                $normalized[] = $subtag;
+                $normalized[] = $this->normalizePrimarySubtag($subtag);
                 continue;
             }
 
@@ -71,15 +71,42 @@ class LanguageTag
 
             if ($this->isScript($subtag, $index)) {
                 $this->processed++;
-                $normalized[] = $subtag;
+                $normalized[] = $this->normalizeScriptSubtag($subtag);
             }
 
             if ($this->isRegion($subtag, $index)) {
-                $normalized[] = $subtag;
+                $normalized[] = $this->normalizeRegionSubtag($subtag);
             }
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param string $subtag
+     * @return string
+     */
+    private function normalizePrimarySubtag(string $subtag): string
+    {
+        return strtolower($subtag);
+    }
+
+    /**
+     * @param string $subtag
+     * @return string
+     */
+    private function normalizeScriptSubtag(string $subtag): string
+    {
+        return ucfirst(strtolower($subtag));
+    }
+
+    /**
+     * @param string $subtag
+     * @return string
+     */
+    private function normalizeRegionSubtag(string $subtag): string
+    {
+        return strtoupper($subtag);
     }
 
     /**
