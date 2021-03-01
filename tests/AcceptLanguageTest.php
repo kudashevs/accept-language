@@ -173,15 +173,15 @@ class AcceptLanguageTest extends TestCase
     public function provideHeaderValueAndAcceptedLanguagesOption()
     {
         return [
-            'language in accepted intersects once results language' => [
+            'language that intersects with accepted_languages results language' => [
                 'de',
                 [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de'], ],
             ],
-            'language in accepted intersects once results language when it is of quality 1' => [
+            'language that intersects with accepted_languages results language when it is of quality 1' => [
                 'fr',
                 [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de', 'fr'], ],
             ],
-            'language in accepted intersects once results language when it is of quality below 1' => [
+            'language that intersects with accepted_languages results language when it is of quality below 1' => [
                 'es',
                 [ 'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333', 'accepted_languages' => ['en', 'es'], ],
             ],
