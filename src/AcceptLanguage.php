@@ -93,19 +93,19 @@ class AcceptLanguage
     /**
      * Parses an HTTP Accept-Language string.
      *
-     * @param string $languageInformation
+     * @param string $headerValue
      * @return array
      */
-    private function parse(string $languageInformation): array
+    private function parse(string $headerValue): array
     {
         if (
-            empty($languageInformation) ||
-            $this->isSpecialRange($languageInformation)
+            empty($headerValue) ||
+            $this->isSpecialRange($headerValue)
         ) {
             return [];
         }
 
-        return $this->parseHeaderValue($languageInformation);
+        return $this->parseHeaderValue($headerValue);
     }
 
     /**
