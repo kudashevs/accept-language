@@ -44,19 +44,19 @@ class LanguageTagTest extends TestCase
                 'zh_yue',
             ],
             'two-letter tag hyphenated with script append script' => [
-                'sr_Latn',
+                'sr-Latn',
                 'sr-Latn',
             ],
             'two-letter tag underscored with script append script' => [
-                'sr_Latn',
+                'sr-Latn',
                 'sr_Latn',
             ],
             'two-letter tag hyphenated with region append region' => [
-                'de_AT',
+                'de-AT',
                 'de-AT',
             ],
             'two-letter tag underscored with region append region' => [
-                'de_AT',
+                'de-AT',
                 'de_AT',
             ],
             'two-letter tag hyphenated with region in digits remove region' => [
@@ -68,27 +68,27 @@ class LanguageTagTest extends TestCase
                 'es-005',
             ],
             'two-letter tag hyphenated with extlang and region append only region' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN',
             ],
             'two-letter tag underscored with extlang and region append only region' => [
-                'zh_CN',
+                'zh-CN',
                 'zh_cmn_CN',
             ],
             'two-letter tag hyphenated with script and region append both' => [
-                'sr_Latn_RS',
+                'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
             'two-letter tag underscored with script and region append both' => [
-                'sr_Latn_RS',
+                'sr-Latn-RS',
                 'sr_Latn_RS',
             ],
             'two-letter tag hyphenated with extlang, script, and region append expected' => [
-                'zh_Hant_CN',
+                'zh-Hant-CN',
                 'zh-yue-Hant-CN',
             ],
             'two-letter tag underscored with extlang, script, and region append expected' => [
-                'zh_Hant_CN',
+                'zh-Hant-CN',
                 'zh_yue_Hant_CN',
             ],
         ];
@@ -108,11 +108,11 @@ class LanguageTagTest extends TestCase
     {
         return [
             'two-letter tag hyphenated with extlang out of its scope' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN-cmn',
             ],
             'two-letter tag hyphenated with script out of its scope' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN-Latn',
             ],
             'two-letter tag hyphenated with region out of its scope' => [

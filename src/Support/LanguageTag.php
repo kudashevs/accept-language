@@ -43,7 +43,7 @@ class LanguageTag
             $parts = $this->normalizeLanguageTagParts($parts);
         }
 
-        return implode('_', $parts);
+        return implode('-', $parts);
     }
 
     /**
