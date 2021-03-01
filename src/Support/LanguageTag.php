@@ -57,7 +57,7 @@ class LanguageTag
                 continue;
             }
 
-            if ($this->isExtlang($part)) {
+            if ($this->isExtlang($part, $index)) {
                 continue;
             }
 
@@ -71,11 +71,12 @@ class LanguageTag
 
     /**
      * @param string $value
+     * @param int $position
      * @return bool
      */
-    private function isExtlang(string $value): bool
+    private function isExtlang(string $value, int $position): bool
     {
-        return (3 === strlen($value));
+        return (3 === strlen($value) && ($position === 1));
     }
 
     /**
