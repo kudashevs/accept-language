@@ -216,13 +216,21 @@ class AcceptLanguage
     private function retrieveProperLanguage(array $languages): string
     {
         foreach ($languages as $language) {
-            $length = strlen($language);
-            if ($length >= 2 && $length <= 3) {
+            if ($this->isProperLanguage($language)) {
                 return $language;
             }
         }
 
         return $this->resolveDefaultLanguage();
+    }
+
+    /**
+     * @param string $language
+     * @return bool
+     */
+    private function isProperLanguage(string $language): bool
+    {
+        return strlen($language) >= 2;
     }
 
     /**
