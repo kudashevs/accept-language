@@ -61,6 +61,8 @@ class LanguageTag
      */
     private function normalizeLanguageTagParts(array $parts): array
     {
+        $normalized = [];
+
         foreach ($parts as $index => $part) {
             if ($index === 0) {
                 $normalized[] = $part;
