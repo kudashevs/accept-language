@@ -234,6 +234,12 @@ class AcceptLanguage
      */
     private function isProperLanguage(string $language): bool
     {
+        $length = strlen($language);
+
+        if (strpos($language,'-') === false) {
+            return $length >= 2 && $length <= 3;
+        }
+
         return strlen($language) >= 2;
     }
 
