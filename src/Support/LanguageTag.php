@@ -32,7 +32,7 @@ class LanguageTag
      */
     private function normalizeLanguageTag($tag): string
     {
-        $parts = $this->separateLanguageTag($tag);
+        $parts = $this->splitLanguageTag($tag);
 
         if (count($parts) > 1) {
             $parts = $this->normalizeLanguageTagParts($parts);
@@ -45,7 +45,7 @@ class LanguageTag
      * @param $rawTag
      * @return array
      */
-    private function separateLanguageTag($rawTag): array
+    private function splitLanguageTag($rawTag): array
     {
         return explode('-', str_replace('_', '-', $rawTag));
     }
