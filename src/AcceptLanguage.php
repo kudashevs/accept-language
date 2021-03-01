@@ -57,7 +57,8 @@ class AcceptLanguage
     }
 
     /**
-     * Retrieves the HTTP Accept-Language information and processes it.
+     * Retrieves the HTTP Accept-Language header value, processes it
+     * and set the $language state property for further use.
      */
     protected function process(): void
     {
