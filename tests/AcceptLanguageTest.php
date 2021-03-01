@@ -100,6 +100,10 @@ class AcceptLanguageTest extends TestCase
     public function provideHeaderValue()
     {
         return [
+            'empty language tag results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => ''],
+            ],
             'any language tag results default' => [
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*'],
