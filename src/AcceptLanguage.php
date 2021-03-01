@@ -121,14 +121,14 @@ class AcceptLanguage
     }
 
     /**
-     * @param string $languageInformation
+     * @param string $headerValue
      * @return array
      */
-    private function parseHeaderValue(string $languageInformation): array
+    private function parseHeaderValue(string $headerValue): array
     {
         $languages = [];
 
-        foreach (explode(',', $languageInformation) as $decoupledLangTag) {
+        foreach (explode(',', $headerValue) as $decoupledLangTag) {
             $splitTagAndQuality = array_pad(explode(';q=', trim($decoupledLangTag)), 2, 1);
 
             $languageTag = $this->normalizeTag($splitTagAndQuality[0]);
