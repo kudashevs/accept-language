@@ -28,6 +28,10 @@ class AcceptLanguage
         'accepted_languages' => [],
     ];
 
+    /**
+     * @param array $options
+     * @throws InvalidOptionArgumentException
+     */
     public function __construct(array $options = [])
     {
         $this->setOptions($options);
@@ -35,6 +39,10 @@ class AcceptLanguage
         $this->process();
     }
 
+    /**
+     * @param array $options
+     * @throws InvalidOptionArgumentException
+     */
     protected function setOptions(array $options): void
     {
         $matchingOptions = array_intersect_key($options, $this->options);
