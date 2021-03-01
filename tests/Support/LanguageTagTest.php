@@ -43,6 +43,14 @@ class LanguageTagTest extends TestCase
                 'zh',
                 'zh_yue',
             ],
+            'two-letter hyphenated with script append script' => [
+                'sr_Latn',
+                'sr-Latn',
+            ],
+            'two-letter underscored with script append script' => [
+                'sr_Latn',
+                'sr_Latn',
+            ],
         ];
     }
 }
