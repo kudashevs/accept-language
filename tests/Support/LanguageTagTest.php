@@ -85,4 +85,28 @@ class LanguageTagTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * @dataProvider provideExceptionalCase
+     */
+    public function testGetNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
+    {
+        $languageTag = new LanguageTag();
+
+        $this->assertSame($expected, $languageTag->normalize($raw));
+    }
+
+    public function provideExceptionalCase()
+    {
+        return [
+            'two-letter primary underscored with extlang out of its scope' => [
+                'zh_CN',
+                'zh-cmn-CN-cmn',
+            ],
+            'two-letter primary underscored with script out of its scope' => [
+                'zh_CN',
+                'zh-cmn-CN-Latn',
+            ],
+        ];
+    }
 }
