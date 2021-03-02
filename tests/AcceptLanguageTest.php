@@ -246,6 +246,10 @@ class AcceptLanguageTest extends TestCase
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'es;q=dd'],
             ],
+            'two language with wrong quality order result highest' => [
+                'es',
+                ['http_accept_language' => 'en;q=0.3,es;q=1'],
+            ],
         ];
     }
 

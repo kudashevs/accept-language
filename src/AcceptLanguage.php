@@ -208,7 +208,10 @@ class AcceptLanguage
             ];
         }, $languages);
 
-        //sorting
+        usort($normalized, function($a, $b) {
+            return $b[1] <=> $a[1];
+        });
+
         return $normalized;
     }
 
