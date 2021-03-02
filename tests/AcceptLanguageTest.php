@@ -136,6 +136,14 @@ class AcceptLanguageTest extends TestCase
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'sgn;q=0'],
             ],
+            'two-letter with 0.001 quality language tag results default' => [
+                'de',
+                ['http_accept_language' => 'de;q=0.001'],
+            ],
+            'three-letter with 0.001 quality language tag results language' => [
+                'sgn',
+                ['http_accept_language' => 'sgn;q=0.001'],
+            ],
             'two-letter with quality language tag results language' => [
                 'de',
                 ['http_accept_language' => 'de;q=0.5'],
@@ -143,6 +151,22 @@ class AcceptLanguageTest extends TestCase
             'three-letter with quality language tag results language' => [
                 'sgn',
                 ['http_accept_language' => 'sgn;q=0.5'],
+            ],
+            'two-letter with 0.999 quality language tag results default' => [
+                'de',
+                ['http_accept_language' => 'de;q=0.999'],
+            ],
+            'three-letter with 0.999 quality language tag results language' => [
+                'sgn',
+                ['http_accept_language' => 'sgn;q=0.999'],
+            ],
+            'two-letter with 1 quality language tag results default' => [
+                'de',
+                ['http_accept_language' => 'de;q=1'],
+            ],
+            'three-letter with 1 quality language tag results language' => [
+                'sgn',
+                ['http_accept_language' => 'sgn;q=1'],
             ],
             'four letters with quality language tag results default' => [
                 self::DEFAULT_LANGUAGE,
