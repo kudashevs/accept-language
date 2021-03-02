@@ -146,6 +146,16 @@ class AcceptLanguage
         $filtered = array_filter($languages, function ($value) {
             return $this->isValidLanguage($value[0]) && $this->isValidQuality($value[1]);
         });
+
+        if (empty($this->options['accepted_languages'])) {
+            return $filtered;
+        }
+
+        $accepted = $this->prepareAcceptedLanguagesOption();
+
+        return array_filter($filtered, function ($value) use ($accepted) {
+            return in_array($this->prepareLanguageForCompare($value[0]), $accepted, true);
+        });
     }
 
     /**
@@ -166,16 +176,24 @@ class AcceptLanguage
         return !empty($value) && is_numeric($value) && (bool)filter_var($value, FILTER_VALIDATE_FLOAT, ['options' => ['min_range' => 0.1, 'max_range' => 1]]);
     }
 
-            /**
-             * The first registered language tag has the highest quality value.
-             * All other similar tags will overwrite it and should be skipped.
-             */
-            if (array_key_exists($languageValue, $languages)) {
-                continue;
-            }
+    /**
+     * @return array
+     */
+    private function prepareAcceptedLanguagesOption(): array
+    {
+        return array_map(function ($value) {
+            return $this->prepareLanguageForCompare($value);
+        }, $this->options['accepted_languages']);
+    }
 
-            $languages[$languageValue] = $languageQuality;
-        }
+    /**
+     * @param string $language
+     * @return string
+     */
+    private function prepareLanguageForCompare(string $language): string
+    {
+        return strtolower(str_replace('_', '-', $language));
+    }
 
         return $languages;
     }
