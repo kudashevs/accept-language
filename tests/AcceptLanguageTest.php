@@ -129,8 +129,8 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'test'],
             ],
             'two-letter with quality language tag results language' => [
-                'en',
-                ['http_accept_language' => 'en;q=0.5'],
+                'de',
+                ['http_accept_language' => 'de;q=0.5'],
             ],
             'three-letter with quality language tag results language' => [
                 'sgn',
