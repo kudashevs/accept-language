@@ -175,7 +175,9 @@ class AcceptLanguage
      */
     private function isValidQuality($value): bool
     {
-        return !empty($value) && is_numeric($value) && (bool)filter_var($value, FILTER_VALIDATE_FLOAT, ['options' => ['min_range' => 0.1, 'max_range' => 1]]);
+        return !empty($value) &&
+            is_numeric($value) &&
+            max(min($value, 1), 0) === $value;
     }
 
     /**
