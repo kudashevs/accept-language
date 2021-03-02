@@ -100,10 +100,6 @@ class AcceptLanguageTest extends TestCase
     public function provideHeaderValue()
     {
         return [
-            'empty language tag results default' => [
-                self::DEFAULT_LANGUAGE,
-                ['http_accept_language' => ''],
-            ],
             'any language tag results default' => [
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*'],
@@ -212,6 +208,35 @@ class AcceptLanguageTest extends TestCase
             'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality below 1' => [
                 'fr',
                 [ 'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7', 'accepted_languages' => ['fr'], ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider provideIncorrectHeaderValue
+     */
+    public function testGetPreferredLanguageProcessesIncorrectHeaderValue($expected, $options)
+    {
+        $service = new AcceptLanguage($options);
+        $result = $service->getPreferredLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideIncorrectHeaderValue()
+    {
+        return [
+            'one empty language tag results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => ''],
+            ],
+            'two empty languages tag results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => ','],
+            ],
+            'two empty languages with quality tag results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => ',;q='],
             ],
         ];
     }
