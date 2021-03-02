@@ -116,12 +116,12 @@ class AcceptLanguage
     }
 
     /**
-     * @param string $languageInformation
+     * @param string $headerValue
      * @return bool
      */
-    private function isSpecialRange(string $languageInformation): bool
+    private function isSpecialRange(string $headerValue): bool
     {
-        return $languageInformation === '*';
+        return $headerValue === '*';
     }
 
     /**
