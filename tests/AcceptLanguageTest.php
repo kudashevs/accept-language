@@ -217,6 +217,39 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @dataProvider provideHeaderValueForNormalization
+     */
+    public function testGetPreferredLanguageReturnsNormalized($expected, $options)
+    {
+        $service = new AcceptLanguage($options);
+        $result = $service->getPreferredLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideHeaderValueForNormalization()
+    {
+        return [
+            'language with hyphen intersects with hyphenated accepted_languages once results language' => [
+                'zh-Hant-HK',
+                [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
+            ],
+            'language with hyphen intersects with underscored accepted_languages once results language' => [
+                'zh-Hant-HK',
+                [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
+            ],
+            'language with underscore intersects with hyphenated accepted_languages once results language' => [
+                'zh-Hant-HK',
+                [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
+            ],
+            'language with underscore intersects with underscored accepted_languages once results language' => [
+                'zh-Hant-HK',
+                [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
+            ],
+        ];
+    }
+
+    /**
      * Caught bugs.
      */
     public function testGetPreferredLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
