@@ -135,7 +135,10 @@ class AcceptLanguage
     private function parseHeaderValue(string $headerValue): array
     {
         return array_map(function ($tag) {
-            return array_pad(explode(';q=', trim($tag)), 2, 1);
+            $blankTag = ['lang', 'quality'];
+            $splitTag = array_pad(explode(';q=', trim($tag)), 2, 1);
+
+            return array_combine($blankTag, $splitTag);
         }, explode(',', $headerValue));
     }
 
@@ -146,7 +149,7 @@ class AcceptLanguage
     private function filter(array $languages): array
     {
         $filtered = array_filter($languages, function ($value) {
-            return $this->isValidLanguage($value[0]) && $this->isValidQuality($value[1]);
+            return $this->isValidLanguage($value['lang']) && $this->isValidQuality($value['quality']);
         });
 
         if (empty($this->options['accepted_languages'])) {
@@ -156,7 +159,7 @@ class AcceptLanguage
         $accepted = $this->prepareAcceptedLanguagesOption();
 
         return array_filter($filtered, function ($value) use ($accepted) {
-            return in_array($this->prepareLanguageForCompare($value[0]), $accepted, true);
+            return in_array($this->prepareLanguageForCompare($value['lang']), $accepted, true);
         });
     }
 
@@ -207,13 +210,13 @@ class AcceptLanguage
     {
         $normalized = array_map(function ($value) {
             return [
-                $this->normalizeTag($value[0]),
-                $this->normalizeQuality($value[1]),
+                'lang' => $this->normalizeTag($value['lang']),
+                'quality' => $this->normalizeQuality($value['quality']),
             ];
         }, $languages);
 
         usort($normalized, function($a, $b) {
-            return $b[1] <=> $a[1];
+            return $b['quality'] <=> $a['quality'];
         });
 
         return $normalized;
@@ -256,9 +259,7 @@ class AcceptLanguage
      */
     private function retrieveProperLanguage(array $languages): string
     {
-        foreach ($languages as $language) {
-            $language = $language[0];
-
+        foreach (array_column($languages, 'lang') as $language) {
             if ($this->isSpecialRange($language)) {
                 break;
             }
