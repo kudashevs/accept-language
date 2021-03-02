@@ -130,7 +130,10 @@ class AcceptLanguage
      */
     private function parseHeaderValue(string $headerValue): array
     {
-        $languages = [];
+        return array_map(function ($tag) {
+            return array_pad(explode(';q=', trim($tag)), 2, 1);
+        }, explode(',', $headerValue));
+    }
 
         foreach (explode(',', $headerValue) as $separateLanguageTag) {
             $splitTagAndQuality = array_pad(explode(';q=', trim($separateLanguageTag)), 2, 1);
