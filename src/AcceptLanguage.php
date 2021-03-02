@@ -199,6 +199,10 @@ class AcceptLanguage
         return strtolower(str_replace('_', '-', $language));
     }
 
+    /**
+     * @param array $languages
+     * @return array
+     */
     private function normalize(array $languages): array
     {
         $normalized = array_map(function ($value) {
