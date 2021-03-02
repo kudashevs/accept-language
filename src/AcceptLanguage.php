@@ -96,7 +96,9 @@ class AcceptLanguage
 
         $filtered = $this->filter($languages);
 
-        return $this->retrieveLanguage($filtered);
+        $normalized = $this->normalize($filtered);
+
+        return $this->retrieveLanguage($normalized);
     }
 
     /**
@@ -195,7 +197,17 @@ class AcceptLanguage
         return strtolower(str_replace('_', '-', $language));
     }
 
-        return $languages;
+    private function normalize(array $languages): array
+    {
+        $normalized = array_map(function ($value) {
+            return [
+                $this->normalizeTag($value[0]),
+                $this->normalizeQuality($value[1]),
+            ];
+        }, $languages);
+
+        //sorting
+        return $normalized;
     }
 
     /**
