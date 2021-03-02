@@ -112,9 +112,13 @@ class AcceptLanguageTest extends TestCase
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => '*,de;q=0.7'],
             ],
+            'any language tag and language tag with equal quality results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => '*,es,de;q=0.7'],
+            ],
             'any language tag and language tag with equal quality results language' => [
                 'es',
-                ['http_accept_language' => '*,es,de;q=0.7'],
+                ['http_accept_language' => 'es,*,de;q=0.7'],
             ],
             'two-letter primary language tag results language' => [
                 'en',
