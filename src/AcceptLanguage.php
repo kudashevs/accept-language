@@ -248,6 +248,12 @@ class AcceptLanguage
     private function retrieveProperLanguage(array $languages): string
     {
         foreach ($languages as $language) {
+            $language = $language[0];
+
+            if ($this->isSpecialRange($language)) {
+                break;
+            }
+
             if ($this->isProperLanguage($language)) {
                 return $language;
             }
