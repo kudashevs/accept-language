@@ -94,7 +94,9 @@ class AcceptLanguage
     {
         $languages = $this->parse($headerValue);
 
-        return $this->retrieveLanguage($languages);
+        $filtered = $this->filter($languages);
+
+        return $this->retrieveLanguage($filtered);
     }
 
     /**
@@ -135,11 +137,34 @@ class AcceptLanguage
         }, explode(',', $headerValue));
     }
 
-        foreach (explode(',', $headerValue) as $separateLanguageTag) {
-            $splitTagAndQuality = array_pad(explode(';q=', trim($separateLanguageTag)), 2, 1);
+    /**
+     * @param array $languages
+     * @return array
+     */
+    private function filter(array $languages): array
+    {
+        $filtered = array_filter($languages, function ($value) {
+            return $this->isValidLanguage($value[0]) && $this->isValidQuality($value[1]);
+        });
+    }
 
-            $languageValue = $this->normalizeTag($splitTagAndQuality[0]);
-            $languageQuality = $this->normalizeQuality($splitTagAndQuality[1]);
+    /**
+     * @param $value
+     * @return bool
+     */
+    private function isValidLanguage($value): bool
+    {
+        return !empty($value);
+    }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    private function isValidQuality($value): bool
+    {
+        return !empty($value) && is_numeric($value) && (bool)filter_var($value, FILTER_VALIDATE_FLOAT, ['options' => ['min_range' => 0.1, 'max_range' => 1]]);
+    }
 
             /**
              * The first registered language tag has the highest quality value.
