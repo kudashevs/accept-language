@@ -226,28 +226,9 @@ class AcceptLanguage
             return $this->resolveDefaultLanguage();
         }
 
-        $languages = $this->retrieveIntersectionWithAcceptableLanguages($languages);
-
-        if (empty($languages)) {
-            return $this->resolveDefaultLanguage();
-        }
-
         $languages = $this->retrieveLanguagesWithHighestQuality($languages);
 
         return $this->retrieveProperLanguage($languages);
-    }
-
-    /**
-     * @param array $languages
-     * @return array
-     */
-    private function retrieveIntersectionWithAcceptableLanguages(array $languages): array
-    {
-        if (empty($this->options['accepted_languages'])) {
-            return $languages;
-        }
-
-        return array_intersect_key($languages, array_flip($this->options['accepted_languages']));
     }
 
     /**
