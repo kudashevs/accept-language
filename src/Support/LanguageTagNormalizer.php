@@ -36,7 +36,7 @@ class LanguageTagNormalizer
             $subtags = $this->normalizeSubtags($subtags);
         }
 
-        return implode('-', $subtags);
+        return implode('_', $subtags);
     }
 
     /**

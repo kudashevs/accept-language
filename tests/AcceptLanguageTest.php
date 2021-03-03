@@ -189,7 +189,7 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
             ],
             'example part uppercase results language' => [
-                'de-DE',
+                'de_DE',
                 ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8'],
             ],
             'mozilla Accept-Language page examples basic results language' => [
@@ -197,15 +197,15 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'de'],
             ],
             'mozilla Accept-Language page examples hyphenated results language' => [
-                'de-CH',
+                'de_CH',
                 ['http_accept_language' => 'de-CH'],
             ],
             'mozilla Accept-Language page examples complex results language' => [
-                'en-US',
+                'en_US',
                 ['http_accept_language' => 'en-US,en;q=0.5'],
             ],
             'mozilla Accept-Language page examples complex with space results language' => [
-                'fr-CH',
+                'fr_CH',
                 ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'],
             ],
             'RFC 2616 14.4 Accept-Language example results language' => [
@@ -308,19 +308,19 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
-                'zh-Hant-HK',
+                'zh_Hant_HK',
                 [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
             ],
             'language with hyphen intersects with underscored accepted_languages once results language' => [
-                'zh-Hant-HK',
+                'zh_Hant_HK',
                 [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
             ],
             'language with underscore intersects with hyphenated accepted_languages once results language' => [
-                'zh-Hant-HK',
+                'zh_Hant_HK',
                 [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
             ],
             'language with underscore intersects with underscored accepted_languages once results language' => [
-                'zh-Hant-HK',
+                'zh_Hant_HK',
                 [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
             ],
         ];

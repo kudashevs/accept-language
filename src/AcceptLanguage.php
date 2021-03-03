@@ -280,7 +280,7 @@ class AcceptLanguage
     {
         $length = strlen($language);
 
-        if (strpos($language,'-') === false) {
+        if (strpos($language,'_') === false) {
             return $length >= 2 && $length <= 3;
         }
 
