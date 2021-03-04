@@ -94,6 +94,35 @@ class LanguageTagNormalizerTest extends TestCase
         ];
     }
 
+    public function testNormalizeReturnsNormalizedLanguageWithDefaultSeparator()
+    {
+        $languageTag = new LanguageTagNormalizer();
+
+        $this->assertSame('en_US', $languageTag->normalize('en-US'));
+    }
+
+    /**
+     * @dataProvider provideLanguageTagWithSeparator
+     */
+    public function testNormalizeReturnsNormalizedLanguageTagWithExpectedSeparator($expected, $raw, $separator)
+    {
+        $languageTag = new LanguageTagNormalizer();
+
+        $this->assertSame($expected, $languageTag->normalize($raw, $separator));
+    }
+
+    public function provideLanguageTagWithSeparator()
+    {
+        return [
+            'sets the hyphen as the separator' => [
+                'en-US', 'en-US', '-',
+            ],
+            'sets the underscore as the separator' => [
+                'en_US', 'en-US', '_',
+            ],
+        ];
+    }
+
     /**
      * @dataProvider provideExceptionalCase
      */
