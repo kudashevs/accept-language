@@ -97,7 +97,7 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @dataProvider provideExceptionalCase
      */
-    public function testGetNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
+    public function testNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
     {
         $languageTag = new LanguageTagNormalizer();
 
