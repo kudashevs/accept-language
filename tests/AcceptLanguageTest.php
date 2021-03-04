@@ -231,23 +231,38 @@ class AcceptLanguageTest extends TestCase
         return [
             'language that intersects with accepted_languages results language' => [
                 'de',
-                [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de'], ],
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['de'],
+                ],
             ],
             'language that intersects with accepted_languages results language when it is of quality 1' => [
                 'fr',
-                [ 'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5', 'accepted_languages' => ['de', 'fr'], ],
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['de', 'fr'],
+                ],
             ],
             'language that intersects with accepted_languages results language when it is of quality below 1' => [
                 'es',
-                [ 'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333', 'accepted_languages' => ['en', 'es'], ],
+                [
+                    'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
+                    'accepted_languages' => ['en', 'es'],
+                ],
             ],
             'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality 1' => [
                 'en',
-                [ 'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7', 'accepted_languages' => ['en'], ],
+                [
+                    'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
+                    'accepted_languages' => ['en'],
+                ],
             ],
             'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality below 1' => [
                 'fr',
-                [ 'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7', 'accepted_languages' => ['fr'], ],
+                [
+                    'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
+                    'accepted_languages' => ['fr'],
+                ],
             ],
         ];
     }
@@ -268,19 +283,31 @@ class AcceptLanguageTest extends TestCase
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
                 'zh_Hant_HK',
-                [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
+                [
+                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh-Hant-HK'],
+                ],
             ],
             'language with hyphen intersects with underscored accepted_languages once results language' => [
                 'zh_Hant_HK',
-                [ 'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
+                [
+                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh_Hant_HK'],
+                ],
             ],
             'language with underscore intersects with hyphenated accepted_languages once results language' => [
                 'zh_Hant_HK',
-                [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh-Hant-HK'], ],
+                [
+                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh-Hant-HK'],
+                ],
             ],
             'language with underscore intersects with underscored accepted_languages once results language' => [
                 'zh_Hant_HK',
-                [ 'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5', 'accepted_languages' => ['zh_Hant_HK'], ],
+                [
+                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh_Hant_HK'],
+                ],
             ],
         ];
     }
