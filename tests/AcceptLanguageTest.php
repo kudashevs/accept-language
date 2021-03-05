@@ -268,6 +268,37 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @dataProvider provideHeaderValueWithTheSpecificOption
+     */
+    public function testGetPreferredLanguageReturnsExpectedWhenSpecificOptionIsSet($expected, $options)
+    {
+        $service = new AcceptLanguage($options);
+        $result = $service->getPreferredLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideHeaderValueWithTheSpecificOption()
+    {
+        return [
+            'returns with the underscore separator' => [
+                'en_GB',
+                [
+                    'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
+                    'separator' => '_',
+                ],
+            ],
+            'returns with the hyphen separator' => [
+                'en-GB',
+                [
+                    'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
+                    'separator' => '-',
+                ],
+            ]
+        ];
+    }
+
+    /**
      * @dataProvider provideHeaderValueForNormalization
      */
     public function testGetPreferredLanguageReturnsNormalized($expected, $options)

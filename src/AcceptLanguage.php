@@ -25,12 +25,14 @@ class AcceptLanguage
      * @var array[
      *  'http_accept_language' string A string with custom HTTP Accept-Language information.
      *  'default_language' string A string with a default preferred language value.
+     *  'separator' string A string with a character that will be used as the separator.
      *  'accepted_languages' array An array with a list of supported languages.
      * ]
      */
     private $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
+        'separator' => '_',
         'accepted_languages' => [],
     ];
 
@@ -228,7 +230,7 @@ class AcceptLanguage
      */
     private function normalizeTag(string $tag): string
     {
-        return $this->normalizer->normalize($tag);
+        return $this->normalizer->normalize($tag, $this->options['separator']);
     }
 
     /**
@@ -280,7 +282,7 @@ class AcceptLanguage
     {
         $length = strlen($language);
 
-        if (strpos($language,'_') === false) {
+        if (strpos($language, $this->options['separator']) === false) {
             return $length >= 2 && $length <= 3;
         }
 
