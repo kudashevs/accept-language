@@ -16,7 +16,8 @@ the CLDR format (overlaps with the ISO 15897 format) and it is used by the major
 
 - Can return the default language value if a client accepts any language 
 - Can override the default value with the option `default_language`
-- Can restrict the search by values in the option `accepted_languages` 
+- Can override the default separator with the option `separator`
+- Can restrict the search by values in the option `accepted_languages`
 
 At the moment, the package goes with Laravel framework support (it includes a service provider and a facade).
 
