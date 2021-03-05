@@ -158,7 +158,7 @@ class AcceptLanguage
             return $filtered;
         }
 
-        $accepted = $this->prepareAcceptedLanguagesOption();
+        $accepted = $this->prepareAcceptedLanguagesForCompare();
 
         return array_filter($filtered, function ($value) use ($accepted) {
             return in_array($this->prepareLanguageForCompare($value['lang']), $accepted, true);
@@ -188,7 +188,7 @@ class AcceptLanguage
     /**
      * @return array
      */
-    private function prepareAcceptedLanguagesOption(): array
+    private function prepareAcceptedLanguagesForCompare(): array
     {
         return array_map(function ($value) {
             return $this->prepareLanguageForCompare($value);
