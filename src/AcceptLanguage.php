@@ -15,11 +15,6 @@ class AcceptLanguage
     private $language;
 
     /**
-     * @var LanguageTagNormalizer
-     */
-    private $normalizer;
-
-    /**
      * Contains various options.
      *
      * @var array[
@@ -37,13 +32,18 @@ class AcceptLanguage
     ];
 
     /**
+     * @var LanguageTagNormalizer
+     */
+    private $normalizer;
+
+    /**
      * @param array $options
      * @throws InvalidOptionArgumentException
      */
     public function __construct(array $options = [])
     {
-        $this->normalizer = new LanguageTagNormalizer();
         $this->setOptions($options);
+        $this->setNormalizer();
 
         $this->process();
     }
@@ -63,6 +63,14 @@ class AcceptLanguage
         }
 
         $this->options = array_merge($this->options, $matchingOptions);
+    }
+
+    /**
+     * @return LanguageTagNormalizer
+     */
+    private function setNormalizer(): void
+    {
+        $this->normalizer = new LanguageTagNormalizer();
     }
 
     /**
