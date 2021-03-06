@@ -29,22 +29,20 @@ final class LanguageTagNormalizer
 
     /**
      * @param string $tag
-     * @param string $separator
      * @return string
      */
-    public function normalize(string $tag, string $separator = '_'): string
+    public function normalize(string $tag): string
     {
-        return $this->normalizeLanguageTag($tag, $separator);
+        return $this->normalizeLanguageTag($tag);
     }
 
     /**
      * Separates language tag, analyzes parts and normalizes them.
      *
      * @param $tag
-     * @param string $separator
      * @return string
      */
-    private function normalizeLanguageTag($tag, string $separator): string
+    private function normalizeLanguageTag($tag): string
     {
         $subtags = $this->splitLanguageTag($tag);
 
@@ -52,7 +50,7 @@ final class LanguageTagNormalizer
             $subtags = $this->normalizeSubtags($subtags);
         }
 
-        return implode($separator, $subtags);
+        return implode('-', $subtags);
     }
 
     /**

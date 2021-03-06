@@ -44,19 +44,19 @@ class LanguageTagNormalizerTest extends TestCase
                 'zh_yue',
             ],
             'two-letter tag hyphenated with script append script' => [
-                'sr_Latn',
+                'sr-Latn',
                 'sr-Latn',
             ],
             'two-letter tag underscored with script append script' => [
-                'sr_Latn',
+                'sr-Latn',
                 'sr_Latn',
             ],
             'two-letter tag hyphenated with region append region' => [
-                'de_AT',
+                'de-AT',
                 'de-AT',
             ],
             'two-letter tag underscored with region append region' => [
-                'de_AT',
+                'de-AT',
                 'de_AT',
             ],
             'two-letter tag hyphenated with region in digits remove region' => [
@@ -68,57 +68,28 @@ class LanguageTagNormalizerTest extends TestCase
                 'es-005',
             ],
             'two-letter tag hyphenated with extlang and region append only region' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN',
             ],
             'two-letter tag underscored with extlang and region append only region' => [
-                'zh_CN',
+                'zh-CN',
                 'zh_cmn_CN',
             ],
             'two-letter tag hyphenated with script and region append both' => [
-                'sr_Latn_RS',
+                'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
             'two-letter tag underscored with script and region append both' => [
-                'sr_Latn_RS',
+                'sr-Latn-RS',
                 'sr_Latn_RS',
             ],
             'two-letter tag hyphenated with extlang, script, and region append expected' => [
-                'zh_Hant_CN',
+                'zh-Hant-CN',
                 'zh-yue-Hant-CN',
             ],
             'two-letter tag underscored with extlang, script, and region append expected' => [
-                'zh_Hant_CN',
+                'zh-Hant-CN',
                 'zh_yue_Hant_CN',
-            ],
-        ];
-    }
-
-    public function testNormalizeReturnsNormalizedLanguageWithDefaultSeparator()
-    {
-        $languageTag = new LanguageTagNormalizer();
-
-        $this->assertSame('en_US', $languageTag->normalize('en-US'));
-    }
-
-    /**
-     * @dataProvider provideLanguageTagWithSeparator
-     */
-    public function testNormalizeReturnsNormalizedLanguageTagWithExpectedSeparator($expected, $raw, $separator)
-    {
-        $languageTag = new LanguageTagNormalizer();
-
-        $this->assertSame($expected, $languageTag->normalize($raw, $separator));
-    }
-
-    public function provideLanguageTagWithSeparator()
-    {
-        return [
-            'sets the hyphen as the separator' => [
-                'en-US', 'en-US', '-',
-            ],
-            'sets the underscore as the separator' => [
-                'en_US', 'en-US', '_',
             ],
         ];
     }
@@ -137,11 +108,11 @@ class LanguageTagNormalizerTest extends TestCase
     {
         return [
             'two-letter tag hyphenated with extlang out of its scope' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN-cmn',
             ],
             'two-letter tag hyphenated with script out of its scope' => [
-                'zh_CN',
+                'zh-CN',
                 'zh-cmn-CN-Latn',
             ],
             'two-letter tag hyphenated with region out of its scope' => [
@@ -149,15 +120,15 @@ class LanguageTagNormalizerTest extends TestCase
                 'de-ext-ext-Latn-CH-1901',
             ],
             'two-letter tag BCP47 section 2.1.1 example 1 return formatted' => [
-                'mn_Cyrl_MN',
+                'mn-Cyrl-MN',
                 'mn-Cyrl-MN',
             ],
             'two-letter tag BCP47 section 2.1.1 example 2 return formatted' => [
-                'mn_Cyrl_MN',
+                'mn-Cyrl-MN',
                 'MN-cYRL-mn',
             ],
             'two-letter tag BCP47 section 2.1.1 example 3 return formatted' => [
-                'mn_Cyrl_MN',
+                'mn-Cyrl-MN',
                 'mN-cYrL-Mn',
             ],
         ];
