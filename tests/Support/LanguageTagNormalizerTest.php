@@ -126,6 +126,13 @@ class LanguageTagNormalizerTest extends TestCase
                     'with_script' => false,
                 ]
             ],
+            'returns without region' => [
+                'zh-Hant',
+                'zh-yue-Hant-CN',
+                [
+                    'with_region' => false,
+                ]
+            ],
         ];
     }
 

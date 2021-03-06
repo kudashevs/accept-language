@@ -19,7 +19,7 @@ final class LanguageTagNormalizer
     private $options = [
         'with_extlang' => false,
         'with_script' => true,
-        'with_region' => false,
+        'with_region' => true,
     ];
 
     public function __construct(array $options = [])
@@ -93,7 +93,9 @@ final class LanguageTagNormalizer
             }
 
             if ($this->isRegion($subtag, $index)) {
-                $normalized[] = $this->normalizeRegionSubtag($subtag);
+                if ($this->options['with_region']) {
+                    $normalized[] = $this->normalizeRegionSubtag($subtag);
+                }
             }
         }
 
