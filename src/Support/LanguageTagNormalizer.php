@@ -13,8 +13,18 @@ final class LanguageTagNormalizer
      */
     private $processed = 0;
 
-    public function __construct()
+    /**
+     * @var array
+     */
+    private $options = [
+        'with_extlang' => false,
+        'with_script' => false,
+        'with_region' => false,
+    ];
+
+    public function __construct(array $options = [])
     {
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
