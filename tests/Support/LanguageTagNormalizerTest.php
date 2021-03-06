@@ -95,6 +95,34 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @dataProvider provideLanguageTagWithOptions
+     */
+    public function testNormalizeReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
+    {
+        $languageTag = new LanguageTagNormalizer($options);
+
+        $this->assertSame($expected, $languageTag->normalize($raw));
+    }
+
+    public function provideLanguageTagWithOptions()
+    {
+        return [
+            'returns without extlang and with script and region by default' => [
+                'zh-Hant-CN',
+                'zh-yue-Hant-CN',
+                []
+            ],
+            'returns with extlang' => [
+                'zh-yue-Hant-CN',
+                'zh-yue-Hant-CN',
+                [
+                    'with_extlang' => true,
+                ]
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider provideExceptionalCase
      */
     public function testNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)

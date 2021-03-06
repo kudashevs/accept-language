@@ -78,7 +78,10 @@ final class LanguageTagNormalizer
 
             if ($this->isExtlang($subtag, $index)) {
                 $this->processed++;
-                continue;
+
+                if ($this->options['with_extlang']) {
+                    $normalized[] = $this->normalizeExtlangSubtag($subtag);
+                }
             }
 
             if ($this->isScript($subtag, $index)) {
@@ -92,6 +95,15 @@ final class LanguageTagNormalizer
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param string $subtag
+     * @return string
+     */
+    private function normalizeExtlangSubtag(string $subtag): string
+    {
+        return strtolower($subtag);
     }
 
     /**
