@@ -18,7 +18,7 @@ final class LanguageTagNormalizer
      */
     private $options = [
         'with_extlang' => false,
-        'with_script' => false,
+        'with_script' => true,
         'with_region' => false,
     ];
 
@@ -86,7 +86,10 @@ final class LanguageTagNormalizer
 
             if ($this->isScript($subtag, $index)) {
                 $this->processed++;
-                $normalized[] = $this->normalizeScriptSubtag($subtag);
+
+                if ($this->options['with_script']) {
+                    $normalized[] = $this->normalizeScriptSubtag($subtag);
+                }
             }
 
             if ($this->isRegion($subtag, $index)) {

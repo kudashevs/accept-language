@@ -119,6 +119,13 @@ class LanguageTagNormalizerTest extends TestCase
                     'with_extlang' => true,
                 ]
             ],
+            'returns without script' => [
+                'zh-CN',
+                'zh-yue-Hant-CN',
+                [
+                    'with_script' => false,
+                ]
+            ],
         ];
     }
 
