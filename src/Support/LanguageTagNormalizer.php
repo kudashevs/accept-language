@@ -4,6 +4,10 @@ namespace Kudashevs\AcceptLanguage\Support;
 
 final class LanguageTagNormalizer
 {
+    private const EXTLANG_SUBTAG_LENGTH = 3;
+    private const SCRIPT_SUBTAG_LENGTH = 4;
+    private const REGION_SUBTAG_LENGTH = 2;
+
     /**
      * @var int
      */
@@ -116,7 +120,8 @@ final class LanguageTagNormalizer
      */
     private function isExtlang(string $value, int $position): bool
     {
-        return (strlen($value) === 3 && ($position === 1));
+        return strlen($value) === self::EXTLANG_SUBTAG_LENGTH &&
+            ($position === 1);
     }
 
     /**
@@ -126,7 +131,7 @@ final class LanguageTagNormalizer
      */
     private function isScript(string $value, int $position): bool
     {
-        return strlen($value) === 4 &&
+        return strlen($value) === self::SCRIPT_SUBTAG_LENGTH &&
             (
                 $position === 1 ||
                 ($this->processed === 1 && $position === 2)
@@ -140,7 +145,7 @@ final class LanguageTagNormalizer
      */
     private function isRegion(string $value, int $position): bool
     {
-        return strlen($value) === 2 &&
+        return strlen($value) === self::REGION_SUBTAG_LENGTH &&
             (
                 $position === 1 ||
                 ($this->processed === 1 && $position === 2) ||
