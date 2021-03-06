@@ -238,7 +238,7 @@ class AcceptLanguage
      */
     private function normalizeTag(string $tag): string
     {
-        return $this->normalizer->normalize($tag, $this->options['separator']);
+        return str_replace('-', $this->options['separator'], $this->normalizer->normalize($tag));
     }
 
     /**
