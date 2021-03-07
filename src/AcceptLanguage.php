@@ -172,7 +172,7 @@ class AcceptLanguage
     {
         $filtered = $this->filterLanguages($languages);
 
-        $filtered = $this->filterThroughAcceptedLanguages($filtered);
+        $filtered = $this->filterLanguagesThroughAcceptedLanguages($filtered);
 
         return $filtered;
     }
@@ -192,7 +192,7 @@ class AcceptLanguage
      * @param array $filtered
      * @return array
      */
-    private function filterThroughAcceptedLanguages(array $filtered): array
+    private function filterLanguagesThroughAcceptedLanguages(array $filtered): array
     {
         if (empty($this->options['accepted_languages'])) {
             return $filtered;
