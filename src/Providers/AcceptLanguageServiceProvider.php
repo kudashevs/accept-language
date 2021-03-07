@@ -38,9 +38,11 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      */
     private function getConfig(Container $app): array
     {
-        return array_filter([
+        $config = [
             'default_language' => $app['config']['app.locale'] ?? false,
             'accepted_languages' => $app['config']['app.accepted_locales'] ?? false,
-        ]);
+        ];
+
+        return array_filter($config);
     }
 }
