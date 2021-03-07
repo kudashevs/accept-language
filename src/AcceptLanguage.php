@@ -54,15 +54,27 @@ class AcceptLanguage
      */
     protected function setOptions(array $options): void
     {
-        $matchingOptions = array_intersect_key($options, $this->options);
+        $validated = $this->validateOptions($options);
 
-        foreach ($matchingOptions as $key => $value) {
-            if (gettype($value) !== gettype($this->options[$key])) {
+        $this->options = array_merge($this->options, $validated);
+    }
+
+    /**
+     * @param array $options
+     * @return array
+     * @throws InvalidOptionArgumentException
+     */
+    protected function validateOptions(array $options): array
+    {
+        $allowedOptions = array_intersect_key($options, $this->options);
+
+        foreach ($allowedOptions as $key => $value) {
+            if (gettype($this->options[$key]) !== gettype($value)) {
                 throw new InvalidOptionArgumentException('The option ' . $key . ' has a wrong value type ' . gettype($value) . '. Option requires a value of the type ' . gettype($this->options[$key]) . '.');
             }
         }
 
-        $this->options = array_merge($this->options, $matchingOptions);
+        return $allowedOptions;
     }
 
     /**
