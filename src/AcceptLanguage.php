@@ -133,7 +133,7 @@ class AcceptLanguage
     {
         if (
             empty($headerValue) ||
-            $this->isSpecialRange($headerValue)
+            $this->isWildcard($headerValue)
         ) {
             return [];
         }
@@ -145,7 +145,7 @@ class AcceptLanguage
      * @param string $headerValue
      * @return bool
      */
-    private function isSpecialRange(string $headerValue): bool
+    private function isWildcard(string $headerValue): bool
     {
         return $headerValue === '*';
     }
@@ -282,7 +282,7 @@ class AcceptLanguage
     private function retrieveProperLanguage(array $languages): string
     {
         foreach (array_column($languages, 'lang') as $language) {
-            if ($this->isSpecialRange($language)) {
+            if ($this->isWildcard($language)) {
                 break;
             }
 
