@@ -172,7 +172,7 @@ class AcceptLanguage
     {
         $filtered = $this->filterLanguages($languages);
 
-        if ($this->hasAcceptedLanguages()) {
+        if (!empty($this->options['accepted_languages'])) {
             $filtered = $this->filterThroughAcceptedLanguages($filtered);
         }
 
@@ -205,14 +205,6 @@ class AcceptLanguage
         });
 
         return $filtered;
-    }
-
-    /**
-     * @return bool
-     */
-    private function hasAcceptedLanguages(): bool
-    {
-        return !empty($this->options['accepted_languages']);
     }
 
     /**
