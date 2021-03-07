@@ -172,9 +172,7 @@ class AcceptLanguage
     {
         $filtered = $this->filterLanguages($languages);
 
-        if (!empty($this->options['accepted_languages'])) {
-            $filtered = $this->filterThroughAcceptedLanguages($filtered);
-        }
+        $filtered = $this->filterThroughAcceptedLanguages($filtered);
 
         return $filtered;
     }
@@ -196,6 +194,10 @@ class AcceptLanguage
      */
     private function filterThroughAcceptedLanguages(array $filtered): array
     {
+        if (empty($this->options['accepted_languages'])) {
+            return $filtered;
+        }
+
         $accepted = $this->prepareAcceptedLanguagesForCompare();
 
         $filtered = array_filter($filtered, function ($value) use ($accepted) {
