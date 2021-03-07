@@ -187,6 +187,17 @@ class AcceptLanguage
         });
     }
 
+        return $filtered;
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasAcceptedLanguages(): bool
+    {
+        return !empty($this->options['accepted_languages']);
+    }
+
     /**
      * @param $value
      * @return bool
