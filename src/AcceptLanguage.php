@@ -173,13 +173,7 @@ class AcceptLanguage
         $filtered = $this->filterLanguages($languages);
 
         if ($this->hasAcceptedLanguages()) {
-            $accepted = $this->prepareAcceptedLanguagesForCompare();
-
-            $filtered = array_filter($filtered, function ($value) use ($accepted) {
-                $language = $this->prepareLanguageForCompare($value['lang']);
-
-                return in_array($language, $accepted, true);
-            });
+            $filtered = $this->filterThroughAcceptedLanguages($filtered);
         }
 
         return $filtered;
@@ -194,6 +188,23 @@ class AcceptLanguage
         return array_filter($languages, function ($value) {
             return $this->isValidLanguage($value['lang']) && $this->isValidQuality($value['quality']);
         });
+    }
+
+    /**
+     * @param array $filtered
+     * @return array
+     */
+    private function filterThroughAcceptedLanguages(array $filtered): array
+    {
+        $accepted = $this->prepareAcceptedLanguagesForCompare();
+
+        $filtered = array_filter($filtered, function ($value) use ($accepted) {
+            $language = $this->prepareLanguageForCompare($value['lang']);
+
+            return in_array($language, $accepted, true);
+        });
+
+        return $filtered;
     }
 
     /**
