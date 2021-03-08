@@ -20,6 +20,7 @@ class AcceptLanguage
      * @var array[
      *  'http_accept_language' string A string with custom HTTP Accept-Language information.
      *  'default_language' string A string with a default preferred language value.
+     *  'two_letter_only' bool A boolean defines whether to use the two-letter codes only or not.
      *  'separator' string A string with a character that will be used as the separator.
      *  'accepted_languages' array An array with a list of supported languages.
      * ]
@@ -27,6 +28,7 @@ class AcceptLanguage
     private $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
+        'two_letter_only' => true,
         'separator' => '_',
         'accepted_languages' => [],
     ];
@@ -348,6 +350,10 @@ class AcceptLanguage
      */
     private function isProperPrimarySubtag(int $length): bool
     {
+        if ($this->options['two_letter_only']) {
+            return $length === 2;
+        }
+
         return $length >= 2 && $length <= 3;
     }
 

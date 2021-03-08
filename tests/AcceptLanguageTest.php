@@ -120,9 +120,16 @@ class AcceptLanguageTest extends TestCase
                 'en',
                 ['http_accept_language' => 'en'],
             ],
-            'three-letter primary language tag results language' => [
-                'sgn',
+            'three-letter primary language tag results default' => [
+                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'sgn'],
+            ],
+            'three-letter primary language tag with optionresults default' => [
+                'sgn',
+                [
+                    'http_accept_language' => 'sgn',
+                    'two_letter_only' => false,
+                ],
             ],
             'four letters primary language tag results default' => [
                 self::DEFAULT_LANGUAGE,
@@ -142,7 +149,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with 0 quality language tag results language' => [
                 self::DEFAULT_LANGUAGE,
-                ['http_accept_language' => 'sgn;q=0'],
+                [
+                    'http_accept_language' => 'sgn;q=0',
+                    'two_letter_only' => false,
+                ],
             ],
             'two-letter with 0.001 quality language tag results default' => [
                 'de',
@@ -150,7 +160,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with 0.001 quality language tag results language' => [
                 'sgn',
-                ['http_accept_language' => 'sgn;q=0.001'],
+                [
+                    'http_accept_language' => 'sgn;q=0.001',
+                    'two_letter_only' => false,
+                ],
             ],
             'two-letter with quality language tag results language' => [
                 'de',
@@ -158,7 +171,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with quality language tag results language' => [
                 'sgn',
-                ['http_accept_language' => 'sgn;q=0.5'],
+                [
+                    'http_accept_language' => 'sgn;q=0.5',
+                    'two_letter_only' => false,
+                ],
             ],
             'two-letter with 0.999 quality language tag results default' => [
                 'de',
@@ -166,7 +182,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with 0.999 quality language tag results language' => [
                 'sgn',
-                ['http_accept_language' => 'sgn;q=0.999'],
+                [
+                    'http_accept_language' => 'sgn;q=0.999',
+                    'two_letter_only' => false,
+                ],
             ],
             'two-letter with 1 quality language tag results default' => [
                 'de',
@@ -174,7 +193,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with 1 quality language tag results language' => [
                 'sgn',
-                ['http_accept_language' => 'sgn;q=1'],
+                [
+                    'http_accept_language' => 'sgn;q=1',
+                    'two_letter_only' => false,
+                ],
             ],
             'two-letter with 1.001 quality language tag results default' => [
                 self::DEFAULT_LANGUAGE,
@@ -182,7 +204,10 @@ class AcceptLanguageTest extends TestCase
             ],
             'three-letter with 1.001 quality language tag results language' => [
                 self::DEFAULT_LANGUAGE,
-                ['http_accept_language' => 'sgn;q=1.001'],
+                [
+                    'http_accept_language' => 'sgn;q=1.001',
+                    'two_letter_only' => false,
+                ],
             ],
             'four letters with quality language tag results default' => [
                 self::DEFAULT_LANGUAGE,
@@ -302,7 +327,21 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
                     'separator' => '-',
                 ],
-            ]
+            ],
+            'returns expected with the two-letter only on' => [
+                'en',
+                [
+                    'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
+                    'two_letter_only' => true,
+                ],
+            ],
+            'returns expected with the two-letter only off' => [
+                'ast',
+                [
+                    'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
+                    'two_letter_only' => false,
+                ],
+            ],
         ];
     }
 
