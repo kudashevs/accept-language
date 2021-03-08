@@ -289,14 +289,14 @@ class AcceptLanguageTest extends TestCase
     public function provideHeaderValueWithTheSpecificOption()
     {
         return [
-            'returns with the underscore separator' => [
+            'returns expected with the underscore separator' => [
                 'en_GB',
                 [
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
                     'separator' => '_',
                 ],
             ],
-            'returns with the hyphen separator' => [
+            'returns expected with the hyphen separator' => [
                 'en-GB',
                 [
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
