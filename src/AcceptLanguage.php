@@ -326,11 +326,38 @@ class AcceptLanguage
     {
         $length = strlen($language);
 
-        if (strpos($language, $this->options['separator']) === false) {
-            return $length >= 2 && $length <= 3;
+        if ($this->isPrimarySubtag($language)) {
+            return $this->isProperPrimarySubtag($length);
         }
 
-        return strlen($language) >= 2;
+        return $this->isProperLanguageTag($length);
+    }
+
+    /**
+     * @param string $language
+     * @return bool
+     */
+    private function isPrimarySubtag(string $language): bool
+    {
+        return strpos($language, $this->options['separator']) === false;
+    }
+
+    /**
+     * @param int $length
+     * @return bool
+     */
+    private function isProperPrimarySubtag(int $length): bool
+    {
+        return $length >= 2 && $length <= 3;
+    }
+
+    /**
+     * @param int $length
+     * @return bool
+     */
+    private function isProperLanguageTag(int $length): bool
+    {
+        return $length > 1;
     }
 
     /**
