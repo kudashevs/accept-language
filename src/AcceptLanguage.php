@@ -307,7 +307,7 @@ class AcceptLanguage
     {
         foreach (array_column($languages, 'lang') as $language) {
             if ($this->isWildcard($language)) {
-                break;
+                return $this->resolveDefaultLanguage();
             }
 
             if ($this->isProperLanguage($language)) {
