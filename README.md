@@ -17,6 +17,7 @@ similar to the CLDR format (overlaps with the ISO 15897) and it is used by the m
 
 - Can return the default language value if a client accepts any language 
 - Can override the default value with the `default_language` option
+- Can retrieve the three-letter language code with the `two_letter_only` option
 - Can override the default separator with the `separator` option
 - Can restrict the search by values in the `accepted_languages` option
 
