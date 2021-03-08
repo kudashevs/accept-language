@@ -16,9 +16,9 @@ of a 2-letter primary subtag and an optional region subtag separated by the unde
 similar to the CLDR format (overlaps with the ISO 15897) and it is used by the majority of frameworks in localization.  
 
 - Can return the default language value if a client accepts any language 
-- Can override the default value with the option `default_language`
-- Can override the default separator with the option `separator`
-- Can restrict the search by values in the option `accepted_languages`
+- Can override the default value with the `default_language` option
+- Can override the default separator with the `separator` option
+- Can restrict the search by values in the `accepted_languages` option
 
 At the moment, the package goes with Laravel framework support (it includes a service provider and a facade).
 
