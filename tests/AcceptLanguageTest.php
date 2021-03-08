@@ -346,6 +346,98 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @dataProvider provideHederValueWithDifferentLanguageLetterLength
+     */
+    public function testGetPreferredLanguageReturnsExpectedWhenTwoLetterOnlySet($expected, $options)
+    {
+        $service = new AcceptLanguage($options);
+        $result = $service->getPreferredLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideHederValueWithDifferentLanguageLetterLength()
+    {
+        return [
+            'two-letter primary language tag results primary subtag' => [
+                'de',
+                ['http_accept_language' => 'de']
+            ],
+            'two-letter primary language tag with extlang results primary subtag' => [
+                'de',
+                ['http_accept_language' => 'de-ger']
+            ],
+            'two-letter primary language tag with script results primary subtag with script' => [
+                'de_Latn',
+                ['http_accept_language' => 'de-Latn']
+            ],
+            'two-letter primary language tag with region results primary subtag with region' => [
+                'de_DE',
+                ['http_accept_language' => 'de-DE']
+            ],
+            'two-letter primary language tag with extlang, script, and region results primary subtag with script and region' => [
+                'de_Latn_DE',
+                ['http_accept_language' => 'de-get-Latn-DE']
+            ],
+            'three-letter primary language tag without two_letter_only option results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'sgn'],
+            ],
+            'three-letter primary language tag without two_letter_only option with extlang results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'sgn-ase'],
+            ],
+            'three-letter primary language tag without two_letter_only option with script results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'sgn-Latn'],
+            ],
+            'three-letter primary language tag without two_letter_only option with region results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'sgn-US'],
+            ],
+            'three-letter primary language tag without two_letter_only option with extlang, script, and region results default' => [
+                self::DEFAULT_LANGUAGE,
+                ['http_accept_language' => 'sgn-ase-Latn-US'],
+            ],
+            'three-letter primary language tag with two_letter_only option results primary subtag' => [
+                'sgn',
+                [
+                    'http_accept_language' => 'sgn',
+                    'two_letter_only' => false,
+                ],
+            ],
+            'three-letter primary language tag with two_letter_only option with extlang results primary subtag' => [
+                'sgn',
+                [
+                    'http_accept_language' => 'sgn-ase',
+                    'two_letter_only' => false,
+                ],
+            ],
+            'three-letter primary language tag with two_letter_only option with script results primary subtag with script' => [
+                'sgn_Latn',
+                [
+                    'http_accept_language' => 'sgn-Latn',
+                    'two_letter_only' => false,
+                ],
+            ],
+            'three-letter primary language tag with two_letter_only option with region results primary subtag with region' => [
+                'sgn_US',
+                [
+                    'http_accept_language' => 'sgn-US',
+                    'two_letter_only' => false,
+                ],
+            ],
+            'three-letter primary language tag with two_letter_only option with extlang, script, and region results primary subtag with script and region' => [
+                'sgn_Latn_US',
+                [
+                    'http_accept_language' => 'sgn-ase-Latn-US',
+                    'two_letter_only' => false,
+                ],
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider provideHeaderValueForNormalization
      */
     public function testGetPreferredLanguageReturnsNormalized($expected, $options)
