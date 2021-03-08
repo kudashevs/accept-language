@@ -128,6 +128,14 @@ class AcceptLanguageTest extends TestCase
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'test'],
             ],
+            'two-letter primary language tag with region results language' => [
+                'en_US',
+                ['http_accept_language' => 'en-us'],
+            ],
+            'two-letter primary language tag with script and region results language' => [
+                'zh_Hant_HK',
+                ['http_accept_language' => 'zh-Hant-HK'],
+            ],
             'two-letter with 0 quality language tag results default' => [
                 self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'de;q=0'],
