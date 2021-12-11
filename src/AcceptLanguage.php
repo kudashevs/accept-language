@@ -80,7 +80,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return LanguageTagNormalizer
+     * @return void
      */
     private function setNormalizer(): void
     {
