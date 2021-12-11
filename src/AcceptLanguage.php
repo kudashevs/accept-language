@@ -158,7 +158,7 @@ class AcceptLanguage
      */
     private function parseHeaderValue(string $headerValue): array
     {
-        return array_map(function ($tag) {
+        return array_map(static function ($tag) {
             $blankTag = ['lang', 'quality'];
             $splitTag = array_pad(explode(';q=', trim($tag)), 2, 1);
 
@@ -263,7 +263,7 @@ class AcceptLanguage
             ];
         }, $languages);
 
-        usort($normalized, function($a, $b) {
+        usort($normalized, static function($a, $b) {
             return $b['quality'] <=> $a['quality'];
         });
 
