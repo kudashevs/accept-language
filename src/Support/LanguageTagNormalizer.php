@@ -22,6 +22,11 @@ final class LanguageTagNormalizer
         'with_region' => true,
     ];
 
+    /**
+     * LanguageTagNormalizer constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         $this->options = array_merge($this->options, $options);
