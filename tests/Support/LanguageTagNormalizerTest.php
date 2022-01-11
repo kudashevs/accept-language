@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class LanguageTagNormalizerTest extends TestCase
 {
-    public function testNormalizeReturnsNotEmpty()
+    public function testNormalizerReturnsNotEmpty()
     {
         $languageTag = new LanguageTagNormalizer();
 
@@ -17,7 +17,7 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @dataProvider provideLanguageTag
      */
-    public function testNormalizeReturnsNormalizedLanguageTag($expected, $raw)
+    public function testNormalizerReturnsNormalizedLanguageTag($expected, $raw)
     {
         $languageTag = new LanguageTagNormalizer();
 
@@ -97,7 +97,7 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @dataProvider provideLanguageTagWithOptions
      */
-    public function testNormalizeReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
+    public function testNormalizerReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
     {
         $languageTag = new LanguageTagNormalizer($options);
 
@@ -157,7 +157,7 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @dataProvider provideExceptionalCase
      */
-    public function testNormalizeReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
+    public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
     {
         $languageTag = new LanguageTagNormalizer();
 
