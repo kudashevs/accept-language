@@ -2,13 +2,6 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
-## [v1.8.2 - 2022-01-14](https://github.com/kudashevs/accept-language/compare/v1.8.1...v1.8.2)
-
-- Fix a bug in the parseHeaderValue method
-- Add CHANGELOG.md file
-- Update .gitattributes with new exclusions
-- Some improvements
-
 ## [v1.8.1 - 2021-11-11](https://github.com/kudashevs/accept-language/compare/v1.8.0...v1.8.1)
 
 - Add .gitattributes
