@@ -528,6 +528,12 @@ class AcceptLanguageTest extends TestCase
      */
     public function testGetPreferredLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
     {
+        /**
+         * Bug found: 14.02.2021
+         * Details: The returned language doesn't follow the order from an HTTP Accept-Language header value.
+         * The bug is in the retrieveAcceptableLanguagesIntersection() method and is related with a wrong order
+         * of array_intersect_key() parameters.
+         */
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.8,en-US;q=0.5,en;q=0.3',
             'accepted_languages' => ['fr', 'en'],
