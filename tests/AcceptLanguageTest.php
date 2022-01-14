@@ -526,7 +526,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * Caught bugs.
      */
-    public function testGetPreferredLanguageCaughtIntersectionBugInRetrieveIntersectionWithAcceptableLanguages()
+    public function testGetPreferredLanguageBugInRetrieveIntersectionWithAcceptableLanguages()
     {
         /**
          * Bug found: 14.02.2021
