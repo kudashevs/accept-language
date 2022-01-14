@@ -158,20 +158,39 @@ class AcceptLanguage
     {
         $result = [];
         $emptyTagDefaultValue = 1;
-        $expectedElementsNumber = 2;
         $tagKeys = ['lang', 'quality'];
 
         foreach (explode(',', $headerValue) as $tag) {
-            $splitTag = array_pad(explode(';q=', trim($tag)), $expectedElementsNumber, $emptyTagDefaultValue);
+            $splitTag = explode(';q=', trim($tag));
 
-            if (count($splitTag) === $expectedElementsNumber) {
-                $result[] = array_combine($tagKeys, $splitTag);
+            if ($normalizedTag = $this->normalizeSplitTag($splitTag, $emptyTagDefaultValue)) {
+                $result[] = array_combine($tagKeys, $normalizedTag);
             }
 
             $emptyTagDefaultValue -= 0.1;
         }
 
         return $result;
+    }
+
+    /**
+     * @param array $values
+     * @param float $default
+     * @return array
+     */
+    private function normalizeSplitTag(array $values, float $default): array
+    {
+        $expectedElementsNumber = 2;
+
+        if (count($values) > $expectedElementsNumber) {
+            return [];
+        }
+
+        if (count($values) !== $expectedElementsNumber || ($values[1] === '')) {
+            $values[1] = $default;
+        }
+
+        return $values;
     }
 
     /**
