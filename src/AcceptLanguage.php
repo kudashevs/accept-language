@@ -156,8 +156,9 @@ class AcceptLanguage
      */
     private function parseHeaderValue(string $headerValue): array
     {
-        return array_map(static function ($tag) {
-            $blankTag = ['lang', 'quality'];
+        $blankTag = ['lang', 'quality'];
+
+        array_map(static function ($tag) use ($blankTag) {
             $splitTag = array_pad(explode(';q=', trim($tag)), 2, 1);
 
             return array_combine($blankTag, $splitTag);
