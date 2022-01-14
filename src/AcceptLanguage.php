@@ -261,7 +261,7 @@ class AcceptLanguage
             ];
         }, $languages);
 
-        usort($normalized, static function($a, $b) {
+        usort($normalized, static function ($a, $b) {
             return $b['quality'] <=> $a['quality'];
         });
 
