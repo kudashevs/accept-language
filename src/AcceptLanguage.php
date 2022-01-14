@@ -158,10 +158,12 @@ class AcceptLanguage
     {
         $blankTag = ['lang', 'quality'];
 
-        array_map(static function ($tag) use ($blankTag) {
+        return array_map(static function ($tag) use ($blankTag) {
             $splitTag = array_pad(explode(';q=', trim($tag)), 2, 1);
 
-            return array_combine($blankTag, $splitTag);
+            if (count($splitTag) === 2) {
+                return array_combine($blankTag, $splitTag);
+            }
         }, explode(',', $headerValue));
     }
 

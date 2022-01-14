@@ -542,4 +542,21 @@ class AcceptLanguageTest extends TestCase
 
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
+
+    public function testGetPreferredLanguageBugInParseHeaderValue()
+    {
+        /**
+         * Bug found: 13.01.2022
+         * Details: The package crashes with a message array_combine(): Both parameters should have an equal number of elements.
+         * The bug happens in the parseHeaderValue() method due to the specific HTTP Accept-Language header which is sent
+         * by PetalBot browser running on Android OS.
+         */
+        $options = [
+            'http_accept_language' => ';q=;q=0.3',
+            'accepted_languages' => ['fr', 'en'],
+        ];
+        $service = new AcceptLanguage($options);
+
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
+    }
 }
