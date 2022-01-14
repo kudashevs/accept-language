@@ -156,15 +156,22 @@ class AcceptLanguage
      */
     private function parseHeaderValue(string $headerValue): array
     {
+        $result = [];
+        $emptyTagDefaultValue = 1;
+        $expectedElementsNumber = 2;
         $blankTag = ['lang', 'quality'];
 
-        return array_map(static function ($tag) use ($blankTag) {
-            $splitTag = array_pad(explode(';q=', trim($tag)), 2, 1);
+        foreach (explode(',', $headerValue) as $tag) {
+            $splitTag = array_pad(explode(';q=', trim($tag)), $expectedElementsNumber, $emptyTagDefaultValue);
 
-            if (count($splitTag) === 2) {
-                return array_combine($blankTag, $splitTag);
+            if (count($splitTag) === $expectedElementsNumber) {
+                $result[] = array_combine($blankTag, $splitTag);
             }
-        }, explode(',', $headerValue));
+
+            $emptyTagDefaultValue -= 0.1;
+        }
+
+        return $result;
     }
 
     /**
