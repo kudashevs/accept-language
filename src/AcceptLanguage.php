@@ -159,13 +159,13 @@ class AcceptLanguage
         $result = [];
         $emptyTagDefaultValue = 1;
         $expectedElementsNumber = 2;
-        $blankTag = ['lang', 'quality'];
+        $tagKeys = ['lang', 'quality'];
 
         foreach (explode(',', $headerValue) as $tag) {
             $splitTag = array_pad(explode(';q=', trim($tag)), $expectedElementsNumber, $emptyTagDefaultValue);
 
             if (count($splitTag) === $expectedElementsNumber) {
-                $result[] = array_combine($blankTag, $splitTag);
+                $result[] = array_combine($tagKeys, $splitTag);
             }
 
             $emptyTagDefaultValue -= 0.1;
