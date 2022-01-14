@@ -163,7 +163,7 @@ class AcceptLanguage
         foreach (explode(',', $headerValue) as $tag) {
             $splitTag = explode(';q=', trim($tag));
 
-            if ($normalizedTag = $this->normalizeSplitTag($splitTag, $emptyTagDefaultValue)) {
+            if ($normalizedTag = $this->normalizeHeaderTag($splitTag, $emptyTagDefaultValue)) {
                 $result[] = array_combine($tagKeys, $normalizedTag);
             }
 
@@ -178,7 +178,7 @@ class AcceptLanguage
      * @param float $default
      * @return array
      */
-    private function normalizeSplitTag(array $values, float $default): array
+    private function normalizeHeaderTag(array $values, float $default): array
     {
         $expectedElementsNumber = 2;
 
