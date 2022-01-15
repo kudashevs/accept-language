@@ -2,6 +2,13 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v1.9.0 - 2022-01-15](https://github.com/kudashevs/accept-language/compare/v1.8.2...v1.9.0)
+
+- Add a TagNormalizer abstraction
+- Add a separator option to the LanguageTagNormalizer
+- Update README.md usage and options sections
+- Massive refactoring
+
 ## [v1.8.2 - 2022-01-14](https://github.com/kudashevs/accept-language/compare/v1.8.1...v1.8.2)
 
 - Fix a bug in the parseHeaderValue method
