@@ -156,10 +156,10 @@ class AcceptLanguage
      */
     private function parseHeaderValue(string $headerValue): array
     {
-        $result = [];
         $emptyTagDefaultValue = 1;
         $tagKeys = ['lang', 'quality'];
 
+        $result = [];
         foreach (explode(',', $headerValue) as $tag) {
             $splitTag = explode(';q=', trim($tag));
 
