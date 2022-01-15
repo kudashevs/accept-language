@@ -162,11 +162,11 @@ class AcceptLanguage
 
         foreach (explode(',', $headerValue) as $tag) {
             $splitTag = explode(';q=', trim($tag));
-            $tagValues = $this->normalizeHeaderTag($splitTag, $emptyTagDefaultValue);
 
-            if (!empty($tagValues)) {
-                $result[] = array_combine($tagKeys, $tagValues);
-            }
+            $result[] = array_combine(
+                $tagKeys,
+                $this->normalizeHeaderTag($splitTag, $emptyTagDefaultValue)
+            );
 
             $emptyTagDefaultValue -= 0.1;
         }
