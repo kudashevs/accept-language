@@ -30,14 +30,26 @@ composer require kudashevs/accept-language
 
 ## Usage
 
-General usage of the package: 
+The usage is quite simple. Just instantiate the class somewhere before you need the preferred user language (personally,
+I do it in a middleware). The object will analyze the HTTP Accept-Language request-header field and retain a result.
+Therefore, you can get the preferred user language in any place of your application. 
 
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
 $service = new AcceptLanguage();
-$language = $service->getPreferredLanguage();
+
+[...]
+
+// returns the user's preferred language
+$service->getPreferredLanguage();
+// or the shorter method which does the same
+$service->getLanguage();
 ```
+
+In case, if the HTTP Accept-Language request-header field doesn't contain any of the accepted languages (see options),
+or if something went wrong, the default language will be returned. Another remark is that the class throws
+`InvalidOptionArgumentException` in case some of the given options were of the incorrect type.
 
 ## References
 
