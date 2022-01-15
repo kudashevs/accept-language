@@ -1,4 +1,4 @@
-# HTTP Accept-Language ![example workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
+# HTTP Accept-Language ![test workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
 
 This PHP package retrieves the preferred language from an HTTP Accept-Language request-header field. The package can
 be used to identify the user's language of choice on their first site visit. Later this information might be used
