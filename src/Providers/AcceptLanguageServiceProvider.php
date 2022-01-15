@@ -15,11 +15,11 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('acceptlanguage', function ($app) {
+        $this->app->singleton(AcceptLanguage::class, function ($app) {
             return (new AcceptLanguage($this->getConfig($app)));
         });
 
-        $this->app->alias('acceptlanguage', AcceptLanguage::class);
+        $this->app->alias(AcceptLanguage::class, 'acceptlanguage');
     }
 
     /**
