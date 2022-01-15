@@ -43,7 +43,7 @@ class AcceptLanguage
     public function __construct(array $options = [])
     {
         $this->initOptions($options);
-        $this->setNormalizer();
+        $this->initNormalizer();
 
         $this->process();
     }
@@ -80,7 +80,7 @@ class AcceptLanguage
     /**
      * @return void
      */
-    private function setNormalizer(): void
+    private function initNormalizer(): void
     {
         $this->normalizer = new LanguageTagNormalizer();
     }
