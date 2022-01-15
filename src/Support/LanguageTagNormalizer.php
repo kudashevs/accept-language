@@ -29,7 +29,17 @@ final class LanguageTagNormalizer
      */
     public function __construct(array $options = [])
     {
-        $this->options = array_merge($this->options, $options);
+        $this->initOptions($options);
+    }
+
+    /**
+     * @param array $options
+     */
+    private function initOptions(array $options): void
+    {
+        $allowed = array_intersect_key($options, $this->options);
+
+        $this->options = array_merge($this->options, $allowed);
     }
 
     /**
