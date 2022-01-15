@@ -16,8 +16,10 @@ class LanguageTagNormalizerTest extends TestCase
 
     /**
      * @dataProvider provideLanguageTag
+     * @param string $expected
+     * @param string $raw
      */
-    public function testNormalizerReturnsNormalizedLanguageTag($expected, $raw)
+    public function testNormalizerReturnsNormalizedLanguageTag(string $expected, string $raw)
     {
         $normalizer = new LanguageTagNormalizer();
 
@@ -96,8 +98,11 @@ class LanguageTagNormalizerTest extends TestCase
 
     /**
      * @dataProvider provideLanguageTagWithDifferentWithOptions
+     * @param string $expected
+     * @param string $raw
+     * @param array $options
      */
-    public function testNormalizerReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
+    public function testNormalizerReturnsExpectedWithSpecificOptionSet(string $expected, string $raw, array $options)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
@@ -156,8 +161,10 @@ class LanguageTagNormalizerTest extends TestCase
 
     /**
      * @dataProvider provideExceptionalCases
+     * @param string $expected
+     * @param string $raw
      */
-    public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
+    public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase(string $expected, string $raw)
     {
         $normalizer = new LanguageTagNormalizer();
 
