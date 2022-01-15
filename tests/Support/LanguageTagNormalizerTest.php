@@ -97,6 +97,53 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @dataProvider provideLanguageTagWithDifferentSeparatorOption
+     * @param string $expected
+     * @param string $raw
+     * @param array $options
+     */
+    public function testNormalizerAcceptsDifferentSeparators(string $expected, string $raw, array $options)
+    {
+        $normalizer = new LanguageTagNormalizer($options);
+
+        $this->assertSame($expected, $normalizer->normalize($raw));
+    }
+
+    public function provideLanguageTagWithDifferentSeparatorOption()
+    {
+        return [
+            'two-letter primary without change' => [
+                'en',
+                'en',
+                [
+                    'separator' => '_',
+                ],
+            ],
+            'two-letter tag hyphenated with script change separator' => [
+                'sr_Latn',
+                'sr-Latn',
+                [
+                    'separator' => '_',
+                ],
+            ],
+            'two-letter tag hyphenated with script and region change separator' => [
+                'sr_Latn_RS',
+                'sr-Latn-RS',
+                [
+                    'separator' => '_',
+                ],
+            ],
+            'two-letter tag hyphenated with extlang, script, and region change separator' => [
+                'zh_Hant_CN',
+                'zh-yue-Hant-CN',
+                [
+                    'separator' => '_',
+                ],
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider provideLanguageTagWithDifferentWithOptions
      * @param string $expected
      * @param string $raw
@@ -115,28 +162,28 @@ class LanguageTagNormalizerTest extends TestCase
             'returns without extlang and with script and region by default' => [
                 'zh-Hant-CN',
                 'zh-yue-Hant-CN',
-                []
+                [],
             ],
             'returns with extlang' => [
                 'zh-yue-Hant-CN',
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
-                ]
+                ],
             ],
             'returns without script' => [
                 'zh-CN',
                 'zh-yue-Hant-CN',
                 [
                     'with_script' => false,
-                ]
+                ],
             ],
             'returns without region' => [
                 'zh-Hant',
                 'zh-yue-Hant-CN',
                 [
                     'with_region' => false,
-                ]
+                ],
             ],
             'returns expected with all switched on' => [
                 'zh-yue-Hant-CN',
@@ -154,7 +201,7 @@ class LanguageTagNormalizerTest extends TestCase
                     'with_extlang' => false,
                     'with_script' => false,
                     'with_region' => false,
-                ]
+                ],
             ],
         ];
     }

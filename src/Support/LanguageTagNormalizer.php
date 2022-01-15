@@ -17,6 +17,7 @@ final class LanguageTagNormalizer
      * @var array
      */
     private $options = [
+        'separator' => '-',
         'with_extlang' => false,
         'with_script' => true,
         'with_region' => true,
@@ -65,7 +66,7 @@ final class LanguageTagNormalizer
             $subtags = $this->normalizeSubtags($subtags);
         }
 
-        return implode('-', $subtags);
+        return implode($this->options['separator'], $subtags);
     }
 
     /**
