@@ -284,10 +284,10 @@ class AcceptLanguage
      */
     private function normalize(array $languages): array
     {
-        $normalized = array_map(function ($value) {
+        $normalized = array_map(function ($tag) {
             return [
-                'lang' => $this->normalizeTag($value['lang']),
-                'quality' => $this->normalizeQuality($value['quality']),
+                'lang' => $this->normalizeTag($tag['lang']),
+                'quality' => $this->normalizeQuality($tag['quality']),
             ];
         }, $languages);
 
