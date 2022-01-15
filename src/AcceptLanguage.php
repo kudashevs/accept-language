@@ -184,7 +184,7 @@ class AcceptLanguage
         $expectedElementsNumber = 2;
 
         if (count($values) > $expectedElementsNumber) {
-            return [];
+            return array_fill(0, $expectedElementsNumber, '');
         }
 
         if (count($values) !== $expectedElementsNumber || ($values[1] === '')) {
