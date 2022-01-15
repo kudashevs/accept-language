@@ -82,7 +82,9 @@ class AcceptLanguage
      */
     private function initNormalizer(): void
     {
-        $this->normalizer = new LanguageTagNormalizer();
+        $this->normalizer = new LanguageTagNormalizer([
+            'separator' => $this->options['separator'],
+        ]);
     }
 
     /**
@@ -304,7 +306,7 @@ class AcceptLanguage
      */
     private function normalizeTag(string $tag): string
     {
-        return str_replace('-', $this->options['separator'], $this->normalizer->normalize($tag));
+        return $this->normalizer->normalize($tag);
     }
 
     /**
