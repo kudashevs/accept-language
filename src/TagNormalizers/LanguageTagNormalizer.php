@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\TagNormalizers;
 
-final class LanguageTagNormalizer
+final class LanguageTagNormalizer implements TagNormalizer
 {
     private const EXTLANG_SUBTAG_LENGTH = 3;
     private const SCRIPT_SUBTAG_LENGTH = 4;
