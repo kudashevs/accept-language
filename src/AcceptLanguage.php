@@ -42,7 +42,7 @@ class AcceptLanguage
      */
     public function __construct(array $options = [])
     {
-        $this->setOptions($options);
+        $this->initOptions($options);
         $this->setNormalizer();
 
         $this->process();
@@ -52,7 +52,7 @@ class AcceptLanguage
      * @param array $options
      * @throws InvalidOptionArgumentException
      */
-    protected function setOptions(array $options): void
+    protected function initOptions(array $options): void
     {
         $validated = $this->validateOptions($options);
 
