@@ -51,6 +51,18 @@ In case, if the HTTP Accept-Language request-header field doesn't contain any of
 or if something went wrong, the default language will be returned. Another remark is that the class throws
 `InvalidOptionArgumentException` in case some of the given options were of the incorrect type.
 
+## Options
+
+The class accepts some options which help you to control the result:
+
+```
+'http_accept_language'      # A string with custom a HTTP Accept-Language header.
+'default_language'          # A string with a default preferred language value (default is 'en').
+'accepted_languages'        # An array with a list of supported languages (default is []).
+'two_letter_only'           # A boolean defines whether to use only the two-letter codes or not (default is true).
+'separator'                 # A string with a character that will be used as the separator in the result (default is '_').
+```
+
 ## References
 
 - [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://tools.ietf.org/html/rfc7231#section-5.3.5)
