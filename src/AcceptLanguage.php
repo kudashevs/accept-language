@@ -219,6 +219,26 @@ class AcceptLanguage
     }
 
     /**
+     * @param $value
+     * @return bool
+     */
+    private function isValidLanguage($value): bool
+    {
+        return !empty($value);
+    }
+
+    /**
+     * @param $value
+     * @return bool
+     */
+    private function isValidQuality($value): bool
+    {
+        return !empty($value) &&
+            is_numeric($value) &&
+            max(min($value, 1), 0) === $value;
+    }
+
+    /**
      * @param array $filtered
      * @return array
      */
@@ -237,26 +257,6 @@ class AcceptLanguage
         });
 
         return $filtered;
-    }
-
-    /**
-     * @param $value
-     * @return bool
-     */
-    private function isValidLanguage($value): bool
-    {
-        return !empty($value);
-    }
-
-    /**
-     * @param $value
-     * @return bool
-     */
-    private function isValidQuality($value): bool
-    {
-        return !empty($value) &&
-            is_numeric($value) &&
-            max(min($value, 1), 0) === $value;
     }
 
     /**
