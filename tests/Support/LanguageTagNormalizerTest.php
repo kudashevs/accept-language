@@ -155,7 +155,7 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExceptionalCase
+     * @dataProvider provideExceptionalCases
      */
     public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
     {
@@ -164,7 +164,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideExceptionalCase()
+    public function provideExceptionalCases()
     {
         return [
             'two-letter tag hyphenated with extlang out of its scope' => [
