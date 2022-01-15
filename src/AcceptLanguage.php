@@ -202,7 +202,7 @@ class AcceptLanguage
     {
         $filtered = $this->excludeNotValidLanguages($languages);
 
-        $filtered = $this->filterLanguagesThroughAcceptedLanguages($filtered);
+        $filtered = $this->excludeNotInAcceptedLanguages($filtered);
 
         return $filtered;
     }
@@ -242,7 +242,7 @@ class AcceptLanguage
      * @param array $filtered
      * @return array
      */
-    private function filterLanguagesThroughAcceptedLanguages(array $filtered): array
+    private function excludeNotInAcceptedLanguages(array $filtered): array
     {
         if (empty($this->options['accepted_languages'])) {
             return $filtered;
