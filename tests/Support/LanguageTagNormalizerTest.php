@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Support;
 
-use Kudashevs\AcceptLanguage\Support\LanguageTagNormalizer;
+use Kudashevs\AcceptLanguage\TagNormalizers\LanguageTagNormalizer;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTagNormalizerTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Support;
+namespace Kudashevs\AcceptLanguage\TagNormalizers;
 
 final class LanguageTagNormalizer
 {

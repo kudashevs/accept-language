@@ -3,7 +3,7 @@
 namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
-use Kudashevs\AcceptLanguage\Support\LanguageTagNormalizer;
+use Kudashevs\AcceptLanguage\TagNormalizers\LanguageTagNormalizer;
 
 class AcceptLanguage
 {
