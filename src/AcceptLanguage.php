@@ -391,16 +391,16 @@ class AcceptLanguage
     /**
      * @return string
      */
-    public function getLanguage(): string
+    public function getPreferredLanguage(): string
     {
-        return $this->getPreferredLanguage();
+        return $this->language;
     }
 
     /**
      * @return string
      */
-    public function getPreferredLanguage(): string
+    public function getLanguage(): string
     {
-        return $this->language;
+        return $this->getPreferredLanguage();
     }
 }
