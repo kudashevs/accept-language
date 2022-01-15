@@ -18,7 +18,7 @@ similar to the CLDR format (overlaps with the ISO 15897), and it is used by the 
 - Can override the default separator with the `separator` option
 - Can restrict the search by values in the `accepted_languages` option
 
-At the moment, the package goes with Laravel framework support (it includes a service provider and a facade).
+The package goes with the built-in Laravel framework support.
 
 ## Installation
 
