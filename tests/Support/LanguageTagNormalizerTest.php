@@ -95,7 +95,7 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideLanguageTagWithOptions
+     * @dataProvider provideLanguageTagWithDifferentWithOptions
      */
     public function testNormalizerReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
     {
@@ -104,7 +104,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideLanguageTagWithOptions()
+    public function provideLanguageTagWithDifferentWithOptions()
     {
         return [
             'returns without extlang and with script and region by default' => [
