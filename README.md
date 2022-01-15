@@ -10,7 +10,7 @@ The HTTP Accept-Language package retrieves a language code with the highest prio
 quality value) from an HTTP Accept-Language request-header field. The language code may consist of a 2-letter/3-letter
 primary language subtag, an optional script subtag, and an optional region subtag. Usually the language code consists
 of a 2-letter primary subtag and an optional region subtag separated by the underscore (e.g. en_GB). This format is very 
-similar to the CLDR format (overlaps with the ISO 15897) and it is used by the majority of frameworks in localization.  
+similar to the CLDR format (overlaps with the ISO 15897), and it is used by the majority of frameworks in localization.  
 
 - Can return the default language value if a client accepts any language 
 - Can override the default value with the `default_language` option
