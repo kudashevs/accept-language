@@ -9,9 +9,9 @@ class LanguageTagNormalizerTest extends TestCase
 {
     public function testNormalizerReturnsNonEmpty()
     {
-        $languageTag = new LanguageTagNormalizer();
+        $normalizer = new LanguageTagNormalizer();
 
-        $this->assertNotEmpty($languageTag->normalize('en'));
+        $this->assertNotEmpty($normalizer->normalize('en'));
     }
 
     /**
@@ -19,9 +19,9 @@ class LanguageTagNormalizerTest extends TestCase
      */
     public function testNormalizerReturnsNormalizedLanguageTag($expected, $raw)
     {
-        $languageTag = new LanguageTagNormalizer();
+        $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $languageTag->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
     public function provideLanguageTag()
@@ -99,9 +99,9 @@ class LanguageTagNormalizerTest extends TestCase
      */
     public function testNormalizerReturnsExpectedWithSpecificOptionSet($expected, $raw, $options)
     {
-        $languageTag = new LanguageTagNormalizer($options);
+        $normalizer = new LanguageTagNormalizer($options);
 
-        $this->assertSame($expected, $languageTag->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
     public function provideLanguageTagWithOptions()
@@ -159,9 +159,9 @@ class LanguageTagNormalizerTest extends TestCase
      */
     public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase($expected, $raw)
     {
-        $languageTag = new LanguageTagNormalizer();
+        $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $languageTag->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
     public function provideExceptionalCase()
