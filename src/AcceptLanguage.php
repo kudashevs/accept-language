@@ -27,9 +27,9 @@ class AcceptLanguage
     private $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
+        'accepted_languages' => [],
         'two_letter_only' => true,
         'separator' => '_',
-        'accepted_languages' => [],
     ];
 
     /**
