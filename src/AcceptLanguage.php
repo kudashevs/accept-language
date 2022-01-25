@@ -71,7 +71,14 @@ class AcceptLanguage
 
         foreach ($allowedOptions as $key => $value) {
             if (gettype($this->options[$key]) !== gettype($value)) {
-                throw new InvalidOptionArgumentException('The option ' . $key . ' has a wrong value type ' . gettype($value) . '. Option requires a value of the type ' . gettype($this->options[$key]) . '.');
+                throw new InvalidOptionArgumentException(
+                    sprintf(
+                        'The option %s has a wrong value type %s. This option requires a value of the type %s.',
+                        $key,
+                        gettype($value),
+                        gettype($this->options[$key])
+                    )
+                );
             }
         }
 
