@@ -23,16 +23,6 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
      * @return array
      */
     private function getConfig(): array
