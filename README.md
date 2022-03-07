@@ -59,7 +59,7 @@ The class accepts some options which help you to control the result:
 'http_accept_language'      # A string with custom a HTTP Accept-Language header.
 'default_language'          # A string with a default preferred language value (default is 'en').
 'accepted_languages'        # An array with a list of supported languages (default is []).
-'two_letter_only'           # A boolean defines whether to use only the two-letter codes or not (default is true).
+'two_letter_only'           # A boolean defines whether to use the two-letter codes only (default is true).
 'separator'                 # A string with a character that will be used as the separator in the result (default is '_').
 ```
 
