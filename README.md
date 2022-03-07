@@ -38,12 +38,13 @@ HTTP Accept-Language request-header field, will retrieve a language of preferenc
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
 $service = new AcceptLanguage();
+```
 
-[...]
-
+Then you can get the retrieved preferred language in any place of your application. In order to do so, there are two methods: 
+```php
 // returns the user's preferred language
 $service->getPreferredLanguage();
-// or the shorter method which does the same
+// a shorter method which does the same
 $service->getLanguage();
 ```
 
