@@ -49,8 +49,8 @@ $service->getLanguage();
 ```
 
 In case, if the HTTP Accept-Language request-header field doesn't contain any of the accepted languages (see options),
-or if something went wrong, the default language will be returned. Another remark is that the class throws
-`InvalidOptionArgumentException` in case some of the given options were of the incorrect type.
+or if something went wrong, a default language will be returned. The class can throw an `InvalidOptionArgumentException`
+in case when any of the given options were of the incorrect type.
 
 ## Options
 
