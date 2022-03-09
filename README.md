@@ -64,6 +64,28 @@ The class accepts some options which help you to control the result:
 'separator'                 # A string with a character that will be used as the separator in the result (default is '_').
 ```
 
+## Laravel usage
+
+If you don't use auto-discovery just add a ServiceProvider to the config/app.php
+
+```php
+'providers' => [
+    Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider::class,
+];
+```
+
+Once added, the `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class and keep its instance in
+the container. To get the preferred language just access the object in the container through a dependency injection
+or directly by alias (e.g. `app('acceptlanguage')->getLanguage();`).
+
+If you want to add a Laravel Facade just add it to the aliases array in the config/app.php
+
+```php
+'aliases' => [
+    'AcceptLanguage' => Kudashevs\AcceptLanguage\Facades\AcceptLanguage::class,
+];
+```
+
 ## References
 
 - [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://tools.ietf.org/html/rfc7231#section-5.3.5)
