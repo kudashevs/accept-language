@@ -2,6 +2,13 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v2.0.0 - 2022-03-11](https://github.com/kudashevs/accept-language/compare/v1.9.0...v2.0.0)
+
+- Increase the minimum PHP version to 7.3
+- Refactor AcceptLanguageServiceProvider
+- Update README.md 
+- Some improvements
+
 ## [v1.9.0 - 2022-01-15](https://github.com/kudashevs/accept-language/compare/v1.8.2...v1.9.0)
 
 - Add a TagNormalizer abstraction
