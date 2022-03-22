@@ -14,9 +14,9 @@ jobs:
       fail-fast: true
       matrix:
         php: [ 7.3, 7.4, 8.0, 8.1 ]
-        dependency-version: [ prefer-lowest, prefer-stable ]
+        stability: [ prefer-lowest, prefer-stable ]
 
-    name: P${{ matrix.php }} - ${{ matrix.dependency-version }}
+    name: P${{ matrix.php }} - ${{ matrix.stability }}
 
     steps:
       - name: Checkout code
@@ -41,7 +41,7 @@ jobs:
           restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.stability }}-
 
       - name: Install dependencies
-        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit --no-coverage
