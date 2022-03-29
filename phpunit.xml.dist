@@ -23,5 +23,10 @@
             <file>src/Facades/AcceptLanguage.php</file>
             <file>src/Providers/AcceptLanguageServiceProvider.php</file>
         </exclude>
+        <report>
+            <clover outputFile="build/clover.xml"/>
+            <html outputDirectory="build/coverage"/>
+            <text outputFile="build/coverage.txt"/>
+        </report>
     </coverage>
 </phpunit>
