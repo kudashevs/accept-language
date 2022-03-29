@@ -542,7 +542,7 @@ class AcceptLanguageTest extends TestCase
         /**
          * Bug found: 14.02.2021
          * Details: The returned language doesn't follow the order from an HTTP Accept-Language header value.
-         * The bug is in the retrieveAcceptableLanguagesIntersection() method and is related with a wrong order
+         * The bug is in the retrieveAcceptableLanguagesIntersection() method and is related to a wrong order
          * of array_intersect_key() parameters.
          */
         $options = [
