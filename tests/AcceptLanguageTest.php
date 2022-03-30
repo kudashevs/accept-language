@@ -110,7 +110,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHeaderValue
+     * @dataProvider provideOptionsWithVariousRequestHeaderValues
      */
     public function testGetPreferredLanguageReturnsExpected($expected, $options)
     {
@@ -120,7 +120,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideHeaderValue()
+    public function provideOptionsWithVariousRequestHeaderValues()
     {
         return [
             'any language tag results default' => [
