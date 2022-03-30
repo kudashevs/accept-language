@@ -369,7 +369,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHeaderValueWithDifferentLanguageLetterLength
+     * @dataProvider provideOptionsWithRequestHeaderWithVariousLanguageLetterLength
      */
     public function testGetPreferredLanguageReturnsExpectedWhenTwoLetterOnlySet($expected, $options)
     {
@@ -379,7 +379,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideHeaderValueWithDifferentLanguageLetterLength()
+    public function provideOptionsWithRequestHeaderWithVariousLanguageLetterLength()
     {
         return [
             'two-letter primary language tag results primary subtag' => [
