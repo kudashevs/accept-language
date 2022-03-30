@@ -506,7 +506,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideIncorrectOrWronglyFormedHeaderValue
+     * @dataProvider provideOptionsWithRequestHeaderWithIncorrectOrWronglyFormedValues
      */
     public function testGetPreferredLanguageProcessesIncorrectOrWronglyFormedHeaderValue($expected, $options)
     {
@@ -516,7 +516,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideIncorrectOrWronglyFormedHeaderValue()
+    public function provideOptionsWithRequestHeaderWithIncorrectOrWronglyFormedValues()
     {
         return [
             'one empty language tag results default' => [
