@@ -42,11 +42,14 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function testGetPreferredLanguageReturnsNotEmpty()
+    /**
+     * @dataProvider provideGetPreferredLanguageMethods
+     */
+    public function testMethodReturnsNotEmpty($method)
     {
         $service = new AcceptLanguage();
 
-        $this->assertNotEmpty($service->getPreferredLanguage());
+        $this->assertNotEmpty($service->$method());
     }
 
     public function provideGetPreferredLanguageMethods()
