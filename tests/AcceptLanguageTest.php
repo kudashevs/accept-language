@@ -49,6 +49,14 @@ class AcceptLanguageTest extends TestCase
         $this->assertNotEmpty($service->getPreferredLanguage());
     }
 
+    public function provideGetPreferredLanguageMethods()
+    {
+        return [
+            'with getPreferredLanguage method' => ['getPreferredLanguage'],
+            'with getLanguage method' => ['getLanguage'],
+        ];
+    }
+
     public function testGetPreferredLanguageReturnsDefaultLanguageWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $service = new AcceptLanguage();
