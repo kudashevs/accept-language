@@ -461,7 +461,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHeaderValueForNormalization
+     * @dataProvider provideOptionsForCheckingTheNormalization
      */
     public function testGetPreferredLanguageReturnsNormalized($expected, $options)
     {
@@ -471,7 +471,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideHeaderValueForNormalization()
+    public function provideOptionsForCheckingTheNormalization()
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
