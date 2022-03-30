@@ -272,7 +272,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHeaderValueAndAcceptedLanguagesOption
+     * @dataProvider provideOptionsWithVariousAcceptedLanguagesValues
      */
     public function testGetPreferredLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
     {
@@ -282,7 +282,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideHeaderValueAndAcceptedLanguagesOption()
+    public function provideOptionsWithVariousAcceptedLanguagesValues()
     {
         return [
             'language that intersects with accepted_languages results language' => [
