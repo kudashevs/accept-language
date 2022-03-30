@@ -324,7 +324,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHeaderValueWithTheSpecificOption
+     * @dataProvider provideOptionsWithVariousSpecificOptions
      */
     public function testGetPreferredLanguageReturnsExpectedWhenSpecificOptionIsSet($expected, $options)
     {
@@ -334,7 +334,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideHeaderValueWithTheSpecificOption()
+    public function provideOptionsWithVariousSpecificOptions()
     {
         return [
             'returns expected with the underscore separator' => [
