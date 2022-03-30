@@ -45,7 +45,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @dataProvider provideGetPreferredLanguageMethods
      */
-    public function testMethodReturnsNotEmpty($method)
+    public function testMethodReturnsNotEmpty(string $method)
     {
         $service = new AcceptLanguage();
 
@@ -55,7 +55,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @dataProvider provideGetPreferredLanguageMethods
      */
-    public function testMethodReturnsDefaultLanguageWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible($method)
+    public function testMethodReturnsDefaultLanguageWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible(string $method)
     {
         $service = new AcceptLanguage();
 
