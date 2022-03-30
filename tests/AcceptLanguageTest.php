@@ -55,14 +55,14 @@ class AcceptLanguageTest extends TestCase
     /**
      * @dataProvider provideGetPreferredLanguageMethods
      */
-    public function testMethodReturnsDefaultLanguageWhenOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible($method)
+    public function testMethodReturnsDefaultLanguageWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible($method)
     {
         $service = new AcceptLanguage();
 
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->$method());
     }
 
-    public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenLanguageInformationIsEmptyAndHTTPAcceptLanguageIsNotAccessible()
+    public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible()
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
