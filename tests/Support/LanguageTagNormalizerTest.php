@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 class LanguageTagNormalizerTest extends TestCase
 {
-    public function testNormalizerReturnsNonEmpty()
+    /** @test */
+    public function it_can_be_instantiated()
     {
         $normalizer = new LanguageTagNormalizer();
 
