@@ -17,7 +17,7 @@ class LanguageTagNormalizerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideLanguageTag
+     * @dataProvider provideDifferentLanguageTags
      */
     public function it_can_normalize_a_language_tag(string $tag, string $expected)
     {
@@ -26,7 +26,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideLanguageTag()
+    public function provideDifferentLanguageTags()
     {
         return [
             'two-letter primary without change' => [
