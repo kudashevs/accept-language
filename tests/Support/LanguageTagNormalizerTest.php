@@ -19,11 +19,11 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideLanguageTag
      */
-    public function it_can_normalize_a_language_tag(string $raw, string $expected)
+    public function it_can_normalize_a_language_tag(string $tag, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
     public function provideLanguageTag()
