@@ -97,7 +97,7 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideLanguageTagWithDifferentSeparatorOption
+     * @dataProvider provideLanguageTagsWithDifferentSeparatorOption
      * @param string $expected
      * @param string $raw
      * @param array $options
@@ -109,7 +109,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideLanguageTagWithDifferentSeparatorOption(): array
+    public function provideLanguageTagsWithDifferentSeparatorOption(): array
     {
         return [
             'two-letter primary without change' => [
@@ -144,7 +144,7 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideLanguageTagWithDifferentWithOptions
+     * @dataProvider provideLanguageTagsWithDifferentWithOptions
      * @param string $expected
      * @param string $raw
      * @param array $options
@@ -156,7 +156,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideLanguageTagWithDifferentWithOptions(): array
+    public function provideLanguageTagsWithDifferentWithOptions(): array
     {
         return [
             'returns without extlang and with script and region by default' => [
