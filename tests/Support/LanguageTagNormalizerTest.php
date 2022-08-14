@@ -19,7 +19,7 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideLanguageTag
      */
-    public function it_can_normalize_a_language_tag(string $expected, string $raw)
+    public function it_can_normalize_a_language_tag(string $raw, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
 
@@ -38,60 +38,60 @@ class LanguageTagNormalizerTest extends TestCase
                 'dum',
             ],
             'two-letter tag hyphenated with extlang remove extlang' => [
-                'zh',
                 'zh-yue',
+                'zh',
             ],
             'two-letter tag underscored with extlang remove extlang' => [
-                'zh',
                 'zh_yue',
+                'zh',
             ],
             'two-letter tag hyphenated with script append script' => [
                 'sr-Latn',
                 'sr-Latn',
             ],
             'two-letter tag underscored with script append script' => [
-                'sr-Latn',
                 'sr_Latn',
+                'sr-Latn',
             ],
             'two-letter tag hyphenated with region append region' => [
                 'de-AT',
                 'de-AT',
             ],
             'two-letter tag underscored with region append region' => [
-                'de-AT',
                 'de_AT',
+                'de-AT',
             ],
             'two-letter tag hyphenated with region in digits remove region' => [
-                'es',
                 'es-005',
+                'es',
             ],
             'two-letter tag underscored with region in digits remove region' => [
-                'es',
                 'es-005',
+                'es',
             ],
             'two-letter tag hyphenated with extlang and region append only region' => [
-                'zh-CN',
                 'zh-cmn-CN',
+                'zh-CN',
             ],
             'two-letter tag underscored with extlang and region append only region' => [
-                'zh-CN',
                 'zh_cmn_CN',
+                'zh-CN',
             ],
             'two-letter tag hyphenated with script and region append both' => [
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
             'two-letter tag underscored with script and region append both' => [
-                'sr-Latn-RS',
                 'sr_Latn_RS',
+                'sr-Latn-RS',
             ],
             'two-letter tag hyphenated with extlang, script, and region append expected' => [
-                'zh-Hant-CN',
                 'zh-yue-Hant-CN',
+                'zh-Hant-CN',
             ],
             'two-letter tag underscored with extlang, script, and region append expected' => [
-                'zh-Hant-CN',
                 'zh_yue_Hant_CN',
+                'zh-Hant-CN',
             ],
         ];
     }
