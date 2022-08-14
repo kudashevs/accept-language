@@ -16,11 +16,12 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideLanguageTag
      * @param string $expected
      * @param string $raw
      */
-    public function testNormalizerReturnsNormalizedLanguageTag(string $expected, string $raw)
+    public function it_can_normalize_a_language_tag(string $expected, string $raw)
     {
         $normalizer = new LanguageTagNormalizer();
 
