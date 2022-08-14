@@ -26,7 +26,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideDifferentLanguageTags()
+    public function provideDifferentLanguageTags(): array
     {
         return [
             'two-letter primary without change' => [
@@ -109,7 +109,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideLanguageTagWithDifferentSeparatorOption()
+    public function provideLanguageTagWithDifferentSeparatorOption(): array
     {
         return [
             'two-letter primary without change' => [
@@ -156,7 +156,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideLanguageTagWithDifferentWithOptions()
+    public function provideLanguageTagWithDifferentWithOptions(): array
     {
         return [
             'returns without extlang and with script and region by default' => [
@@ -218,7 +218,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($raw));
     }
 
-    public function provideExceptionalCases()
+    public function provideExceptionalCases(): array
     {
         return [
             'two-letter tag hyphenated with extlang out of its scope' => [
