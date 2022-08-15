@@ -77,7 +77,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         $normalizedSubtags = [];
 
         foreach ($subtags as $index => $subtag) {
-            if ($index === 0) {
+            if ($this->isPrimaryTag($index)) {
                 $normalizedSubtags[] = $this->normalizePrimarySubtag($subtag);
                 continue;
             }
@@ -126,6 +126,11 @@ final class LanguageTagNormalizer implements TagNormalizer
     private function normalizeRegionSubtag(string $subtag): string
     {
         return strtoupper($subtag);
+    }
+
+    private function isPrimaryTag($index): bool
+    {
+        return $index === 0;
     }
 
     private function isExtlang(string $value, int $position): bool
