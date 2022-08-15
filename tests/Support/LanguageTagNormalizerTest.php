@@ -142,12 +142,10 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideLanguageTagsWithDifferentWithOptions
-     * @param string $expected
-     * @param string $raw
-     * @param array $options
      */
-    public function it_can_normalize_with_provided_options(string $expected, string $raw, array $options)
+    public function it_can_normalize_with_provided_options(string $raw, array $options, string $expected)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
@@ -158,48 +156,48 @@ class LanguageTagNormalizerTest extends TestCase
     {
         return [
             'returns without extlang and with script and region by default' => [
-                'zh-Hant-CN',
                 'zh-yue-Hant-CN',
                 [],
+                'zh-Hant-CN',
             ],
             'returns with extlang' => [
-                'zh-yue-Hant-CN',
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
                 ],
+                'zh-yue-Hant-CN',
             ],
             'returns without script' => [
-                'zh-CN',
                 'zh-yue-Hant-CN',
                 [
                     'with_script' => false,
                 ],
+                'zh-CN',
             ],
             'returns without region' => [
-                'zh-Hant',
                 'zh-yue-Hant-CN',
                 [
                     'with_region' => false,
                 ],
+                'zh-Hant',
             ],
             'returns expected with all switched on' => [
-                'zh-yue-Hant-CN',
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
                     'with_script' => true,
                     'with_region' => true,
                 ],
+                'zh-yue-Hant-CN',
             ],
             'returns expected with all switched off' => [
-                'zh',
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => false,
                     'with_script' => false,
                     'with_region' => false,
                 ],
+                'zh',
             ],
         ];
     }
