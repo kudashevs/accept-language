@@ -33,9 +33,6 @@ final class LanguageTagNormalizer implements TagNormalizer
         $this->initOptions($options);
     }
 
-    /**
-     * @param array $options
-     */
     private function initOptions(array $options): void
     {
         $allowed = array_intersect_key($options, $this->options);
@@ -57,10 +54,6 @@ final class LanguageTagNormalizer implements TagNormalizer
         return $this->generateNormalizedTag($subtags);
     }
 
-    /**
-     * @param $tag
-     * @return array
-     */
     private function splitLanguageTag($tag): array
     {
         $harmonizedTag = str_replace('_', '-', $tag);
@@ -79,10 +72,6 @@ final class LanguageTagNormalizer implements TagNormalizer
         return implode($this->options['separator'], $normalizedSubtags);
     }
 
-    /**
-     * @param array $subtags
-     * @return array
-     */
     private function normalizeSubtags(array $subtags): array
     {
         $normalizedSubtags = [];
@@ -119,58 +108,32 @@ final class LanguageTagNormalizer implements TagNormalizer
         return $normalizedSubtags;
     }
 
-    /**
-     * @param string $subtag
-     * @return string
-     */
     private function normalizeExtlangSubtag(string $subtag): string
     {
         return strtolower($subtag);
     }
 
-    /**
-     * @param string $subtag
-     * @return string
-     */
     private function normalizePrimarySubtag(string $subtag): string
     {
         return strtolower($subtag);
     }
 
-    /**
-     * @param string $subtag
-     * @return string
-     */
     private function normalizeScriptSubtag(string $subtag): string
     {
         return ucfirst(strtolower($subtag));
     }
 
-    /**
-     * @param string $subtag
-     * @return string
-     */
     private function normalizeRegionSubtag(string $subtag): string
     {
         return strtoupper($subtag);
     }
 
-    /**
-     * @param string $value
-     * @param int $position
-     * @return bool
-     */
     private function isExtlang(string $value, int $position): bool
     {
         return strlen($value) === self::EXTLANG_SUBTAG_LENGTH &&
             ($position === 1);
     }
 
-    /**
-     * @param string $value
-     * @param int $position
-     * @return bool
-     */
     private function isScript(string $value, int $position): bool
     {
         return strlen($value) === self::SCRIPT_SUBTAG_LENGTH &&
@@ -180,11 +143,6 @@ final class LanguageTagNormalizer implements TagNormalizer
             );
     }
 
-    /**
-     * @param string $value
-     * @param int $position
-     * @return bool
-     */
     private function isRegion(string $value, int $position): bool
     {
         return strlen($value) === self::REGION_SUBTAG_LENGTH &&
