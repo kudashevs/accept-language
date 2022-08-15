@@ -100,11 +100,11 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideLanguageTagsWithDifferentSeparatorOption
      */
-    public function it_can_normalize_with_a_provided_separator(string $raw, array $options, string $expected)
+    public function it_can_normalize_with_a_provided_separator(string $tag, array $options, string $expected)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
-        $this->assertSame($expected, $normalizer->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
     public function provideLanguageTagsWithDifferentSeparatorOption(): array
@@ -145,11 +145,11 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideLanguageTagsWithDifferentWithOptions
      */
-    public function it_can_normalize_with_provided_options(string $raw, array $options, string $expected)
+    public function it_can_normalize_with_provided_options(string $tag, array $options, string $expected)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
-        $this->assertSame($expected, $normalizer->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
     public function provideLanguageTagsWithDifferentWithOptions(): array
@@ -206,11 +206,11 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideExceptionalCases
      */
-    public function it_can_normalize_an_exceptional_case(string $raw, string $expected)
+    public function it_can_normalize_an_exceptional_case(string $tag, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize($raw));
+        $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
     public function provideExceptionalCases(): array
