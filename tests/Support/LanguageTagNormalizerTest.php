@@ -97,12 +97,13 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideLanguageTagsWithDifferentSeparatorOption
      * @param string $expected
      * @param string $raw
      * @param array $options
      */
-    public function testNormalizerAcceptsDifferentSeparators(string $expected, string $raw, array $options)
+    public function it_can_normalize_with_a_provided_separator(string $expected, string $raw, array $options)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
