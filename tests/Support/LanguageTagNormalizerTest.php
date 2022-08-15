@@ -147,7 +147,7 @@ class LanguageTagNormalizerTest extends TestCase
      * @param string $raw
      * @param array $options
      */
-    public function testNormalizerReturnsExpectedWithSpecificOptionSet(string $expected, string $raw, array $options)
+    public function it_can_normalize_with_provided_options(string $expected, string $raw, array $options)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
