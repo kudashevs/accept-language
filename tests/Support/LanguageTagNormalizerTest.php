@@ -203,11 +203,12 @@ class LanguageTagNormalizerTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideExceptionalCases
      * @param string $expected
      * @param string $raw
      */
-    public function testNormalizerReturnsNormalizedLanguageTagOnExceptionalCase(string $expected, string $raw)
+    public function it_can_normalize_an_exceptional_case(string $expected, string $raw)
     {
         $normalizer = new LanguageTagNormalizer();
 
