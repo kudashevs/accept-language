@@ -85,11 +85,11 @@ final class LanguageTagNormalizer implements TagNormalizer
      */
     private function normalizeSubtags(array $subtags): array
     {
-        $normalized = [];
+        $normalizedSubtags = [];
 
         foreach ($subtags as $index => $subtag) {
             if ($index === 0) {
-                $normalized[] = $this->normalizePrimarySubtag($subtag);
+                $normalizedSubtags[] = $this->normalizePrimarySubtag($subtag);
                 continue;
             }
 
@@ -97,7 +97,7 @@ final class LanguageTagNormalizer implements TagNormalizer
                 $this->processed++;
 
                 if ($this->options['with_extlang']) {
-                    $normalized[] = $this->normalizeExtlangSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeExtlangSubtag($subtag);
                 }
             }
 
@@ -105,18 +105,18 @@ final class LanguageTagNormalizer implements TagNormalizer
                 $this->processed++;
 
                 if ($this->options['with_script']) {
-                    $normalized[] = $this->normalizeScriptSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeScriptSubtag($subtag);
                 }
             }
 
             if ($this->isRegion($subtag, $index)) {
                 if ($this->options['with_region']) {
-                    $normalized[] = $this->normalizeRegionSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeRegionSubtag($subtag);
                 }
             }
         }
 
-        return $normalized;
+        return $normalizedSubtags;
     }
 
     /**
