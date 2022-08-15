@@ -54,7 +54,7 @@ final class LanguageTagNormalizer implements TagNormalizer
     {
         $subtags = $this->splitLanguageTag($tag);
 
-        return $this->normalizeLanguageTag($subtags);
+        return $this->generateNormalizedTag($subtags);
     }
 
     /**
@@ -68,7 +68,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return explode('-', $harmonizedTag);
     }
 
-    private function normalizeLanguageTag(array $tags): string
+    private function generateNormalizedTag(array $tags): string
     {
         if (count($tags) === 1) {
             return current($tags);
