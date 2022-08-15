@@ -44,25 +44,17 @@ final class LanguageTagNormalizer implements TagNormalizer
     }
 
     /**
+     * Return a normalized language tag.
+     * ???
+     *
      * @param string $tag
      * @return string
      */
     public function normalize(string $tag): string
     {
-        return $this->normalizeLanguageTag($tag);
-    }
-
-    /**
-     * Separates language tag, analyzes parts and normalizes them.
-     *
-     * @param $tag
-     * @return string
-     */
-    private function normalizeLanguageTag($tag): string
-    {
         $subtags = $this->splitLanguageTag($tag);
 
-        return $this->normalizeTags($subtags);
+        return $this->normalizeLanguageTag($subtags);
     }
 
     /**
@@ -76,7 +68,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return explode('-', $harmonizedTag);
     }
 
-    private function normalizeTags(array $tags): string
+    private function normalizeLanguageTag(array $tags): string
     {
         if (count($tags) === 1) {
             return current($tags);
