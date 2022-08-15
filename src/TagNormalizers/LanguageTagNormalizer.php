@@ -74,9 +74,9 @@ final class LanguageTagNormalizer implements TagNormalizer
             return current($subtags);
         }
 
-        $normalizedTags = $this->normalizeSubtags($subtags);
+        $normalizedSubtags = $this->normalizeSubtags($subtags);
 
-        return implode($this->options['separator'], $normalizedTags);
+        return implode($this->options['separator'], $normalizedSubtags);
     }
 
     /**
