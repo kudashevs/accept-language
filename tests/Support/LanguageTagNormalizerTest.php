@@ -205,10 +205,8 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @test
      * @dataProvider provideExceptionalCases
-     * @param string $expected
-     * @param string $raw
      */
-    public function it_can_normalize_an_exceptional_case(string $expected, string $raw)
+    public function it_can_normalize_an_exceptional_case(string $raw, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
 
@@ -219,28 +217,28 @@ class LanguageTagNormalizerTest extends TestCase
     {
         return [
             'two-letter tag hyphenated with extlang out of its scope' => [
-                'zh-CN',
                 'zh-cmn-CN-cmn',
+                'zh-CN',
             ],
             'two-letter tag hyphenated with script out of its scope' => [
-                'zh-CN',
                 'zh-cmn-CN-Latn',
+                'zh-CN',
             ],
             'two-letter tag hyphenated with region out of its scope' => [
-                'de',
                 'de-ext-ext-Latn-CH-1901',
+                'de',
             ],
             'two-letter tag BCP47 section 2.1.1 example 1 return formatted' => [
                 'mn-Cyrl-MN',
                 'mn-Cyrl-MN',
             ],
             'two-letter tag BCP47 section 2.1.1 example 2 return formatted' => [
-                'mn-Cyrl-MN',
                 'MN-cYRL-mn',
+                'mn-Cyrl-MN',
             ],
             'two-letter tag BCP47 section 2.1.1 example 3 return formatted' => [
-                'mn-Cyrl-MN',
                 'mN-cYrL-Mn',
+                'mn-Cyrl-MN',
             ],
         ];
     }
