@@ -94,7 +94,7 @@ final class LanguageTagNormalizer implements TagNormalizer
                 $this->processed++;
 
                 if ($this->options['with_script']) {
-                    $normalizedSubtags[] = $this->normalizeScriptSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeScript($subtag);
                 }
             }
 
@@ -118,7 +118,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return strtolower($subtag);
     }
 
-    private function normalizeScriptSubtag(string $subtag): string
+    private function normalizeScript(string $subtag): string
     {
         return ucfirst(strtolower($subtag));
     }
