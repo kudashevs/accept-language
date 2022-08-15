@@ -100,7 +100,7 @@ final class LanguageTagNormalizer implements TagNormalizer
 
             if ($this->isRegion($subtag, $index)) {
                 if ($this->options['with_region']) {
-                    $normalizedSubtags[] = $this->normalizeRegionSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeRegion($subtag);
                 }
             }
         }
@@ -123,7 +123,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return ucfirst(strtolower($subtag));
     }
 
-    private function normalizeRegionSubtag(string $subtag): string
+    private function normalizeRegion(string $subtag): string
     {
         return strtoupper($subtag);
     }
