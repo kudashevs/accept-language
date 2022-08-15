@@ -68,13 +68,13 @@ final class LanguageTagNormalizer implements TagNormalizer
         return explode('-', $harmonizedTag);
     }
 
-    private function generateNormalizedTag(array $tags): string
+    private function generateNormalizedTag(array $subtags): string
     {
-        if (count($tags) === 1) {
-            return current($tags);
+        if (count($subtags) === 1) {
+            return current($subtags);
         }
 
-        $normalizedTags = $this->normalizeSubtags($tags);
+        $normalizedTags = $this->normalizeSubtags($subtags);
 
         return implode($this->options['separator'], $normalizedTags);
     }
