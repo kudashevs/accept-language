@@ -62,11 +62,7 @@ final class LanguageTagNormalizer implements TagNormalizer
     {
         $subtags = $this->splitLanguageTag($tag);
 
-        if (count($subtags) > 1) {
-            $subtags = $this->normalizeSubtags($subtags);
-        }
-
-        return implode($this->options['separator'], $subtags);
+        return $this->normalizeTags($subtags);
     }
 
     /**
@@ -78,6 +74,17 @@ final class LanguageTagNormalizer implements TagNormalizer
         $harmonizedTag = str_replace('_', '-', $tag);
 
         return explode('-', $harmonizedTag);
+    }
+
+    private function normalizeTags(array $tags): string
+    {
+        if (count($tags) === 1) {
+            return current($tags);
+        }
+
+        $normalizedTags = $this->normalizeSubtags($tags);
+
+        return implode($this->options['separator'], $normalizedTags);
     }
 
     /**
