@@ -70,12 +70,12 @@ final class LanguageTagNormalizer implements TagNormalizer
     }
 
     /**
-     * @param $rawTag
+     * @param $tag
      * @return array
      */
-    private function splitLanguageTag($rawTag): array
+    private function splitLanguageTag($tag): array
     {
-        return explode('-', str_replace('_', '-', $rawTag));
+        return explode('-', str_replace('_', '-', $tag));
     }
 
     /**
