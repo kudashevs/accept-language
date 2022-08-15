@@ -99,11 +99,8 @@ class LanguageTagNormalizerTest extends TestCase
     /**
      * @test
      * @dataProvider provideLanguageTagsWithDifferentSeparatorOption
-     * @param string $expected
-     * @param string $raw
-     * @param array $options
      */
-    public function it_can_normalize_with_a_provided_separator(string $expected, string $raw, array $options)
+    public function it_can_normalize_with_a_provided_separator(string $raw, array $options, string $expected)
     {
         $normalizer = new LanguageTagNormalizer($options);
 
@@ -115,31 +112,31 @@ class LanguageTagNormalizerTest extends TestCase
         return [
             'two-letter primary without change' => [
                 'en',
-                'en',
                 [
                     'separator' => '_',
                 ],
+                'en',
             ],
             'two-letter tag hyphenated with script change separator' => [
-                'sr_Latn',
                 'sr-Latn',
                 [
                     'separator' => '_',
                 ],
+                'sr_Latn',
             ],
             'two-letter tag hyphenated with script and region change separator' => [
-                'sr_Latn_RS',
                 'sr-Latn-RS',
                 [
                     'separator' => '_',
                 ],
+                'sr_Latn_RS',
             ],
             'two-letter tag hyphenated with extlang, script, and region change separator' => [
-                'zh_Hant_CN',
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
                 ],
+                'zh_Hant_CN',
             ],
         ];
     }
