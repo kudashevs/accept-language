@@ -86,7 +86,7 @@ final class LanguageTagNormalizer implements TagNormalizer
                 $this->processed++;
 
                 if ($this->options['with_extlang']) {
-                    $normalizedSubtags[] = $this->normalizeExtlangSubtag($subtag);
+                    $normalizedSubtags[] = $this->normalizeExtlang($subtag);
                 }
             }
 
@@ -108,7 +108,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return $normalizedSubtags;
     }
 
-    private function normalizeExtlangSubtag(string $subtag): string
+    private function normalizeExtlang(string $subtag): string
     {
         return strtolower($subtag);
     }
