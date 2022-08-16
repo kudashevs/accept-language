@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Support;
+namespace Kudashevs\AcceptLanguage\Tests\TagNormalizers;
 
 use Kudashevs\AcceptLanguage\TagNormalizers\LanguageTagNormalizer;
 use PHPUnit\Framework\TestCase;
