@@ -24,8 +24,6 @@ final class LanguageTagNormalizer implements TagNormalizer
     ];
 
     /**
-     * LanguageTagNormalizer constructor.
-     *
      * @param array $options
      */
     public function __construct(array $options = [])
