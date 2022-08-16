@@ -39,8 +39,9 @@ final class LanguageTagNormalizer implements TagNormalizer
     }
 
     /**
-     * Return a normalized language tag.
-     * ???
+     * Return a normalized language tag. The normalization process includes:
+     * - replacing separators (underscores, hyphens) with a value of the "separator" option
+     * - omitting unwanted subtags according to the pre-selected options
      *
      * @param string $tag
      * @return string
