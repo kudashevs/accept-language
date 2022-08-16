@@ -62,10 +62,6 @@ final class LanguageTagNormalizer implements TagNormalizer
 
     private function generateNormalizedTag(array $subtags): string
     {
-        if (count($subtags) === 1) {
-            return current($subtags);
-        }
-
         $normalizedSubtags = $this->normalizeSubtags($subtags);
 
         return implode($this->options['separator'], $normalizedSubtags);
