@@ -5,6 +5,8 @@ namespace Kudashevs\AcceptLanguage\TagNormalizers;
 interface TagNormalizer
 {
     /**
+     * Return a normalized tag.
+     *
      * @param string $tag
      * @return string
      */
