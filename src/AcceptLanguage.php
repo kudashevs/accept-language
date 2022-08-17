@@ -124,9 +124,9 @@ class AcceptLanguage
      */
     protected function process(): void
     {
-        $headerValue = $this->retrieveAcceptLanguage();
+        $header = $this->retrieveAcceptLanguage();
 
-        $this->language = $this->findLanguage($headerValue);
+        $this->language = $this->findLanguage($header);
     }
 
     /**
