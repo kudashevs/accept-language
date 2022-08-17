@@ -69,20 +69,28 @@ class AcceptLanguage
     {
         $allowedOptions = array_intersect_key($options, $this->options);
 
-        foreach ($allowedOptions as $key => $value) {
-            if (gettype($this->options[$key]) !== gettype($value)) {
-                throw new InvalidOptionArgumentException(
-                    sprintf(
-                        'The option %s has a wrong value type %s. This option requires a value of the type %s.',
-                        $key,
-                        gettype($value),
-                        gettype($this->options[$key])
-                    )
-                );
-            }
+        foreach ($allowedOptions as $name => $value) {
+            $this->validateOption($name, $value);
         }
 
         return $allowedOptions;
+    }
+
+    /**
+     * @throws InvalidOptionArgumentException
+     */
+    protected function validateOption(string $name, $value): void
+    {
+        if (gettype($this->options[$name]) !== gettype($value)) {
+            throw new InvalidOptionArgumentException(
+                sprintf(
+                    'The option %s has a wrong value type %s. This option requires a value of the type %s.',
+                    $name,
+                    gettype($value),
+                    gettype($this->options[$name])
+                )
+            );
+        }
     }
 
     /**
