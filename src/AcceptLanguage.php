@@ -159,19 +159,19 @@ class AcceptLanguage
     /**
      * Parses an HTTP Accept-Language string.
      *
-     * @param string $headerValue
+     * @param string $header
      * @return array
      */
-    private function parse(string $headerValue): array
+    private function parse(string $header): array
     {
         if (
-            empty($headerValue) ||
-            $this->isWildcard($headerValue)
+            empty($header) ||
+            $this->isWildcard($header)
         ) {
             return [];
         }
 
-        return $this->parseHeader($headerValue);
+        return $this->parseHeader($header);
     }
 
     /**
