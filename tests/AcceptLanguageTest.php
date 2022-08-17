@@ -16,7 +16,7 @@ class AcceptLanguageTest extends TestCase
     public function testSetOptionsThrowsExceptionOnWrongOptionParameterType($option)
     {
         $this->expectException(InvalidOptionArgumentException::class);
-        $this->expectExceptionMessage('The option ' . key($option) . ' has a wrong value type');
+        $this->expectExceptionMessage('The option "' . key($option) . '" has a wrong value type');
 
         new AcceptLanguage($option);
     }

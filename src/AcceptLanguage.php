@@ -88,7 +88,7 @@ class AcceptLanguage
         if (gettype($this->options[$name]) !== gettype($value)) {
             throw new InvalidOptionArgumentException(
                 sprintf(
-                    'The option %s has a wrong value type %s. This option requires a value of the type %s.',
+                    'The option "%s" has a wrong value type %s. This option requires a value of the type %s.',
                     $name,
                     gettype($value),
                     gettype($this->options[$name])
