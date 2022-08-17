@@ -85,13 +85,16 @@ class AcceptLanguage
             return;
         }
 
-        if (gettype($this->options[$name]) !== gettype($value)) {
+        $externalOptionType = gettype($value);
+        $internalOptionType = gettype($this->options[$name]);
+
+        if ($externalOptionType !== $internalOptionType) {
             throw new InvalidOptionArgumentException(
                 sprintf(
                     'The option "%s" has a wrong value type %s. This option requires a value of the type %s.',
                     $name,
-                    gettype($value),
-                    gettype($this->options[$name])
+                    $externalOptionType,
+                    $internalOptionType
                 )
             );
         }
