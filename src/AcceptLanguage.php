@@ -361,7 +361,7 @@ class AcceptLanguage
     private function retrieveLanguage(array $languages): string
     {
         if (empty($languages)) {
-            return $this->resolveDefaultLanguage();
+            return $this->retrieveDefaultLanguage();
         }
 
         return $this->retrieveProperLanguage($languages);
@@ -375,7 +375,7 @@ class AcceptLanguage
     {
         foreach (array_column($languages, 'lang') as $language) {
             if ($this->isWildcard($language)) {
-                return $this->resolveDefaultLanguage();
+                return $this->retrieveDefaultLanguage();
             }
 
             if ($this->isProperLanguage($language)) {
@@ -383,7 +383,7 @@ class AcceptLanguage
             }
         }
 
-        return $this->resolveDefaultLanguage();
+        return $this->retrieveDefaultLanguage();
     }
 
     /**
@@ -410,7 +410,7 @@ class AcceptLanguage
     /**
      * @return string
      */
-    private function resolveDefaultLanguage(): string
+    private function retrieveDefaultLanguage(): string
     {
         return $this->options['default_language'];
     }
