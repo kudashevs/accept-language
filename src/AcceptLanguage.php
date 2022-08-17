@@ -165,13 +165,18 @@ class AcceptLanguage
     private function parse(string $header): array
     {
         if (
-            empty($header) ||
+            $this->isEmpty($header) ||
             $this->isWildcard($header)
         ) {
             return [];
         }
 
         return $this->parseHeader($header);
+    }
+
+    private function isEmpty(string $header): bool
+    {
+        return $header === '';
     }
 
     /**
