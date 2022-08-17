@@ -81,6 +81,10 @@ class AcceptLanguage
      */
     protected function validateOption(string $name, $value): void
     {
+        if (!array_key_exists($name, $this->options)) {
+            return;
+        }
+
         if (gettype($this->options[$name]) !== gettype($value)) {
             throw new InvalidOptionArgumentException(
                 sprintf(
