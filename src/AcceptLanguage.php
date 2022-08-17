@@ -171,7 +171,7 @@ class AcceptLanguage
             return [];
         }
 
-        return $this->parseHeaderValue($headerValue);
+        return $this->parseHeader($headerValue);
     }
 
     /**
@@ -187,7 +187,7 @@ class AcceptLanguage
      * @param string $headerValue
      * @return array
      */
-    private function parseHeaderValue(string $headerValue): array
+    private function parseHeader(string $headerValue): array
     {
         $emptyTagDefaultValue = 1;
         $tagKeys = ['lang', 'quality'];
