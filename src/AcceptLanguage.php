@@ -142,12 +142,12 @@ class AcceptLanguage
     }
 
     /**
-     * @param string $headerValue
+     * @param string $header
      * @return string
      */
-    private function findLanguage(string $headerValue): string
+    protected function findLanguage(string $header): string
     {
-        $languages = $this->parse($headerValue);
+        $languages = $this->parse($header);
 
         $filtered = $this->filter($languages);
 
