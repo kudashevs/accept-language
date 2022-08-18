@@ -94,10 +94,12 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenAcceptedLanguagesContainsOptionalLanguage(string $method)
-    {
+    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages(
+        string $method
+    ) {
         $options = [
             'default_language' => 'es',
             'accepted_languages' => ['en', 'de', 'es'],
