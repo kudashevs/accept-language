@@ -11,9 +11,10 @@ class AcceptLanguageTest extends TestCase
     const DEFAULT_LANGUAGE = 'en';
 
     /**
+     * @test
      * @dataProvider provideDifferentWrongOptions
      */
-    public function testSetOptionsThrowsExceptionOnWrongOptionParameterType($option)
+    public function it_can_throw_exception_when_an_option_of_a_wrong_type($option)
     {
         $this->expectException(InvalidOptionArgumentException::class);
         $this->expectExceptionMessage('The option "' . key($option) . '" has a wrong value type');
