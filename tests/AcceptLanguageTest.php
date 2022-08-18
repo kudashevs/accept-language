@@ -44,9 +44,10 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function testMethodReturnsNotEmpty(string $method)
+    public function it_can_retrieve_a_language(string $method)
     {
         $service = new AcceptLanguage();
 
