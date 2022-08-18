@@ -43,7 +43,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetPreferredLanguageMethods
+     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
     public function testMethodReturnsNotEmpty(string $method)
     {
@@ -53,7 +53,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetPreferredLanguageMethods
+     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
     public function testMethodReturnsDefaultLanguageWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible(string $method)
     {
@@ -63,7 +63,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetPreferredLanguageMethods
+     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
     public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible(string $method)
     {
@@ -74,7 +74,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetPreferredLanguageMethods
+     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
     public function testGetPreferredLanguageReturnsDefaultLanguageWhenRetrievedLanguageIsNotListedInAcceptedLanguages(string $method)
     {
@@ -88,7 +88,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetPreferredLanguageMethods
+     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
     public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenAcceptedLanguagesContainsOptionalLanguage(string $method)
     {
@@ -101,7 +101,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($options['default_language'], $service->$method());
     }
 
-    public function provideGetPreferredLanguageMethods()
+    public function provideDifferentRetrieveLanguageMethods()
     {
         return [
             'with getPreferredLanguage method' => ['getPreferredLanguage'],
