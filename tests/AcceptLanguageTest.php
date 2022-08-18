@@ -86,7 +86,7 @@ class AcceptLanguageTest extends TestCase
     ) {
         $options = [
             'http_accept_language' => 'pp',
-            'accepted_languages' => ['en', 'de', 'fr']
+            'accepted_languages' => ['en', 'de', 'fr'],
         ];
         $service = new AcceptLanguage($options);
 
