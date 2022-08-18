@@ -55,9 +55,10 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function testMethodReturnsDefaultLanguageWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible(string $method)
+    public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided(string $method)
     {
         $service = new AcceptLanguage();
 
