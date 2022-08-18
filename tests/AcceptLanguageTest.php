@@ -66,9 +66,10 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function testGetPreferredLanguageReturnsDefaultLanguageFromOptionsWhenLanguageOptionsAreEmptyAndHTTPAcceptLanguageIsNotAccessible(string $method)
+    public function it_can_retrieve_the_preferred_language_from_options(string $method)
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
