@@ -25,20 +25,20 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentWrongOptions()
     {
         return [
-            'wrong http_accept_language without string value' => [
-                [
-                    'http_accept_language' => null,
-                ],
+            'an http_accept_language option with a wrong value' => [
+                ['http_accept_language' => null],
             ],
-            'wrong default_language without not string value' => [
-                [
-                    'default_language' => null,
-                ],
+            'an default_language option with a wrong value' => [
+                ['default_language' => null],
             ],
-            'wrong accepted_languages without not array value' => [
-                [
-                    'accepted_languages' => null,
-                ],
+            'an accepted_languages option with a wrong value' => [
+                ['accepted_languages' => null],
+            ],
+            'an two_letter_only option with a wrong value' => [
+                ['two_letter_only' => null],
+            ],
+            'an separator option with a wrong value' => [
+                ['separator' => null],
             ],
         ];
     }
