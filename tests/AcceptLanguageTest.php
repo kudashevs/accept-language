@@ -11,7 +11,7 @@ class AcceptLanguageTest extends TestCase
     const DEFAULT_LANGUAGE = 'en';
 
     /**
-     * @dataProvider provideWrongOptions
+     * @dataProvider provideDifferentWrongOptions
      */
     public function testSetOptionsThrowsExceptionOnWrongOptionParameterType($option)
     {
@@ -21,7 +21,7 @@ class AcceptLanguageTest extends TestCase
         new AcceptLanguage($option);
     }
 
-    public function provideWrongOptions()
+    public function provideDifferentWrongOptions()
     {
         return [
             'wrong http_accept_language without string value' => [
