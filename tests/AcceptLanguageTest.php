@@ -106,7 +106,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsWithVariousRequestHeaderValues
+     * @dataProvider provideDifferentRequestHeaderValues
      */
     public function testGetPreferredLanguageReturnsExpected($expected, $options)
     {
@@ -116,7 +116,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsWithVariousRequestHeaderValues()
+    public function provideDifferentRequestHeaderValues()
     {
         return [
             'any language tag results default' => [
@@ -268,7 +268,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsWithVariousAcceptedLanguagesValues
+     * @dataProvider provideDifferentAcceptedLanguagesValues
      */
     public function testGetPreferredLanguageReturnsExpectedWhenAcceptedLanguagesAreSet($expected, $options)
     {
@@ -278,7 +278,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsWithVariousAcceptedLanguagesValues()
+    public function provideDifferentAcceptedLanguagesValues()
     {
         return [
             'language that intersects with accepted_languages results language' => [
@@ -320,7 +320,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsWithVariousSpecificOptions
+     * @dataProvider provideDifferentOptions
      */
     public function testGetPreferredLanguageReturnsExpectedWhenSpecificOptionIsSet($expected, $options)
     {
@@ -330,7 +330,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsWithVariousSpecificOptions()
+    public function provideDifferentOptions()
     {
         return [
             'returns expected with the underscore separator' => [
@@ -365,7 +365,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsWithRequestHeaderWithVariousLanguageLetterLength
+     * @dataProvider provideDifferentRequestHeadersWithDifferentLanguageLetterLength
      */
     public function testGetPreferredLanguageReturnsExpectedWhenTwoLetterOnlySet($expected, $options)
     {
@@ -375,7 +375,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsWithRequestHeaderWithVariousLanguageLetterLength()
+    public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength()
     {
         return [
             'two-letter primary language tag results primary subtag' => [
@@ -457,7 +457,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsForCheckingTheNormalization
+     * @dataProvider provideDifferentAcceptedLanguagesValuesRelatedToNormalization
      */
     public function testGetPreferredLanguageReturnsNormalized($expected, $options)
     {
@@ -467,7 +467,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsForCheckingTheNormalization()
+    public function provideDifferentAcceptedLanguagesValuesRelatedToNormalization()
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
@@ -502,7 +502,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOptionsWithRequestHeaderWithIncorrectOrWronglyFormedValues
+     * @dataProvider provideDifferentRequestHeadersWithMalformedValues
      */
     public function testGetPreferredLanguageProcessesIncorrectOrWronglyFormedHeaderValue($expected, $options)
     {
@@ -512,7 +512,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideOptionsWithRequestHeaderWithIncorrectOrWronglyFormedValues()
+    public function provideDifferentRequestHeadersWithMalformedValues()
     {
         return [
             'one empty language tag results default' => [
