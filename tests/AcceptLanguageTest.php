@@ -45,76 +45,64 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function it_can_retrieve_a_language(string $method)
+    public function it_can_retrieve_a_language()
     {
         $service = new AcceptLanguage();
 
-        $this->assertNotEmpty($service->$method());
+        $this->assertNotEmpty($service->getPreferredLanguage());
+        $this->assertNotEmpty($service->getLanguage());
     }
 
     /**
      * @test
-     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided(string $method)
+    public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided()
     {
         $service = new AcceptLanguage();
 
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->$method());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
     /**
      * @test
-     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function it_can_retrieve_the_preferred_language_from_options(string $method)
+    public function it_can_retrieve_the_preferred_language_from_options()
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame($options['default_language'], $service->$method());
+        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
+        $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
     /**
      * @test
-     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function it_can_retrieve_the_default_language_when_a_language_is_not_listed_in_accepted_languages(
-        string $method
-    ) {
+    public function it_can_retrieve_the_default_language_when_a_language_is_not_listed_in_accepted_languages() {
         $options = [
             'http_accept_language' => 'pp',
             'accepted_languages' => ['en', 'de', 'fr'],
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->$method());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
+        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
     }
 
     /**
      * @test
-     * @dataProvider provideDifferentRetrieveLanguageMethods
      */
-    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages(
-        string $method
-    ) {
+    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages() {
         $options = [
             'default_language' => 'es',
             'accepted_languages' => ['en', 'de', 'es'],
         ];
         $service = new AcceptLanguage($options);
 
-        $this->assertSame($options['default_language'], $service->$method());
-    }
-
-    public function provideDifferentRetrieveLanguageMethods()
-    {
-        return [
-            'with getPreferredLanguage method' => ['getPreferredLanguage'],
-            'with getLanguage method' => ['getLanguage'],
-        ];
+        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
+        $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
     /**
