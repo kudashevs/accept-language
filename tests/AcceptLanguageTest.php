@@ -272,7 +272,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesValues
      */
-    public function it_can_retrieve_the_preferred_language_when_the_accepted_languages_are_set($expected, $options)
+    public function it_can_retrieve_the_preferred_language_when_the_accepted_languages_are_set($options, $expected)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
@@ -284,39 +284,39 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'language that intersects with accepted_languages results language' => [
-                'de',
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['de'],
                 ],
+                'de',
             ],
             'language that intersects with accepted_languages results language when it is of quality 1' => [
-                'fr',
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['de', 'fr'],
                 ],
+                'fr',
             ],
             'language that intersects with accepted_languages results language when it is of quality below 1' => [
-                'es',
                 [
                     'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
                     'accepted_languages' => ['en', 'es'],
                 ],
+                'es',
             ],
             'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality 1' => [
-                'en',
                 [
                     'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
                     'accepted_languages' => ['en'],
                 ],
+                'en',
             ],
             'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality below 1' => [
-                'fr',
                 [
                     'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
                     'accepted_languages' => ['fr'],
                 ],
+                'fr',
             ],
         ];
     }
