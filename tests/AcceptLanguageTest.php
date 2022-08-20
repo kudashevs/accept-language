@@ -80,7 +80,8 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_default_language_when_a_language_is_not_listed_in_accepted_languages() {
+    public function it_can_retrieve_the_default_language_when_a_language_is_not_listed_in_accepted_languages()
+    {
         $options = [
             'http_accept_language' => 'pp',
             'accepted_languages' => ['en', 'de', 'fr'],
@@ -94,7 +95,8 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages() {
+    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages()
+    {
         $options = [
             'default_language' => 'es',
             'accepted_languages' => ['en', 'de', 'es'],
