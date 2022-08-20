@@ -274,8 +274,10 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesValues
      */
-    public function it_can_retrieve_the_preferred_language_when_the_accepted_languages_is_set($options, $expected)
-    {
+    public function it_can_retrieve_the_preferred_language_when_the_accepted_languages_is_set(
+        array $options,
+        string $expected
+    ) {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
 
