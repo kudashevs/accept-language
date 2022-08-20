@@ -330,7 +330,7 @@ class AcceptLanguageTest extends TestCase
      * @dataProvider provideDifferentTwoLetterOnlyOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
-    public function it_can_retrieve_the_preferred_language_with_different_options($expected, $options)
+    public function it_can_retrieve_the_preferred_language_with_different_options($options, $expected)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
@@ -342,18 +342,18 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'returns expected with the two-letter only on' => [
-                'en',
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => true,
                 ],
+                'en',
             ],
             'returns expected with the two-letter only off' => [
-                'ast',
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => false,
                 ],
+                'ast',
             ],
         ];
     }
@@ -362,18 +362,18 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'returns expected with the underscore separator' => [
-                'en_GB',
                 [
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
                     'separator' => '_',
                 ],
+                'en_GB',
             ],
             'returns expected with the hyphen separator' => [
-                'en-GB',
                 [
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
                     'separator' => '-',
                 ],
+                'en-GB',
             ],
         ];
     }
