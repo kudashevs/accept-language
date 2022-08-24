@@ -382,7 +382,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeadersWithDifferentLanguageLetterLength
      */
-    public function it_can_retrieve_the_preferred_language_of_different_length($options, $expected)
+    public function it_can_retrieve_the_preferred_language_of_different_length(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
