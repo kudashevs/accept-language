@@ -394,23 +394,23 @@ class AcceptLanguageTest extends TestCase
         return [
             'two-letter primary language tag results primary subtag' => [
                 'de',
-                ['http_accept_language' => 'de']
+                ['http_accept_language' => 'de'],
             ],
             'two-letter primary language tag with extlang results primary subtag' => [
                 'de',
-                ['http_accept_language' => 'de-ger']
+                ['http_accept_language' => 'de-ger'],
             ],
             'two-letter primary language tag with script results primary subtag with script' => [
                 'de_Latn',
-                ['http_accept_language' => 'de-Latn']
+                ['http_accept_language' => 'de-Latn'],
             ],
             'two-letter primary language tag with region results primary subtag with region' => [
                 'de_DE',
-                ['http_accept_language' => 'de-DE']
+                ['http_accept_language' => 'de-DE'],
             ],
             'two-letter primary language tag with extlang, script, and region results primary subtag with script and region' => [
                 'de_Latn_DE',
-                ['http_accept_language' => 'de-get-Latn-DE']
+                ['http_accept_language' => 'de-get-Latn-DE'],
             ],
             'three-letter primary language tag without two_letter_only option results default' => [
                 self::DEFAULT_LANGUAGE,
