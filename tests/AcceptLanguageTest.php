@@ -329,8 +329,10 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesWithDifferentSeparators
      */
-    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators($options, $expected)
-    {
+    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators(
+        array $options,
+        string $expected
+    ) {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
 
