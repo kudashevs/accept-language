@@ -329,7 +329,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesWithDifferentSeparators
      */
-    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators($expected, $options)
+    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators($options, $expected)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
@@ -341,32 +341,32 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
-                'zh_Hant_HK',
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
+                'zh_Hant_HK',
             ],
             'language with hyphen intersects with underscored accepted_languages once results language' => [
-                'zh_Hant_HK',
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
                 ],
+                'zh_Hant_HK',
             ],
             'language with underscore intersects with hyphenated accepted_languages once results language' => [
-                'zh_Hant_HK',
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
+                'zh_Hant_HK',
             ],
             'language with underscore intersects with underscored accepted_languages once results language' => [
-                'zh_Hant_HK',
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
                 ],
+                'zh_Hant_HK',
             ],
         ];
     }
