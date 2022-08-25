@@ -327,7 +327,7 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentAcceptedLanguagesValuesRelatedToNormalization
+     * @dataProvider provideDifferentAcceptedLanguagesWithDifferentSeparators
      */
     public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators($expected, $options)
     {
@@ -337,7 +337,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentAcceptedLanguagesValuesRelatedToNormalization()
+    public function provideDifferentAcceptedLanguagesWithDifferentSeparators()
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results language' => [
