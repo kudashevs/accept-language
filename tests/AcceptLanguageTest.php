@@ -550,9 +550,10 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
+     * @test
      * @dataProvider provideDifferentRequestHeadersWithMalformedValues
      */
-    public function testGetPreferredLanguageProcessesIncorrectOrWronglyFormedHeaderValue($expected, $options)
+    public function it_can_retrieve_the_preferred_language_when_the_header_is_malformed($expected, $options)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
