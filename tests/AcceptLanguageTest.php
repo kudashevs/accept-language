@@ -593,7 +593,10 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function testGetPreferredLanguageReturnsExpectedWhenNoQualitiesProvided()
+    /**
+     * @test
+     */
+    public function it_can_retrieve_the_preferred_language_when_no_quality_provided()
     {
         $options = [
             'http_accept_language' => 'fr;q=,en;q=,gr',
