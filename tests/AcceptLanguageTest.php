@@ -553,7 +553,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeadersWithMalformedValues
      */
-    public function it_can_retrieve_the_preferred_language_when_the_header_is_malformed($expected, $options)
+    public function it_can_retrieve_the_preferred_language_when_the_header_is_malformed($options, $expected)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
@@ -565,28 +565,28 @@ class AcceptLanguageTest extends TestCase
     {
         return [
             'one empty language tag results default' => [
-                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => ''],
+                self::DEFAULT_LANGUAGE,
             ],
             'two empty languages tag results default' => [
-                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => ','],
+                self::DEFAULT_LANGUAGE,
             ],
             'two empty languages with quality tag results default' => [
-                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => ',;q='],
+                self::DEFAULT_LANGUAGE,
             ],
             'one language with wrong quality digit tag results default' => [
-                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'es;q=5'],
+                self::DEFAULT_LANGUAGE,
             ],
             'one language with wrong quality value tag results default' => [
-                self::DEFAULT_LANGUAGE,
                 ['http_accept_language' => 'es;q=dd'],
+                self::DEFAULT_LANGUAGE,
             ],
             'two language with wrong quality order result highest' => [
-                'es',
                 ['http_accept_language' => 'en;q=0.3,es;q=1'],
+                'es',
             ],
         ];
     }
