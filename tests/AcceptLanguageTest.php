@@ -329,7 +329,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesValuesRelatedToNormalization
      */
-    public function it_can_retrieve_the_preferred_language_with_normalization($expected, $options)
+    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators($expected, $options)
     {
         $service = new AcceptLanguage($options);
         $result = $service->getPreferredLanguage();
