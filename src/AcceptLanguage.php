@@ -9,7 +9,7 @@ use Kudashevs\AcceptLanguage\TagNormalizers\TagNormalizer;
 class AcceptLanguage
 {
     /**
-     * Contains the found language.
+     * Contain a found language of preference.
      *
      * @var string
      */
@@ -416,6 +416,8 @@ class AcceptLanguage
     }
 
     /**
+     * Return the language of preference.
+     *
      * @return string
      */
     public function getPreferredLanguage(): string
@@ -424,6 +426,8 @@ class AcceptLanguage
     }
 
     /**
+     * Return the language of preference.
+     *
      * @return string
      */
     public function getLanguage(): string
