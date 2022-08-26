@@ -9,6 +9,12 @@ use Kudashevs\AcceptLanguage\TagNormalizers\TagNormalizer;
 class AcceptLanguage
 {
     /**
+     * Contain an original header.
+     * @var
+     */
+    protected $header;
+
+    /**
      * Contain a found language of preference.
      *
      * @var string
@@ -126,6 +132,7 @@ class AcceptLanguage
     {
         $header = $this->retrieveAcceptLanguage();
 
+        $this->header = $header;
         $this->language = $this->findLanguage($header);
     }
 
@@ -413,6 +420,16 @@ class AcceptLanguage
     private function retrieveDefaultLanguage(): string
     {
         return $this->options['default_language'];
+    }
+
+    /**
+     * Return the original HTTP Accept-Language header.
+     *
+     * @return string
+     */
+    public function getHeader(): string
+    {
+        return $this->header;
     }
 
     /**

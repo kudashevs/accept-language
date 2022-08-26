@@ -43,6 +43,16 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
+    /** @test */
+    public function it_can_retain_the_original_header()
+    {
+        $service = new AcceptLanguage([
+            'http_accept_language' => 'en-US,en;q=0.5',
+        ]);
+
+        $this->assertEquals('en-US,en;q=0.5', $service->getHeader());
+    }
+
     /**
      * @test
      */
