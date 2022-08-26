@@ -608,7 +608,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /**
-     * Caught bugs.
+     * Caught bugs section.
      */
 
     /**
