@@ -13,7 +13,7 @@ class AcceptLanguage
      *
      * @var string
      */
-    private $language;
+    protected $language;
 
     /**
      * @var array[
