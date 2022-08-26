@@ -610,7 +610,11 @@ class AcceptLanguageTest extends TestCase
     /**
      * Caught bugs.
      */
-    public function testGetPreferredLanguageBugInRetrieveIntersectionWithAcceptableLanguages()
+
+    /**
+     * @test
+     */
+    public function it_can_handle_a_bug_in_the_retrieve_acceptable_languages_intersection()
     {
         /**
          * Bug found: 14.02.2021
@@ -627,7 +631,10 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
 
-    public function testGetPreferredLanguageBugInParseHeaderValue()
+    /**
+     * @test
+     */
+    public function it_can_handle_a_bug_in_the_parse_header()
     {
         /**
          * Bug found: 13.01.2022
