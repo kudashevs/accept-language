@@ -67,8 +67,6 @@ class AcceptLanguage
     }
 
     /**
-     * @param array $options
-     * @return array
      * @throws InvalidOptionArgumentException
      */
     protected function retrieveValidOptions(array $options): array
@@ -186,19 +184,11 @@ class AcceptLanguage
         return $header === '';
     }
 
-    /**
-     * @param string $headerValue
-     * @return bool
-     */
     private function isWildcard(string $headerValue): bool
     {
         return $headerValue === '*';
     }
 
-    /**
-     * @param string $headerValue
-     * @return array
-     */
     private function parseHeader(string $headerValue): array
     {
         $emptyTagDefaultValue = 1;
@@ -219,11 +209,6 @@ class AcceptLanguage
         return $result;
     }
 
-    /**
-     * @param array $values
-     * @param float $default
-     * @return array
-     */
     private function normalizeHeaderTag(array $values, float $default): array
     {
         $expectedElementsNumber = 2;
@@ -239,10 +224,6 @@ class AcceptLanguage
         return $values;
     }
 
-    /**
-     * @param array $languages
-     * @return array
-     */
     private function filter(array $languages): array
     {
         $filtered = $this->excludeNotValidLanguages($languages);
@@ -252,10 +233,6 @@ class AcceptLanguage
         return $filtered;
     }
 
-    /**
-     * @param array $languages
-     * @return array
-     */
     private function excludeNotValidLanguages(array $languages): array
     {
         return array_filter($languages, function ($value) {
@@ -263,19 +240,11 @@ class AcceptLanguage
         });
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
     private function isValidLanguage($value): bool
     {
         return !empty($value);
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
     private function isValidQuality($value): bool
     {
         return !empty($value) &&
@@ -283,10 +252,6 @@ class AcceptLanguage
             max(min($value, 1), 0) === $value;
     }
 
-    /**
-     * @param array $filtered
-     * @return array
-     */
     private function excludeNotInAcceptedLanguages(array $filtered): array
     {
         if (empty($this->options['accepted_languages'])) {
@@ -304,9 +269,6 @@ class AcceptLanguage
         return $filtered;
     }
 
-    /**
-     * @return array
-     */
     private function prepareAcceptedLanguagesForCompare(): array
     {
         return array_map(function ($value) {
@@ -314,19 +276,11 @@ class AcceptLanguage
         }, $this->options['accepted_languages']);
     }
 
-    /**
-     * @param string $language
-     * @return string
-     */
     private function prepareLanguageForCompare(string $language): string
     {
         return strtolower(str_replace('_', '-', $language));
     }
 
-    /**
-     * @param array $languages
-     * @return array
-     */
     private function normalize(array $languages): array
     {
         $normalized = array_map(function ($tag) {
@@ -343,28 +297,16 @@ class AcceptLanguage
         return $normalized;
     }
 
-    /**
-     * @param string $tag
-     * @return string
-     */
     private function normalizeTag(string $tag): string
     {
         return $this->normalizer->normalize($tag);
     }
 
-    /**
-     * @param string $quality
-     * @return float
-     */
     private function normalizeQuality(string $quality): float
     {
         return (float)$quality;
     }
 
-    /**
-     * @param array $languages
-     * @return string
-     */
     private function retrieveLanguage(array $languages): string
     {
         if (empty($languages)) {
@@ -374,10 +316,6 @@ class AcceptLanguage
         return $this->retrieveProperLanguage($languages);
     }
 
-    /**
-     * @param array $languages
-     * @return string
-     */
     private function retrieveProperLanguage(array $languages): string
     {
         foreach (array_column($languages, 'lang') as $language) {
@@ -393,10 +331,6 @@ class AcceptLanguage
         return $this->retrieveDefaultLanguage();
     }
 
-    /**
-     * @param string $language
-     * @return bool
-     */
     private function isProperLanguage(string $language): bool
     {
         $primarySubtag = explode($this->options['separator'], $language)[0];
@@ -414,9 +348,6 @@ class AcceptLanguage
         return $length >= 2 && $length <= 3;
     }
 
-    /**
-     * @return string
-     */
     private function retrieveDefaultLanguage(): string
     {
         return $this->options['default_language'];
