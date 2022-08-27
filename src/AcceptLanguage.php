@@ -128,7 +128,7 @@ class AcceptLanguage
      *
      * @return void
      */
-    protected function process(): void
+    public function process(): void
     {
         $header = $this->retrieveAcceptLanguage();
 
