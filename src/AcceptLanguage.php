@@ -51,8 +51,6 @@ class AcceptLanguage
     {
         $this->initOptions($options);
         $this->initNormalizer();
-
-        $this->process();
     }
 
     /**

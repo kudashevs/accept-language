@@ -49,6 +49,7 @@ class AcceptLanguageTest extends TestCase
         $service = new AcceptLanguage([
             'http_accept_language' => 'en-US,en;q=0.5',
         ]);
+        $service->process();
 
         $this->assertEquals('en-US,en;q=0.5', $service->getHeader());
     }
@@ -59,6 +60,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_language()
     {
         $service = new AcceptLanguage();
+        $service->process();
 
         $this->assertNotEmpty($service->getPreferredLanguage());
         $this->assertNotEmpty($service->getLanguage());
@@ -70,6 +72,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided()
     {
         $service = new AcceptLanguage();
+        $service->process();
 
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
@@ -82,6 +85,7 @@ class AcceptLanguageTest extends TestCase
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame($options['default_language'], $service->getPreferredLanguage());
         $this->assertSame($options['default_language'], $service->getLanguage());
@@ -97,6 +101,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['en', 'de', 'fr'],
         ];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
@@ -112,6 +117,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['en', 'de', 'es'],
         ];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame($options['default_language'], $service->getPreferredLanguage());
         $this->assertSame($options['default_language'], $service->getLanguage());
@@ -124,6 +130,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_the_preferred_language(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -289,6 +296,7 @@ class AcceptLanguageTest extends TestCase
         string $expected
     ) {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -344,6 +352,7 @@ class AcceptLanguageTest extends TestCase
         string $expected
     ) {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -391,6 +400,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_the_preferred_language_with_different_options(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -443,6 +453,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_the_preferred_language_of_different_length(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -568,6 +579,7 @@ class AcceptLanguageTest extends TestCase
         string $expected
     ) {
         $service = new AcceptLanguage($options);
+        $service->process();
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -613,6 +625,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['fr', 'en'],
         ];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
@@ -637,6 +650,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['fr', 'en'],
         ];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
@@ -657,6 +671,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['fr', 'en'],
         ];
         $service = new AcceptLanguage($options);
+        $service->process();
 
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
     }
