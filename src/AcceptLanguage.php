@@ -26,7 +26,7 @@ class AcceptLanguage
      *  'http_accept_language' string A string with a custom HTTP Accept-Language header.
      *  'default_language' string A string with a default preferred language value.
      *  'accepted_languages' array An array with a list of supported languages.
-     *  'two_letter_only' bool A boolean defines whether to use only the two-letter codes or not.
+     *  'two_letter_only' bool A boolean which defines whether to use only the two-letter codes or not.
      *  'separator' string A string with a character that will be used as the separator in the result.
      * ]
      */
