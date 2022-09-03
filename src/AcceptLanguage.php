@@ -282,7 +282,7 @@ class AcceptLanguage
         return strtolower(str_replace('_', '-', $language));
     }
 
-    private function normalize(array $languages): array
+    protected function normalize(array $languages): array
     {
         $normalized = array_map(function ($tag) {
             return [
@@ -298,12 +298,12 @@ class AcceptLanguage
         return $normalized;
     }
 
-    private function normalizeTag(string $tag): string
+    protected function normalizeTag(string $tag): string
     {
         return $this->normalizer->normalize($tag);
     }
 
-    private function normalizeQuality(string $quality): float
+    protected function normalizeQuality(string $quality): float
     {
         return (float)$quality;
     }
