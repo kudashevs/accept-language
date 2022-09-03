@@ -30,7 +30,7 @@ class AcceptLanguage
      *  'separator' string A string with a character that will be used as the separator in the result.
      * ]
      */
-    private $options = [
+    protected $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
         'accepted_languages' => [],
