@@ -139,148 +139,148 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentRequestHeaderValues()
     {
         return [
-            'any language tag results default' => [
+            'any language tag results to default' => [
                 ['http_accept_language' => '*'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'any language tag with highest quality results default' => [
+            'any language tag with highest quality results to default' => [
                 ['http_accept_language' => '*,de;q=0.7'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'any language tag and language tag with equal quality results default' => [
+            'any language tag and language tag with equal quality results to default' => [
                 ['http_accept_language' => '*,es,de;q=0.7'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'any language tag and language tag with equal quality results language' => [
+            'any language tag and language tag with equal quality results to the language' => [
                 ['http_accept_language' => 'es,*,de;q=0.7'],
                 'es',
             ],
-            'two-letter primary language tag results language' => [
+            'two-letter primary language tag results to the language' => [
                 ['http_accept_language' => 'fr'],
                 'fr',
             ],
-            'three-letter primary language tag results default' => [
+            'three-letter primary language tag results to default' => [
                 ['http_accept_language' => 'sgn'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag with optionresults default' => [
+            'three-letter primary language tag with option results to default' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'four letters primary language tag results default' => [
+            'four letters primary language tag results to default' => [
                 ['http_accept_language' => 'test'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two-letter primary language tag with region results language' => [
+            'two-letter primary language tag with region results to the language' => [
                 ['http_accept_language' => 'en-us'],
                 'en_US',
             ],
-            'two-letter primary language tag with script and region results language' => [
+            'two-letter primary language tag with script and region results to the language' => [
                 ['http_accept_language' => 'zh-Hant-HK'],
                 'zh_Hant_HK',
             ],
-            'two-letter with 0 quality language tag results default' => [
+            'two-letter with 0 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter with 0 quality language tag results language' => [
+            'three-letter with 0 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two-letter with 0.001 quality language tag results default' => [
+            'two-letter with 0.001 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0.001'],
                 'de',
             ],
-            'three-letter with 0.001 quality language tag results language' => [
+            'three-letter with 0.001 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.001',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with quality language tag results language' => [
+            'two-letter with quality language tag results to the language' => [
                 ['http_accept_language' => 'de;q=0.5'],
                 'de',
             ],
-            'three-letter with quality language tag results language' => [
+            'three-letter with quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.5',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 0.999 quality language tag results default' => [
+            'two-letter with 0.999 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0.999'],
                 'de',
             ],
-            'three-letter with 0.999 quality language tag results language' => [
+            'three-letter with 0.999 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.999',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 1 quality language tag results default' => [
+            'two-letter with 1 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=1'],
                 'de',
             ],
-            'three-letter with 1 quality language tag results language' => [
+            'three-letter with 1 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 1.001 quality language tag results default' => [
+            'two-letter with 1.001 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=1.001'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter with 1.001 quality language tag results language' => [
+            'three-letter with 1.001 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1.001',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'four letters with quality language tag results default' => [
+            'four letters with quality language tag results to default' => [
                 ['http_accept_language' => 'test;q=0.5'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'sequence of primary tags results language' => [
+            'sequence of primary tags results to the language' => [
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
                 'de',
             ],
-            'example all lowercase results language' => [
+            'example all lowercase results to the language' => [
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
                 'de',
             ],
-            'example part uppercase results language' => [
+            'example part uppercase results to the language' => [
                 ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8'],
                 'de_DE',
             ],
-            'mozilla Accept-Language page examples basic results language' => [
+            'mozilla Accept-Language page examples basic results to the language' => [
                 ['http_accept_language' => 'de'],
                 'de',
             ],
-            'mozilla Accept-Language page examples hyphenated results language' => [
+            'mozilla Accept-Language page examples hyphenated results to the language' => [
                 ['http_accept_language' => 'de-CH'],
                 'de_CH',
             ],
-            'mozilla Accept-Language page examples complex results language' => [
+            'mozilla Accept-Language page examples complex results to the language' => [
                 ['http_accept_language' => 'en-US,en;q=0.5'],
                 'en_US',
             ],
-            'mozilla Accept-Language page examples complex with space results language' => [
+            'mozilla Accept-Language page examples complex with space results to the language' => [
                 ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'],
                 'fr_CH',
             ],
-            'RFC 2616 14.4 Accept-Language example results language' => [
+            'RFC 2616 14.4 Accept-Language example results to the language' => [
                 ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7'],
                 'da',
             ],
@@ -305,35 +305,35 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentAcceptedLanguagesValues()
     {
         return [
-            'language that intersects with accepted_languages results language' => [
+            'language that intersects with accepted_languages results to the accepted language' => [
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['de'],
                 ],
                 'de',
             ],
-            'language that intersects with accepted_languages results language when it is of quality 1' => [
+            'language that intersects with accepted_languages results to the accepted language when it is of quality 1' => [
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['de', 'fr'],
                 ],
                 'fr',
             ],
-            'language that intersects with accepted_languages results language when it is of quality below 1' => [
+            'language that intersects with accepted_languages results to the accepted language when it is of quality below 1' => [
                 [
                     'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
                     'accepted_languages' => ['en', 'es'],
                 ],
                 'es',
             ],
-            'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality 1' => [
+            'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality 1' => [
                 [
                     'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
                     'accepted_languages' => ['en'],
                 ],
                 'en',
             ],
-            'RFC 2616 14.4 Accept-Language example returns accepted language when it is of quality below 1' => [
+            'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality below 1' => [
                 [
                     'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
                     'accepted_languages' => ['fr'],
@@ -361,28 +361,28 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentAcceptedLanguagesWithDifferentSeparators()
     {
         return [
-            'language with hyphen intersects with hyphenated accepted_languages once results language' => [
+            'language with hyphen intersects with hyphenated accepted_languages once results to the language' => [
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with hyphen intersects with underscored accepted_languages once results language' => [
+            'language with hyphen intersects with underscored accepted_languages once results to the language' => [
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with underscore intersects with hyphenated accepted_languages once results language' => [
+            'language with underscore intersects with hyphenated accepted_languages once results to the language' => [
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with underscore intersects with underscored accepted_languages once results language' => [
+            'language with underscore intersects with underscored accepted_languages once results to the language' => [
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
@@ -409,14 +409,14 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentTwoLetterOnlyOptions()
     {
         return [
-            'returns expected with the two-letter only on' => [
+            'returns expected with the two-letter only option set to true' => [
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => true,
                 ],
                 'en',
             ],
-            'returns expected with the two-letter only off' => [
+            'returns expected with the two-letter only option set to false' => [
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => false,
@@ -462,105 +462,105 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength()
     {
         return [
-            'two-letter primary language tag results primary subtag' => [
+            'two-letter primary language tag results to the primary subtag' => [
                 [
                     'http_accept_language' => 'de',
                     'two_letter_only' => true,
                 ],
                 'de',
             ],
-            'two-letter primary language tag with extlang results primary subtag' => [
+            'two-letter primary language tag with extlang results to the primary subtag' => [
                 [
                     'http_accept_language' => 'de-ger',
                     'two_letter_only' => true,
                 ],
                 'de',
             ],
-            'two-letter primary language tag with script results primary subtag with script' => [
+            'two-letter primary language tag with script results to the primary subtag with script' => [
                 [
                     'http_accept_language' => 'de-Latn',
                     'two_letter_only' => true,
                 ],
                 'de_Latn',
             ],
-            'two-letter primary language tag with region results primary subtag with region' => [
+            'two-letter primary language tag with region results to the primary subtag with region' => [
                 [
                     'http_accept_language' => 'de-DE',
                     'two_letter_only' => true,
                 ],
                 'de_DE',
             ],
-            'two-letter primary language tag with extlang, script, and region results primary subtag with script and region' => [
+            'two-letter primary language tag with extlang, script, and region results to the primary subtag with script and region' => [
                 [
                     'http_accept_language' => 'de-get-Latn-DE',
                     'two_letter_only' => true,
                 ],
                 'de_Latn_DE',
             ],
-            'three-letter primary language tag without two_letter_only option results default' => [
+            'three-letter primary language tag without two_letter_only option results to default' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag without two_letter_only option with extlang results default' => [
+            'three-letter primary language tag without two_letter_only option with extlang results to default' => [
                 [
                     'http_accept_language' => 'sgn-ase',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag without two_letter_only option with script results default' => [
+            'three-letter primary language tag without two_letter_only option with script results to default' => [
                 [
                     'http_accept_language' => 'sgn-Latn',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag without two_letter_only option with region results default' => [
+            'three-letter primary language tag without two_letter_only option with region results to default' => [
                 [
                     'http_accept_language' => 'sgn-US',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag without two_letter_only option with extlang, script, and region results default' => [
+            'three-letter primary language tag without two_letter_only option with extlang, script, and region results to default' => [
                 [
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter primary language tag with two_letter_only option results primary subtag' => [
+            'three-letter primary language tag with two_letter_only option results to the primary subtag' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'three-letter primary language tag with two_letter_only option with extlang results primary subtag' => [
+            'three-letter primary language tag with two_letter_only option with extlang results to the primary subtag' => [
                 [
                     'http_accept_language' => 'sgn-ase',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'three-letter primary language tag with two_letter_only option with script results primary subtag with script' => [
+            'three-letter primary language tag with two_letter_only option with script results to the primary subtag with script' => [
                 [
                     'http_accept_language' => 'sgn-Latn',
                     'two_letter_only' => false,
                 ],
                 'sgn_Latn',
             ],
-            'three-letter primary language tag with two_letter_only option with region results primary subtag with region' => [
+            'three-letter primary language tag with two_letter_only option with region results to the primary subtag with region' => [
                 [
                     'http_accept_language' => 'sgn-US',
                     'two_letter_only' => false,
                 ],
                 'sgn_US',
             ],
-            'three-letter primary language tag with two_letter_only option with extlang, script, and region results primary subtag with script and region' => [
+            'three-letter primary language tag with two_letter_only option with extlang, script, and region results to the primary subtag with script and region' => [
                 [
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'two_letter_only' => false,
@@ -588,27 +588,27 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentRequestHeadersWithMalformedValues()
     {
         return [
-            'one empty language tag results default' => [
+            'one empty language tag results to default' => [
                 ['http_accept_language' => ''],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two empty languages tag results default' => [
+            'two empty languages tag results to default' => [
                 ['http_accept_language' => ','],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two empty languages with quality tag results default' => [
+            'two empty languages with quality tag results to default' => [
                 ['http_accept_language' => ',;q='],
                 self::DEFAULT_LANGUAGE,
             ],
-            'one language with wrong quality digit tag results default' => [
+            'one language with wrong quality digit tag results to default' => [
                 ['http_accept_language' => 'es;q=5'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'one language with wrong quality value tag results default' => [
+            'one language with wrong quality value tag results to default' => [
                 ['http_accept_language' => 'es;q=dd'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two language with wrong quality order result highest' => [
+            'two languages with wrong quality order result to the language with the highest quality' => [
                 ['http_accept_language' => 'en;q=0.3,es;q=1'],
                 'es',
             ],
