@@ -181,11 +181,11 @@ class AcceptLanguage
 
         $result = [];
         foreach (explode(',', $header) as $languageRange) {
-            $splitTag = explode(';q=', trim($languageRange));
+            $splitRange = explode(';q=', trim($languageRange));
 
             $result[] = array_combine(
                 $tagKeys,
-                $this->normalizeHeaderTag($splitTag, $emptyTagDefaultValue)
+                $this->normalizeHeaderTag($splitRange, $emptyTagDefaultValue)
             );
 
             $emptyTagDefaultValue -= 0.1;
