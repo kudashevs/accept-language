@@ -180,8 +180,8 @@ class AcceptLanguage
         $tagKeys = ['lang', 'quality'];
 
         $result = [];
-        foreach (explode(',', $header) as $tag) {
-            $splitTag = explode(';q=', trim($tag));
+        foreach (explode(',', $header) as $languageRange) {
+            $splitTag = explode(';q=', trim($languageRange));
 
             $result[] = array_combine(
                 $tagKeys,
