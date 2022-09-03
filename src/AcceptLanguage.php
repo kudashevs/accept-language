@@ -197,12 +197,13 @@ class AcceptLanguage
     protected function normalizeLanguageRange(array $values, float $default): array
     {
         $expectedNumberOfElements = 2;
+        $numberOfElements = count($values);
 
-        if (count($values) > $expectedNumberOfElements) {
+        if ($numberOfElements > $expectedNumberOfElements) {
             return $this->generateEmptyArray($expectedNumberOfElements);
         }
 
-        if (count($values) !== $expectedNumberOfElements || ($values[1] === '')) {
+        if ($numberOfElements !== $expectedNumberOfElements || $values[1] === '') {
             $values[1] = $default;
         }
 
