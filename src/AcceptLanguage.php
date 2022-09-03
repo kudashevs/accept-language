@@ -199,6 +199,10 @@ class AcceptLanguage
         $expectedNumberOfElements = 2;
         $numberOfElements = count($values);
 
+        if ($numberOfElements === 0) {
+            return $this->generateEmptyArray($expectedNumberOfElements);
+        }
+
         if ($numberOfElements > $expectedNumberOfElements) {
             return $this->generateEmptyArray($expectedNumberOfElements);
         }
