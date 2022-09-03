@@ -101,12 +101,12 @@ class AcceptLanguage
         }
     }
 
-    private function initNormalizer(): void
+    protected function initNormalizer(): void
     {
         $this->normalizer = $this->createTagNormalizer();
     }
 
-    private function createTagNormalizer(): TagNormalizer
+    protected function createTagNormalizer(): TagNormalizer
     {
         return new LanguageTagNormalizer([
             'separator' => $this->options['separator'],
