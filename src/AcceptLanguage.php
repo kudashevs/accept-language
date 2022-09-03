@@ -54,7 +54,6 @@ class AcceptLanguage
     }
 
     /**
-     * @param array $options
      * @throws InvalidOptionArgumentException
      */
     protected function initOptions(array $options): void
@@ -102,17 +101,11 @@ class AcceptLanguage
         }
     }
 
-    /**
-     * @return void
-     */
     private function initNormalizer(): void
     {
         $this->normalizer = $this->createTagNormalizer();
     }
 
-    /**
-     * @return TagNormalizer
-     */
     private function createTagNormalizer(): TagNormalizer
     {
         return new LanguageTagNormalizer([
@@ -134,9 +127,6 @@ class AcceptLanguage
         $this->language = $this->findLanguage($header);
     }
 
-    /**
-     * @return string
-     */
     private function retrieveAcceptLanguage(): string
     {
         $value = empty($this->options['http_accept_language'])
@@ -146,10 +136,6 @@ class AcceptLanguage
         return trim($value);
     }
 
-    /**
-     * @param string $header
-     * @return string
-     */
     protected function findLanguage(string $header): string
     {
         $languages = $this->parse($header);
@@ -161,12 +147,6 @@ class AcceptLanguage
         return $this->retrieveLanguage($normalized);
     }
 
-    /**
-     * Parses an HTTP Accept-Language string.
-     *
-     * @param string $header
-     * @return array
-     */
     private function parse(string $header): array
     {
         if (
