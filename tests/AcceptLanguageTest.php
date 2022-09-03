@@ -600,11 +600,11 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => ',;q='],
                 self::DEFAULT_LANGUAGE,
             ],
-            'one language with wrong quality digit tag results to default' => [
+            'one language with quality tag with a wrong digit results to default' => [
                 ['http_accept_language' => 'es;q=5'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'one language with wrong quality value tag results to default' => [
+            'one language with quality tag with a wrong value results to default' => [
                 ['http_accept_language' => 'es;q=dd'],
                 self::DEFAULT_LANGUAGE,
             ],
