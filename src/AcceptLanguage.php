@@ -176,7 +176,7 @@ class AcceptLanguage
          * A basic language range differs from the language tags defined in only in that there is no requirement that
          * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
          */
-        $emptyTagDefaultValue = 1;
+        $defaultEmptyQualityValue = 1;
         $tagKeys = ['lang', 'quality'];
 
         $result = [];
@@ -185,10 +185,10 @@ class AcceptLanguage
 
             $result[] = array_combine(
                 $tagKeys,
-                $this->normalizeHeaderTag($splitRange, $emptyTagDefaultValue)
+                $this->normalizeHeaderTag($splitRange, $defaultEmptyQualityValue)
             );
 
-            $emptyTagDefaultValue -= 0.1;
+            $defaultEmptyQualityValue -= 0.1;
         }
 
         return $result;
