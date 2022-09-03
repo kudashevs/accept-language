@@ -243,7 +243,7 @@ class AcceptLanguage
 
     protected function isValidLanguage($value): bool
     {
-        return !empty($value);
+        return $this->isWildcard($value) || strlen($value) > 1;
     }
 
     protected function isValidQuality($value): bool
