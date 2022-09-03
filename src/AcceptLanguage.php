@@ -199,7 +199,7 @@ class AcceptLanguage
         $expectedNumberOfElements = 2;
 
         if (count($values) > $expectedNumberOfElements) {
-            return array_fill(0, $expectedNumberOfElements, '');
+            return $this->generateEmptyArray($expectedNumberOfElements);
         }
 
         if (count($values) !== $expectedNumberOfElements || ($values[1] === '')) {
@@ -207,6 +207,11 @@ class AcceptLanguage
         }
 
         return $values;
+    }
+
+    protected function generateEmptyArray(int $elements): array
+    {
+        return array_fill(0, $elements, '');
     }
 
     private function filter(array $languages): array
