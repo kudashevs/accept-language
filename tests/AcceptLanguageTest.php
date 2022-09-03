@@ -612,6 +612,14 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'en;q=0.3,es;q=1'],
                 'es',
             ],
+            'one language with two quality values in a row results to default' => [
+                ['http_accept_language' => 'fr;q=0.5;q=0.3'],
+                self::DEFAULT_LANGUAGE,
+            ],
+            'two languages with a semicolon as a separator results to default' => [
+                ['http_accept_language' => 'de;en;q=0.5'],
+                self::DEFAULT_LANGUAGE,
+            ],
         ];
     }
 
