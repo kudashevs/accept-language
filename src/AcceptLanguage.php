@@ -171,6 +171,11 @@ class AcceptLanguage
 
     protected function parseHeader(string $header): array
     {
+        /**
+         * The Accept-Language header field consists of language-ranges. See RFC 7231, Section 5.3.5.
+         * A basic language range differs from the language tags defined in only in that there is no requirement that
+         * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
+         */
         $emptyTagDefaultValue = 1;
         $tagKeys = ['lang', 'quality'];
 
