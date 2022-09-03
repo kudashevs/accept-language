@@ -164,9 +164,9 @@ class AcceptLanguage
         return $header === '';
     }
 
-    protected function isWildcard(string $headerValue): bool
+    protected function isWildcard(string $header): bool
     {
-        return $headerValue === '*';
+        return $header === '*';
     }
 
     protected function parseHeader(string $headerValue): array
