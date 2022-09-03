@@ -147,7 +147,7 @@ class AcceptLanguage
         return $this->retrieveLanguage($normalized);
     }
 
-    private function parse(string $header): array
+    protected function parse(string $header): array
     {
         if (
             $this->isEmpty($header) ||
@@ -159,17 +159,17 @@ class AcceptLanguage
         return $this->parseHeader($header);
     }
 
-    private function isEmpty(string $header): bool
+    protected function isEmpty(string $header): bool
     {
         return $header === '';
     }
 
-    private function isWildcard(string $headerValue): bool
+    protected function isWildcard(string $headerValue): bool
     {
         return $headerValue === '*';
     }
 
-    private function parseHeader(string $headerValue): array
+    protected function parseHeader(string $headerValue): array
     {
         $emptyTagDefaultValue = 1;
         $tagKeys = ['lang', 'quality'];
@@ -189,7 +189,7 @@ class AcceptLanguage
         return $result;
     }
 
-    private function normalizeHeaderTag(array $values, float $default): array
+    protected function normalizeHeaderTag(array $values, float $default): array
     {
         $expectedElementsNumber = 2;
 
