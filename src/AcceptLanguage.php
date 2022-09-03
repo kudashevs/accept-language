@@ -225,7 +225,7 @@ class AcceptLanguage
         return array_fill(0, $elements, '');
     }
 
-    private function filter(array $languages): array
+    protected function filter(array $languages): array
     {
         $filtered = $this->excludeNotValidLanguages($languages);
 
@@ -234,26 +234,26 @@ class AcceptLanguage
         return $filtered;
     }
 
-    private function excludeNotValidLanguages(array $languages): array
+    protected function excludeNotValidLanguages(array $languages): array
     {
         return array_filter($languages, function ($value) {
             return $this->isValidLanguage($value['lang']) && $this->isValidQuality($value['quality']);
         });
     }
 
-    private function isValidLanguage($value): bool
+    protected function isValidLanguage($value): bool
     {
         return !empty($value);
     }
 
-    private function isValidQuality($value): bool
+    protected function isValidQuality($value): bool
     {
         return !empty($value) &&
             is_numeric($value) &&
             max(min($value, 1), 0) === $value;
     }
 
-    private function excludeNotInAcceptedLanguages(array $filtered): array
+    protected function excludeNotInAcceptedLanguages(array $filtered): array
     {
         if (empty($this->options['accepted_languages'])) {
             return $filtered;
@@ -270,14 +270,14 @@ class AcceptLanguage
         return $filtered;
     }
 
-    private function prepareAcceptedLanguagesForCompare(): array
+    protected function prepareAcceptedLanguagesForCompare(): array
     {
         return array_map(function ($value) {
             return $this->prepareLanguageForCompare($value);
         }, $this->options['accepted_languages']);
     }
 
-    private function prepareLanguageForCompare(string $language): string
+    protected function prepareLanguageForCompare(string $language): string
     {
         return strtolower(str_replace('_', '-', $language));
     }
