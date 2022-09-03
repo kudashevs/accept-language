@@ -169,13 +169,13 @@ class AcceptLanguage
         return $header === '*';
     }
 
-    protected function parseHeader(string $headerValue): array
+    protected function parseHeader(string $header): array
     {
         $emptyTagDefaultValue = 1;
         $tagKeys = ['lang', 'quality'];
 
         $result = [];
-        foreach (explode(',', $headerValue) as $tag) {
+        foreach (explode(',', $header) as $tag) {
             $splitTag = explode(';q=', trim($tag));
 
             $result[] = array_combine(
