@@ -41,7 +41,7 @@ class AcceptLanguage
     /**
      * @var TagNormalizer
      */
-    private $normalizer;
+    protected $normalizer;
 
     /**
      * @param array $options
