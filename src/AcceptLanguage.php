@@ -185,7 +185,7 @@ class AcceptLanguage
 
             $result[] = array_combine(
                 $tagKeys,
-                $this->normalizeHeaderTag($splitRange, $defaultEmptyQualityValue)
+                $this->normalizeLanguageRange($splitRange, $defaultEmptyQualityValue)
             );
 
             $defaultEmptyQualityValue -= 0.1;
@@ -194,7 +194,7 @@ class AcceptLanguage
         return $result;
     }
 
-    protected function normalizeHeaderTag(array $values, float $default): array
+    protected function normalizeLanguageRange(array $values, float $default): array
     {
         $expectedElementsNumber = 2;
 
