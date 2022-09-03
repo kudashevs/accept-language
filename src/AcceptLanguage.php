@@ -308,16 +308,16 @@ class AcceptLanguage
         return (float)$quality;
     }
 
-    private function retrieveLanguage(array $languages): string
+    protected function retrieveLanguage(array $languages): string
     {
-        if (empty($languages)) {
+        if (count($languages) === 0) {
             return $this->retrieveDefaultLanguage();
         }
 
         return $this->retrieveProperLanguage($languages);
     }
 
-    private function retrieveProperLanguage(array $languages): string
+    protected function retrieveProperLanguage(array $languages): string
     {
         foreach (array_column($languages, 'lang') as $language) {
             if ($this->isWildcard($language)) {
@@ -332,7 +332,7 @@ class AcceptLanguage
         return $this->retrieveDefaultLanguage();
     }
 
-    private function isProperLanguage(string $language): bool
+    protected function isProperLanguage(string $language): bool
     {
         $primarySubtag = explode($this->options['separator'], $language)[0];
         $primaryLength = strlen($primarySubtag);
@@ -340,7 +340,7 @@ class AcceptLanguage
         return $this->isProperPrimarySubtag($primaryLength);
     }
 
-    private function isProperPrimarySubtag(int $length): bool
+    protected function isProperPrimarySubtag(int $length): bool
     {
         if ($this->options['two_letter_only']) {
             return $length === 2;
@@ -349,7 +349,7 @@ class AcceptLanguage
         return $length >= 2 && $length <= 3;
     }
 
-    private function retrieveDefaultLanguage(): string
+    protected function retrieveDefaultLanguage(): string
     {
         return $this->options['default_language'];
     }
