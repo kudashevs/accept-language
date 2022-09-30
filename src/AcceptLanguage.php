@@ -10,16 +10,13 @@ class AcceptLanguage
 {
     /**
      * Contain an original header.
-     * @var
      */
-    protected $header;
+    protected string $header;
 
     /**
      * Contain a found language of preference.
-     *
-     * @var string
      */
-    protected $language;
+    protected string $language;
 
     /**
      * @var array[
@@ -30,7 +27,7 @@ class AcceptLanguage
      *  'separator' string A string with a character that will be used as the separator in the result.
      * ]
      */
-    protected $options = [
+    protected array $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
         'accepted_languages' => [],
@@ -38,10 +35,7 @@ class AcceptLanguage
         'separator' => '_',
     ];
 
-    /**
-     * @var TagNormalizer
-     */
-    protected $normalizer;
+    protected TagNormalizer $normalizer;
 
     /**
      * @param array $options
