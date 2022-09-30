@@ -8,15 +8,9 @@ final class LanguageTagNormalizer implements TagNormalizer
     private const SCRIPT_SUBTAG_LENGTH = 4;
     private const REGION_SUBTAG_LENGTH = 2;
 
-    /**
-     * @var int
-     */
-    private $processed = 0;
+    private int $processed = 0;
 
-    /**
-     * @var array
-     */
-    private $options = [
+    private array $options = [
         'separator' => '-',
         'with_extlang' => false,
         'with_script' => true,
