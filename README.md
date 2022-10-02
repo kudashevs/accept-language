@@ -1,4 +1,4 @@
-# HTTP Accept-Language ![test workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
+# Accept-Language ![test workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
 
 This PHP package retrieves a language of preference (preferred language) from an HTTP Accept-Language request-header field.
 The package can be used to identify the visitor's language of choice on a site visit. Later this information might be used
@@ -6,7 +6,7 @@ to make various decisions (set locale, redirect the user to the specific page, e
 
 ## Features
 
-The HTTP Accept-Language package retrieves a language code with the highest priority (the highest language associated
+The Accept-Language package retrieves a language code with the highest priority (the highest language associated
 quality value) from an HTTP Accept-Language request-header field. The language code may consist of a 2-letter/3-letter
 primary language subtag, an optional script subtag, and an optional region subtag. Usually, the language code consists
 of a 2-letter primary subtag and an optional region subtag separated by the underscore (e.g. en_GB). This format is very 
