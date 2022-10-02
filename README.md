@@ -12,11 +12,11 @@ primary language subtag, an optional script subtag, and an optional region subta
 of a 2-letter primary subtag and an optional region subtag separated by the underscore (e.g. en_GB). This format is very 
 similar to the CLDR format (overlaps with the ISO 15897), and it is used by the majority of frameworks in localization.  
 
-- Can return the default language value if a client accepts any language 
-- Can override the default value with the `default_language` option
-- Can retrieve the three-letter language code with the `two_letter_only` option
-- Can override the default separator with the `separator` option
-- Can restrict the search by values in the `accepted_languages` option
+- Can return the default language value if a client accepts any language
+- Can override the predefined default value by providing the `default_language` option
+- Can retrieve the two-letter language code only by setting the `two_letter_only` option
+- Can override the default separator value by providing the `separator` option
+- Can restrict the language search by providing the `accepted_languages` option
 
 The package goes with the built-in Laravel framework support.
 
