@@ -136,9 +136,7 @@ class AcceptLanguage
 
         $filtered = $this->filter($languageTags); // @todo rename exclude unwanted
 
-        $normalized = $this->normalize($filtered);
-
-        return $this->retrieveLanguage($normalized);
+        return $this->retrieveLanguage($filtered);
     }
 
     protected function parse(string $header): array
@@ -174,7 +172,7 @@ class AcceptLanguage
 
         $languageTags = $this->excludeInvalidLanguageRanges($languageRanges);
 
-        return $languageTags;
+        return $this->normalize($languageTags);
     }
 
     protected function prepareLanguageRanges(string $header): array
