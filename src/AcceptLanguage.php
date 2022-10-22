@@ -183,7 +183,7 @@ class AcceptLanguage
         foreach (explode(',', $header) as $languageRange) {
             $splitLanguageRange = explode(';q=', trim($languageRange));
 
-            $result[] = $this->prepareLanguageTag(
+            $ranges[] = $this->prepareLanguageRange(
                 $splitLanguageRange,
                 $defaultEmptyQualityValue
             );
@@ -194,7 +194,7 @@ class AcceptLanguage
         return $ranges;
     }
 
-    protected function prepareLanguageTag(array $parts, float $quality): array
+    protected function prepareLanguageRange(array $parts, float $quality): array
     {
         $predefinedLanguageTagKeys = ['lang', 'quality'];
 
