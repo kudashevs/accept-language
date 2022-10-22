@@ -278,7 +278,7 @@ class AcceptLanguage
     {
         return is_numeric($value) &&
             $value > 0 &&
-            max(min($value, 1), 0) === $value;
+            max(min($value, 1), 0.001) === $value;
     }
 
     protected function excludeNotAcceptedLanguages(array $filtered): array
