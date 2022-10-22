@@ -317,14 +317,14 @@ class AcceptLanguage
         return strtolower(str_replace('_', '-', $language));
     }
 
-    protected function normalizeLanguageTags(array $languages): array
+    protected function normalizeLanguageTags(array $tags): array
     {
         $normalized = array_map(function ($tag) {
             return [
                 'lang' => $this->normalizeTag($tag['lang']),
                 'quality' => $this->normalizeQuality($tag['quality']),
             ];
-        }, $languages);
+        }, $tags);
 
         /**
          * Sorting by quality values is a part of the normalization process.
