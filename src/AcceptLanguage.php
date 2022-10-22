@@ -132,9 +132,9 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        $languages = $this->parse($header);
+        $languageTags = $this->parse($header);
 
-        $filtered = $this->filter($languages);
+        $filtered = $this->filter($languageTags); // @todo rename exclude unwanted
 
         $normalized = $this->normalize($filtered);
 
