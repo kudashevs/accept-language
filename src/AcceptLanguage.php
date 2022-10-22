@@ -172,9 +172,9 @@ class AcceptLanguage
          */
         $languageRanges = $this->prepareLanguageRanges($header);
 
-        $result = $this->excludeInvalidLanguageRanges($languageRanges);
+        $languageTags = $this->excludeInvalidLanguageRanges($languageRanges);
 
-        return $result;
+        return $languageTags;
     }
 
     protected function prepareLanguageRanges(string $header): array
