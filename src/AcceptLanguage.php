@@ -206,7 +206,11 @@ class AcceptLanguage
             return $this->normalizeLanguageRangeWithQuality($values);
         }
 
-        if ($numberOfElements === $expectedNumberOfElements - 1 || $values[1] === '') {
+        if ($numberOfElements === $expectedNumberOfElements && trim($values[1]) === '') {
+            return [$values[0], $default];
+        }
+
+        if ($numberOfElements === $expectedNumberOfElements - 1) {
             return [$values[0], $default];
         }
 
