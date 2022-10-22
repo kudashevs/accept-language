@@ -203,7 +203,7 @@ class AcceptLanguage
         $numberOfElements = count($values);
 
         if ($numberOfElements === $expectedNumberOfElements && is_numeric($values[1])) {
-            return [$values[0], (float)$values[1]];
+            return $this->normalizeLanguageRangeWithQuality($values);
         }
 
         if ($numberOfElements === $expectedNumberOfElements - 1 || $values[1] === '') {
@@ -214,6 +214,14 @@ class AcceptLanguage
          * It is better to return an empty tag when a language range is really malformed or something went really wrong.
          */
         return $this->generateEmptyArray($expectedNumberOfElements);
+    }
+
+    /**
+     * @return array<string,float>
+     */
+    protected function normalizeLanguageRangeWithQuality(array $values): array
+    {
+        return [$values[0], (float)$values[1]];
     }
 
     protected function generateEmptyArray(int $elements): array
