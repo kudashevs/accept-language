@@ -182,73 +182,73 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'zh-Hant-HK'],
                 'zh_Hant_HK',
             ],
-            'two-letter with 0 quality language tag results to default' => [
+            'two-letter primary language tag with 0 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter with 0 quality language tag results to the language' => [
+            'three-letter primary language tag with 0 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two-letter with 0.001 quality language tag results to default' => [
+            'two-letter primary language tag with 0.001 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0.001'],
                 'de',
             ],
-            'three-letter with 0.001 quality language tag results to the language' => [
+            'three-letter primary language tag with 0.001 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.001',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with quality language tag results to the language' => [
+            'two-letter primary language tag with quality language tag results to the language' => [
                 ['http_accept_language' => 'de;q=0.5'],
                 'de',
             ],
-            'three-letter with quality language tag results to the language' => [
+            'three-letter primary language tag with quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.5',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 0.999 quality language tag results to default' => [
+            'two-letter primary language tag with 0.999 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=0.999'],
                 'de',
             ],
-            'three-letter with 0.999 quality language tag results to the language' => [
+            'three-letter primary language tag with 0.999 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.999',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 1 quality language tag results to default' => [
+            'two-letter primary language tag with 1 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=1'],
                 'de',
             ],
-            'three-letter with 1 quality language tag results to the language' => [
+            'three-letter primary language tag with 1 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'two-letter with 1.001 quality language tag results to default' => [
+            'two-letter primary language tag with 1.001 quality language tag results to default' => [
                 ['http_accept_language' => 'de;q=1.001'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'three-letter with 1.001 quality language tag results to the language' => [
+            'three-letter primary language tag with 1.001 quality language tag results to the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1.001',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'four letters with quality language tag results to default' => [
+            'four letters primary language tag with quality language tag results to default' => [
                 ['http_accept_language' => 'test;q=0.5'],
                 self::DEFAULT_LANGUAGE,
             ],
@@ -361,28 +361,28 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentAcceptedLanguagesWithDifferentSeparators(): array
     {
         return [
-            'language with hyphen intersects with hyphenated accepted_languages once results to the language' => [
+            'language with hyphen which intersects with hyphenated accepted_languages results to the language' => [
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with hyphen intersects with underscored accepted_languages once results to the language' => [
+            'language with hyphen which intersects with underscored accepted_languages results to the language' => [
                 [
                     'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with underscore intersects with hyphenated accepted_languages once results to the language' => [
+            'language with underscore which intersects with hyphenated accepted_languages results to the language' => [
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh-Hant-HK'],
                 ],
                 'zh_Hant_HK',
             ],
-            'language with underscore intersects with underscored accepted_languages once results to the language' => [
+            'language with underscore which intersects with underscored accepted_languages results to the language' => [
                 [
                     'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
                     'accepted_languages' => ['zh_Hant_HK'],
@@ -600,7 +600,7 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => ','],
                 self::DEFAULT_LANGUAGE,
             ],
-            'two empty languages with quality tag results to default' => [
+            'two empty languages tag with empty quality tag results to default' => [
                 ['http_accept_language' => ',;q='],
                 self::DEFAULT_LANGUAGE,
             ],
