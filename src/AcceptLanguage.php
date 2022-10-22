@@ -321,7 +321,7 @@ class AcceptLanguage
     {
         $normalized = array_map(function ($tag) {
             return [
-                'lang' => $this->normalizeTag($tag['lang']),
+                'lang' => $this->normalizeLanguage($tag['lang']),
                 'quality' => $this->normalizeQuality($tag['quality']),
             ];
         }, $tags);
@@ -336,7 +336,7 @@ class AcceptLanguage
         return $normalized;
     }
 
-    protected function normalizeTag(string $tag): string
+    protected function normalizeLanguage(string $tag): string
     {
         return $this->normalizer->normalize($tag);
     }
