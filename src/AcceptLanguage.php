@@ -170,7 +170,9 @@ class AcceptLanguage
          * A basic language range differs from the language tags defined in only in that there is no requirement that
          * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
          */
-        $result = $this->prepareLanguageRanges($header);
+        $ranges = $this->prepareLanguageRanges($header);
+
+        $result = $this->excludeInvalidLanguages($ranges);
 
         return $result;
     }
@@ -260,15 +262,6 @@ class AcceptLanguage
         return ['', 0];
     }
 
-    protected function filter(array $languages): array
-    {
-        $filtered = $this->excludeInvalidLanguages($languages);
-
-        $filtered = $this->excludeNotAcceptedLanguages($filtered);
-
-        return $filtered;
-    }
-
     protected function excludeInvalidLanguages(array $languages): array
     {
         return array_filter($languages, function ($value) {
@@ -292,10 +285,15 @@ class AcceptLanguage
             max(min($value, 1), 0.001) === $value;
     }
 
-    protected function excludeNotAcceptedLanguages(array $filtered): array
+    protected function filter(array $languages): array
+    {
+        return $this->excludeNotAcceptedLanguages($languages);
+    }
+
+    protected function excludeNotAcceptedLanguages(array $languages): array
     {
         if (count($this->options['accepted_languages']) === 0) {
-            return $filtered;
+            return $languages;
         }
 
         $accepted = $this->prepareAcceptedLanguagesForCompare();
