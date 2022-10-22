@@ -276,8 +276,8 @@ class AcceptLanguage
 
     protected function isValidQuality($value): bool
     {
-        return !empty($value) &&
-            is_numeric($value) &&
+        return is_numeric($value) &&
+            $value > 0 &&
             max(min($value, 1), 0) === $value;
     }
 
