@@ -255,14 +255,14 @@ class AcceptLanguage
 
     protected function filter(array $languages): array
     {
-        $filtered = $this->excludeNotValidLanguages($languages);
+        $filtered = $this->excludeInvalidLanguages($languages);
 
         $filtered = $this->excludeNotInAcceptedLanguages($filtered);
 
         return $filtered;
     }
 
-    protected function excludeNotValidLanguages(array $languages): array
+    protected function excludeInvalidLanguages(array $languages): array
     {
         return array_filter($languages, function ($value) {
             return $this->isValidLanguage($value['lang']) && $this->isValidQuality($value['quality']);
