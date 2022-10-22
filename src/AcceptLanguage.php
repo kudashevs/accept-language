@@ -172,7 +172,7 @@ class AcceptLanguage
 
         $languageTags = $this->excludeInvalidLanguageRanges($languageRanges);
 
-        return $this->normalize($languageTags);
+        return $this->normalizeLanguageTags($languageTags);
     }
 
     protected function prepareLanguageRanges(string $header): array
@@ -317,7 +317,7 @@ class AcceptLanguage
         return strtolower(str_replace('_', '-', $language));
     }
 
-    protected function normalize(array $languages): array
+    protected function normalizeLanguageTags(array $languages): array
     {
         $normalized = array_map(function ($tag) {
             return [
