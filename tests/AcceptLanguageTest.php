@@ -22,7 +22,7 @@ class AcceptLanguageTest extends TestCase
         new AcceptLanguage($option);
     }
 
-    public function provideDifferentWrongOptions()
+    public function provideDifferentWrongOptions(): array
     {
         return [
             'an http_accept_language option with a wrong value' => [
@@ -136,7 +136,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeaderValues()
+    public function provideDifferentRequestHeaderValues(): array
     {
         return [
             'any language tag results to default' => [
@@ -302,7 +302,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentAcceptedLanguagesValues()
+    public function provideDifferentAcceptedLanguagesValues(): array
     {
         return [
             'language that intersects with accepted_languages results to the accepted language' => [
@@ -358,7 +358,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentAcceptedLanguagesWithDifferentSeparators()
+    public function provideDifferentAcceptedLanguagesWithDifferentSeparators(): array
     {
         return [
             'language with hyphen intersects with hyphenated accepted_languages once results to the language' => [
@@ -406,7 +406,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentTwoLetterOnlyOptions()
+    public function provideDifferentTwoLetterOnlyOptions(): array
     {
         return [
             'returns expected with the two-letter only option set to true' => [
@@ -426,7 +426,7 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentSeparatorOptions()
+    public function provideDifferentSeparatorOptions(): array
     {
         return [
             'returns expected with the underscore separator' => [
@@ -459,7 +459,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength()
+    public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength(): array
     {
         return [
             'two-letter primary language tag results to the primary subtag' => [
@@ -585,7 +585,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeadersWithMalformedValues()
+    public function provideDifferentRequestHeadersWithMalformedValues(): array
     {
         return [
             'one empty language tag results to default' => [
