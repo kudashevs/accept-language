@@ -185,10 +185,10 @@ class AcceptLanguage
 
     protected function prepareLanguageTag(array $parts, float $quality): array
     {
-        $tagKeys = ['lang', 'quality'];
+        $predefinedLanguageTagKeys = ['lang', 'quality'];
 
         return array_combine(
-            $tagKeys,
+            $predefinedLanguageTagKeys,
             $this->normalizeLanguageRange($parts, $quality)
         );
     }
