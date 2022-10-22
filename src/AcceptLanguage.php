@@ -115,13 +115,13 @@ class AcceptLanguage
      */
     public function process(): void
     {
-        $header = $this->retrieveAcceptLanguage();
+        $header = $this->retrieveAcceptLanguageHeader();
 
         $this->header = $header;
         $this->language = $this->findLanguage($header);
     }
 
-    protected function retrieveAcceptLanguage(): string
+    protected function retrieveAcceptLanguageHeader(): string
     {
         $value = trim($this->options['http_accept_language']) === ''
             ? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE']
