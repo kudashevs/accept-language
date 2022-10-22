@@ -592,6 +592,10 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => ''],
                 self::DEFAULT_LANGUAGE,
             ],
+            'one empty language tag with empty quality tag results to default' => [
+                ['http_accept_language' => ';q='],
+                self::DEFAULT_LANGUAGE,
+            ],
             'two empty languages tag results to default' => [
                 ['http_accept_language' => ','],
                 self::DEFAULT_LANGUAGE,
