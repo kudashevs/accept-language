@@ -257,7 +257,7 @@ class AcceptLanguage
     {
         $filtered = $this->excludeInvalidLanguages($languages);
 
-        $filtered = $this->excludeNotInAcceptedLanguages($filtered);
+        $filtered = $this->excludeNotAcceptedLanguages($filtered);
 
         return $filtered;
     }
@@ -281,7 +281,7 @@ class AcceptLanguage
             max(min($value, 1), 0) === $value;
     }
 
-    protected function excludeNotInAcceptedLanguages(array $filtered): array
+    protected function excludeNotAcceptedLanguages(array $filtered): array
     {
         if (empty($this->options['accepted_languages'])) {
             return $filtered;
