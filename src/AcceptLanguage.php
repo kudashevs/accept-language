@@ -207,11 +207,11 @@ class AcceptLanguage
         }
 
         if ($numberOfElements === $expectedNumberOfElements && trim($values[1]) === '') {
-            return [$values[0], $default];
+            return $this->normalizeLanguageRangeWithoutQuality($values, $default);
         }
 
         if ($numberOfElements === $expectedNumberOfElements - 1) {
-            return [$values[0], $default];
+            return $this->normalizeLanguageRangeWithoutQuality($values, $default);
         }
 
         /**
@@ -226,6 +226,14 @@ class AcceptLanguage
     protected function normalizeLanguageRangeWithQuality(array $values): array
     {
         return [$values[0], (float)$values[1]];
+    }
+
+    /**
+     * @return array<string,float>
+     */
+    protected function normalizeLanguageRangeWithoutQuality(array $values, float $quality): array
+    {
+        return [$values[0], $quality];
     }
 
     protected function generateEmptyArray(int $elements): array
