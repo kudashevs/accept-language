@@ -118,7 +118,7 @@ class AcceptLanguage
         $header = $this->retrieveAcceptLanguageHeader();
 
         $this->header = $header;
-        $this->language = $this->findLanguage($header);
+        $this->language = $this->findPreferredLanguage($header);
     }
 
     protected function retrieveAcceptLanguageHeader(): string
@@ -130,7 +130,7 @@ class AcceptLanguage
         return trim($value);
     }
 
-    protected function findLanguage(string $header): string
+    protected function findPreferredLanguage(string $header): string
     {
         $languages = $this->parse($header);
 
