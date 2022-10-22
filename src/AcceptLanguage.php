@@ -193,25 +193,18 @@ class AcceptLanguage
         $expectedNumberOfElements = 2;
         $numberOfElements = count($values);
 
-        /**
-         * It is better to return an empty tag when something went really wrong.
-         */
-        if ($numberOfElements === 0) {
-            return $this->generateEmptyArray($expectedNumberOfElements);
+        if ($numberOfElements === $expectedNumberOfElements && is_numeric($values[1])) {
+            return [$values[0], (float)$values[1]];
+        }
+
+        if ($numberOfElements === $expectedNumberOfElements - 1 || $values[1] === '') {
+            return [$values[0], $default];
         }
 
         /**
-         * It is better to return an empty tag when a language range is really malformed.
+         * It is better to return an empty tag when a language range is really malformed or something went really wrong.
          */
-        if ($numberOfElements > $expectedNumberOfElements) {
-            return $this->generateEmptyArray($expectedNumberOfElements);
-        }
-
-        if ($numberOfElements !== $expectedNumberOfElements || $values[1] === '') {
-            $values[1] = $default;
-        }
-
-        return $values;
+        return $this->generateEmptyArray($expectedNumberOfElements);
     }
 
     protected function generateEmptyArray(int $elements): array
