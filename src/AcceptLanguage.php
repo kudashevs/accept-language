@@ -287,7 +287,7 @@ class AcceptLanguage
 
     protected function excludeNotAcceptedLanguages(array $filtered): array
     {
-        if (empty($this->options['accepted_languages'])) {
+        if (count($this->options['accepted_languages']) === 0) {
             return $filtered;
         }
 
