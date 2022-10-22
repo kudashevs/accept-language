@@ -283,6 +283,36 @@ class AcceptLanguage
             max(min($value, 1), 0.001) === $value;
     }
 
+    protected function normalizeLanguageTags(array $tags): array
+    {
+        $normalized = array_map(function ($tag) {
+            return [
+                'lang' => $this->normalizeLanguage($tag['lang']),
+                'quality' => $this->normalizeQuality($tag['quality']),
+            ];
+        }, $tags);
+
+        /**
+         * Sorting by quality values is a part of the normalization process.
+         */
+        usort($normalized, static function ($a, $b) {
+            return $b['quality'] <=> $a['quality'];
+        });
+
+        return $normalized;
+    }
+
+    protected function normalizeLanguage(string $tag): string
+    {
+        return $this->normalizer->normalize($tag);
+    }
+
+    // @todo add union int|float|string
+    protected function normalizeQuality($quality): float
+    {
+        return (float)$quality;
+    }
+
     protected function filter(array $languages): array
     {
         return $this->excludeNotAcceptedLanguages($languages);
@@ -315,36 +345,6 @@ class AcceptLanguage
     protected function prepareLanguageForCompare(string $language): string
     {
         return strtolower(str_replace('_', '-', $language));
-    }
-
-    protected function normalizeLanguageTags(array $tags): array
-    {
-        $normalized = array_map(function ($tag) {
-            return [
-                'lang' => $this->normalizeLanguage($tag['lang']),
-                'quality' => $this->normalizeQuality($tag['quality']),
-            ];
-        }, $tags);
-
-        /**
-         * Sorting by quality values is a part of the normalization process.
-         */
-        usort($normalized, static function ($a, $b) {
-            return $b['quality'] <=> $a['quality'];
-        });
-
-        return $normalized;
-    }
-
-    protected function normalizeLanguage(string $tag): string
-    {
-        return $this->normalizer->normalize($tag);
-    }
-
-    // @todo add union int|float|string
-    protected function normalizeQuality($quality): float
-    {
-        return (float)$quality;
     }
 
     protected function retrieveLanguage(array $languages): string
