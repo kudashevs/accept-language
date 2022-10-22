@@ -262,9 +262,9 @@ class AcceptLanguage
         return ['', 0];
     }
 
-    protected function excludeInvalidLanguageRanges(array $languages): array
+    protected function excludeInvalidLanguageRanges(array $ranges): array
     {
-        return array_filter($languages, function ($value) {
+        return array_filter($ranges, function ($value) {
             return $this->isValidLanguage($value['lang']) && $this->isValidQuality($value['quality']);
         });
     }
