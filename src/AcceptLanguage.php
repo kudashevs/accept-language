@@ -276,6 +276,10 @@ class AcceptLanguage
 
     protected function isValidQuality($value): bool
     {
+        /**
+         * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
+         * and 1 is the most preferred; a value of 0 means "not acceptable". See RFC 7231, Section 5.3.1.
+         */
         return is_numeric($value) &&
             $value > 0 &&
             max(min($value, 1), 0.001) === $value;
