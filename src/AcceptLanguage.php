@@ -175,7 +175,11 @@ class AcceptLanguage
         $result = [];
         foreach (explode(',', $header) as $languageRange) {
             $splitLanguageRange = explode(';q=', trim($languageRange));
-            $result[] = $this->prepareLanguageTag($splitLanguageRange, $defaultEmptyQualityValue);
+
+            $result[] = $this->prepareLanguageTag(
+                $splitLanguageRange,
+                $defaultEmptyQualityValue
+            );
 
             $defaultEmptyQualityValue -= 0.1;
         }
