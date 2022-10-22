@@ -202,14 +202,23 @@ class AcceptLanguage
         $expectedNumberOfElements = 2;
         $numberOfElements = count($values);
 
+        /**
+         * A proper language range with a quality value.
+         */
         if ($numberOfElements === $expectedNumberOfElements && is_numeric($values[1])) {
             return $this->normalizeLanguageRangeWithQuality($values);
         }
 
+        /**
+         * A proper language range with an empty quality value.
+         */
         if ($numberOfElements === $expectedNumberOfElements && trim($values[1]) === '') {
             return $this->normalizeLanguageRangeWithoutQuality($values, $default);
         }
 
+        /**
+         * A proper language range without a quality value.
+         */
         if ($numberOfElements === $expectedNumberOfElements - 1) {
             return $this->normalizeLanguageRangeWithoutQuality($values, $default);
         }
