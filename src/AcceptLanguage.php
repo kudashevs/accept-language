@@ -226,7 +226,7 @@ class AcceptLanguage
         /**
          * It is better to return an empty tag when a language range is really malformed or something went really wrong.
          */
-        return $this->generateEmptyArray($expectedNumberOfElements);
+        return $this->generateEmptyLanguageRange($expectedNumberOfElements);
     }
 
     /**
@@ -245,7 +245,7 @@ class AcceptLanguage
         return [$values[0], $quality];
     }
 
-    protected function generateEmptyArray(int $elements): array
+    protected function generateEmptyLanguageRange(int $elements): array
     {
         return array_fill(0, $elements, '');
     }
