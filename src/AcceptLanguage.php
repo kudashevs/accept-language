@@ -341,7 +341,8 @@ class AcceptLanguage
         return $this->normalizer->normalize($tag);
     }
 
-    protected function normalizeQuality(string $quality): float
+    // @todo add union int|float|string
+    protected function normalizeQuality($quality): float
     {
         return (float)$quality;
     }
