@@ -326,6 +326,9 @@ class AcceptLanguage
             ];
         }, $languages);
 
+        /**
+         * Sorting by quality values is a part of the normalization process.
+         */
         usort($normalized, static function ($a, $b) {
             return $b['quality'] <=> $a['quality'];
         });
