@@ -108,8 +108,8 @@ class AcceptLanguage
     }
 
     /**
-     * Retrieve an HTTP Accept-Language header value, process it
-     * and set the value of the $language field for the further use.
+     * Retrieve an HTTP Accept-Language header, process its value, find
+     * a language of preference, and update the state for further use.
      *
      * @return void
      */
