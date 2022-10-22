@@ -165,14 +165,21 @@ class AcceptLanguage
 
     protected function parseHeader(string $header): array
     {
-        $defaultEmptyQualityValue = 1;
-
         /**
          * The Accept-Language header field consists of language-ranges. See RFC 7231, Section 5.3.5.
          * A basic language range differs from the language tags defined in only in that there is no requirement that
          * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
          */
-        $result = [];
+        $result = $this->prepareLanguageRanges($header);
+
+        return $result;
+    }
+
+    protected function prepareLanguageRanges(string $header): array
+    {
+        $defaultEmptyQualityValue = 1;
+
+        $ranges = [];
         foreach (explode(',', $header) as $languageRange) {
             $splitLanguageRange = explode(';q=', trim($languageRange));
 
@@ -184,7 +191,7 @@ class AcceptLanguage
             $defaultEmptyQualityValue -= 0.1;
         }
 
-        return $result;
+        return $ranges;
     }
 
     protected function prepareLanguageTag(array $parts, float $quality): array
