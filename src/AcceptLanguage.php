@@ -185,6 +185,7 @@ class AcceptLanguage
     protected function prepareLanguageRanges(string $header): array
     {
         $defaultEmptyQuality = 1;
+        $defaultEmptyQualityStep = 0.1;
 
         $ranges = [];
         foreach (explode(',', $header) as $languageRange) {
@@ -195,7 +196,7 @@ class AcceptLanguage
                 $defaultEmptyQuality
             );
 
-            $defaultEmptyQuality -= 0.1;
+            $defaultEmptyQuality -= $defaultEmptyQualityStep;
         }
 
         return $ranges;
