@@ -352,15 +352,6 @@ class AcceptLanguage
 
     protected function retrieveLanguage(array $languages): string
     {
-        if (count($languages) === 0) {
-            return $this->retrieveDefaultLanguage();
-        }
-
-        return $this->retrieveProperLanguage($languages);
-    }
-
-    protected function retrieveProperLanguage(array $languages): string
-    {
         foreach (array_column($languages, 'lang') as $language) {
             if ($this->isWildcard($language)) {
                 return $this->retrieveDefaultLanguage();
