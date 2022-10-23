@@ -132,14 +132,14 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        $languageTags = $this->parse($header);
+        $languageTags = $this->parseHeader($header);
 
         $filteredLanguageTags = $this->excludeUnwanted($languageTags);
 
         return $this->retrieveLanguage($filteredLanguageTags);
     }
 
-    protected function parse(string $header): array
+    protected function parseHeader(string $header): array
     {
         if (
             $this->isEmpty($header) ||
