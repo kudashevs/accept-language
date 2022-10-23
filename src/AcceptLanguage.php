@@ -335,7 +335,7 @@ class AcceptLanguage
         $preparedAcceptedLanguages = $this->prepareAcceptedLanguagesForComparison();
 
         return array_filter($languages, function ($value) use ($preparedAcceptedLanguages) {
-            $language = $this->prepareLanguageForCompare($value['lang']);
+            $language = $this->prepareLanguageForComparison($value['lang']);
 
             return in_array($language, $preparedAcceptedLanguages, true);
         });
@@ -349,11 +349,11 @@ class AcceptLanguage
     protected function prepareAcceptedLanguagesForComparison(): array
     {
         return array_map(function ($language) {
-            return $this->prepareLanguageForCompare($language);
+            return $this->prepareLanguageForComparison($language);
         }, $this->options['accepted_languages']);
     }
 
-    protected function prepareLanguageForCompare(string $language): string
+    protected function prepareLanguageForComparison(string $language): string
     {
         return strtolower(str_replace('_', '-', $language));
     }
