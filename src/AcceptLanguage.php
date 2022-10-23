@@ -148,7 +148,7 @@ class AcceptLanguage
             return [];
         }
 
-        return $this->parseHeader($header);
+        return $this->parseHeaderWithNormalization($header);
     }
 
     protected function isEmpty(string $header): bool
@@ -161,7 +161,7 @@ class AcceptLanguage
         return $header === '*';
     }
 
-    protected function parseHeader(string $header): array
+    protected function parseHeaderWithNormalization(string $header): array
     {
         /**
          * The Accept-Language header field consists of language-ranges. See RFC 7231, Section 5.3.5.
