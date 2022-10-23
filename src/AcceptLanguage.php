@@ -134,9 +134,9 @@ class AcceptLanguage
     {
         $languageTags = $this->parse($header);
 
-        $filtered = $this->excludeUnwanted($languageTags);
+        $filteredLanguageTags = $this->excludeUnwanted($languageTags);
 
-        return $this->retrieveLanguage($filtered);
+        return $this->retrieveLanguage($filteredLanguageTags);
     }
 
     protected function parse(string $header): array
