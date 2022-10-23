@@ -134,7 +134,7 @@ class AcceptLanguage
     {
         $languageTags = $this->parse($header);
 
-        $filtered = $this->filter($languageTags); // @todo rename exclude unwanted
+        $filtered = $this->excludeUnwanted($languageTags);
 
         return $this->retrieveLanguage($filtered);
     }
@@ -313,7 +313,7 @@ class AcceptLanguage
         return (float)$quality;
     }
 
-    protected function filter(array $languages): array
+    protected function excludeUnwanted(array $languages): array
     {
         return $this->excludeNotAcceptedLanguages($languages);
     }
