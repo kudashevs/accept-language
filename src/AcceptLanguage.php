@@ -370,16 +370,11 @@ class AcceptLanguage
         $primarySubtag = $this->retrievePrimarySubtag($language);
         $primaryLength = strlen($primarySubtag);
 
-        return $this->isProperPrimarySubtag($primaryLength);
-    }
-
-    protected function isProperPrimarySubtag(int $length): bool
-    {
         if ($this->options['two_letter_only']) {
-            return $length === 2;
+            return $primaryLength === 2;
         }
 
-        return $length >= 2 && $length <= 3;
+        return $primaryLength >= 2 && $primaryLength <= 3;
     }
 
     protected function retrievePrimarySubtag(string $language): string
