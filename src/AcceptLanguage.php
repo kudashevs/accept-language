@@ -368,13 +368,13 @@ class AcceptLanguage
     protected function isAppropriateLanguage(string $language): bool
     {
         $primarySubtag = $this->retrievePrimarySubtag($language);
-        $primaryLength = strlen($primarySubtag);
+        $primarySubtagLength = strlen($primarySubtag);
 
         if ($this->options['two_letter_only']) {
-            return $primaryLength === 2;
+            return $primarySubtagLength === 2;
         }
 
-        return $primaryLength >= 2 && $primaryLength <= 3;
+        return $primarySubtagLength >= 2 && $primarySubtagLength <= 3;
     }
 
     protected function retrievePrimarySubtag(string $language): string
