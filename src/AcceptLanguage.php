@@ -340,8 +340,8 @@ class AcceptLanguage
 
     protected function prepareAcceptedLanguagesForCompare(): array
     {
-        return array_map(function ($value) {
-            return $this->prepareLanguageForCompare($value);
+        return array_map(function ($language) {
+            return $this->prepareLanguageForCompare($language);
         }, $this->options['accepted_languages']);
     }
 
