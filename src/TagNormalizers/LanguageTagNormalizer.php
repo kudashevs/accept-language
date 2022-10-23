@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kudashevs\AcceptLanguage\TagNormalizers;
 
 final class LanguageTagNormalizer implements TagNormalizer
