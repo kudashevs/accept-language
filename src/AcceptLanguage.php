@@ -367,7 +367,7 @@ class AcceptLanguage
 
     protected function isAppropriateLanguage(string $language): bool
     {
-        $primarySubtag = explode($this->options['separator'], $language)[0];
+        $primarySubtag = $this->retrievePrimarySubtag($language);
         $primaryLength = strlen($primarySubtag);
 
         return $this->isProperPrimarySubtag($primaryLength);
@@ -380,6 +380,11 @@ class AcceptLanguage
         }
 
         return $length >= 2 && $length <= 3;
+    }
+
+    protected function retrievePrimarySubtag(string $language): string
+    {
+        return explode($this->options['separator'], $language)[0];
     }
 
     protected function retrieveDefaultLanguage(): string
