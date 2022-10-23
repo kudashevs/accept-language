@@ -184,7 +184,7 @@ class AcceptLanguage
 
     protected function prepareLanguageRanges(string $header): array
     {
-        $defaultEmptyQualityValue = 1;
+        $defaultEmptyQuality = 1;
 
         $ranges = [];
         foreach (explode(',', $header) as $languageRange) {
@@ -192,10 +192,10 @@ class AcceptLanguage
 
             $ranges[] = $this->prepareLanguageRange(
                 $splitLanguageRange,
-                $defaultEmptyQualityValue
+                $defaultEmptyQuality
             );
 
-            $defaultEmptyQualityValue -= 0.1;
+            $defaultEmptyQuality -= 0.1;
         }
 
         return $ranges;
