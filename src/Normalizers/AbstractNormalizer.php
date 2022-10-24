@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
-interface TagNormalizer
+interface AbstractNormalizer
 {
     /**
      * Return a normalized tag.
