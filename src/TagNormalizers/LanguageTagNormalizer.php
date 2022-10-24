@@ -69,7 +69,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         $normalizedSubtags = [];
 
         foreach ($subtags as $index => $subtag) {
-            if ($this->isPrimaryTag($index)) {
+            if ($this->isPrimary($index)) {
                 $normalizedSubtags[] = $this->normalizePrimary($subtag);
                 continue;
             }
@@ -100,7 +100,7 @@ final class LanguageTagNormalizer implements TagNormalizer
         return $normalizedSubtags;
     }
 
-    private function isPrimaryTag($index): bool
+    private function isPrimary($index): bool
     {
         return $index === 0;
     }
