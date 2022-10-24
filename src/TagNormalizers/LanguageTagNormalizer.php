@@ -100,9 +100,9 @@ final class LanguageTagNormalizer implements TagNormalizer
         return $normalizedSubtags;
     }
 
-    private function normalizeExtlang(string $subtag): string
+    private function isPrimaryTag($index): bool
     {
-        return strtolower($subtag);
+        return $index === 0;
     }
 
     private function normalizePrimary(string $subtag): string
@@ -110,25 +110,15 @@ final class LanguageTagNormalizer implements TagNormalizer
         return strtolower($subtag);
     }
 
-    private function normalizeScript(string $subtag): string
-    {
-        return ucfirst(strtolower($subtag));
-    }
-
-    private function normalizeRegion(string $subtag): string
-    {
-        return strtoupper($subtag);
-    }
-
-    private function isPrimaryTag($index): bool
-    {
-        return $index === 0;
-    }
-
     private function isExtlang(string $value, int $position): bool
     {
         return strlen($value) === self::EXTLANG_SUBTAG_LENGTH &&
             ($position === 1);
+    }
+
+    private function normalizeExtlang(string $subtag): string
+    {
+        return strtolower($subtag);
     }
 
     private function isScript(string $value, int $position): bool
@@ -140,6 +130,11 @@ final class LanguageTagNormalizer implements TagNormalizer
             );
     }
 
+    private function normalizeScript(string $subtag): string
+    {
+        return ucfirst(strtolower($subtag));
+    }
+
     private function isRegion(string $value, int $position): bool
     {
         return strlen($value) === self::REGION_SUBTAG_LENGTH &&
@@ -148,5 +143,10 @@ final class LanguageTagNormalizer implements TagNormalizer
                 ($this->processed === 1 && $position === 2) ||
                 ($this->processed === 2 && $position === 3)
             );
+    }
+
+    private function normalizeRegion(string $subtag): string
+    {
+        return strtoupper($subtag);
     }
 }
