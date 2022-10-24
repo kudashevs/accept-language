@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LanguageTags;
 
-final class LanguageTag
+final class LanguageTag implements AbstractTag
 {
     private string $languageTag;
 
@@ -21,7 +21,7 @@ final class LanguageTag
         $this->quality = $quality;
     }
 
-    public function getLanguageTag(): string
+    public function getTag(): string
     {
         return $this->languageTag;
     }

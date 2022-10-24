@@ -12,7 +12,7 @@ class LanguageTagTest extends TestCase
     {
         $instance = new LanguageTag('en', 1);
 
-        $this->assertNotEmpty($instance->getLanguageTag());
+        $this->assertNotEmpty($instance->getTag());
         $this->assertNotEmpty($instance->getQuality());
     }
 }
