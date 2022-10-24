@@ -29,6 +29,18 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideDifferentLanguageTags(): array
     {
         return [
+            'empty string without change' => [
+                '',
+                '',
+            ],
+            'space symbol without change' => [
+                ' ',
+                ' ',
+            ],
+            'wildcard symbol without change' => [
+                '*',
+                '*',
+            ],
             'two-letter primary without change' => [
                 'en',
                 'en',
