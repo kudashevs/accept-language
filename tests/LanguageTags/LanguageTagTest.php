@@ -1,8 +1,8 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
+namespace Kudashevs\AcceptLanguage\Tests\LanguageTags;
 
-use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
+use Kudashevs\AcceptLanguage\LanguageTags\LanguageTag;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTagTest extends TestCase

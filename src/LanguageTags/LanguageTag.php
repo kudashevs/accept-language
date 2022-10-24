@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\AcceptLanguage\ValueObjects;
+namespace Kudashevs\AcceptLanguage\LanguageTags;
 
 final class LanguageTag
 {
