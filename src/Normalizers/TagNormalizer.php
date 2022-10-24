@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\TagNormalizers;
+namespace Kudashevs\AcceptLanguage\Normalizers;
 
 interface TagNormalizer
 {

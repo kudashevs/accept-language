@@ -1,8 +1,8 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\TagNormalizers;
+namespace Kudashevs\AcceptLanguage\Tests\Normalizers;
 
-use Kudashevs\AcceptLanguage\TagNormalizers\LanguageTagNormalizer;
+use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTagNormalizerTest extends TestCase

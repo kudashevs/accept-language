@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\AcceptLanguage\TagNormalizers;
+namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements TagNormalizer
 {
