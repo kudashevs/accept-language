@@ -345,55 +345,6 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentAcceptedLanguagesWithDifferentSeparators
-     */
-    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators(
-        array $options,
-        string $expected
-    ) {
-        $service = new AcceptLanguage($options);
-        $service->process();
-        $result = $service->getPreferredLanguage();
-
-        $this->assertSame($expected, $result);
-    }
-
-    public function provideDifferentAcceptedLanguagesWithDifferentSeparators(): array
-    {
-        return [
-            'language with hyphen which intersects with hyphenated accepted_languages results to the language' => [
-                [
-                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
-                    'accepted_languages' => ['zh-Hant-HK'],
-                ],
-                'zh_Hant_HK',
-            ],
-            'language with hyphen which intersects with underscored accepted_languages results to the language' => [
-                [
-                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
-                    'accepted_languages' => ['zh_Hant_HK'],
-                ],
-                'zh_Hant_HK',
-            ],
-            'language with underscore which intersects with hyphenated accepted_languages results to the language' => [
-                [
-                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
-                    'accepted_languages' => ['zh-Hant-HK'],
-                ],
-                'zh_Hant_HK',
-            ],
-            'language with underscore which intersects with underscored accepted_languages results to the language' => [
-                [
-                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
-                    'accepted_languages' => ['zh_Hant_HK'],
-                ],
-                'zh_Hant_HK',
-            ],
-        ];
-    }
-
-    /**
-     * @test
      * @dataProvider provideDifferentTwoLetterOnlyOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
@@ -442,6 +393,55 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '-',
                 ],
                 'en-GB',
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider provideDifferentAcceptedLanguagesWithDifferentSeparators
+     */
+    public function it_can_retrieve_the_preferred_the_accepted_languages_with_different_separators(
+        array $options,
+        string $expected
+    ) {
+        $service = new AcceptLanguage($options);
+        $service->process();
+        $result = $service->getPreferredLanguage();
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function provideDifferentAcceptedLanguagesWithDifferentSeparators(): array
+    {
+        return [
+            'language with hyphen which intersects with hyphenated accepted_languages results to the language' => [
+                [
+                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh-Hant-HK'],
+                ],
+                'zh_Hant_HK',
+            ],
+            'language with hyphen which intersects with underscored accepted_languages results to the language' => [
+                [
+                    'http_accept_language' => 'zH-HanT-Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh_Hant_HK'],
+                ],
+                'zh_Hant_HK',
+            ],
+            'language with underscore which intersects with hyphenated accepted_languages results to the language' => [
+                [
+                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh-Hant-HK'],
+                ],
+                'zh_Hant_HK',
+            ],
+            'language with underscore which intersects with underscored accepted_languages results to the language' => [
+                [
+                    'http_accept_language' => 'zH_HanT_Hk, en;q=0.9, *;q=0.5',
+                    'accepted_languages' => ['zh_Hant_HK'],
+                ],
+                'zh_Hant_HK',
             ],
         ];
     }
