@@ -3,7 +3,7 @@
 namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
-use Kudashevs\AcceptLanguage\Normalizers\AbstractNormalizer;
+use Kudashevs\AcceptLanguage\Normalizers\AbstractTagNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
 
 class AcceptLanguage
@@ -35,7 +35,7 @@ class AcceptLanguage
         'separator' => '_',
     ];
 
-    protected AbstractNormalizer $normalizer;
+    protected AbstractTagNormalizer $normalizer;
 
     /**
      * @param array $options
@@ -100,7 +100,7 @@ class AcceptLanguage
         $this->normalizer = $this->createTagNormalizer();
     }
 
-    protected function createTagNormalizer(): AbstractNormalizer
+    protected function createTagNormalizer(): AbstractTagNormalizer
     {
         return new LanguageTagNormalizer([
             'separator' => $this->options['separator'],

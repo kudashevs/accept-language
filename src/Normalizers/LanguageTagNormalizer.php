@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
-final class LanguageTagNormalizer implements AbstractNormalizer
+final class LanguageTagNormalizer implements AbstractTagNormalizer
 {
     private const EXTLANG_SUBTAG_LENGTH = 3;
     private const SCRIPT_SUBTAG_LENGTH = 4;
