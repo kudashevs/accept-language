@@ -36,7 +36,7 @@ class LanguageTagTest extends TestCase
                 '',
                 0.0,
             ],
-            'a tag with space retults in empty language tag' => [
+            'a tag with space results in empty language tag' => [
                 [' ', 1],
                 '',
                 0.0,
