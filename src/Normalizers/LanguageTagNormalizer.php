@@ -6,6 +6,7 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements AbstractTagNormalizer
 {
+    private const SUBTAG_SEPARATOR = '-';
     private const EXTLANG_SUBTAG_LENGTH = 3;
     private const SCRIPT_SUBTAG_LENGTH = 4;
     private const REGION_SUBTAG_LENGTH = 2;
@@ -52,7 +53,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function splitLanguageTag($tag): array
     {
-        return explode('-', $tag);
+        return explode(self::SUBTAG_SEPARATOR, $tag);
     }
 
     private function generateNormalizedTag(array $subtags): string
