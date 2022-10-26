@@ -34,6 +34,13 @@ final class LanguageTag implements AbstractTag
 
     private function isValidLanguageTag($value): bool
     {
+        /**
+         * A language tag is a sequence of one or more case-insensitive subtags, each separated by a hyphen character
+         * ("-", %x2D). In most cases, a language tag consists of a primary language subtag that identifies a broad
+         * family of related languages (e.g., "en" = English), which is optionally followed by a series of subtags that
+         * refine or narrow that language's range (e.g., "en-CA" = the variety of English as communicated in Canada).
+         * Whitespace is not allowed within a language tag. See RFC 7231, 3.1.3.1.
+         */
         return $this->isWildcard($value) || strlen($value) >= 2;
     }
 
