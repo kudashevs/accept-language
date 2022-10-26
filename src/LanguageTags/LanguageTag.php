@@ -10,12 +10,12 @@ final class LanguageTag implements AbstractTag
 
     private float $quality;
 
-    public function __construct(string $tag, $quality)
+    public function __construct(string $tag, float $quality)
     {
-        $this->initLanguageTag($tag, $quality);
+        $this->initTag($tag, $quality);
     }
 
-    private function initLanguageTag(string $tag, $quality): void
+    private function initTag(string $tag, $quality): void
     {
         $this->languageTag = $tag;
         $this->quality = $quality;
