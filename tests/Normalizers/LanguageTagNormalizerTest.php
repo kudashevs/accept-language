@@ -29,51 +29,51 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideDifferentLanguageTags(): array
     {
         return [
-            'empty string without change' => [
+            'empty string result in no change' => [
                 '',
                 '',
             ],
-            'space symbol without change' => [
+            'space symbol result in no change' => [
                 ' ',
                 ' ',
             ],
-            'wildcard symbol without change' => [
+            'wildcard symbol result in no change' => [
                 '*',
                 '*',
             ],
-            'two-letter primary without change' => [
+            'two-letter primary result in no change' => [
                 'en',
                 'en',
             ],
-            'three-letter primary without change' => [
+            'three-letter primary result in no change' => [
                 'dum',
                 'dum',
             ],
-            'two-letter tag hyphenated with extlang remove extlang' => [
+            'two-letter primary with extlang result in remove extlang' => [
                 'zh-yue',
                 'zh',
             ],
-            'two-letter tag hyphenated with script append script' => [
+            'two-letter primary with script result in no change' => [
                 'sr-Latn',
                 'sr-Latn',
             ],
-            'two-letter tag hyphenated with region append region' => [
+            'two-letter primary with region result in no change' => [
                 'de-AT',
                 'de-AT',
             ],
-            'two-letter tag hyphenated with region in digits remove region' => [
+            'two-letter primary with region formatted in digits result in remove region' => [
                 'es-005',
                 'es',
             ],
-            'two-letter tag hyphenated with extlang and region append only region' => [
+            'two-letter primary with extlang and region result in append only region' => [
                 'zh-cmn-CN',
                 'zh-CN',
             ],
-            'two-letter tag hyphenated with script and region append both' => [
+            'two-letter primary with script and region result in append script and region' => [
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'two-letter tag hyphenated with extlang, script, and region append expected' => [
+            'two-letter primary with extlang, script, and region result in append expected only' => [
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
@@ -94,28 +94,28 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideLanguageTagsWithDifferentSeparatorOption(): array
     {
         return [
-            'two-letter primary without change' => [
+            'two-letter primary result in no change' => [
                 'en',
                 [
                     'separator' => '_',
                 ],
                 'en',
             ],
-            'two-letter tag hyphenated with script change separator' => [
+            'two-letter primary with script change separator' => [
                 'sr-Latn',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn',
             ],
-            'two-letter tag hyphenated with script and region change separator' => [
+            'two-letter primary with script and region with underscore separator change separator' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn_RS',
             ],
-            'two-letter tag hyphenated with extlang, script, and region change separator' => [
+            'two-letter primary with extlang, script, and region with underscore separator change separator' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
@@ -200,15 +200,15 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideExceptionalCases(): array
     {
         return [
-            'two-letter tag hyphenated with extlang out of its scope' => [
+            'two-letter primary with extlang out of its exact place' => [
                 'zh-cmn-CN-cmn',
                 'zh-CN',
             ],
-            'two-letter tag hyphenated with script out of its scope' => [
+            'two-letter primary with script out of its exact place' => [
                 'zh-cmn-CN-Latn',
                 'zh-CN',
             ],
-            'two-letter tag hyphenated with region out of its scope' => [
+            'two-letter primary with region out of its exact place' => [
                 'de-ext-ext-Latn-CH-1901',
                 'de',
             ],
