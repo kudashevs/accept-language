@@ -101,26 +101,89 @@ class LanguageTagNormalizerTest extends TestCase
                 ],
                 'en',
             ],
-            'two-letter primary with script change separator' => [
+            'two-letter primary with script with hyphen separator result in no change' => [
+                'sr-Latn',
+                [
+                    'separator' => '-',
+                ],
+                'sr-Latn',
+            ],
+            'two-letter primary with script and region with hyphen separator result in no change' => [
+                'sr-Latn-RS',
+                [
+                    'separator' => '-',
+                ],
+                'sr-Latn-RS',
+            ],
+            'two-letter primary with extlang, script, and region with hyphen separator result in no change' => [
+                'zh-yue-Hant-CN',
+                [
+                    'separator' => '-',
+                ],
+                'zh-Hant-CN',
+            ],
+            'three-letter primary with script with hyphen separator result in no change' => [
+                'sgn-Latn',
+                [
+                    'separator' => '-',
+                ],
+                'sgn-Latn',
+            ],
+            'two-letter primary with script with underscore separator change the separator' => [
                 'sr-Latn',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn',
             ],
-            'two-letter primary with script and region with underscore separator change separator' => [
+            'two-letter primary with script and region with underscore separator change the separator' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn_RS',
             ],
-            'two-letter primary with extlang, script, and region with underscore separator change separator' => [
+            'two-letter primary with extlang, script, and region with underscore separator change the separator' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
                 ],
                 'zh_Hant_CN',
+            ],
+            'three-letter primary with script with underscore separator no change' => [
+                'sgn-Latn',
+                [
+                    'separator' => '_',
+                ],
+                'sgn_Latn',
+            ],
+            'two-letter primary with script with tilde separator change the separator' => [
+                'sr-Latn',
+                [
+                    'separator' => '~',
+                ],
+                'sr~Latn',
+            ],
+            'two-letter primary with script and region with tilde separator change the separator' => [
+                'sr-Latn-RS',
+                [
+                    'separator' => '~',
+                ],
+                'sr~Latn~RS',
+            ],
+            'two-letter primary with extlang, script, and region with tilde separator change the separator' => [
+                'zh-yue-Hant-CN',
+                [
+                    'separator' => '~',
+                ],
+                'zh~Hant~CN',
+            ],
+            'three-letter primary with script with tilde separator no change' => [
+                'sr-Latn',
+                [
+                    'separator' => '~',
+                ],
+                'sr~Latn',
             ],
         ];
     }
