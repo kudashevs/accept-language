@@ -52,9 +52,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function splitLanguageTag($tag): array
     {
-        $harmonizedTag = str_replace('_', '-', $tag);
-
-        return explode('-', $harmonizedTag);
+        return explode('-', $tag);
     }
 
     private function generateNormalizedTag(array $subtags): string

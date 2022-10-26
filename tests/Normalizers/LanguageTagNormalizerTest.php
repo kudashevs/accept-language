@@ -53,31 +53,15 @@ class LanguageTagNormalizerTest extends TestCase
                 'zh-yue',
                 'zh',
             ],
-            'two-letter tag underscored with extlang remove extlang' => [
-                'zh_yue',
-                'zh',
-            ],
             'two-letter tag hyphenated with script append script' => [
                 'sr-Latn',
-                'sr-Latn',
-            ],
-            'two-letter tag underscored with script append script' => [
-                'sr_Latn',
                 'sr-Latn',
             ],
             'two-letter tag hyphenated with region append region' => [
                 'de-AT',
                 'de-AT',
             ],
-            'two-letter tag underscored with region append region' => [
-                'de_AT',
-                'de-AT',
-            ],
             'two-letter tag hyphenated with region in digits remove region' => [
-                'es-005',
-                'es',
-            ],
-            'two-letter tag underscored with region in digits remove region' => [
                 'es-005',
                 'es',
             ],
@@ -85,24 +69,12 @@ class LanguageTagNormalizerTest extends TestCase
                 'zh-cmn-CN',
                 'zh-CN',
             ],
-            'two-letter tag underscored with extlang and region append only region' => [
-                'zh_cmn_CN',
-                'zh-CN',
-            ],
             'two-letter tag hyphenated with script and region append both' => [
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'two-letter tag underscored with script and region append both' => [
-                'sr_Latn_RS',
-                'sr-Latn-RS',
-            ],
             'two-letter tag hyphenated with extlang, script, and region append expected' => [
                 'zh-yue-Hant-CN',
-                'zh-Hant-CN',
-            ],
-            'two-letter tag underscored with extlang, script, and region append expected' => [
-                'zh_yue_Hant_CN',
                 'zh-Hant-CN',
             ],
         ];
