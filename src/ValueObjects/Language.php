@@ -80,6 +80,19 @@ final class Language
         return ['', 0]; // @todo add keys
     }
 
+    /**
+     * @param int|float $quality
+     * @return int|float
+     */
+    private function prepareQuality($quality)
+    {
+        if (is_int($quality) || is_float($quality)) {
+            return $quality;
+        }
+
+        return (float)$quality;
+    }
+
     public function getTag(): string
     {
         return $this->tag;
