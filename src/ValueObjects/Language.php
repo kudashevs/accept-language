@@ -19,13 +19,13 @@ final class Language
 
     private function initLanguage(string $tag, $quality): void
     {
-        [$this->tag, $this->quality] = $this->prepareTagWithQuality($tag, $quality);
+        [$this->tag, $this->quality] = $this->prepareLanguageState($tag, $quality);
     }
 
     /**
      * @return array<string,int|float>
      */
-    private function prepareTagWithQuality(string $tag, $quality): array
+    private function prepareLanguageState(string $tag, $quality): array
     {
         if ($this->isValidTag(trim($tag)) && $this->isValidQuality($quality)) {
             return $this->generateLanguageTag($tag, $quality);
