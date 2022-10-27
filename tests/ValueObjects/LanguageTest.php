@@ -2,15 +2,15 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
 
-use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
+use Kudashevs\AcceptLanguage\ValueObjects\Language;
 use PHPUnit\Framework\TestCase;
 
-class LanguageTagTest extends TestCase
+class LanguageTest extends TestCase
 {
     /** @test */
     public function it_can_be_instantiated()
     {
-        $instance = new LanguageTag('en', 1);
+        $instance = new Language('en', 1);
 
         $this->assertNotEmpty($instance->getTag());
         $this->assertNotEmpty($instance->getQuality());
@@ -22,7 +22,7 @@ class LanguageTagTest extends TestCase
      */
     public function it_can_create_a_language_tag(array $input, string $tag, float $quality)
     {
-        $instance = new LanguageTag(...$input);
+        $instance = new Language(...$input);
 
         $this->assertSame($tag, $instance->getTag());
         $this->assertSame($quality, $instance->getQuality());
