@@ -14,6 +14,7 @@ class LanguageTest extends TestCase
 
         $this->assertNotEmpty($instance->getTag());
         $this->assertNotEmpty($instance->getQuality());
+        $this->assertTrue($instance->isValid());
     }
 
     /**

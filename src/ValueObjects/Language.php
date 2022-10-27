@@ -19,11 +19,17 @@ final class Language
 
     private function initLanguage(string $tag, $quality): void
     {
-        [$this->tag, $this->quality] = $this->prepareLanguageState($tag, $quality);
+        [
+            'tag' => $this->tag,
+            'quality' => $this->quality,
+            'valid' => $this->valid,
+        ] = $this->prepareLanguageState($tag, $quality);
     }
 
     /**
-     * @return array<string,int|float>
+     * @param string $tag
+     * @param int|float $quality
+     * @return array{tag: string,quality: int|float,valid: bool}
      */
     private function prepareLanguageState(string $tag, $quality): array
     {
@@ -62,7 +68,11 @@ final class Language
 
     private function generateValidLanguage(string $tag, $quality): array
     {
-        return [$tag, $quality]; // @todo add keys
+        return [
+            'tag' => $tag,
+            'quality' => $quality,
+            'valid' => true,
+        ];
     }
 
     private function generateNonValidLanguage(string $tag, $quality): array
