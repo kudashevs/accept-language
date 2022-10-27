@@ -21,7 +21,7 @@ class LanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageRanges
      */
-    public function it_can_create_a_language_tag(array $input, string $tag, $quality)
+    public function it_can_create_a_language(array $input, string $tag, $quality)
     {
         $instance = new Language(...$input);
 
