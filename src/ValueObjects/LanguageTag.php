@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-final class LanguageTag implements AbstractTag
+final class LanguageTag
 {
     private string $languageTag;
 
