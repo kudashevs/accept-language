@@ -77,7 +77,13 @@ final class Language
 
     private function generateNonValidLanguage(string $tag, $quality): array
     {
-        return ['', 0]; // @todo add keys
+        $quality = $this->prepareQuality($quality);
+
+        return [
+            'tag' => $tag,
+            'quality' => $quality,
+            'valid' => false,
+        ];
     }
 
     /**

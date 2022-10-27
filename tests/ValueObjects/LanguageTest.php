@@ -33,14 +33,14 @@ class LanguageTest extends TestCase
     {
         return [
             'an empty tag results in an empty language tag' => [
-                ['', 1],
+                ['', 0],
                 '',
                 0,
             ],
             'a tag with space results in empty language tag' => [
-                [' ', 1],
-                '',
-                0,
+                [' ', 0.5],
+                ' ',
+                0.5,
             ],
             'a two-letter primary language tag results in a language tag' => [
                 ['en', 1],
