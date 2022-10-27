@@ -10,6 +10,8 @@ final class Language
 
     private $quality;
 
+    private bool $valid = false;
+
     public function __construct(string $tag, float $quality)
     {
         $this->initTag($tag, $quality);
@@ -79,5 +81,10 @@ final class Language
     public function getQuality()
     {
         return $this->quality;
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
     }
 }
