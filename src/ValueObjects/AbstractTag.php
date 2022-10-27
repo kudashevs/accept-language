@@ -1,8 +1,11 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\LanguageTags;
+namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-interface AbstractTag
+/**
+ * AbstractTag represents an abstraction of a tag with a quality.
+ */
+interface AbstractTag // @todo rename AbstractLanguage
 {
     /**
      * Return the tag value.
