@@ -73,7 +73,10 @@ final class Language
         return $this->tag;
     }
 
-    public function getQuality(): float
+    /**
+     * @return int|float
+     */
+    public function getQuality()
     {
         return $this->quality;
     }

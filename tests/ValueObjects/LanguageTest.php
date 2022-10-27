@@ -20,7 +20,7 @@ class LanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageRanges
      */
-    public function it_can_create_a_language_tag(array $input, string $tag, float $quality)
+    public function it_can_create_a_language_tag(array $input, string $tag, $quality)
     {
         $instance = new Language(...$input);
 
@@ -34,17 +34,17 @@ class LanguageTest extends TestCase
             'an empty tag results in an empty language tag' => [
                 ['', 1],
                 '',
-                0.0,
+                0,
             ],
             'a tag with space results in empty language tag' => [
                 [' ', 1],
                 '',
-                0.0,
+                0,
             ],
             'a two-letter primary language tag results in a language tag' => [
                 ['en', 1],
                 'en',
-                1.0,
+                1,
             ],
         ];
     }
