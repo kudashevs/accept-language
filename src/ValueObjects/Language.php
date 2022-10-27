@@ -14,10 +14,10 @@ final class Language
 
     public function __construct(string $tag, float $quality)
     {
-        $this->initTag($tag, $quality);
+        $this->initLanguage($tag, $quality);
     }
 
-    private function initTag(string $tag, $quality): void
+    private function initLanguage(string $tag, $quality): void
     {
         [$this->tag, $this->quality] = $this->prepareTagWithQuality($tag, $quality);
     }
