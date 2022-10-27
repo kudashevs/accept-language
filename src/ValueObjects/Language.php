@@ -6,7 +6,7 @@ namespace Kudashevs\AcceptLanguage\ValueObjects;
 
 final class Language
 {
-    private string $languageTag;
+    private string $tag;
 
     private float $quality;
 
@@ -17,7 +17,7 @@ final class Language
 
     private function initTag(string $tag, $quality): void
     {
-        [$this->languageTag, $this->quality] = $this->prepareTagWithQuality($tag, $quality);
+        [$this->tag, $this->quality] = $this->prepareTagWithQuality($tag, $quality);
     }
 
     /**
@@ -70,7 +70,7 @@ final class Language
 
     public function getTag(): string
     {
-        return $this->languageTag;
+        return $this->tag;
     }
 
     public function getQuality(): float
