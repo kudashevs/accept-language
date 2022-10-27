@@ -27,14 +27,14 @@ final class Language
      */
     private function prepareTagWithQuality(string $tag, $quality): array
     {
-        if ($this->isValidLanguageTag(trim($tag)) && $this->isValidQuality($quality)) {
+        if ($this->isValidTag(trim($tag)) && $this->isValidQuality($quality)) {
             return $this->generateLanguageTag($tag, $quality);
         }
 
         return $this->generateEmptyLanguageTag();
     }
 
-    private function isValidLanguageTag($value): bool
+    private function isValidTag($value): bool
     {
         /**
          * A language tag is a sequence of one or more case-insensitive subtags, each separated by a hyphen character
