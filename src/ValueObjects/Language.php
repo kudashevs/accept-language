@@ -28,10 +28,10 @@ final class Language
     private function prepareLanguageState(string $tag, $quality): array
     {
         if ($this->isValidTag(trim($tag)) && $this->isValidQuality($quality)) {
-            return $this->generateLanguageTag($tag, $quality);
+            return $this->generateValidLanguage($tag, $quality);
         }
 
-        return $this->generateEmptyLanguageTag();
+        return $this->generateNonValidLanguage($tag, $quality);
     }
 
     private function isValidTag($value): bool
@@ -60,12 +60,12 @@ final class Language
         return $value > 0 && max(min($value, 1), 0.001) === $value;
     }
 
-    private function generateLanguageTag(string $tag, float $quality): array
+    private function generateValidLanguage(string $tag, $quality): array
     {
         return [$tag, $quality]; // @todo add keys
     }
 
-    private function generateEmptyLanguageTag(): array
+    private function generateNonValidLanguage(string $tag, $quality): array
     {
         return ['', 0]; // @todo add keys
     }
