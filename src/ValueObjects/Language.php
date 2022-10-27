@@ -8,7 +8,7 @@ final class Language
 {
     private string $tag;
 
-    private float $quality;
+    private $quality;
 
     public function __construct(string $tag, float $quality)
     {
