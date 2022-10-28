@@ -12,7 +12,7 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
     }
 
