@@ -19,33 +19,53 @@ class LanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentLanguageRanges
+     * @dataProvider provideDifferentValidLanguageRanges
      */
-    public function it_can_create_a_language(array $input, string $tag, $quality)
+    public function it_can_create_a_valid_language(array $input, string $tag, $quality)
     {
         $instance = new Language(...$input);
 
         $this->assertSame($tag, $instance->getTag());
         $this->assertSame($quality, $instance->getQuality());
+        $this->assertTrue($instance->isValid());
     }
 
-    public function provideDifferentLanguageRanges(): array
+    public function provideDifferentValidLanguageRanges(): array
     {
         return [
-            'an empty tag results in an empty language tag' => [
+            'a two-letter primary language tag results in a valid language tag' => [
+                ['en', 1],
+                'en',
+                1,
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider provideDifferentInvalidLanguageRanges
+     */
+    public function it_can_create_a_non_valid_language(array $input, string $tag, $quality)
+    {
+        $instance = new Language(...$input);
+
+        $this->assertSame($tag, $instance->getTag());
+        $this->assertSame($quality, $instance->getQuality());
+        $this->assertFalse($instance->isValid());
+    }
+
+    public function provideDifferentInvalidLanguageRanges(): array
+    {
+        return [
+            'an empty tag results in a non valid language' => [
                 ['', 0],
                 '',
                 0,
             ],
-            'a tag with space results in empty language tag' => [
+            'a tag with space results in a non valid language' => [
                 [' ', 0.5],
                 ' ',
                 0.5,
-            ],
-            'a two-letter primary language tag results in a language tag' => [
-                ['en', 1],
-                'en',
-                1,
             ],
         ];
     }
