@@ -63,9 +63,14 @@ class LanguageTest extends TestCase
                 0,
             ],
             'a tag with space results in a non valid language' => [
-                [' ', 0.5],
+                [' ', 0],
                 ' ',
-                0.5,
+                0,
+            ],
+            'a tag with space in text results in a non valid language' => [
+                ['not valid', 0],
+                'not valid',
+                0,
             ],
         ];
     }

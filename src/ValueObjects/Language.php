@@ -49,12 +49,17 @@ final class Language
          * refine or narrow that language's range (e.g., "en-CA" = the variety of English as communicated in Canada).
          * Whitespace is not allowed within a language tag. See RFC 7231, 3.1.3.1.
          */
-        return $this->isWildcard($value) || strlen($value) >= 2;
+        return $this->isWildcard($value) || $this->isValidLanguageTag($value);
     }
 
     private function isWildcard(string $header): bool
     {
         return $header === '*';
+    }
+
+    private function isValidLanguageTag(string $header): bool
+    {
+        return strlen($header) >= 2 && $this->isWhitespaceLess($header);
     }
 
     private function isWhitespaceLess(string $header): bool
