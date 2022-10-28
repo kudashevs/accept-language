@@ -57,6 +57,11 @@ final class Language
         return $header === '*';
     }
 
+    private function isWhitespaceLess(string $header): bool
+    {
+        return preg_match('/\s/', $header) === 0;
+    }
+
     private function isValidQuality($value): bool
     {
         /**
