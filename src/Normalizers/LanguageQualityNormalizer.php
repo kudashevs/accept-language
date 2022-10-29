@@ -32,18 +32,18 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return $this->normalizeQuality($quality, $fallback);
     }
 
-    private function normalizeQuality($quality, float $default)
+    private function normalizeQuality($quality, float $fallback)
     {
         if ($this->isValidQuality($quality)) {
             return $this->prepareQuality($quality);
         }
 
         if ($this->isUndefinedQuality($quality)) {
-            return $this->prepareQuality($default);
+            return $this->prepareQuality($fallback);
         }
 
         if ($this->isEmptyQuality($quality)) {
-            return $this->prepareQuality($default);
+            return $this->prepareQuality($fallback);
         }
 
         return self::NOT_ACCEPTABLE_QUALITY;
