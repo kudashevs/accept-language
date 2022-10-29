@@ -492,7 +492,7 @@ class AcceptLanguageTest extends TestCase
             ],
             'two-letter primary language tag with extlang, script, and region results in the primary subtag with script and region' => [
                 [
-                    'http_accept_language' => 'de-get-Latn-DE',
+                    'http_accept_language' => 'de-ger-Latn-DE',
                     'two_letter_only' => true,
                 ],
                 'de_Latn_DE',
