@@ -36,7 +36,16 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     public function normalize($quality)
     {
-        return $this->normalizeQuality($quality, self::NOT_ACCEPTABLE_QUALITY);
+        return $this->normalizeQuality($quality);
+    }
+
+    private function normalizeQuality($quality)
+    {
+        if ($this->isValidQuality($quality)) {
+            return $this->prepareQuality($quality);
+        }
+
+        return self::NOT_ACCEPTABLE_QUALITY;
     }
 
     /**
@@ -44,10 +53,10 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     public function normalizeWithFallback($quality, float $fallback)
     {
-        return $this->normalizeQuality($quality, $fallback);
+        return $this->normalizeQualityWithFallback($quality, $fallback);
     }
 
-    private function normalizeQuality($quality, float $fallback)
+    private function normalizeQualityWithFallback($quality, float $fallback)
     {
         if ($this->isValidQuality($quality)) {
             return $this->prepareQuality($quality);
