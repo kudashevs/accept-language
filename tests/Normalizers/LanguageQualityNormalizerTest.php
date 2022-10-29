@@ -83,7 +83,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
     }
 
-    public function provideDifferentQualityValuesWithFallback()
+    public function provideDifferentQualityValuesWithFallback(): array
     {
         return [
             'an empty quality results in the provided fallback' => [
@@ -140,7 +140,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($quality));
     }
 
-    public function providedDifferentQualityBoundaryValues()
+    public function providedDifferentQualityBoundaryValues(): array
     {
         return [
             'a negative out of bounds 0.001 results in the not acceptable' => [
