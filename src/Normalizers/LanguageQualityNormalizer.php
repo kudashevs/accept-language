@@ -70,10 +70,13 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return is_string($quality) && trim((string)$quality) === '';
     }
 
+    /**
+     * @return int|float
+     */
     private function prepareQuality($quality)
     {
-        if ((int)$quality === 1) {
-            return 1;
+        if ($quality == 0 || $quality == 1) {
+            return (int)$quality;
         }
 
         return (float)$quality;
