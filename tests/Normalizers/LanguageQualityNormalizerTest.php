@@ -17,6 +17,63 @@ class LanguageQualityNormalizerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideDifferentQualityValues
+     */
+    public function it_can_normalize_a_quality($quality, $expected)
+    {
+        $normalizer = new LanguageQualityNormalizer();
+
+        $this->assertSame($expected, $normalizer->normalize($quality));
+    }
+
+    public function provideDifferentQualityValues(): array
+    {
+        return [
+            'an empty quality results in the not acceptable' => [
+                '',
+                0,
+            ],
+            'a null quality results in the not acceptable' => [
+                null,
+                0,
+            ],
+            'a random string results in the not acceptable' => [
+                'wrong',
+                0,
+            ],
+            'a numerical string with invalid quality results in the not acceptable' => [
+                '2',
+                0,
+            ],
+            'a numerical string with valid quality results in the quality' => [
+                '1',
+                1,
+            ],
+            'an invalid negative quality results in the not acceptable' => [
+                -1,
+                0,
+            ],
+            'an invalid positive quality results in the provided default' => [
+                2,
+                0,
+            ],
+            'a valid quality 0 results in the the not acceptable' => [
+                0,
+                0,
+            ],
+            'a valid quality 0.3 results in the quality' => [
+                0.3,
+                0.3,
+            ],
+            'a valid quality 1 results in the quality' => [
+                1,
+                1,
+            ],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider provideDifferentQualityValuesWithFallback
      */
     public function it_can_normalize_a_quality_with_fallback(array $range, $expected)
