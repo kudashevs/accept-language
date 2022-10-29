@@ -12,8 +12,23 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
+    private array $options = [
+        'allow_empty' => true,
+    ];
+
+    /**
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
+        $this->initOptions($options);
+    }
+
+    private function initOptions(array $options): void
+    {
+        $allowed = array_intersect_key($options, $this->options);
+
+        $this->options = array_merge($this->options, $allowed);
     }
 
     /**
