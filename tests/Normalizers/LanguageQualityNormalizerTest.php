@@ -12,21 +12,21 @@ class LanguageQualityNormalizerTest extends TestCase
     {
         $normalizer = new LanguageQualityNormalizer();
 
-        $this->assertNotEmpty($normalizer->normalize(1, 1.0));
+        $this->assertNotEmpty($normalizer->normalize(1));
     }
 
     /**
      * @test
-     * @dataProvider provideDifferentQualityValues
+     * @dataProvider provideDifferentQualityValuesWithFallback
      */
-    public function it_can_normalize_a_quality(array $range, $expected)
+    public function it_can_normalize_a_quality_with_fallback(array $range, $expected)
     {
         $normalizer = new LanguageQualityNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize(...$range));
+        $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
     }
 
-    public function provideDifferentQualityValues()
+    public function provideDifferentQualityValuesWithFallback()
     {
         return [
             'a random string results in the not acceptable' => [
