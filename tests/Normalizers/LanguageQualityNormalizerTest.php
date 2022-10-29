@@ -86,9 +86,25 @@ class LanguageQualityNormalizerTest extends TestCase
     public function provideDifferentQualityValuesWithFallback()
     {
         return [
+            'an empty quality results in the provided fallback' => [
+                ['', 0.5],
+                0.5,
+            ],
+            'a null quality results in the provided fallback' => [
+                [null, 1.0],
+                1,
+            ],
             'a random string results in the not acceptable' => [
                 ['wrong', 0.5],
                 0,
+            ],
+            'a numerical string with invalid quality results in the not acceptable' => [
+                ['2', 0.5],
+                0,
+            ],
+            'a numerical string with valid quality results in the quality' => [
+                ['1', 0.5],
+                1,
             ],
             'an invalid negative quality results in the not acceptable' => [
                 [-1, 0.5],
@@ -98,13 +114,9 @@ class LanguageQualityNormalizerTest extends TestCase
                 [2, 0.5],
                 0,
             ],
-            'a null quality results in the provided default' => [
-                [null, 1.0],
-                1,
-            ],
-            'an empty quality results in the provided default' => [
-                ['', 0.5],
-                0.5,
+            'a valid quality 0 results in the the not acceptable' => [
+                [0, 1],
+                0,
             ],
             'a valid quality 0.3 results in the quality' => [
                 [0.3, 0.5],
