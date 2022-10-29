@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase
 {
-    const DEFAULT_LANGUAGE = 'en';
+    protected const DEFAULT_LANGUAGE = 'en';
 
     /**
      * @test
