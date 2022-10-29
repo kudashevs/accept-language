@@ -64,38 +64,38 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider providedDifferentQualityBoundaryValues
      */
-    public function it_can_normalize_at_boundaries(array $range, $expected)
+    public function it_can_normalize_at_boundaries($quality, $expected)
     {
         $normalizer = new LanguageQualityNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize(...$range));
+        $this->assertSame($expected, $normalizer->normalize($quality));
     }
 
     public function providedDifferentQualityBoundaryValues()
     {
         return [
             'a negative out of bounds 0.001 results in the not acceptable' => [
-                [-0.001, 0.5],
+                -0.001,
                 0,
             ],
             'a zero value results in the not acceptable' => [
-                [0, 0.5],
+                0,
                 0,
             ],
             'a positive within bounds 0.001 results in the quality' => [
-                [0.001, 0.5],
+                0.001,
                 0.001,
             ],
             'a positive within bounds 0.999 results in the quality' => [
-                [0.999, 0.5],
+                0.999,
                 0.999,
             ],
             'a positive withing bounds 1 results in the quality' => [
-                [1, 0.5],
+                1,
                 1,
             ],
             'a positive out of bounds 1.001 results in the not acceptable' => [
-                [1.001, 0.5],
+                1.001,
                 0,
             ],
         ];
