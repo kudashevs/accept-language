@@ -21,7 +21,7 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     public function normalize($quality)
     {
-        return $this->normalizeQuality($quality, 1);
+        return $this->normalizeQuality($quality, self::NOT_ACCEPTABLE_QUALITY);
     }
 
     /**
