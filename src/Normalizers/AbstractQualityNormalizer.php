@@ -7,9 +7,8 @@ interface AbstractQualityNormalizer
     /**
      * Perform a normalization process and return a normalized quality.
      *
-     * @param $quality
-     * @param float $default
+     * @param int|float|string $quality
      * @return int|float
      */
-    public function normalize($quality, float $default);
+    public function normalize($quality);
 }
