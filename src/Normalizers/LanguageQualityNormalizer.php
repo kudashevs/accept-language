@@ -66,7 +66,7 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
             return $this->prepareQuality($fallback);
         }
 
-        if ($this->isEmptyQuality($quality)) {
+        if ($this->isEmptyQuality($quality) && $this->isEmptyAllowed()) {
             return $this->prepareQuality($fallback);
         }
 
@@ -92,6 +92,11 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
     private function isEmptyQuality($quality): bool
     {
         return is_string($quality) && trim((string)$quality) === '';
+    }
+
+    private function isEmptyAllowed(): bool
+    {
+        return $this->options['allow_empty'];
     }
 
     /**

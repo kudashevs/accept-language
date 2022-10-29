@@ -131,6 +131,33 @@ class LanguageQualityNormalizerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideDifferentAllowEmptyOptions
+     */
+    public function it_can_normalize_an_empty_quality_with_different_options(array $options, array $range, $expected)
+    {
+        $normalizer = new LanguageQualityNormalizer($options);
+
+        $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
+    }
+
+    public function provideDifferentAllowEmptyOptions(): array
+    {
+        return [
+            'an empty quality with the allowed option set to true results in the provided fallback' => [
+                ['allow_empty' => true],
+                ['', 0.5],
+                0.5,
+            ],
+            'an empty quality with the allowed options set to false results in the not acceptable' => [
+                ['allow_empty' => false],
+                ['', 0.5],
+                0,
+            ],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider providedDifferentQualityBoundaryValues
      */
     public function it_can_normalize_at_boundaries($quality, $expected)
