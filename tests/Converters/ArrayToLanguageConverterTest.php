@@ -30,28 +30,67 @@ class ArrayToLanguageConverterTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentRawLanguageRanges
+     * @dataProvider provideDifferentDataWithInvalidValues
      */
-    public function it_can_convert_a_raw_language_range_to_a_language(array $rawLanguageRange, float $quality)
-    {
+    public function it_can_convert_the_invalid_data_to_an_invalid_language(
+        array $data,
+        string $expectedTag,
+        float $expectedQuality
+    ) {
         $service = new ArrayToLanguageConverter();
-        $language = $service->convert($rawLanguageRange, $quality);
+        $language = $service->convert($data, 1);
 
+        $this->assertEquals($expectedTag, $language->getTag());
+        $this->assertEquals($expectedQuality, $language->getQuality());
+        $this->assertFalse($language->isValid());
+    }
+
+    public function provideDifferentDataWithInvalidValues(): array
+    {
+        return [
+            'an array with too many values results in an invalid language' => [
+                ['en', '42', 0],
+                'en',
+                42,
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider provideDifferentDataWithValidValues
+     */
+    public function it_can_convert_the_valid_data_to_a_language(
+        array $data,
+        string $expectedTag,
+        float $expectedQuality
+    ) {
+        $service = new ArrayToLanguageConverter();
+        $language = $service->convert(...$data);
+
+        $this->assertEquals($expectedTag, $language->getTag());
+        $this->assertEquals($expectedQuality, $language->getQuality());
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentRawLanguageRanges(): array
+    public function provideDifferentDataWithValidValues(): array
     {
         return [
-            'an empty language range results in invalid language' => [
-                ['en', '42', 0],
-                1,
+            'a valid language without a quality results in a language with fallback' => [
+                [['en'], 0.5],
+                'en',
+                0.5,
             ],
-            'a valid language range results in a language' => [
-                ['en', 0.5],
-                1,
+            'a valid language with a empty quality results in a language with fallback' => [
+                [['en', ''], 0.5],
+                'en',
+                0.5,
             ],
-
+            'a valid language with a valid quality results in a language' => [
+                [['en', 0.5], 1],
+                'en',
+                0.5,
+            ],
         ];
     }
 }

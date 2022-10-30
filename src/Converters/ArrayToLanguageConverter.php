@@ -41,10 +41,12 @@ class ArrayToLanguageConverter implements AbstractToLanguageConverter
     public function convertArrayToLanguage(array $data, float $fallbackQuality): Language
     {
         if (count($data) > self::EXPECTED_ARRAY_SIZE) {
-            return $this->makeLanguage($data[0], 0);
+            return $this->makeLanguage($data[0], $data[1]);
         }
 
-        return $this->makeLanguage($data[0], $fallbackQuality);
+        $quality = (!isset($data[1]) || $data[1] === '') ? $fallbackQuality : $data[1];
+
+        return $this->makeLanguage($data[0], $quality);
     }
 
     /**
