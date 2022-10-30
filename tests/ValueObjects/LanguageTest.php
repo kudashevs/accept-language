@@ -48,6 +48,21 @@ class LanguageTest extends TestCase
                 'en',
                 1,
             ],
+            'a language tag with region subtag and a valid quality results in a valid language' => [
+                ['de-DE', 1],
+                'de-DE',
+                1,
+            ],
+            'a language tag with script subtag and a valid quality results in a valid language' => [
+                ['de-Latn', 1],
+                'de-Latn',
+                1,
+            ],
+            'a language tag with extlang, script, and region subtags and a valid quality results in a valid language' => [
+                ['de-ger-Latn-DE', 1],
+                'de-ger-Latn-DE',
+                1,
+            ],
         ];
     }
 
