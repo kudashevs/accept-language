@@ -10,11 +10,11 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_create_a_language()
     {
-        $instance = Language::create('en', 1);
+        $language = Language::create('en', 1);
 
-        $this->assertNotEmpty($instance->getTag());
-        $this->assertNotEmpty($instance->getQuality());
-        $this->assertTrue($instance->isValid());
+        $this->assertNotEmpty($language->getTag());
+        $this->assertNotEmpty($language->getQuality());
+        $this->assertTrue($language->isValid());
     }
 
     /**
@@ -23,11 +23,11 @@ class LanguageTest extends TestCase
      */
     public function it_can_create_a_valid_language(array $input, string $tag, $quality)
     {
-        $instance = Language::create(...$input);
+        $language = Language::create(...$input);
 
-        $this->assertSame($tag, $instance->getTag());
-        $this->assertSame($quality, $instance->getQuality());
-        $this->assertTrue($instance->isValid());
+        $this->assertSame($tag, $language->getTag());
+        $this->assertSame($quality, $language->getQuality());
+        $this->assertTrue($language->isValid());
     }
 
     public function provideDifferentValidLanguageRanges(): array
@@ -72,11 +72,11 @@ class LanguageTest extends TestCase
      */
     public function it_can_create_a_non_valid_language(array $input, string $tag, $quality)
     {
-        $instance = Language::create(...$input);
+        $language = Language::create(...$input);
 
-        $this->assertSame($tag, $instance->getTag());
-        $this->assertSame($quality, $instance->getQuality());
-        $this->assertFalse($instance->isValid());
+        $this->assertSame($tag, $language->getTag());
+        $this->assertSame($quality, $language->getQuality());
+        $this->assertFalse($language->isValid());
     }
 
     public function provideDifferentInvalidLanguageRanges(): array
