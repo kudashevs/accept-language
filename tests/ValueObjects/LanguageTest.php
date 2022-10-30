@@ -81,7 +81,7 @@ class LanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentInvalidLanguageRanges
+     * @dataProvider provideDifferentInvalidLanguageAndQualityValues
      */
     public function it_can_create_an_invalid_language_from_the_invalid_data(
         array $input,
@@ -95,7 +95,7 @@ class LanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    public function provideDifferentInvalidLanguageRanges(): array
+    public function provideDifferentInvalidLanguageAndQualityValues(): array
     {
         return [
             'an empty language tag and a valid quality results in a non valid language' => [
