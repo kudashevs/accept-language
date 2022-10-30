@@ -12,11 +12,6 @@ final class Language
 
     private bool $valid = false;
 
-    private function __construct(string $tag, $quality)
-    {
-        $this->initLanguage($tag, $quality);
-    }
-
     /**
      * @param string $tag
      * @param int|float $quality
@@ -38,6 +33,11 @@ final class Language
         $language->valid = false;
 
         return $language;
+    }
+
+    private function __construct(string $tag, $quality)
+    {
+        $this->initLanguage($tag, $quality);
     }
 
     private function initLanguage(string $tag, $quality): void
