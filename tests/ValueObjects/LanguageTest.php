@@ -31,7 +31,7 @@ class LanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentValidLanguageRanges
      */
-    public function it_can_create_a_valid_language(array $input, string $tag, $quality)
+    public function it_can_create_a_valid_language_from_the_valid_data(array $input, string $tag, $quality)
     {
         $language = Language::create(...$input);
 
