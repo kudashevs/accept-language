@@ -5,39 +5,14 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Converters;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidConverterArgumentException;
-use Kudashevs\AcceptLanguage\Normalizers\AbstractQualityNormalizer;
-use Kudashevs\AcceptLanguage\Normalizers\AbstractTagNormalizer;
-use Kudashevs\AcceptLanguage\Normalizers\LanguageQualityNormalizer;
-use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
 use Kudashevs\AcceptLanguage\ValueObjects\Language;
 
 class ArrayToLanguageConverter implements AbstractToLanguageConverter
 {
     protected const EXPECTED_ARRAY_SIZE = 2;
 
-    protected AbstractTagNormalizer $tagNormalizer;
-
-    protected AbstractQualityNormalizer $qualityNormalizer;
-
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        $this->initNormalizers($options);
-    }
-
-    protected function initNormalizers(array $options): void
-    {
-        $this->tagNormalizer = $this->createTagNormalizer($options);
-        $this->qualityNormalizer = $this->createQualityNormalizer($options);
-    }
-
-    protected function createTagNormalizer(array $options): AbstractTagNormalizer
-    {
-        return new LanguageTagNormalizer($options);
-    }
-
-    protected function createQualityNormalizer(array $options): AbstractQualityNormalizer
-    {
-        return new LanguageQualityNormalizer($options);
     }
 
     /**
@@ -79,9 +54,6 @@ class ArrayToLanguageConverter implements AbstractToLanguageConverter
      */
     public function makeLanguage(string $tag, $quality): Language
     {
-        $normalizedTag = $this->tagNormalizer->normalize($tag);
-        $normalizedQuality = $this->qualityNormalizer->normalize($quality);
-
-        return new Language($normalizedTag, $normalizedQuality);
+        return Language::create($tag, $quality);
     }
 }
