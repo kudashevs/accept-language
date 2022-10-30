@@ -29,7 +29,7 @@ class LanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentValidLanguageRanges
+     * @dataProvider provideDifferentValidLanguageAndQualityValues
      */
     public function it_can_create_a_valid_language_from_the_valid_data(
         array $input,
@@ -43,7 +43,7 @@ class LanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentValidLanguageRanges(): array
+    public function provideDifferentValidLanguageAndQualityValues(): array
     {
         return [
             'a language tag and a minimum quality results in a valid language' => [
