@@ -83,12 +83,15 @@ class LanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidLanguageRanges
      */
-    public function it_can_create_an_invalid_language_from_the_invalid_data(array $input, string $tag, $quality)
-    {
+    public function it_can_create_an_invalid_language_from_the_invalid_data(
+        array $input,
+        string $expectedTag,
+        $expectedQuality
+    ) {
         $language = Language::create(...$input);
 
-        $this->assertSame($tag, $language->getTag());
-        $this->assertSame($quality, $language->getQuality());
+        $this->assertSame($expectedTag, $language->getTag());
+        $this->assertSame($expectedQuality, $language->getQuality());
         $this->assertFalse($language->isValid());
     }
 
