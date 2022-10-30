@@ -12,7 +12,7 @@ final class Language
 
     private bool $valid = false;
 
-    public function __construct(string $tag, float $quality)
+    private function __construct(string $tag, $quality)
     {
         $this->initLanguage($tag, $quality);
     }
