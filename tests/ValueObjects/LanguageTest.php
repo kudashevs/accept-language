@@ -33,17 +33,17 @@ class LanguageTest extends TestCase
     public function provideDifferentValidLanguageRanges(): array
     {
         return [
-            'a language tag with a minimum quality results in a valid language' => [
+            'a language tag and a minimum quality results in a valid language' => [
                 ['en', 0],
                 'en',
                 0,
             ],
-            'a language tag with a valid quality results in a valid language' => [
+            'a language tag and a valid quality results in a valid language' => [
                 ['en', 0.5],
                 'en',
                 0.5,
             ],
-            'a language tag with a maximum quality results in a valid language' => [
+            'a language tag and a maximum quality results in a valid language' => [
                 ['en', 1],
                 'en',
                 1,
