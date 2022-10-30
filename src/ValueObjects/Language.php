@@ -17,6 +17,16 @@ final class Language
         $this->initLanguage($tag, $quality);
     }
 
+    /**
+     * @param string $tag
+     * @param int|float $quality
+     * @return Language
+     */
+    public static function create(string $tag, $quality): Language
+    {
+        return new Language($tag, $quality);
+    }
+
     private function initLanguage(string $tag, $quality): void
     {
         [

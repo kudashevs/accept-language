@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 class LanguageTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_create_a_language()
     {
-        $instance = new Language('en', 1);
+        $instance = Language::create('en', 1);
 
         $this->assertNotEmpty($instance->getTag());
         $this->assertNotEmpty($instance->getQuality());
@@ -23,7 +23,7 @@ class LanguageTest extends TestCase
      */
     public function it_can_create_a_valid_language(array $input, string $tag, $quality)
     {
-        $instance = new Language(...$input);
+        $instance = Language::create(...$input);
 
         $this->assertSame($tag, $instance->getTag());
         $this->assertSame($quality, $instance->getQuality());
@@ -72,7 +72,7 @@ class LanguageTest extends TestCase
      */
     public function it_can_create_a_non_valid_language(array $input, string $tag, $quality)
     {
-        $instance = new Language(...$input);
+        $instance = Language::create(...$input);
 
         $this->assertSame($tag, $instance->getTag());
         $this->assertSame($quality, $instance->getQuality());
