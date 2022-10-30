@@ -27,6 +27,19 @@ final class Language
         return new Language($tag, $quality);
     }
 
+    /**
+     * @param string $tag
+     * @param int|float $quality
+     * @return Language
+     */
+    public static function createInvalid(string $tag, $quality): Language
+    {
+        $language = new Language($tag, $quality);
+        $language->valid = false;
+
+        return $language;
+    }
+
     private function initLanguage(string $tag, $quality): void
     {
         [
