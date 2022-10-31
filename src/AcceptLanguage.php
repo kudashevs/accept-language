@@ -175,14 +175,12 @@ class AcceptLanguage
          * A basic language range differs from the language tags defined in only in that there is no requirement that
          * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
          */
-        $languageRanges = $this->prepareLanguageRanges($header);
-
-        $languageTags = $this->excludeInvalidLanguageRanges($languageRanges);
+        $languageTags = $this->retrieveLanguageTags($header);
 
         return $this->normalizeLanguageTags($languageTags);
     }
 
-    protected function prepareLanguageRanges(string $header): array
+    protected function retrieveLanguageTags(string $header): array
     {
         $defaultEmptyQuality = 1;
         $defaultEmptyQualityStep = 0.1;
