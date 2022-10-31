@@ -221,17 +221,6 @@ class AcceptLanguage
         });
     }
 
-    protected function normalizeLanguage(string $tag): string
-    {
-        return $this->normalizer->normalize($tag);
-    }
-
-    // @todo add union int|float|string
-    protected function normalizeQuality($quality): float
-    {
-        return (float)$quality;
-    }
-
     protected function excludeUnwanted(array $languages): array
     {
         return $this->excludeNotAcceptedLanguages($languages);
