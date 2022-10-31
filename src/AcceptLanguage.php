@@ -177,7 +177,7 @@ class AcceptLanguage
 
     protected function retrieveLanguages(string $header): array
     {
-        $defaultEmptyQuality = 1;
+        $fallbackQuality = 1;
         $defaultEmptyQualityStep = 0.1;
 
         $languages = [];
@@ -191,10 +191,10 @@ class AcceptLanguage
             /** @var Language[] $languages */
             $languages[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
-                $defaultEmptyQuality
+                $fallbackQuality
             );
 
-            $defaultEmptyQuality -= $defaultEmptyQualityStep;
+            $fallbackQuality -= $defaultEmptyQualityStep;
         }
 
         return $languages;
