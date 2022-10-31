@@ -4,6 +4,7 @@ namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
+use Kudashevs\AcceptLanguage\ValueObjects\Language;
 
 class AcceptLanguage
 {
@@ -192,7 +193,8 @@ class AcceptLanguage
              */
             $splitLanguageRange = preg_split('/;q=/i', trim($languageRange));
 
-            $ranges[] = $this->prepareLanguageRange(
+            /** @var Language[] $ranges */
+            $ranges[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
                 $defaultEmptyQuality
             );
@@ -336,7 +338,7 @@ class AcceptLanguage
         $preparedAcceptedLanguages = $this->prepareAcceptedLanguagesForComparison();
 
         return array_filter($languages, function ($value) use ($preparedAcceptedLanguages) {
-            $language = $this->prepareLanguageForComparison($value['lang']);
+            $language = $this->prepareLanguageForComparison($value->getTag());
 
             return in_array($language, $preparedAcceptedLanguages, true);
         });
@@ -361,13 +363,13 @@ class AcceptLanguage
 
     protected function retrieveLanguage(array $languages): string
     {
-        foreach (array_column($languages, 'lang') as $language) {
-            if ($this->isWildcard($language)) {
+        foreach ($languages as $language) {
+            if ($this->isWildcard($language->getTag())) {
                 return $this->retrieveDefaultLanguage();
             }
 
             if ($this->isAppropriateLanguage($language)) {
-                return $language;
+                return $language->getTag();
             }
         }
 
