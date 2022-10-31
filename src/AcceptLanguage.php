@@ -3,8 +3,7 @@
 namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
-use Kudashevs\AcceptLanguage\Normalizers\AbstractTagNormalizer;
-use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
+use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 
 class AcceptLanguage
 {
@@ -35,7 +34,7 @@ class AcceptLanguage
         'separator' => '_',
     ];
 
-    protected AbstractTagNormalizer $normalizer;
+    protected LanguageFactory $factory;
 
     /**
      * @param array $options
@@ -44,7 +43,7 @@ class AcceptLanguage
     public function __construct(array $options = [])
     {
         $this->initOptions($options);
-        $this->initNormalizer();
+        $this->initFactory();
     }
 
     /**
@@ -95,14 +94,14 @@ class AcceptLanguage
         }
     }
 
-    protected function initNormalizer(): void
+    protected function initFactory(): void
     {
-        $this->normalizer = $this->createTagNormalizer();
+        $this->factory = $this->createFactory();
     }
 
-    protected function createTagNormalizer(): AbstractTagNormalizer
+    protected function createFactory(): LanguageFactory
     {
-        return new LanguageTagNormalizer([
+        return new LanguageFactory([
             'separator' => $this->options['separator'],
         ]);
     }
