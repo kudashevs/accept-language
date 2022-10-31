@@ -170,9 +170,9 @@ class AcceptLanguage
      */
     protected function parseHeaderWithNormalization(string $header): array
     {
-        $languageTags = $this->retrieveLanguages($header);
+        $languages = $this->retrieveLanguages($header);
 
-        return $this->normalizeLanguageTags($languageTags);
+        return $this->normalizeLanguageTags($languages);
     }
 
     protected function retrieveLanguages(string $header): array
