@@ -202,21 +202,23 @@ class AcceptLanguage
 
     protected function normalizeLanguages(array $languages): array
     {
-        $normalized = array_map(function ($tag) {
-            return [
-                'lang' => $this->normalizeLanguage($tag['lang']),
-                'quality' => $this->normalizeQuality($tag['quality']),
-            ];
-        }, $languages);
+        $applicable = $this->getApplicableLanguages($languages);
 
         /**
          * Sorting by quality values is a part of the normalization process.
          */
-        usort($normalized, static function ($a, $b) {
-            return $b['quality'] <=> $a['quality'];
+        usort($applicable, static function ($a, $b) {
+            return $b->getQuality() <=> $a->getQuality();
         });
 
-        return $normalized;
+        return $applicable;
+    }
+
+    protected function getApplicableLanguages(array $languages): array
+    {
+        return array_filter($languages, static function ($language) {
+            return $language->isValid() && $language->getQuality() > 0;
+        });
     }
 
     protected function normalizeLanguage(string $tag): string
