@@ -205,7 +205,7 @@ class AcceptLanguage
         $applicable = $this->getApplicableLanguages($languages);
 
         /**
-         * Sorting by quality values is a part of the normalization process.
+         * Sorting by quality is a part of the normalization process.
          */
         usort($applicable, static function ($a, $b) {
             return $b->getQuality() <=> $a->getQuality();
