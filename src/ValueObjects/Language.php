@@ -60,7 +60,7 @@ final class Language
             return $this->generateValidLanguage($tag, $quality);
         }
 
-        return $this->generateNonValidLanguage($tag, $quality);
+        return $this->generateInvalidLanguage($tag, $quality);
     }
 
     private function isValidTag($value): bool
@@ -108,7 +108,7 @@ final class Language
         ];
     }
 
-    private function generateNonValidLanguage(string $tag, $quality): array
+    private function generateInvalidLanguage(string $tag, $quality): array
     {
         $quality = $this->prepareQuality($quality);
 
