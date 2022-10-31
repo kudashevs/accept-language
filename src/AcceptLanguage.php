@@ -185,7 +185,7 @@ class AcceptLanguage
          * A basic language range differs from the language tags defined in only in that there is no requirement that
          * it be "well-formed" or be validated against the IANA Language Subtag Registry. See RFC 4647, Section 2.1.
          */
-        $ranges = [];
+        $languages = [];
         foreach (explode(',', $header) as $languageRange) {
             /**
              * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
@@ -193,8 +193,8 @@ class AcceptLanguage
              */
             $splitLanguageRange = preg_split('/;q=/i', trim($languageRange));
 
-            /** @var Language[] $ranges */
-            $ranges[] = $this->factory->makeFromLanguageRange(
+            /** @var Language[] $languages */
+            $languages[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
                 $defaultEmptyQuality
             );
@@ -202,7 +202,7 @@ class AcceptLanguage
             $defaultEmptyQuality -= $defaultEmptyQualityStep;
         }
 
-        return $ranges;
+        return $languages;
     }
 
     protected function prepareLanguageRange(array $parts, float $quality): array
