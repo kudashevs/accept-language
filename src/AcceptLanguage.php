@@ -172,7 +172,7 @@ class AcceptLanguage
     {
         $languages = $this->retrieveLanguages($header);
 
-        return $this->normalizeLanguageTags($languages);
+        return $this->normalizeLanguages($languages);
     }
 
     protected function retrieveLanguages(string $header): array
@@ -200,7 +200,7 @@ class AcceptLanguage
         return $languages;
     }
 
-    protected function normalizeLanguageTags(array $tags): array
+    protected function normalizeLanguages(array $tags): array
     {
         $normalized = array_map(function ($tag) {
             return [
