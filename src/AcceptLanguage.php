@@ -200,14 +200,14 @@ class AcceptLanguage
         return $languages;
     }
 
-    protected function normalizeLanguages(array $tags): array
+    protected function normalizeLanguages(array $languages): array
     {
         $normalized = array_map(function ($tag) {
             return [
                 'lang' => $this->normalizeLanguage($tag['lang']),
                 'quality' => $this->normalizeQuality($tag['quality']),
             ];
-        }, $tags);
+        }, $languages);
 
         /**
          * Sorting by quality values is a part of the normalization process.
