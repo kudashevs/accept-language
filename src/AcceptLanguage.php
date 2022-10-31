@@ -255,7 +255,7 @@ class AcceptLanguage
 
     protected function prepareLanguageForComparison(string $language): string
     {
-        return strtolower(str_replace('_', '-', $language));
+        return strtolower(str_replace('-', $this->options['separator'], $language));
     }
 
     protected function retrieveLanguage(array $languages): string
