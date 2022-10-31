@@ -228,7 +228,7 @@ class AcceptLanguage
 
     protected function excludeNotAcceptedLanguages(array $languages): array
     {
-        if (!$this->hasAcceptedLanguages()) {
+        if ($this->isEmptyAcceptedLanguagesOption()) {
             return $languages;
         }
 
@@ -241,9 +241,9 @@ class AcceptLanguage
         });
     }
 
-    protected function hasAcceptedLanguages(): bool
+    protected function isEmptyAcceptedLanguagesOption(): bool
     {
-        return count($this->options['accepted_languages']) !== 0;
+        return count($this->options['accepted_languages']) === 0;
     }
 
     protected function prepareAcceptedLanguagesForComparison(): array
