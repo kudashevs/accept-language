@@ -178,7 +178,7 @@ class AcceptLanguage
     protected function retrieveLanguages(string $header): array
     {
         $fallbackQuality = 1;
-        $defaultEmptyQualityStep = 0.1;
+        $fallbackQualityStep = 0.1;
 
         $languages = [];
         foreach (explode(',', $header) as $languageRange) {
@@ -194,7 +194,7 @@ class AcceptLanguage
                 $fallbackQuality
             );
 
-            $fallbackQuality -= $defaultEmptyQualityStep;
+            $fallbackQuality -= $fallbackQualityStep;
         }
 
         return $languages;
