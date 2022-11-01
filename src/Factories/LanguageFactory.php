@@ -26,10 +26,7 @@ class LanguageFactory
     {
         $this->checkValidLanguageRange($rawLanguageRange);
 
-        $currentLanguageRateSize = count($rawLanguageRange);
-        $expectedLanguageRangeSize = 2;
-
-        if ($currentLanguageRateSize > $expectedLanguageRangeSize) {
+        if ($this->isSuspiciousLanguageRange($rawLanguageRange)) {
             $possibleTag = (string)$rawLanguageRange[0];
             $possibleQuality = $rawLanguageRange[1];
 
@@ -47,6 +44,11 @@ class LanguageFactory
         if (count($range) === 0) {
             throw new InvalidFactoryArgumentException('Cannot process an empty language range.');
         }
+    }
+
+    protected function isSuspiciousLanguageRange(array $range): bool
+    {
+        return count($range) > 2;
     }
 
     public function createInvalidLanguage(string $tag, $quality): Language
