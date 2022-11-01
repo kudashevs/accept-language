@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidQualityValueArgumentException;
 use Kudashevs\AcceptLanguage\Normalizers\AbstractQualityNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageQualityNormalizer;
 
@@ -48,9 +47,10 @@ class QualityValue
     private function initQuality($quality): void
     {
         if (!$this->isValidQuality($quality)) {
-            throw new InvalidQualityValueArgumentException(
-                sprintf('The quality value "%s" is invalid.', $quality)
-            );
+            $this->valid = false;
+            $this->quality = $this->prepareQuality($quality);
+
+            return;
         }
 
         $this->quality = $this->normalizeQuality($quality);

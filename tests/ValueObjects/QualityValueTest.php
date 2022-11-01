@@ -2,7 +2,6 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidQualityValueArgumentException;
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 use PHPUnit\Framework\TestCase;
 
@@ -21,12 +20,12 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidQualityValues
      */
-    public function it_can_throw_exception_when_a_quality_is_wrong($quality)
+    public function it_can_handle_an_ivalid_quality($input, $expected)
     {
-        $this->expectException(InvalidQualityValueArgumentException::class);
-        $this->expectExceptionMessage('The quality value "' . $quality . '" is invalid.');
+        $quality = new QualityValue($input);
 
-        new QualityValue($quality);
+        $this->assertSame($expected, $quality->getQuality());
+        $this->assertFalse($quality->isValid());
     }
 
     public function provideDifferentInvalidQualityValues(): array
@@ -120,6 +119,11 @@ class QualityValueTest extends TestCase
     public function providedDifferentQualityBoundaryValues(): array
     {
         return [
+            'a negative out of bounds 0.001 results in the not acceptable' => [
+                -0.001,
+                -0.001,
+                false,
+            ],
             'a zero value results in the not acceptable' => [
                 0,
                 0,
@@ -139,6 +143,11 @@ class QualityValueTest extends TestCase
                 1,
                 1,
                 true,
+            ],
+            'a positive out of bounds 1.001 results in the not acceptable' => [
+                1.001,
+                1.001,
+                false,
             ],
         ];
     }
