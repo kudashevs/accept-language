@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidLanguageTagArgumentException;
 use Kudashevs\AcceptLanguage\Normalizers\AbstractTagNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
 
@@ -54,9 +53,10 @@ final class LanguageTag
     private function initTag(string $tag): void
     {
         if (!$this->isValidTag($tag)) {
-            throw new InvalidLanguageTagArgumentException(
-                sprintf('The language tag "%s" is invalid.', $tag)
-            );
+            $this->valid = false;
+            $this->tag = $this->prepareTag($tag);
+
+            return;
         }
 
         $this->tag = $this->normalizeTag($tag);
@@ -117,6 +117,11 @@ final class LanguageTag
     private function isSeparatorLess(string $tag): bool
     {
         return strpos($tag, '-') === false;
+    }
+
+    private function prepareTag(string $tag): string
+    {
+        return htmlspecialchars($tag, ENT_QUOTES, 'UTF-8');
     }
 
     private function normalizeTag(string $tag): string

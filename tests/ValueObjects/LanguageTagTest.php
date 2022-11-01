@@ -2,7 +2,6 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidLanguageTagArgumentException;
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
 use PHPUnit\Framework\TestCase;
 
@@ -21,12 +20,12 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidLanguageValues
      */
-    public function it_can_throw_exception_when_a_language_tag_is_wrong($input)
+    public function it_can_handle_an_ivalid_language_tag(string $input, string $expected)
     {
-        $this->expectException(InvalidLanguageTagArgumentException::class);
-        $this->expectExceptionMessage('The language tag "' . $input . '" is invalid.');
+        $quality = new LanguageTag($input);
 
-        new LanguageTag($input);
+        $this->assertSame($expected, $quality->getTag());
+        $this->assertFalse($quality->isValid());
     }
 
     public function provideDifferentInvalidLanguageValues(): array
