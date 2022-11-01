@@ -112,7 +112,12 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function isExtlang(string $value, int $position): bool
     {
         return strlen($value) === self::EXTLANG_SUBTAG_LENGTH &&
-            ($position === 1);
+            $this->isExtlangPosition($position);
+    }
+
+    private function isExtlangPosition(int $position): bool
+    {
+        return $position === 1;
     }
 
     private function normalizeExtlang(string $subtag): string
