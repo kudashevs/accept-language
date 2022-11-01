@@ -77,7 +77,7 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return self::NOT_ACCEPTABLE_QUALITY;
     }
 
-    protected function isValidQuality($value): bool
+    private function isValidQuality($value): bool
     {
         /**
          * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
