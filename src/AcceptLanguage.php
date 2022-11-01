@@ -274,7 +274,7 @@ class AcceptLanguage
 
     protected function isAppropriateLanguage(Language $language): bool
     {
-        $primarySubtag = $this->retrievePrimarySubtag($language->getTag());
+        $primarySubtag = $language->getPrimarySubtag();
         $primarySubtagLength = strlen($primarySubtag);
 
         if ($this->options['two_letter_only']) {
@@ -282,11 +282,6 @@ class AcceptLanguage
         }
 
         return $primarySubtagLength >= 2 && $primarySubtagLength <= 3;
-    }
-
-    protected function retrievePrimarySubtag(string $language): string
-    {
-        return explode($this->options['separator'], $language)[0];
     }
 
     protected function retrieveDefaultLanguage(): string

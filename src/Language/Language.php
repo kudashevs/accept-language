@@ -94,6 +94,14 @@ final class Language implements AbstractLanguage
     }
 
     /**
+     * @return string
+     */
+    public function getPrimarySubtag(): string
+    {
+        return $this->tag->getPrimarySubtag();
+    }
+
+    /**
      * @return int|float
      */
     public function getQuality()

@@ -135,4 +135,13 @@ class LanguageTest extends TestCase
             ],
         ];
     }
+
+    /** @test */
+    public function it_can_retrieve_a_primary_subtag()
+    {
+        $language = Language::create('zh-yue-Hant-CN', 1);
+
+        $this->assertSame('zh', $language->getPrimarySubtag());
+        $this->assertTrue($language->isValid());
+    }
 }
