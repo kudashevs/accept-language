@@ -4,7 +4,7 @@ namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
-use Kudashevs\AcceptLanguage\ValueObjects\Language;
+use Kudashevs\AcceptLanguage\Language\Language;
 
 class AcceptLanguage
 {

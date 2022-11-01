@@ -1,8 +1,8 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
+namespace Kudashevs\AcceptLanguage\Tests\Language;
 
-use Kudashevs\AcceptLanguage\ValueObjects\Language;
+use Kudashevs\AcceptLanguage\Language\Language;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTest extends TestCase
@@ -73,7 +73,7 @@ class LanguageTest extends TestCase
             ],
             'a language tag with extlang, script, and region subtags and a valid quality results in a valid language' => [
                 ['de-ger-Latn-DE', 1],
-                'de-ger-Latn-DE',
+                'de-Latn-DE',
                 1,
             ],
         ];
@@ -119,18 +119,18 @@ class LanguageTest extends TestCase
                 0,
             ],
             'a valid language tag with a negative quality results in a non valid language' => [
-                ['valid', -1],
-                'valid',
+                ['en', -1],
+                'en',
                 -1,
             ],
             'a valid language tag with a quality lesser than minimum results in a non valid language' => [
-                ['valid', -0.001],
-                'valid',
+                ['en', -0.001],
+                'en',
                 -0.001,
             ],
             'a valid language tag with a quality greater than maximum results in a non valid language' => [
-                ['valid', 1.001],
-                'valid',
+                ['en', 1.001],
+                'en',
                 1.001,
             ],
         ];

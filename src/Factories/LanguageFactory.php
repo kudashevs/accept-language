@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgumentException;
-use Kudashevs\AcceptLanguage\ValueObjects\Language;
+use Kudashevs\AcceptLanguage\Language\Language;
 
 class LanguageFactory
 {
