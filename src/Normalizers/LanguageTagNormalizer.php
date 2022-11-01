@@ -145,11 +145,14 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function isRegion(string $value, int $position): bool
     {
         return strlen($value) === self::REGION_SUBTAG_LENGTH &&
-            (
-                $position === 1 ||
-                ($this->processed === 1 && $position === 2) ||
-                ($this->processed === 2 && $position === 3)
-            );
+            $this->isRegionPosition($position);
+    }
+
+    private function isRegionPosition(int $position): bool
+    {
+        return $position === 1 ||
+            ($this->processed === 1 && $position === 2) ||
+            ($this->processed === 2 && $position === 3);
     }
 
     private function normalizeRegion(string $subtag): string
