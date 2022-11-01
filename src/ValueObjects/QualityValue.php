@@ -60,7 +60,7 @@ class QualityValue
     {
         return is_null($quality) ||
             $this->isEmptyQuality($quality) ||
-            $this->isInValidRange($quality);
+            $this->isInsideValidRange($quality);
     }
 
     private function isEmptyQuality($quality): bool
@@ -68,7 +68,7 @@ class QualityValue
         return is_string($quality) && trim((string)$quality) === '';
     }
 
-    private function isInValidRange($quality): bool
+    private function isInsideValidRange($quality): bool
     {
         return is_numeric($quality) && $quality >= 0 && $quality <= 1;
     }
