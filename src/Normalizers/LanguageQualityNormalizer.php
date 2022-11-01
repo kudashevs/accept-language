@@ -77,6 +77,11 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return self::NOT_ACCEPTABLE_QUALITY;
     }
 
+    private function isUndefinedQuality($quality): bool
+    {
+        return is_null($quality);
+    }
+
     private function isValidQuality($value): bool
     {
         /**
@@ -86,11 +91,6 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return is_numeric($value) &&
             $value > 0 &&
             max(min($value, 1), 0.001) === $value;
-    }
-
-    private function isUndefinedQuality($quality): bool
-    {
-        return is_null($quality);
     }
 
     private function isEmptyQuality($quality): bool
