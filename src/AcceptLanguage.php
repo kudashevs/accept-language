@@ -134,9 +134,9 @@ class AcceptLanguage
     {
         $applicableLanguages = $this->parseHeader($header);
 
-        $filteredLanguages = $this->getAcceptableLanguages($applicableLanguages);
+        $acceptableLanguages = $this->getAcceptableLanguages($applicableLanguages);
 
-        return $this->retrieveLanguage($filteredLanguages);
+        return $this->retrieveLanguage($acceptableLanguages);
     }
 
     protected function parseHeader(string $header): array
