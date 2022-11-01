@@ -128,10 +128,13 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function isScript(string $value, int $position): bool
     {
         return strlen($value) === self::SCRIPT_SUBTAG_LENGTH &&
-            (
-                $position === 1 ||
-                ($this->processed === 1 && $position === 2)
-            );
+            $this->isScriptPosition($position);
+    }
+
+    private function isScriptPosition(int $position): bool
+    {
+        return $position === 1 ||
+            ($this->processed === 1 && $position === 2);
     }
 
     private function normalizeScript(string $subtag): string
