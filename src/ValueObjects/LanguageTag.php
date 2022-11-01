@@ -10,6 +10,10 @@ use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
 
 final class LanguageTag
 {
+    private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 2;
+
+    private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 3;
+
     private const DEFAULT_SEPARATOR = '-';
 
     private AbstractTagNormalizer $normalizer;
@@ -82,7 +86,7 @@ final class LanguageTag
 
     private function isLongEnough(string $tag): bool
     {
-        return strlen($tag) >= 2;
+        return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH;
     }
 
     private function isWhitespaceLess(string $tag): bool
@@ -100,14 +104,14 @@ final class LanguageTag
         /**
          * The primary language subtag is the first subtag in a language tag. See RFC 5646, Section 2.2.1.
          */
-        return strlen($tag) >= 2 &&
-            strlen($tag) <= 3 &&
+        return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH &&
+            strlen($tag) <= self::MAXIMUM_PRIMARY_SUBTAG_LENGTH &&
             $this->isSeparatorLess($tag);
     }
 
     private function isPrimaryWithSubtags(string $tag): bool
     {
-        return strlen($tag) > 3 && !$this->isSeparatorLess($tag);
+        return strlen($tag) > self::MAXIMUM_PRIMARY_SUBTAG_LENGTH && !$this->isSeparatorLess($tag);
     }
 
     private function isSeparatorLess(string $tag): bool
