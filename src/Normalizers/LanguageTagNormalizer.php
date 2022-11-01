@@ -74,26 +74,18 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
             }
 
             if ($this->isExtlang($subtag, $index)) {
-                $this->processed++;
-
-                if ($this->options['with_extlang']) {
-                    $normalizedSubtags[] = $this->normalizeExtlang($subtag);
-                }
+                $normalizedSubtags[] = $this->normalizeExtlang($subtag);
             }
 
             if ($this->isScript($subtag, $index)) {
-                $this->processed++;
-
-                if ($this->options['with_script']) {
-                    $normalizedSubtags[] = $this->normalizeScript($subtag);
-                }
+                $normalizedSubtags[] = $this->normalizeScript($subtag);
             }
 
             if ($this->isRegion($subtag, $index)) {
-                if ($this->options['with_region']) {
-                    $normalizedSubtags[] = $this->normalizeRegion($subtag);
-                }
+                $normalizedSubtags[] = $this->normalizeRegion($subtag);
             }
+
+            $this->processed++;
         }
 
         return $normalizedSubtags;
@@ -111,7 +103,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isExtlang(string $value, int $position): bool
     {
-        return $this->isExtlangPosition($position) &&
+        return $this->options['with_extlang'] &&
+            $this->isExtlangPosition($position) &&
             strlen($value) === self::EXTLANG_SUBTAG_LENGTH;
     }
 
@@ -127,7 +120,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isScript(string $value, int $position): bool
     {
-        return $this->isScriptPosition($position) &&
+        return $this->options['with_script'] &&
+            $this->isScriptPosition($position) &&
             strlen($value) === self::SCRIPT_SUBTAG_LENGTH;
     }
 
@@ -144,7 +138,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isRegion(string $value, int $position): bool
     {
-        return $this->isRegionPosition($position) &&
+        return $this->options['with_region'] &&
+            $this->isRegionPosition($position) &&
             strlen($value) === self::REGION_SUBTAG_LENGTH;
     }
 
