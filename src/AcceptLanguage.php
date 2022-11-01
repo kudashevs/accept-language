@@ -233,12 +233,12 @@ class AcceptLanguage
             return $languages;
         }
 
-        $preparedAcceptedLanguages = $this->prepareAcceptedLanguagesForComparison();
+        $preparedAcceptedLanguagesOption = $this->prepareAcceptedLanguagesForComparison();
 
-        return array_filter($languages, function ($language) use ($preparedAcceptedLanguages) {
+        return array_filter($languages, function ($language) use ($preparedAcceptedLanguagesOption) {
             $preparedTag = $this->prepareLanguageForComparison($language->getTag());
 
-            return in_array($preparedTag, $preparedAcceptedLanguages, true);
+            return in_array($preparedTag, $preparedAcceptedLanguagesOption, true);
         });
     }
 
