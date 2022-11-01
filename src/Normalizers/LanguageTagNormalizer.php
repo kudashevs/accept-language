@@ -111,8 +111,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isExtlang(string $value, int $position): bool
     {
-        return strlen($value) === self::EXTLANG_SUBTAG_LENGTH &&
-            $this->isExtlangPosition($position);
+        return $this->isExtlangPosition($position) &&
+            strlen($value) === self::EXTLANG_SUBTAG_LENGTH;
     }
 
     private function isExtlangPosition(int $position): bool
@@ -127,8 +127,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isScript(string $value, int $position): bool
     {
-        return strlen($value) === self::SCRIPT_SUBTAG_LENGTH &&
-            $this->isScriptPosition($position);
+        return $this->isScriptPosition($position) &&
+            strlen($value) === self::SCRIPT_SUBTAG_LENGTH;
     }
 
     private function isScriptPosition(int $position): bool
@@ -144,8 +144,8 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isRegion(string $value, int $position): bool
     {
-        return strlen($value) === self::REGION_SUBTAG_LENGTH &&
-            $this->isRegionPosition($position);
+        return $this->isRegionPosition($position) &&
+            strlen($value) === self::REGION_SUBTAG_LENGTH;
     }
 
     private function isRegionPosition(int $position): bool
