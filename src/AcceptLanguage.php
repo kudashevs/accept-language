@@ -134,7 +134,7 @@ class AcceptLanguage
     {
         $applicableLanguages = $this->parseHeader($header);
 
-        $filteredLanguages = $this->excludeUnwanted($applicableLanguages);
+        $filteredLanguages = $this->getAcceptableLanguages($applicableLanguages);
 
         return $this->retrieveLanguage($filteredLanguages);
     }
@@ -219,11 +219,6 @@ class AcceptLanguage
         return array_filter($languages, static function ($language) {
             return $language->isValid() && $language->getQuality() > 0;
         });
-    }
-
-    protected function excludeUnwanted(array $languages): array
-    {
-        return $this->getAcceptableLanguages($languages);
     }
 
     protected function getAcceptableLanguages(array $languages): array
