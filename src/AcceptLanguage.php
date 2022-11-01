@@ -223,10 +223,10 @@ class AcceptLanguage
 
     protected function excludeUnwanted(array $languages): array
     {
-        return $this->excludeNotAcceptedLanguages($languages);
+        return $this->getAcceptableLanguages($languages);
     }
 
-    protected function excludeNotAcceptedLanguages(array $languages): array
+    protected function getAcceptableLanguages(array $languages): array
     {
         if ($this->isEmptyAcceptedLanguagesOption()) {
             return $languages;
