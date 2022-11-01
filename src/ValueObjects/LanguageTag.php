@@ -138,6 +138,14 @@ final class LanguageTag
     }
 
     /**
+     * @return string
+     */
+    public function getPrimarySubtag(): string
+    {
+        return explode($this->separator, $this->tag)[0];
+    }
+
+    /**
      * @return bool
      */
     public function isValid(): bool

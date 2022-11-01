@@ -279,4 +279,57 @@ class LanguageTagTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * @test
+     * @dataProvider provideDifferentLanguageValues
+     */
+    public function it_can_retrieve_a_primary_subtag(array $options, string $input, string $expected)
+    {
+        $language = new LanguageTag($input, $options);
+
+        $this->assertSame($expected, $language->getPrimarySubtag());
+        $this->assertTrue($language->isValid());
+    }
+
+    public function provideDifferentLanguageValues(): array
+    {
+        return [
+            'a two-letter primary result in no change' => [
+                [
+                    'separator' => '-',
+                ],
+                'en',
+                'en',
+            ],
+            'a two-letter primary with script with hyphen separator result in the primary subtag' => [
+                [
+                    'separator' => '-',
+                ],
+                'sr-Latn',
+                'sr',
+            ],
+            'a two-letter primary with extlang, script, and region with hyphen separator result in the primary subtag' => [
+                [
+                    'separator' => '-',
+                ],
+                'zh-yue-Hant-CN',
+                'zh',
+            ],
+            'a two-letter primary with extlang, script, and region with underscore separator result in in the primary subtag' => [
+                [
+                    'separator' => '_',
+                ],
+                'zh-yue-Hant-CN',
+                'zh',
+            ],
+            'a two-letter primary with extlang, script, and region with tilde separator result in in the primary subtag' => [
+                [
+                    'separator' => '~',
+                ],
+                'zh-yue-Hant-CN',
+                'zh',
+            ],
+        ];
+    }
 }
