@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgumentException;
+use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 
 class LanguageFactory
@@ -21,7 +22,7 @@ class LanguageFactory
         $this->options = $options;
     }
 
-    public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): Language
+    public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): AbstractLanguage
     {
         $this->checkValidLanguageRange($rawLanguageRange);
 

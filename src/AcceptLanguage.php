@@ -4,6 +4,7 @@ namespace Kudashevs\AcceptLanguage;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
+use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 
 class AcceptLanguage
@@ -139,6 +140,9 @@ class AcceptLanguage
         return $this->retrieveLanguage($acceptableLanguages);
     }
 
+    /**
+     * @return array[]|AbstractLanguage[]
+     */
     protected function parseHeader(string $header): array
     {
         if (
@@ -166,7 +170,7 @@ class AcceptLanguage
      * data) to language tags (validated and well-formed data). For more information see RFC 4647, Section 2.1.
      *
      * @param string $header
-     * @return array{lang: string, quality: float}
+     * @return AbstractLanguage[]
      */
     protected function parseHeaderWithNormalization(string $header): array
     {
@@ -188,7 +192,7 @@ class AcceptLanguage
              */
             $splitLanguageRange = preg_split('/;q=/i', trim($languageRange));
 
-            /** @var Language[] $languages */
+            /** @var AbstractLanguage[] $languages */
             $languages[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
                 $fallbackQuality
