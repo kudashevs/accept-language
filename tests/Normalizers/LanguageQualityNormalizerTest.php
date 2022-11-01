@@ -29,12 +29,12 @@ class LanguageQualityNormalizerTest extends TestCase
     public function provideDifferentQualityValues(): array
     {
         return [
+            'a null quality results in the default weight' => [
+                null,
+                1,
+            ],
             'an empty quality results in the not acceptable' => [
                 '',
-                0,
-            ],
-            'a null quality results in the not acceptable' => [
-                null,
                 0,
             ],
             'a random string results in the not acceptable' => [

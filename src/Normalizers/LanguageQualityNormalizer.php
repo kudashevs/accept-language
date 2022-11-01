@@ -41,6 +41,13 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
 
     private function normalizeQuality($quality)
     {
+        /**
+         * If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
+         */
+        if ($this->isUndefinedQuality($quality)) {
+            return $this->prepareQuality(1);
+        }
+
         if ($this->isValidQuality($quality)) {
             return $this->prepareQuality($quality);
         }

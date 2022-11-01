@@ -69,12 +69,12 @@ class QualityValueTest extends TestCase
     public function provideDifferentValidQualityValues(): array
     {
         return [
+            'a null quality results in the default weight' => [
+                null,
+                1,
+            ],
             'an empty quality results in the not acceptable' => [
                 '',
-                0,
-            ],
-            'a null quality results in the not acceptable' => [
-                null,
                 0,
             ],
             'a numerical string with valid quality results in the quality' => [
