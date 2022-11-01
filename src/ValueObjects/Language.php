@@ -110,11 +110,9 @@ final class Language
 
     private function generateInvalidLanguage(string $tag, $quality): array
     {
-        $quality = $this->prepareQuality($quality);
-
         return [
             'tag' => $tag,
-            'quality' => $quality,
+            'quality' => $this->prepareQuality($quality),
             'valid' => false,
         ];
     }
