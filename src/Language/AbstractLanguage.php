@@ -12,6 +12,11 @@ interface AbstractLanguage
     public function getTag(): string;
 
     /**
+     * @return string
+     */
+    public function getPrimarySubtag(): string;
+
+    /**
      * @return int|float
      */
     public function getQuality();
