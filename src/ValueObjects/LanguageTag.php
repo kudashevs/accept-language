@@ -89,11 +89,6 @@ final class LanguageTag
         return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH;
     }
 
-    private function isWhitespaceLess(string $tag): bool
-    {
-        return preg_match('/\s/', $tag) === 0;
-    }
-
     private function isValidCharacterRange(string $tag): bool
     {
         return preg_match('/[a-z0-9\-]/i', $tag) === 1;
