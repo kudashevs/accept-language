@@ -81,7 +81,7 @@ final class LanguageTag
          * refine or narrow that language's range (e.g., "en-CA" = the variety of English as communicated in Canada).
          * Whitespace is not allowed within a language tag. See RFC 7231, Section 3.1.3.1.
          */
-        return $this->isValidLength($tag) && $this->isWhitespaceLess($tag) && $this->isLikeLanguageTag($tag);
+        return $this->isValidLength($tag) && $this->isValidCharacterRange($tag) && $this->isLikeLanguageTag($tag);
     }
 
     private function isValidLength(string $tag): bool
@@ -92,6 +92,11 @@ final class LanguageTag
     private function isWhitespaceLess(string $tag): bool
     {
         return preg_match('/\s/', $tag) === 0;
+    }
+
+    private function isValidCharacterRange(string $tag): bool
+    {
+        return preg_match('/[a-z0-9\-]/i', $tag) === 1;
     }
 
     private function isLikeLanguageTag($tag)
