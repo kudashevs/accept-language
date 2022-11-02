@@ -147,19 +147,19 @@ class AcceptLanguage
      */
     protected function parseHeader(string $header): array
     {
-        if (
-            $this->isEmpty($header) ||
-            $this->isWildcard($header)
-        ) {
+        /**
+         * Some cases do not require further processing as they result in the default language.
+         */
+        if ($this->isDefaultLanguageCase($header)) {
             return [];
         }
 
         return $this->parseHeaderWithNormalization($header);
     }
 
-    protected function isEmpty(string $header): bool
+    protected function isDefaultLanguageCase(string $header): bool
     {
-        return $header === '';
+        return trim($header) === '' || trim($header) === '*';
     }
 
     protected function isWildcard(string $header): bool
