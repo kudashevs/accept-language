@@ -162,11 +162,6 @@ class AcceptLanguage
         return trim($header) === '' || trim($header) === '*';
     }
 
-    protected function isWildcard(string $header): bool
-    {
-        return $header === '*';
-    }
-
     /**
      * Parse an HTTP Accept-Language header and perform the transition from language ranges (raw and not well-formed
      * data) to language tags (validated and well-formed data). For more information see RFC 4647, Section 2.1.
