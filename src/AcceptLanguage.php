@@ -188,11 +188,7 @@ class AcceptLanguage
 
         $languages = [];
         foreach (explode(',', $header) as $languageRange) {
-            /**
-             * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
-             * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
-             */
-            $splitLanguageRange = preg_split('/;q=/i', trim($languageRange));
+            $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
             /** @var AbstractLanguage[] $languages */
             $languages[] = $this->factory->makeFromLanguageRange(
@@ -204,6 +200,15 @@ class AcceptLanguage
         }
 
         return $languages;
+    }
+
+    protected function splitLanguageRange(string $range): array
+    {
+        /**
+         * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
+         * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
+         */
+        return preg_split('/;q=/i', trim($range));
     }
 
     protected function normalizeLanguages(array $languages): array
