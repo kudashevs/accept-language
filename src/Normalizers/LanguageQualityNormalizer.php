@@ -55,11 +55,6 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     public function normalizeWithFallback($quality, float $fallback)
     {
-        return $this->normalizeQualityWithFallback($quality, $fallback);
-    }
-
-    private function normalizeQualityWithFallback($quality, float $fallback)
-    {
         if ($this->isValidQuality($quality)) {
             return $this->prepareQuality($quality);
         }
