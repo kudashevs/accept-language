@@ -188,6 +188,9 @@ class AcceptLanguage
 
         $languages = [];
         foreach (explode(',', $header) as $languageRange) {
+            /**
+             * For more information about language ranges see RFC 4647, Section 2.1.
+             */
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
             /** @var AbstractLanguage[] $languages */
