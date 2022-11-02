@@ -167,6 +167,13 @@ class QualityValueTest extends TestCase
     public function provideDifferentQualityValuesWithDifferentFallbacks(): array
     {
         return [
+            'a null quality with a fallback results in the fallback' => [
+                [
+                    'fallback_value' => 1,
+                ],
+                null,
+                1,
+            ],
             'an empty quality with a fallback results in the fallback' => [
                 [
                     'fallback_value' => 0.5,
@@ -174,12 +181,19 @@ class QualityValueTest extends TestCase
                 '',
                 0.5,
             ],
-            'a null quality with a fallback results in the fallback' => [
+            'a null quality with an invalid fallback results in the not acceptable' => [
                 [
-                    'fallback_value' => 1,
+                    'fallback_value' => 2,
                 ],
                 null,
-                1,
+                0,
+            ],
+            'an empty quality with an invalid fallback results in the not acceptable' => [
+                [
+                    'fallback_value' => -1,
+                ],
+                '',
+                0,
             ],
         ];
     }

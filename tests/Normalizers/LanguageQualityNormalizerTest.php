@@ -86,43 +86,71 @@ class LanguageQualityNormalizerTest extends TestCase
     public function provideDifferentQualityValuesWithFallback(): array
     {
         return [
-            'an empty quality results in the provided fallback' => [
-                ['', 0.5],
+            'a null quality with an invalid fallback results in the not acceptable' => [
+                [null, -1],
+                0,
+            ],
+            'a null quality with a valid fallback 0.5 results in the provided fallback' => [
+                [null, 0.5],
                 0.5,
             ],
-            'a null quality results in the provided fallback' => [
+            'a null quality with a valid fallback 1.0 results in the provided fallback' => [
                 [null, 1.0],
                 1,
             ],
-            'a random string results in the not acceptable' => [
+            'an empty quality with an invalid fallback results in the not acceptable' => [
+                ['', 2],
+                0,
+            ],
+            'an empty quality with a valid fallback 0.5 results in the provided fallback' => [
+                ['', 0.5],
+                0.5,
+            ],
+            'an empty quality with a valid fallback 1.0 results in the provided fallback' => [
+                ['', 1.0],
+                1,
+            ],
+            'a random string with a valid fallback results in the not acceptable' => [
                 ['wrong', 0.5],
                 0,
             ],
-            'a numerical string with invalid quality results in the not acceptable' => [
+            'a numerical string with an invalid quality and a valid fallback results in the not acceptable' => [
                 ['2', 0.5],
                 0,
             ],
-            'a numerical string with valid quality results in the quality' => [
+            'a numerical string with a valid quality and a valid fallback results in the quality' => [
                 ['1', 0.5],
                 1,
             ],
-            'an invalid negative quality results in the not acceptable' => [
+            'an invalid negative quality with a valid fallback results in the not acceptable' => [
                 [-1, 0.5],
                 0,
             ],
-            'an invalid positive quality results in the provided default' => [
+            'an invalid positive quality with a valid fallback results in the provided default' => [
                 [2, 0.5],
                 0,
             ],
-            'a valid quality 0 results in the the not acceptable' => [
+            'an empty quality with a fallback 0 results in the minimum fallback provided fallback' => [
+                ['', 0],
+                0,
+            ],
+            'an empty quality with a fallback 0.5 results in the provided fallback' => [
+                ['', 0.5],
+                0.5,
+            ],
+            'an empty quality with a fallback 1 results in the provided fallback' => [
+                ['', 1],
+                1,
+            ],
+            'a valid quality 0 with a valid fallback results in the the not acceptable' => [
                 [0, 1],
                 0,
             ],
-            'a valid quality 0.3 results in the quality' => [
+            'a valid quality 0.3 with a valid fallback results in the quality' => [
                 [0.3, 0.5],
                 0.3,
             ],
-            'a valid quality 1 results in the quality' => [
+            'a valid quality 1 with a valid fallback results in the quality' => [
                 [1, 0.5],
                 1,
             ],

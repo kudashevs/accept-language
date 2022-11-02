@@ -56,7 +56,9 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
     public function normalizeWithFallback($quality, float $fallback)
     {
         if ($this->isUndefinedQuality($quality)) {
-            return $this->prepareQuality($fallback);
+            return $this->prepareQuality(
+                $this->prepareFallback($fallback)
+            );
         }
 
         /**
@@ -64,7 +66,9 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
          * this is not a serious mistake, we might want to handle this empty value when a fallback is available.
          */
         if ($this->isEmptyQuality($quality)) {
-            return $this->prepareQuality($fallback);
+            return $this->prepareQuality(
+                $this->prepareFallback($fallback)
+            );
         }
 
         if ($this->isValidQuality($quality)) {
@@ -72,6 +76,14 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         }
 
         return self::NOT_ACCEPTABLE_QUALITY;
+    }
+
+    /**
+     * @return int|float
+     */
+    private function prepareFallback(float $fallback)
+    {
+        return $this->isValidQuality($fallback) ? $fallback : self::NOT_ACCEPTABLE_QUALITY;
     }
 
     private function isUndefinedQuality($quality): bool
