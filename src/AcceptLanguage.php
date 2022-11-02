@@ -270,7 +270,7 @@ class AcceptLanguage
     protected function retrieveLanguage(array $languages): string
     {
         foreach ($languages as $language) {
-            if ($this->isWildcard($language->getTag())) {
+            if ($this->isAnyLanguage($language)) {
                 return $this->retrieveDefaultLanguage();
             }
 
@@ -280,6 +280,11 @@ class AcceptLanguage
         }
 
         return $this->retrieveDefaultLanguage();
+    }
+
+    protected function isAnyLanguage(Language $language): bool
+    {
+        return $language->getTag() === '*';
     }
 
     protected function isAppropriateLanguage(Language $language): bool
