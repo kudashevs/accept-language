@@ -55,12 +55,16 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return $this->generateNormalizedTag($subtags);
     }
 
+    /**
+     * @return array<string, string|null>
+     */
     private function extractSubtags($tag): array
     {
         preg_match(
             '/^(?<primary>[a-z]{2,3})(-(?<extlang>[a-z]{3})?)?(-(?<script>[a-z]{4})?)?(-(?<region>[a-z]{2}|[0-9]{3})?)?$/i',
             $tag,
             $subtags,
+            PREG_UNMATCHED_AS_NULL,
         );
 
         return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
