@@ -263,18 +263,6 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideExceptionalCases(): array
     {
         return [
-            'a two-letter primary with extlang out of its exact place' => [
-                'zh-cmn-CN-cmn',
-                'zh-CN',
-            ],
-            'a two-letter primary with script out of its exact place' => [
-                'zh-cmn-CN-Latn',
-                'zh-CN',
-            ],
-            'a two-letter primary with region out of its exact place' => [
-                'de-ext-ext-Latn-CH-1901',
-                'de',
-            ],
             'a two-letter tag BCP47 section 2.1.1 example 1 return formatted' => [
                 'mn-Cyrl-MN',
                 'mn-Cyrl-MN',
