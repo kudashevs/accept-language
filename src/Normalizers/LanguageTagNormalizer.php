@@ -79,30 +79,30 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function normalizeSubtags(array $subtags): array
     {
-        $normalizedSubtags = [];
+        $normalizedSubtags = [
+            'primary' => $this->preparePrimary($subtags['primary']),
+            'extlang' => $this->prepareExtlang($subtags['extlang']),
+            'script' => $this->prepareScript($subtags['script']),
+            'region' => $this->prepareRegion($subtags['region']),
+        ];
 
-        foreach ($subtags as $index => $subtag) {
-            if ($this->isPrimary($index)) {
-                $normalizedSubtags[] = $this->normalizePrimary($subtag);
-                continue;
-            }
+        return array_filter($normalizedSubtags, function ($subtag) {
+            return $subtag !== '';
+        });
+    }
 
-            if ($this->isExtlang($subtag, $index)) {
-                $normalizedSubtags[] = $this->normalizeExtlang($subtag);
-            }
-
-            if ($this->isScript($subtag, $index)) {
-                $normalizedSubtags[] = $this->normalizeScript($subtag);
-            }
-
-            if ($this->isRegion($subtag, $index)) {
-                $normalizedSubtags[] = $this->normalizeRegion($subtag);
-            }
-
-            $this->processed++;
+    private function preparePrimary($value): string
+    {
+        if ($this->isAppropriateSubtag($value)) {
+            return $this->normalizePrimary($value);
         }
 
-        return $normalizedSubtags;
+        return '';
+    }
+
+    private function isAppropriateSubtag($value): bool
+    {
+        return is_string($value) && $value !== '';
     }
 
     private function isPrimary($index): bool
@@ -113,6 +113,15 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function normalizePrimary(string $subtag): string
     {
         return strtolower($subtag);
+    }
+
+    private function prepareExtlang($value): string
+    {
+        if ($this->options['with_extlang'] === true && $this->isAppropriateSubtag($value)) {
+            return $this->normalizeExtlang($value);
+        }
+
+        return '';
     }
 
     private function isExtlang(string $value, int $position): bool
@@ -132,6 +141,15 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return strtolower($subtag);
     }
 
+    private function prepareScript($value): string
+    {
+        if ($this->options['with_script'] === true && $this->isAppropriateSubtag($value)) {
+            return $this->normalizeScript($value);
+        }
+
+        return '';
+    }
+
     private function isScript(string $value, int $position): bool
     {
         return $this->options['with_script'] &&
@@ -148,6 +166,15 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function normalizeScript(string $subtag): string
     {
         return ucfirst(strtolower($subtag));
+    }
+
+    private function prepareRegion($value): string
+    {
+        if ($this->options['with_region'] === true && $this->isAppropriateSubtag($value)) {
+            return $this->normalizeRegion($value);
+        }
+
+        return '';
     }
 
     private function isRegion(string $value, int $position): bool
