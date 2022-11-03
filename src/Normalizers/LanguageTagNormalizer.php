@@ -61,13 +61,18 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function generateNormalizedTag(string $tag, array $subtags): string
     {
-        if (count($subtags) === 0) {
+        if ($this->isUnrecognizableTag($subtags)) {
             return $tag;
         }
 
         $normalizedSubtags = $this->normalizeSubtags($subtags);
 
         return implode($this->options['separator'], $normalizedSubtags);
+    }
+
+    private function isUnrecognizableTag(array $subtags): bool
+    {
+        return count($subtags) === 0;
     }
 
     private function normalizeSubtags(array $subtags): array
