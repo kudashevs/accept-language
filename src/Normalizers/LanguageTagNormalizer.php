@@ -45,7 +45,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
             return $tag;
         }
 
-        return $this->generateNormalizedTag($subtags);
+        return $this->generateNormalizedTag($tag, $subtags);
     }
 
     /**
@@ -63,7 +63,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
     }
 
-    private function generateNormalizedTag(array $subtags): string
+    private function generateNormalizedTag(string $tag, array $subtags): string
     {
         $normalizedSubtags = $this->normalizeSubtags($subtags);
 
