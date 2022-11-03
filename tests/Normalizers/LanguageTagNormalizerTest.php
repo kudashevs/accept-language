@@ -61,9 +61,9 @@ class LanguageTagNormalizerTest extends TestCase
                 'de-AT',
                 'de-AT',
             ],
-            'a two-letter primary with region formatted in digits result in remove region' => [
+            'a two-letter primary with region in digits result in no change' => [
                 'es-005',
-                'es',
+                'es-005',
             ],
             'a two-letter primary with extlang and region result in append only region' => [
                 'zh-cmn-CN',
@@ -223,6 +223,13 @@ class LanguageTagNormalizerTest extends TestCase
             ],
             'returns a language tag without region' => [
                 'zh-yue-Hant-CN',
+                [
+                    'with_region' => false,
+                ],
+                'zh-Hant',
+            ],
+            'returns a language tag without region in digits' => [
+                'zh-yue-Hant-005',
                 [
                     'with_region' => false,
                 ],

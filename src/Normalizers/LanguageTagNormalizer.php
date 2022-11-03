@@ -46,14 +46,24 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
      */
     public function normalize(string $tag): string
     {
-        $subtags = $this->splitLanguageTag($tag);
+        $subtags = $this->extractSubtags($tag);
+
+        if (count($subtags) === 0) {
+            return $tag;
+        }
 
         return $this->generateNormalizedTag($subtags);
     }
 
-    private function splitLanguageTag($tag): array
+    private function extractSubtags($tag): array
     {
-        return explode(self::SUBTAG_SEPARATOR, $tag);
+        preg_match(
+            '/^(?<primary>[a-z]{2,3})(-(?<extlang>[a-z]{3})?)?(-(?<script>[a-z]{4})?)?(-(?<region>[a-z]{2}|[0-9]{3})?)?$/i',
+            $tag,
+            $subtags,
+        );
+
+        return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
     }
 
     private function generateNormalizedTag(array $subtags): string
