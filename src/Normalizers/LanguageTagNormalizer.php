@@ -6,6 +6,14 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements AbstractTagNormalizer
 {
+    /**
+     * 'separator' A string with a custom separator to use in a normalized tag.
+     * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
+     * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
+     * 'with_region' A boolean that defines whether to add a region subtag to a normalized tag.
+     *
+     * @var array{'separator': string, 'with_extlang': bool, 'with_script': bool, 'with_region': bool}
+     */
     private array $options = [
         'separator' => '-',
         'with_extlang' => false,
