@@ -35,6 +35,8 @@ class AcceptLanguage
         'default_language' => 'en',
         'accepted_languages' => [],
         'two_letter_only' => true,
+        'use_script_subtag' => true,
+        'use_region_subtag' => true,
         'separator' => '_',
     ];
 
@@ -107,6 +109,8 @@ class AcceptLanguage
     {
         return new LanguageFactory([
             'separator' => $this->options['separator'],
+            'with_script' => $this->options['use_script_subtag'],
+            'with_region' => $this->options['use_region_subtag'],
         ]);
     }
 

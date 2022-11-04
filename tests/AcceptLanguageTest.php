@@ -346,6 +346,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      * @dataProvider provideDifferentTwoLetterOnlyOptions
+     * @dataProvider provideDifferentUseScriptRegionSubtagOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
     public function it_can_retrieve_the_preferred_language_with_different_options(array $options, string $expected)
@@ -373,6 +374,42 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'ast',
+            ],
+        ];
+    }
+
+    public function provideDifferentUseScriptRegionSubtagOptions(): array
+    {
+        return [
+            'returns expected with the use script subtag option set to true' => [
+                [
+                    'http_accept_language' => 'zh-Hans,fr;q=0.8, en;q=0.7',
+                    'use_script_subtag' => true,
+                ],
+                'zh_Hans',
+            ],
+            'returns expected with the use script subtag option set to false' => [
+                [
+                    'http_accept_language' => 'zh-Hans,fr;q=0.8, en;q=0.7',
+                    'use_script_subtag' => false,
+                ],
+                'zh',
+            ],
+            'returns expected with the use region subtag option set to true' => [
+                [
+                    'http_accept_language' => 'zh-Hant-HK,fr;q=0.8, en;q=0.7',
+                    'use_script_subtag' => false,
+                    'use_region_subtag' => true,
+                ],
+                'zh_HK',
+            ],
+            'returns expected with the use region subtag option set to false' => [
+                [
+                    'http_accept_language' => 'zh-Hant-HK,fr;q=0.8, en;q=0.7',
+                    'use_script_subtag' => false,
+                    'use_region_subtag' => false,
+                ],
+                'zh',
             ],
         ];
     }
