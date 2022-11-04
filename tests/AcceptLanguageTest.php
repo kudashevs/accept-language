@@ -638,7 +638,7 @@ class AcceptLanguageTest extends TestCase
     {
         /**
          * This is an exceptional case where we want to handle an empty quality parameter value.
-         * @see LanguageQualityNormalizer::normalizeQuality()
+         * @see LanguageQualityNormalizer::normalizeWithFallback()
          */
         $options = [
             'http_accept_language' => 'fr;q=,en;q=,gr',
