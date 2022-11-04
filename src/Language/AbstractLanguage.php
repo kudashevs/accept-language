@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Language;
 
+/**
+ * AbstractLanguage represents an abstraction of a language that consists of a language tag and a quality value.
+ */
 interface AbstractLanguage
 {
     /**
