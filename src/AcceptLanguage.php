@@ -303,7 +303,11 @@ class AcceptLanguage
 
     protected function retrieveDefaultLanguage(): string
     {
-        return $this->options['default_language'];
+        $formattedDefaultLanguage = $this->factory->makeFromLanguageString(
+            $this->options['default_language']
+        );
+
+        return $formattedDefaultLanguage->getTag();
     }
 
     /**

@@ -123,6 +123,22 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
+    /** @test */
+    public function it_can_format_the_default_language_option_according_to_the_settings()
+    {
+        $options = [
+            'default_language' => 'sr-Latn-RS',
+            'accepted_languages' => ['en', 'de', 'es'],
+            'separator' => '~',
+        ];
+
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame('sr~Latn~RS', $service->getPreferredLanguage());
+        $this->assertSame('sr~Latn~RS', $service->getLanguage());
+    }
+
     /**
      * @test
      * @dataProvider provideDifferentRequestHeaderValues
