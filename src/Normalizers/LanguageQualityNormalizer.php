@@ -99,14 +99,6 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return self::NOT_ACCEPTABLE_QUALITY;
     }
 
-    /**
-     * @return int|float
-     */
-    private function prepareFallback(float $fallback)
-    {
-        return $this->isValidQuality($fallback) ? $fallback : self::NOT_ACCEPTABLE_QUALITY;
-    }
-
     private function isEmptyQuality($quality): bool
     {
         return is_string($quality) && trim((string)$quality) === '' && $this->options['allow_empty'];
@@ -122,5 +114,13 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         }
 
         return (float)$quality;
+    }
+
+    /**
+     * @return int|float
+     */
+    private function prepareFallback(float $fallback)
+    {
+        return $this->isValidQuality($fallback) ? $fallback : self::NOT_ACCEPTABLE_QUALITY;
     }
 }
