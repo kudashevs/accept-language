@@ -288,14 +288,17 @@ class AcceptLanguage
 
     protected function isAppropriateLanguage(Language $language): bool
     {
-        $primarySubtag = $language->getPrimarySubtag();
-        $primarySubtagLength = strlen($primarySubtag);
+        $primarySubtagMinLength = 2;
+        $primarySubtagMaxLength = 3;
+        $primarySubtagLength = strlen(
+            $language->getPrimarySubtag()
+        );
 
         if ($this->options['two_letter_only']) {
             return $primarySubtagLength === 2;
         }
 
-        return $primarySubtagLength >= 2 && $primarySubtagLength <= 3;
+        return $primarySubtagLength >= $primarySubtagMinLength && $primarySubtagLength <= $primarySubtagMaxLength;
     }
 
     protected function retrieveDefaultLanguage(): string
