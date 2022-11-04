@@ -10,7 +10,7 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 interface AbstractTagNormalizer
 {
     /**
-     * Return a normalized tag.
+     * Perform a normalization process and return a normalized tag.
      *
      * @param string $tag
      * @return string
