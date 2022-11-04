@@ -64,7 +64,18 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
             PREG_UNMATCHED_AS_NULL,
         );
 
-        return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
+        return $this->prepareSubtags($subtags);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function prepareSubtags(array $subtags): array
+    {
+        return array_map(
+            'strval',
+            array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY)
+        );
     }
 
     private function generateNormalizedTag(string $tag, array $subtags): string
