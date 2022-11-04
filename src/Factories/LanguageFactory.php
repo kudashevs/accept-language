@@ -73,7 +73,7 @@ class LanguageFactory
 
     /**
      * @param string $tag
-     * @param int|float $quality
+     * @param int|float|string $quality
      * @param float $fallbackQuality
      * @return Language
      */
