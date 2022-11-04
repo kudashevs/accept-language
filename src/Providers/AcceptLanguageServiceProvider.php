@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kudashevs\AcceptLanguage\Providers;
 
 use Illuminate\Container\Container;
