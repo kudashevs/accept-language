@@ -182,8 +182,7 @@ class AcceptLanguage
     }
 
     /**
-     * Parse an HTTP Accept-Language header and perform the transition from language ranges (raw and not well-formed
-     * data) to language tags (validated and well-formed data). For more information see RFC 4647, Section 2.1.
+     * Parse an HTTP Accept-Language header, retrieve languages, and prepare them for further processing.
      *
      * @param string $header
      * @return array<AbstractLanguage>
