@@ -53,8 +53,8 @@ final class LanguageTag
     private function initTag(string $tag): void
     {
         if (!$this->isValidTag($tag)) {
-            $this->valid = false;
             $this->tag = $this->prepareTag($tag);
+            $this->valid = false;
 
             return;
         }
