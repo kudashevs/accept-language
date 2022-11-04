@@ -52,6 +52,11 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return $this->generateNormalizedTag($tag, $subtags);
     }
 
+    private function isValidExtraction(array $subtags): bool
+    {
+        return count($subtags) === 4;
+    }
+
     /**
      * @return array<string, string|null>
      */
