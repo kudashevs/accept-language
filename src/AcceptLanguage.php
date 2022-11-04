@@ -22,13 +22,23 @@ class AcceptLanguage
     protected string $language;
 
     /**
-     * @var array[
-     *  'http_accept_language' string A string with a custom HTTP Accept-Language header.
-     *  'default_language' string A string with a default preferred language value.
-     *  'accepted_languages' array An array with a list of supported languages.
-     *  'two_letter_only' bool A boolean which defines whether to use only the two-letter codes or not.
-     *  'separator' string A string with a character that will be used as the separator in the result.
-     * ]
+     * 'http_accept_language' string A string with a custom HTTP Accept-Language header.
+     * 'default_language' string A string with a default preferred language value.
+     * 'accepted_languages' array An array with a list of supported languages.
+     * 'two_letter_only' bool A boolean that defines whether to retrieve only two-letter primary subtags or not.
+     * 'use_script_subtag' bool A boolean that defines whether to include a script subtag in the result or not.
+     * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
+     * 'separator' string A string with a character that will be used as a separator in the result.
+     *
+     * @var array{
+     *     'http_accept_language': string,
+     *     'default_language': string,
+     *     'accepted_languages': array<int, string>,
+     *     'two_letter_only': bool,
+     *     'use_script_subtag': bool,
+     *     'use_region_subtag': bool,
+     *     'separator': string
+     * }
      */
     protected array $options = [
         'http_accept_language' => '',
