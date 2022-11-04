@@ -92,11 +92,6 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return $this->generateNormalizedTagFromSubtags($subtags);
     }
 
-    private function isUnrecognizableTag(array $subtags): bool
-    {
-        return count($subtags) === 0;
-    }
-
     private function generateNormalizedTagFromSubtags(array $subtags): string
     {
         $primary = $subtags['primary'] ?? '';
