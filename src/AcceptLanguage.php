@@ -81,7 +81,7 @@ class AcceptLanguage
      */
     protected function validateOption(string $name, $value): void
     {
-        if (!array_key_exists($name, $this->options)) {
+        if (!$this->isValidOptionName($name)) {
             return;
         }
 
@@ -98,6 +98,11 @@ class AcceptLanguage
                 )
             );
         }
+    }
+
+    protected function isValidOptionName(string $name): bool
+    {
+        return array_key_exists($name, $this->options);
     }
 
     protected function initFactory(): void
