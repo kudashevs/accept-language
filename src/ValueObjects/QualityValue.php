@@ -89,11 +89,14 @@ class QualityValue
 
     private function isLikeInteger($quality): bool
     {
-        return is_int($quality) || (
-                is_string($quality) &&
-                is_numeric($quality) &&
-                strpos($quality, '.') === false
-            );
+        return is_int($quality) || $this->isStringInteger($quality);
+    }
+
+    private function isStringInteger($quality): bool
+    {
+        return is_string($quality) &&
+            is_numeric($quality) &&
+            strpos($quality, '.') === false;
     }
 
     private function normalizeQuality($quality)
