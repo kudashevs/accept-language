@@ -12,6 +12,11 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
      */
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
+    /**
+     * 'allow_empty' A boolean that defines whether to handle an empty quality when a fallback is available.
+     *
+     * @var array{'allow_empty': bool}
+     */
     private array $options = [
         'allow_empty' => true,
     ];
