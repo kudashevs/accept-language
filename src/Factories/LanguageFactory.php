@@ -22,11 +22,22 @@ class LanguageFactory
         $this->options = $options;
     }
 
+    /**
+     * @param string $language
+     * @return AbstractLanguage
+     */
     public function makeFromLanguageString(string $language): AbstractLanguage
     {
         return $this->createValidLanguage($language, 1);
     }
 
+    /**
+     * @param array<string, mixed> $rawLanguageRange
+     * @param float $fallbackQuality
+     * @return AbstractLanguage
+     *
+     * @throws InvalidFactoryArgumentException
+     */
     public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): AbstractLanguage
     {
         $this->checkValidLanguageRange($rawLanguageRange);
