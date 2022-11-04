@@ -47,8 +47,8 @@ class QualityValue
     private function initQuality($quality): void
     {
         if (!$this->isValidQuality($quality)) {
-            $this->valid = false;
             $this->quality = $this->prepareQuality($quality);
+            $this->valid = false;
 
             return;
         }
