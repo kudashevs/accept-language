@@ -25,7 +25,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     }
 
     /**
-     * @return array
+     * @return array<string, string|array>
      */
     private function getConfig(): array
     {
