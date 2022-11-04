@@ -162,7 +162,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array[]|AbstractLanguage[]
+     * @return array<AbstractLanguage>
      */
     protected function parseHeader(string $header): array
     {
@@ -186,7 +186,7 @@ class AcceptLanguage
      * data) to language tags (validated and well-formed data). For more information see RFC 4647, Section 2.1.
      *
      * @param string $header
-     * @return AbstractLanguage[]
+     * @return array<AbstractLanguage>
      */
     protected function parseHeaderWithNormalization(string $header): array
     {
@@ -207,7 +207,7 @@ class AcceptLanguage
              */
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
-            /** @var AbstractLanguage[] $languages */
+            /** @var array<AbstractLanguage> $languages */
             $languages[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
                 $fallbackQuality
