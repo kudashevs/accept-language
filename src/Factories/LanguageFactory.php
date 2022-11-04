@@ -51,7 +51,7 @@ class LanguageFactory
         return count($range) > 2;
     }
 
-    public function createInvalidLanguage(string $tag, $quality): Language
+    protected function createInvalidLanguage(string $tag, $quality): Language
     {
         return Language::createInvalid($tag, $quality, $this->options);
     }
@@ -62,7 +62,7 @@ class LanguageFactory
      * @param float $fallbackQuality
      * @return Language
      */
-    public function createValidLanguageWithFallback(string $tag, $quality, float $fallbackQuality): Language
+    protected function createValidLanguageWithFallback(string $tag, $quality, float $fallbackQuality): Language
     {
         $options = array_merge($this->options, [
             'fallback_value' => $fallbackQuality,
