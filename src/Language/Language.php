@@ -30,7 +30,7 @@ final class Language implements AbstractLanguage
 
     /**
      * @param string $tag
-     * @param $quality
+     * @param mixed $quality
      * @param array $options
      * @return Language
      */
