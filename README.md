@@ -64,11 +64,14 @@ The class accepts some options which help you to control the result:
 
 ```
 'http_accept_language'      # A string with custom a HTTP Accept-Language header.
-'default_language'          # A string with a default preferred language value (default is 'en').
-'accepted_languages'        # An array with a list of supported languages (default is []).
+'default_language'          # A string with a default preferred language value (default is 'en')¹.
+'accepted_languages'        # An array with a list of supported languages (default is [])².
 'two_letter_only'           # A boolean defines whether to use the two-letter codes only (default is true).
-'separator'                 # A string with a character that will be used as the separator in the result (default is '_').
+'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
 ```
+<small>1 - the default language should be a valid Language Tag (it will be formatted according to the settings)</small>  
+<small>2 - the values of the `accept-languages` option should be valid Language Tags</small>  
+<small>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</small>
 
 ## Laravel usage
 
