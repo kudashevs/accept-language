@@ -31,7 +31,8 @@ composer require kudashevs/accept-language
 ## Usage
 
 The usage is quite simple. Just instantiate the `AcceptLanguage` class and call a `process` method on the instance.
-Do it somewhere before a place where you need the user's preferred language (for example, it can be done in a middleware).
+Do it somewhere before a place where you need the user's preferred language (for example, in a front controller or
+in a middleware).
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
