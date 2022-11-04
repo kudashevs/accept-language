@@ -76,20 +76,18 @@ The class accepts some options that help you to control the result:
 
 ## Laravel usage
 
-If you don't use auto-discovery just add a ServiceProvider to the config/app.php
-
+If you don't use auto-discovery just add a ServiceProvider to the `config/app.php` file.
 ```php
 'providers' => [
     Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider::class,
 ];
 ```
 
-Once added, the `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class and keep its instance in
-the container. To get the preferred language just access the object in the container through a dependency injection
-or directly by alias (e.g. `app('acceptlanguage')->getLanguage();`).
+Once added, the `AcceptLanguageServiceProvider` will prepare the `AcceptLanguage` class for usage and keep its instance
+in the container. To get the preferred language just access the object in the container through a dependency injection
+or directly by using an alias (e.g. `app('acceptlanguage')->getLanguage();`).
 
-If you want to add a Laravel Facade just add it to the aliases array in the config/app.php
-
+If you want to add a Laravel Facade just add it to the aliases array in the `config/app.php` file.
 ```php
 'aliases' => [
     'AcceptLanguage' => Kudashevs\AcceptLanguage\Facades\AcceptLanguage::class,
