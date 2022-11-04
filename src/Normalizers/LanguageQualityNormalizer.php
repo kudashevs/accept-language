@@ -50,6 +50,22 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
         return self::NOT_ACCEPTABLE_QUALITY;
     }
 
+    private function isUndefinedQuality($quality): bool
+    {
+        return is_null($quality);
+    }
+
+    private function isValidQuality($value): bool
+    {
+        /**
+         * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
+         * and 1 is the most preferred; a value of 0 means "not acceptable". See RFC 7231, Section 5.3.1.
+         */
+        return is_numeric($value) &&
+            $value > 0 &&
+            max(min($value, 1), 0.001) === $value;
+    }
+
     /**
      * @inheritDoc
      */
@@ -84,22 +100,6 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
     private function prepareFallback(float $fallback)
     {
         return $this->isValidQuality($fallback) ? $fallback : self::NOT_ACCEPTABLE_QUALITY;
-    }
-
-    private function isUndefinedQuality($quality): bool
-    {
-        return is_null($quality);
-    }
-
-    private function isValidQuality($value): bool
-    {
-        /**
-         * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
-         * and 1 is the most preferred; a value of 0 means "not acceptable". See RFC 7231, Section 5.3.1.
-         */
-        return is_numeric($value) &&
-            $value > 0 &&
-            max(min($value, 1), 0.001) === $value;
     }
 
     private function isEmptyQuality($quality): bool
