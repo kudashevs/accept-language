@@ -96,6 +96,12 @@ If you want to add a Laravel Facade just add it to the aliases array in the conf
 ];
 ```
 
+## Testing
+If you want to be sure that everything works as expected, just run the unit tests provided with the package.
+```bash
+composer test
+```
+
 ## References
 
 - [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://tools.ietf.org/html/rfc7231#section-5.3.5)
