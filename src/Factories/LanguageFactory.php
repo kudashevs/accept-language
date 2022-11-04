@@ -51,11 +51,21 @@ class LanguageFactory
         return count($range) > 2;
     }
 
+    /**
+     * @param string $tag
+     * @param int|float|string $quality
+     * @return Language
+     */
     protected function createValidLanguage(string $tag, $quality): Language
     {
         return Language::create($tag, $quality, $this->options);
     }
 
+    /**
+     * @param string $tag
+     * @param int|float|string $quality
+     * @return Language
+     */
     protected function createInvalidLanguage(string $tag, $quality): Language
     {
         return Language::createInvalid($tag, $quality, $this->options);
