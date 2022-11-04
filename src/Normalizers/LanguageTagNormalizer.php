@@ -22,7 +22,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     ];
 
     /**
-     * @param array $options
+     * @param array<string, bool|string> $options
      */
     public function __construct(array $options = [])
     {

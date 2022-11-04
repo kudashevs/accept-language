@@ -25,7 +25,7 @@ final class LanguageTag
 
     /**
      * @param string $tag
-     * @param array $options
+     * @param array<string, bool|string> $options
      */
     public function __construct(string $tag, array $options = [])
     {

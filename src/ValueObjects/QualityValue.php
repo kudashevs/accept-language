@@ -19,7 +19,7 @@ class QualityValue
 
     /**
      * @param int|float|string $quality
-     * @param array $options
+     * @param array<string, bool|string> $options
      */
     public function __construct($quality, array $options = [])
     {

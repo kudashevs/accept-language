@@ -53,7 +53,7 @@ class AcceptLanguage
     protected LanguageFactory $factory;
 
     /**
-     * @param array $options
+     * @param array<string, bool|string|array> $options
      * @throws InvalidOptionArgumentException
      */
     public function __construct(array $options = [])
@@ -73,6 +73,8 @@ class AcceptLanguage
     }
 
     /**
+     * @return array<string, bool|string|array>
+     *
      * @throws InvalidOptionArgumentException
      */
     protected function retrieveValidOptions(array $options): array

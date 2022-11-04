@@ -12,6 +12,9 @@ class LanguageFactory
 {
     protected array $options = [];
 
+    /**
+     * @param array<string, bool|string> $options
+     */
     public function __construct(array $options = [])
     {
         $this->initOptions($options);

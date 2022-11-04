@@ -20,7 +20,7 @@ final class Language implements AbstractLanguage
     /**
      * @param string $tag
      * @param int|float|string $quality
-     * @param array $options
+     * @param array<string, bool|string> $options
      * @return Language
      */
     public static function create(string $tag, $quality, array $options = []): Language
@@ -31,7 +31,7 @@ final class Language implements AbstractLanguage
     /**
      * @param string $tag
      * @param mixed $quality
-     * @param array $options
+     * @param array<string, bool|string> $options
      * @return Language
      */
     public static function createInvalid(string $tag, $quality, array $options = []): Language

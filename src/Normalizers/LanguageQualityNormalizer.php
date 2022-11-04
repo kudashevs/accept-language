@@ -22,7 +22,7 @@ final class LanguageQualityNormalizer implements AbstractQualityNormalizer
     ];
 
     /**
-     * @param array $options
+     * @param array<string, bool|string> $options
      */
     public function __construct(array $options = [])
     {
