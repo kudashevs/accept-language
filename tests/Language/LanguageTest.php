@@ -136,6 +136,79 @@ class LanguageTest extends TestCase
         ];
     }
 
+    /**
+     * @test
+     * @dataProvider provideDifferentLanguageAndQualityValuesWithDifferentOptions
+     */
+    public function it_can_create_a_valid_language_with_different_options(
+        array $input,
+        string $expectedTag,
+        $expectedQuality
+    ) {
+        $language = Language::create(...$input);
+
+        $this->assertSame($expectedTag, $language->getTag());
+        $this->assertSame($expectedQuality, $language->getQuality());
+        $this->assertTrue($language->isValid());
+    }
+
+    public function provideDifferentLanguageAndQualityValuesWithDifferentOptions(): array
+    {
+        return [
+            'a language tag with all options disabled results in the expected language' => [
+                [
+                    'de-gsg-Latn-DE',
+                    1,
+                    [
+                        'with_extlang' => false,
+                        'with_script' => false,
+                        'with_region' => false,
+                    ],
+                ],
+                'de',
+                1,
+            ],
+            'a language tag with all options enabled results in the expected language' => [
+                [
+                    'de-gsg-Latn-DE',
+                    0,
+                    [
+                        'separator' => '~',
+                        'with_extlang' => true,
+                        'with_script' => true,
+                        'with_region' => true,
+                    ],
+                ],
+                'de~gsg~Latn~DE',
+                0,
+            ],
+            'a quality with all options disabled results in the expected quality' => [
+                [
+                    'en',
+                    '',
+                    [
+                        'allow_empty' => false,
+                        'fallback_value' => 0.5,
+                    ],
+                ],
+                'en',
+                0,
+            ],
+            'a quality with all options enabled results in the expected quality' => [
+                [
+                    'en',
+                    0.5,
+                    [
+                        'allow_empty' => true,
+                        'fallback_value' => 0.5,
+                    ],
+                ],
+                'en',
+                0.5,
+            ],
+        ];
+    }
+
     /** @test */
     public function it_can_retrieve_a_primary_subtag()
     {
