@@ -59,7 +59,13 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     private function extractSubtags($tag): array
     {
         preg_match(
-            '/^(?<primary>[a-z]{2,3})(-(?<extlang>[a-z]{3})?)?(-(?<script>[a-z]{4})?)?(-(?<region>[a-z]{2}|[0-9]{3})?)?$/i',
+            '/^
+                        (?<primary>[a-z]{2,3})
+                        (-(?<extlang>[a-z]{3})?)?
+                        (-(?<script>[a-z]{4})?)?
+                        (-(?<region>[a-z]{2}|[0-9]{3})?)?
+                        (-(?<variant>[a-z][a-z0-9]{4,}|[0-9][a-z0-9]{3,})?)?
+                    $/iSx',
             $tag,
             $subtags,
             PREG_UNMATCHED_AS_NULL,
@@ -90,7 +96,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isValidSetOfSubtags(array $subtags): bool
     {
-        return count($subtags) === 4;
+        return count($subtags) === 5;
     }
 
     private function generateNormalizedTagFromSubtags(array $subtags): string

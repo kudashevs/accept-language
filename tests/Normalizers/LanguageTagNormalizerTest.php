@@ -77,6 +77,22 @@ class LanguageTagNormalizerTest extends TestCase
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
+            'a two-letter primary with variant result in remove variant' => [
+                'sl-nedis',
+                'sl',
+            ],
+            'a two-letter primary with region and variant result in remove variant' => [
+                'sl-IT-nedis',
+                'sl-IT',
+            ],
+            'a two-letter primary with region and variant in digits result in remove variant' => [
+                'de-CH-1901',
+                'de-CH',
+            ],
+            'a two-letter primary with region and extended variant result in remove variant' => [
+                'fr-FR-1694acad',
+                'fr-FR',
+            ],
         ];
     }
 
