@@ -87,8 +87,12 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         );
     }
 
-    private function generateNormalizedTag(array $subtags): string
+    private function generateNormalizedTag(string $tag, array $subtags): string
     {
+        if (!$this->isValidSetOfSubtags($subtags)) {
+            return $tag;
+        }
+
         return $this->generateNormalizedTagFromSubtags($subtags);
     }
 
