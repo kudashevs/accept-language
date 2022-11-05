@@ -218,40 +218,68 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideLanguageTagsWithDifferentWithOptions(): array
     {
         return [
-            'returns a language tag without extlang and with script and region by default' => [
+            'returns a language tag without extlang by default' => [
                 'zh-yue-Hant-CN',
                 [],
                 'zh-Hant-CN',
             ],
-            'returns a language tag with extlang' => [
+            'returns a language tag with extlang when extlang option set to true' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
                 ],
                 'zh-yue-Hant-CN',
             ],
-            'returns a language tag without script' => [
+            'returns a language tag without extlang when extlang option set to false' => [
+                'zh-yue-Hant-CN',
+                [
+                    'with_extlang' => false,
+                ],
+                'zh-Hant-CN',
+            ],
+            'returns a language tag with script when script option set to true' => [
+                'zh-yue-Hant-CN',
+                [
+                    'with_script' => true,
+                ],
+                'zh-Hant-CN',
+            ],
+            'returns a language tag without script when script option set to false' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_script' => false,
                 ],
                 'zh-CN',
             ],
-            'returns a language tag without region' => [
+            'returns a language tag with region when region option set to true' => [
+                'zh-yue-Hant-CN',
+                [
+                    'with_region' => true,
+                ],
+                'zh-Hant-CN',
+            ],
+            'returns a language tag without region when region option set to false' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_region' => false,
                 ],
                 'zh-Hant',
             ],
-            'returns a language tag without region in digits' => [
+            'returns a language tag with region in digits when region option set to true' => [
+                'zh-yue-Hant-005',
+                [
+                    'with_region' => true,
+                ],
+                'zh-Hant-005',
+            ],
+            'returns a language tag without region in digits when region option set to false' => [
                 'zh-yue-Hant-005',
                 [
                     'with_region' => false,
                 ],
                 'zh-Hant',
             ],
-            'returns expected language tag with all switched on' => [
+            'returns an expected language tag with all switched on' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
@@ -260,7 +288,7 @@ class LanguageTagNormalizerTest extends TestCase
                 ],
                 'zh-yue-Hant-CN',
             ],
-            'returns expected language tag with all switched off' => [
+            'returns an expected language tag with all switched off' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => false,
