@@ -29,67 +29,67 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideDifferentLanguageTags(): array
     {
         return [
-            'an empty string result in no change' => [
+            'an empty string results in no change' => [
                 '',
                 '',
             ],
-            'a space symbol result in no change' => [
+            'a space symbol results in no change' => [
                 ' ',
                 ' ',
             ],
-            'a wildcard symbol result in no change' => [
+            'a wildcard symbol results in no change' => [
                 '*',
                 '*',
             ],
-            'a two-letter primary result in no change' => [
+            'a two-letter primary results in no change' => [
                 'en',
                 'en',
             ],
-            'a three-letter primary result in no change' => [
+            'a three-letter primary results in no change' => [
                 'dum',
                 'dum',
             ],
-            'a two-letter primary with extlang result in remove extlang' => [
+            'a two-letter primary with extlang results in remove extlang' => [
                 'zh-yue',
                 'zh',
             ],
-            'a two-letter primary with script result in no change' => [
+            'a two-letter primary with script results in no change' => [
                 'sr-Latn',
                 'sr-Latn',
             ],
-            'a two-letter primary with region result in no change' => [
+            'a two-letter primary with region results in no change' => [
                 'de-AT',
                 'de-AT',
             ],
-            'a two-letter primary with region in digits result in no change' => [
+            'a two-letter primary with region in digits results in no change' => [
                 'es-005',
                 'es-005',
             ],
-            'a two-letter primary with extlang and region result in append only region' => [
+            'a two-letter primary with extlang and region results in append only region' => [
                 'zh-cmn-CN',
                 'zh-CN',
             ],
-            'a two-letter primary with script and region result in append script and region' => [
+            'a two-letter primary with script and region results in append script and region' => [
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region result in append only script and region' => [
+            'a two-letter primary with extlang, script, and region results in append only script and region' => [
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
-            'a two-letter primary with variant result in remove variant' => [
+            'a two-letter primary with variant results in remove variant' => [
                 'sl-nedis',
                 'sl',
             ],
-            'a two-letter primary with region and variant result in remove variant' => [
+            'a two-letter primary with region and variant results in remove variant' => [
                 'sl-IT-nedis',
                 'sl-IT',
             ],
-            'a two-letter primary with region and variant in digits result in remove variant' => [
+            'a two-letter primary with region and variant in digits results in remove variant' => [
                 'de-CH-1901',
                 'de-CH',
             ],
-            'a two-letter primary with region and extended variant result in remove variant' => [
+            'a two-letter primary with region and extended variant results in remove variant' => [
                 'fr-FR-1694acad',
                 'fr-FR',
             ],
@@ -110,35 +110,35 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideLanguageTagsWithDifferentSeparatorOption(): array
     {
         return [
-            'a two-letter primary result in no change' => [
+            'a two-letter primary results in no change' => [
                 'en',
                 [
                     'separator' => '_',
                 ],
                 'en',
             ],
-            'a two-letter primary with script with hyphen separator result in no change' => [
+            'a two-letter primary with script with hyphen separator results in no change' => [
                 'sr-Latn',
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn',
             ],
-            'a two-letter primary with script and region with hyphen separator result in no change' => [
+            'a two-letter primary with script and region with hyphen separator results in no change' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region with hyphen separator result in no change' => [
+            'a two-letter primary with extlang, script, and region with hyphen separator results in no change' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '-',
                 ],
                 'zh-Hant-CN',
             ],
-            'a three-letter primary with script with hyphen separator result in no change' => [
+            'a three-letter primary with script with hyphen separator results in no change' => [
                 'sgn-Latn',
                 [
                     'separator' => '-',
@@ -286,15 +286,15 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideExceptionalCases(): array
     {
         return [
-            'a two-letter tag BCP47 section 2.1.1 example 1 return formatted' => [
+            'a two-letter tag BCP47 section 2.1.1 example 1 returns formatted' => [
                 'mn-Cyrl-MN',
                 'mn-Cyrl-MN',
             ],
-            'a two-letter tag BCP47 section 2.1.1 example 2 return formatted' => [
+            'a two-letter tag BCP47 section 2.1.1 example 2 returns formatted' => [
                 'MN-cYRL-mn',
                 'mn-Cyrl-MN',
             ],
-            'a two-letter tag BCP47 section 2.1.1 example 3 return formatted' => [
+            'a two-letter tag BCP47 section 2.1.1 example 3 returns formatted' => [
                 'mN-cYrL-Mn',
                 'mn-Cyrl-MN',
             ],
