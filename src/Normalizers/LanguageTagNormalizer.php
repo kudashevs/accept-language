@@ -95,16 +95,11 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function generateNormalizedTagFromSubtags(array $subtags): string
     {
-        $primary = $subtags['primary'] ?? '';
-        $extlang = $subtags['extlang'] ?? '';
-        $script = $subtags['script'] ?? '';
-        $region = $subtags['region'] ?? '';
-
         $normalizedSubtags = [
-            'primary' => $this->preparePrimary($primary),
-            'extlang' => $this->prepareExtlang($extlang),
-            'script' => $this->prepareScript($script),
-            'region' => $this->prepareRegion($region),
+            $this->normalizePrimary($subtags['primary']),
+            $this->options['with_extlang'] ? $this->normalizeExtlang($subtags['extlang']) : '',
+            $this->options['with_script'] ? $this->normalizeScript($subtags['script']) : '',
+            $this->options['with_region'] ? $this->normalizeRegion($subtags['region']) : '',
         ];
 
         return implode($this->options['separator'], array_filter($normalizedSubtags, 'strlen'));
