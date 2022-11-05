@@ -310,11 +310,16 @@ class AcceptLanguage
             $language->getPrimarySubtag()
         );
 
-        if ($this->options['two_letter_only']) {
+        if ($this->isTwoLetterOnlyCase()) {
             return $primarySubtagLength === 2;
         }
 
         return $primarySubtagLength >= $primarySubtagMinLength && $primarySubtagLength <= $primarySubtagMaxLength;
+    }
+
+    protected function isTwoLetterOnlyCase()
+    {
+        return $this->options['two_letter_only'];
     }
 
     protected function retrieveDefaultLanguage(): string
