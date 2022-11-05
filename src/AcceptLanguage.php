@@ -273,7 +273,9 @@ class AcceptLanguage
     protected function prepareAcceptedLanguagesForComparison(): array
     {
         return array_map(function ($language) {
-            return $this->prepareLanguageForComparison($language);
+            $hyphenatedLanguage = str_replace($this->options['separator'], '-', $language);
+
+            return $this->prepareLanguageForComparison($hyphenatedLanguage);
         }, $this->options['accepted_languages']);
     }
 

@@ -342,6 +342,37 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'es',
             ],
+            'a language that intersects with accepted_languages with hyphen separator results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr-CH'],
+                ],
+                'fr_CH',
+            ],
+            'a language that intersects with accepted_languages with underscore separator results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr_CH'],
+                    'separator' => '_',
+                ],
+                'fr_CH',
+            ],
+            'a language that intersects with accepted_languages with tilde separator results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr~CH'],
+                    'separator' => '~',
+                ],
+                'fr~CH',
+            ],
+            'a language that intersects with accepted_languages and a separator results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr-CH'],
+                    'separator' => '_',
+                ],
+                'fr_CH',
+            ],
             'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality 1' => [
                 [
                     'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
