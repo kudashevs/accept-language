@@ -279,7 +279,7 @@ class AcceptLanguage
 
     protected function prepareLanguageForComparison(string $language): string
     {
-        return strtolower(str_replace('-', $this->options['separator'], $language));
+        return $this->factory->makeFromLanguageString($language)->getTag();
     }
 
     protected function retrieveLanguage(array $languages): string
