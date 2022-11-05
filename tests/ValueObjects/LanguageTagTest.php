@@ -89,7 +89,7 @@ class LanguageTagTest extends TestCase
                 'de-gsg-Latn-DE',
                 'de-gsg-Latn-DE',
             ],
-            'a three-letter primary result in the language' => [
+            'a three-letter primary results in the language' => [
                 'ast',
                 'ast',
             ],
@@ -186,35 +186,35 @@ class LanguageTagTest extends TestCase
     public function provideDifferentLanguageValuesWithDifferentSeparatorOption(): array
     {
         return [
-            'a two-letter primary result in no change' => [
+            'a two-letter primary results in no change' => [
                 [
                     'separator' => '_',
                 ],
                 'en',
                 'en',
             ],
-            'a two-letter primary with script with hyphen separator result in no change' => [
+            'a two-letter primary with script with hyphen separator results in no change' => [
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn',
                 'sr-Latn',
             ],
-            'a two-letter primary with script and region with hyphen separator result in no change' => [
+            'a two-letter primary with script and region with hyphen separator results in no change' => [
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region with hyphen separator result in no change' => [
+            'a two-letter primary with extlang, script, and region with hyphen separator results in no change' => [
                 [
                     'separator' => '-',
                 ],
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
-            'a three-letter primary with script with hyphen separator result in no change' => [
+            'a three-letter primary with script with hyphen separator results in no change' => [
                 [
                     'separator' => '-',
                 ],
@@ -295,35 +295,35 @@ class LanguageTagTest extends TestCase
     public function provideDifferentLanguageValues(): array
     {
         return [
-            'a two-letter primary result in no change' => [
+            'a two-letter primary results in no change' => [
                 [
                     'separator' => '-',
                 ],
                 'en',
                 'en',
             ],
-            'a two-letter primary with script with hyphen separator result in the primary subtag' => [
+            'a two-letter primary with script with hyphen separator results in the primary subtag' => [
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn',
                 'sr',
             ],
-            'a two-letter primary with extlang, script, and region with hyphen separator result in the primary subtag' => [
+            'a two-letter primary with extlang, script, and region with hyphen separator results in the primary subtag' => [
                 [
                     'separator' => '-',
                 ],
                 'zh-yue-Hant-CN',
                 'zh',
             ],
-            'a two-letter primary with extlang, script, and region with underscore separator result in in the primary subtag' => [
+            'a two-letter primary with extlang, script, and region with underscore separator results in in the primary subtag' => [
                 [
                     'separator' => '_',
                 ],
                 'zh-yue-Hant-CN',
                 'zh',
             ],
-            'a two-letter primary with extlang, script, and region with tilde separator result in in the primary subtag' => [
+            'a two-letter primary with extlang, script, and region with tilde separator results in in the primary subtag' => [
                 [
                     'separator' => '~',
                 ],
