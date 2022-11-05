@@ -47,13 +47,10 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
      */
     public function normalize(string $tag): string
     {
-        $subtags = $this->extractSubtags($tag);
-
-        if ($this->isValidExtraction($subtags)) {
-            return $this->generateNormalizedTag($subtags);
-        }
-
-        return $tag;
+        return $this->generateNormalizedTag(
+            $tag,
+            $this->extractSubtags($tag)
+        );
     }
 
     private function isValidExtraction(array $subtags): bool
