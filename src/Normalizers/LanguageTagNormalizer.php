@@ -92,6 +92,11 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
         return $this->generateNormalizedTagFromSubtags($subtags);
     }
 
+    private function isValidSetOfSubtags(array $subtags): bool
+    {
+        return count($subtags) === 4;
+    }
+
     private function generateNormalizedTagFromSubtags(array $subtags): string
     {
         $primary = $subtags['primary'] ?? '';
