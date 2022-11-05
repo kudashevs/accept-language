@@ -71,7 +71,7 @@ The class accepts some options that help you to control the result:
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
 ```
 <small>1 - the default language should be a valid Language Tag (it will be formatted according to the settings)</small>  
-<small>2 - the values of the `accept-languages` option should be valid Language Tags</small>  
+<small>2 - the value of the `accepted_languages` option should include only valid Language Tags (however, a value from `separator` can be used)</small>  
 <small>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</small>
 
 ## Laravel usage
