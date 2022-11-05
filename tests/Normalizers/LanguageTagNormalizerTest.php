@@ -73,7 +73,7 @@ class LanguageTagNormalizerTest extends TestCase
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region result in append expected only' => [
+            'a two-letter primary with extlang, script, and region result in append only script and region' => [
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
