@@ -93,6 +93,18 @@ class LanguageTagNormalizerTest extends TestCase
                 'fr-FR-1694acad',
                 'fr-FR',
             ],
+            'a two-letter primary with region and extension results in remove extension' => [
+                'de-DE-u-co-phonebk',
+                'de-DE',
+            ],
+            'a two-letter primary with region and private results in remove private' => [
+                'en-US-x-twain',
+                'en-US',
+            ],
+            'a two-letter primary with extlange, script, region, variant, extension and private-use subtags results in the expected' => [
+                'th-tsq-thai-th-bauddha-t-th-x-foobar-private',
+                'th-Thai-TH',
+            ],
         ];
     }
 
@@ -218,8 +230,8 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideLanguageTagsWithDifferentWithOptions(): array
     {
         return [
-            'returns a language tag without extlang by default' => [
-                'zh-yue-Hant-CN',
+            'returns a language tag without extlang, variant, extension and private-use subtags by default' => [
+                'zh-yue-Hant-CN-tongyong-u-co-phonebk-x-foobar',
                 [],
                 'zh-Hant-CN',
             ],

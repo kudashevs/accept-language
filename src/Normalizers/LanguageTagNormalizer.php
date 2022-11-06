@@ -64,7 +64,9 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
                         (-(?<extlang>[a-z]{3})?)?
                         (-(?<script>[a-z]{4})?)?
                         (-(?<region>[a-z]{2}|[0-9]{3})?)?
-                        (-(?<variant>[a-z][a-z0-9]{4,}|[0-9][a-z0-9]{3,})?)?
+                        (-([a-z][a-z0-9]{4,}|[0-9][a-z0-9]{3,})?)?      # variant subtag
+                        (-([a-z]-[a-z-]+)?)?                            # extension subtag
+                        (-(x-[[a-z-]+)?)?                               # private subtag
                     $/iSx',
             $tag,
             $subtags,
@@ -96,7 +98,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
 
     private function isValidSetOfSubtags(array $subtags): bool
     {
-        return count($subtags) === 5;
+        return count($subtags) === 4;
     }
 
     private function generateNormalizedTagFromSubtags(array $subtags): string
