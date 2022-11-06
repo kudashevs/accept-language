@@ -71,9 +71,7 @@ class LanguageFactory
     }
 
     /**
-     * @param string $tag
      * @param int|float|string $quality
-     * @return Language
      */
     protected function createValidLanguage(string $tag, $quality): Language
     {
@@ -81,9 +79,7 @@ class LanguageFactory
     }
 
     /**
-     * @param string $tag
-     * @param int|float|string $quality
-     * @return Language
+     * @param mixed $quality
      */
     protected function createInvalidLanguage(string $tag, $quality): Language
     {
@@ -91,10 +87,7 @@ class LanguageFactory
     }
 
     /**
-     * @param string $tag
-     * @param int|float|string $quality
-     * @param float $fallbackQuality
-     * @return Language
+     * @param int|float|string|null $quality
      */
     protected function createValidLanguageWithFallback(string $tag, $quality, float $fallbackQuality): Language
     {
