@@ -408,14 +408,14 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentTwoLetterOnlyOptions(): array
     {
         return [
-            'returns expected with the two-letter only option set to true' => [
+            'returns expected second in row language with the two-letter only option set to true' => [
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => true,
                 ],
                 'en',
             ],
-            'returns expected with the two-letter only option set to false' => [
+            'returns expected first in row language with the two-letter only option set to false' => [
                 [
                     'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
                     'two_letter_only' => false,
