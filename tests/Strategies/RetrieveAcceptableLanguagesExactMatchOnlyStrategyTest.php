@@ -49,6 +49,29 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
     }
 
+    /** @test */
+    public function it_can_retrieve_the_exact_match_languages_from_languages()
+    {
+        $languages = [
+            $this->createLanguage('fr', 1),
+            $this->createLanguage('fr-CH', 0.9),
+            $this->createLanguage('en-US', 0.8),
+            $this->createLanguage('en', 0.5),
+        ];
+
+        $accepted = [
+            $this->createLanguage('fr-CH'),
+            $this->createLanguage('en'),
+        ];
+
+        $strategy = new RetrieveAcceptableLanguagesExactMatchOnlyStrategy();
+        $result = $strategy->retrieve($languages, $accepted);
+
+        $this->assertCount(2, $result);
+        $this->assertContainsLanguage(['fr-CH', 0.9], $result);
+        $this->assertContainsLanguage(['en', 0.5], $result);
+    }
+
     protected function createLanguage(string $language, float $quality = 1): AbstractLanguage
     {
         return (new LanguageFactory())->makeFromLanguageString($language, $quality);
