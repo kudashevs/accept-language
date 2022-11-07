@@ -394,6 +394,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentTwoLetterOnlyOptions
      * @dataProvider provideDifferentUseScriptRegionSubtagOptions
+     * @dataProvider provideDifferentFullSearchOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
     public function it_can_retrieve_the_preferred_language_with_different_options(array $options, string $expected)
@@ -457,6 +458,62 @@ class AcceptLanguageTest extends TestCase
                     'use_region_subtag' => false,
                 ],
                 'zh',
+            ],
+        ];
+    }
+
+    public function provideDifferentFullSearchOptions(): array
+    {
+        return [
+            'returns expected default with the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'fr-CH',
+                    'accepted_languages' => ['fr'],
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected language with the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'fr-CH',
+                    'accepted_languages' => ['fr'],
+                    'exact_match_only' => false,
+                ],
+                'fr_CH',
+            ],
+            'returns expected default with script and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'de-Latn-AT',
+                    'accepted_languages' => ['de-AT'],
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected language with script and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'de-gsg-AT',
+                    'accepted_languages' => ['de-AT'],
+                    'exact_match_only' => false,
+                ],
+                'de_AT',
+            ],
+            'returns expected default with extlang, script, and region and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'sgn-ase-Latn-US',
+                    'accepted_languages' => ['sgn_us'],
+                    'two_letter_only' => false,
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected language with extlang, script, and region and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'sgn-ase-Latn-US',
+                    'accepted_languages' => ['sgn_us'],
+                    'two_letter_only' => false,
+                    'exact_match_only' => false,
+                ],
+                'sgn_Latn_US',
             ],
         ];
     }

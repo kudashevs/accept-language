@@ -281,7 +281,13 @@ class AcceptLanguage
 
     protected function prepareLanguageForComparison(string $language): string
     {
-        return $this->factory->makeFromLanguageString($language)->getTag();
+        $languageTag = $this->factory->makeFromLanguageString($language);
+
+        if (!$this->options['exact_match_only']) {
+            return $languageTag->getPrimarySubtag();
+        }
+
+        return $languageTag->getTag();
     }
 
     protected function retrieveLanguage(array $languages): string
