@@ -286,11 +286,16 @@ class AcceptLanguage
     {
         $languageTag = $this->factory->makeFromLanguageString($language);
 
-        if (!$this->options['exact_match_only']) {
-            return $languageTag->getPrimarySubtag();
+        if ($this->isExactMatchOnlyCase()) {
+            return $languageTag->getTag();
         }
 
-        return $languageTag->getTag();
+        return $languageTag->getPrimarySubtag();
+    }
+
+    protected function isExactMatchOnlyCase(): bool
+    {
+        return $this->options['exact_match_only'];
     }
 
     protected function retrieveLanguage(array $languages): string
