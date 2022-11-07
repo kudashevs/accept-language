@@ -25,6 +25,7 @@ class AcceptLanguage
      * 'http_accept_language' string A string with a custom HTTP Accept-Language header.
      * 'default_language' string A string with a default preferred language value.
      * 'accepted_languages' array An array with a list of supported languages.
+     * 'exact_match_only' bool A boolean that defines whether to retrieve only languages that match exactly the supported languages.
      * 'two_letter_only' bool A boolean that defines whether to retrieve only two-letter primary subtags or not.
      * 'use_script_subtag' bool A boolean that defines whether to include a script subtag in the result or not.
      * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
@@ -34,6 +35,7 @@ class AcceptLanguage
      *     'http_accept_language': string,
      *     'default_language': string,
      *     'accepted_languages': array<int, string>,
+     *     'exact_match_only': bool,
      *     'two_letter_only': bool,
      *     'use_script_subtag': bool,
      *     'use_region_subtag': bool,
@@ -44,6 +46,7 @@ class AcceptLanguage
         'http_accept_language' => '',
         'default_language' => 'en',
         'accepted_languages' => [],
+        'exact_match_only' => true,
         'two_letter_only' => true,
         'use_script_subtag' => true,
         'use_region_subtag' => true,
