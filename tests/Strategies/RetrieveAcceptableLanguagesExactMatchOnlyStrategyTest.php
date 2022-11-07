@@ -5,6 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Strategies;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Strategies\RetrieveAcceptableLanguagesExactMatchOnlyStrategy;
+use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
 class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
@@ -23,8 +24,8 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
         $strategy = new RetrieveAcceptableLanguagesExactMatchOnlyStrategy();
         $result = $strategy->retrieve($languages, $accepted);
 
-        $this->assertSame('fr-CH', $result[0]->getTag());
-        $this->assertSame(0.5, $result[0]->getQuality());
+        $this->assertCount(1, $result);
+        $this->assertContainsLanguage(['fr-CH', 0.5], $result);
     }
 
     /** @test */
@@ -45,12 +46,45 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
         $result = $strategy->retrieve($languages, $accepted);
 
         $this->assertCount(1, $result);
-        $this->assertSame('fr-CH', $result[0]->getTag());
-        $this->assertSame(0.9, $result[0]->getQuality());
+        $this->assertContainsLanguage(['fr-CH', 0.9], $result);
     }
 
     protected function createLanguage(string $language, float $quality = 1): AbstractLanguage
     {
         return (new LanguageFactory())->makeFromLanguageString($language, $quality);
+    }
+
+    /**
+     * @param AbstractLanguage|array|string $needle
+     * @param array<AbstractLanguage> $haystack
+     * @return void
+     */
+    protected function assertContainsLanguage($needle, array $haystack): void
+    {
+        if (is_a($needle, AbstractLanguage::class)) {
+            $found = array_filter($haystack, function ($language) use ($needle) {
+                return $language->getTag() === $needle->getTag() &&
+                    $language->getQuality() === $needle->getQuality();
+            });
+        }
+
+        if (is_array($needle) && is_string($needle[0]) && is_float($needle[1])) {
+            $found = array_filter($haystack, function ($language) use ($needle) {
+                return $language->getTag() === $needle[0] &&
+                    $language->getQuality() === $needle[1];
+            });
+        }
+
+        if (is_string($needle)) {
+            $found = array_filter($haystack, function ($language) use ($needle) {
+                return $language->getTag() === $needle;
+            });
+        }
+
+        if (!isset($found)) {
+            throw new Exception('The needle of a wrong type.');
+        }
+
+        $this->assertCount(1, $found);
     }
 }
