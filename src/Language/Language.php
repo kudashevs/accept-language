@@ -102,6 +102,14 @@ final class Language implements AbstractLanguage
     }
 
     /**
+     * @return array<int, string>
+     */
+    public function getSubtags(): array
+    {
+        return $this->tag->getSubtags();
+    }
+
+    /**
      * @return string
      */
     public function getPrimarySubtag(): string

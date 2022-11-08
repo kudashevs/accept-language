@@ -223,6 +223,18 @@ class LanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_retrieve_subtags_of_a_tag()
+    {
+        $expectedSubtags = ['de', 'Latn', 'DE'];
+
+        $language = Language::create('de-Latn-DE', 1);
+
+        $this->assertCount(3, $language->getSubtags());
+        $this->assertSame($expectedSubtags, $language->getSubtags());
+        $this->assertTrue($language->isValid());
+    }
+
+    /** @test */
     public function it_can_retrieve_a_primary_subtag()
     {
         $language = Language::create('zh-yue-Hant-CN', 1);
