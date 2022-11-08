@@ -54,7 +54,7 @@ final class LanguageTagNormalizer implements AbstractTagNormalizer
     }
 
     /**
-     * @return array<string, string|null>
+     * @return array<string, string>
      */
     private function extractSubtags($tag): array
     {
