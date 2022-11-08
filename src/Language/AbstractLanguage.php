@@ -10,6 +10,13 @@ namespace Kudashevs\AcceptLanguage\Language;
 interface AbstractLanguage
 {
     /**
+     * Return provided options.
+     *
+     * @return array<string, mixed>
+     */
+    public function getOptions(): array;
+
+    /**
      * Return a language tag.
      *
      * @return string
