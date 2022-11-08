@@ -24,6 +24,13 @@ interface AbstractLanguage
     public function getTag(): string;
 
     /**
+     * Return subtags of a language tag.
+     *
+     * @return array
+     */
+    public function getSubtags(): array;
+
+    /**
      * Return a primary subtag of a language tag.
      *
      * @return string
