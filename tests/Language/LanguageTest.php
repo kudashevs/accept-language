@@ -210,6 +210,19 @@ class LanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_retain_the_provided_options()
+    {
+        $language = Language::create('zh-yue-Hant-CN', 1, [
+            'separator' => '~',
+            'fallback_value' => 0.5,
+        ]);
+
+        $this->assertContains('~', $language->getOptions());
+        $this->assertContains(0.5, $language->getOptions());
+        $this->assertTrue($language->isValid());
+    }
+
+    /** @test */
     public function it_can_retrieve_a_primary_subtag()
     {
         $language = Language::create('zh-yue-Hant-CN', 1);

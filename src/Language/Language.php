@@ -86,6 +86,14 @@ final class Language implements AbstractLanguage
     }
 
     /**
+     * @return array<string, bool|string>
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
      * @return string
      */
     public function getTag(): string
