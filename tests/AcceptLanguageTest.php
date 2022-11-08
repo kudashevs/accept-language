@@ -393,7 +393,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      * @dataProvider provideDifferentTwoLetterOnlyOptions
-     * @dataProvider provideDifferentUseScriptRegionSubtagOptions
+     * @dataProvider provideDifferentUseExtlangScriptRegionSubtagOptions
      * @dataProvider provideDifferentFullSearchOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
@@ -426,9 +426,23 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentUseScriptRegionSubtagOptions(): array
+    public function provideDifferentUseExtlangScriptRegionSubtagOptions(): array
     {
         return [
+            'returns expected with the use extlang subtag option set to true' => [
+                [
+                    'http_accept_language' => 'zh-yue-Hans,fr;q=0.8, en;q=0.7',
+                    'use_extlang_subtag' => true,
+                ],
+                'zh_yue_Hans',
+            ],
+            'returns expected with the use extlang subtag option set to false' => [
+                [
+                    'http_accept_language' => 'zh-yue-Hans,fr;q=0.8, en;q=0.7',
+                    'use_extlang_subtag' => false,
+                ],
+                'zh_Hans',
+            ],
             'returns expected with the use script subtag option set to true' => [
                 [
                     'http_accept_language' => 'zh-Hans,fr;q=0.8, en;q=0.7',
