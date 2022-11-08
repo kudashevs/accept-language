@@ -284,51 +284,59 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValues
      */
-    public function it_can_retrieve_a_primary_subtag(array $options, string $input, string $expected)
+    public function it_can_retrieve_a_primary_subtag_and_subtags(array $options, string $input, array $expected)
     {
         $language = new LanguageTag($input, $options);
 
-        $this->assertSame($expected, $language->getPrimarySubtag());
+        $this->assertSame($expected, $language->getSubtags());
+        $this->assertSame($expected[0], $language->getPrimarySubtag());
         $this->assertTrue($language->isValid());
     }
 
     public function provideDifferentLanguageValues(): array
     {
         return [
-            'a two-letter primary results in no change' => [
+            'a two-letter primary results in the subtags' => [
                 [
                     'separator' => '-',
                 ],
                 'en',
-                'en',
+                ['en'],
             ],
-            'a two-letter primary with script with hyphen separator results in the primary subtag' => [
+            'a two-letter primary with script with hyphen separator results in the subtags' => [
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn',
-                'sr',
+                ['sr', 'Latn'],
             ],
-            'a two-letter primary with extlang, script, and region with hyphen separator results in the primary subtag' => [
+            'a two-letter primary with script and region with hyphen separator results in the subtags' => [
+                [
+                    'separator' => '-',
+                ],
+                'sr-Latn-RS',
+                ['sr', 'Latn', 'RS'],
+            ],
+            'a two-letter primary with extlang, script, and region with hyphen separator results in the subtags' => [
                 [
                     'separator' => '-',
                 ],
                 'zh-yue-Hant-CN',
-                'zh',
+                ['zh', 'Hant', 'CN'],
             ],
-            'a two-letter primary with extlang, script, and region with underscore separator results in in the primary subtag' => [
+            'a two-letter primary with extlang, script, and region with underscore separator results in the subtags' => [
                 [
                     'separator' => '_',
                 ],
                 'zh-yue-Hant-CN',
-                'zh',
+                ['zh', 'Hant', 'CN'],
             ],
-            'a two-letter primary with extlang, script, and region with tilde separator results in in the primary subtag' => [
+            'a two-letter primary with extlang, script, and region with tilde separator results in the subtags' => [
                 [
                     'separator' => '~',
                 ],
                 'zh-yue-Hant-CN',
-                'zh',
+                ['zh', 'Hant', 'CN'],
             ],
         ];
     }

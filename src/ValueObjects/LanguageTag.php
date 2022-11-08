@@ -138,6 +138,14 @@ final class LanguageTag
     }
 
     /**
+     * @return array
+     */
+    public function getSubtags(): array
+    {
+        return explode($this->separator, $this->tag);
+    }
+
+    /**
      * @return string
      */
     public function getPrimarySubtag(): string
