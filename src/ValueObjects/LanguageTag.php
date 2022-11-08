@@ -150,7 +150,7 @@ final class LanguageTag
      */
     public function getPrimarySubtag(): string
     {
-        return explode($this->separator, $this->tag)[0];
+        return current($this->getSubtags());
     }
 
     /**
