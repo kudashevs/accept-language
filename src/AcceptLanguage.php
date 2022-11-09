@@ -165,7 +165,7 @@ class AcceptLanguage
     {
         $applicableLanguages = $this->parseHeader($header);
 
-        $acceptableLanguages = $this->getAcceptableLanguages($applicableLanguages);
+        $acceptableLanguages = $this->retrievePreferredLanguages($applicableLanguages);
 
         return $this->retrieveLanguage($acceptableLanguages);
     }
@@ -257,7 +257,7 @@ class AcceptLanguage
         });
     }
 
-    protected function getAcceptableLanguages(array $languages): array
+    protected function retrievePreferredLanguages(array $languages): array
     {
         if ($this->isEmptyAcceptedLanguagesOption()) {
             return $languages;
