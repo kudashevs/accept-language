@@ -33,7 +33,7 @@ class TestCase extends PHPUnitTestCase
             });
         }
 
-        if (is_array($needle) && is_string($needle[0]) && is_float($needle[1])) {
+        if (is_array($needle) && is_string($needle[0]) && is_numeric($needle[1])) {
             $found = array_filter($haystack, function ($language) use ($needle) {
                 return $language->getTag() === $needle[0] &&
                     $language->getQuality() === $needle[1];
