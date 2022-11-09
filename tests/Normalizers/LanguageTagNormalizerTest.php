@@ -326,15 +326,15 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideExceptionalCases(): array
     {
         return [
-            'a two-letter tag BCP47 section 2.1.1 example 1 returns formatted' => [
+            'a two-letter tag RFC 5646 section 2.1.1 case insensitive example 1 returns formatted' => [
                 'mn-Cyrl-MN',
                 'mn-Cyrl-MN',
             ],
-            'a two-letter tag BCP47 section 2.1.1 example 2 returns formatted' => [
+            'a two-letter tag RFC 5646 section 2.1.1 case insensitive example 2 returns formatted' => [
                 'MN-cYRL-mn',
                 'mn-Cyrl-MN',
             ],
-            'a two-letter tag BCP47 section 2.1.1 example 3 returns formatted' => [
+            'a two-letter tag RFC 5646 section 2.1.1 case insensitive example 3 returns formatted' => [
                 'mN-cYrL-Mn',
                 'mn-Cyrl-MN',
             ],
