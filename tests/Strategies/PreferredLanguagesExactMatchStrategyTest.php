@@ -2,9 +2,9 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Strategies;
 
-use Kudashevs\AcceptLanguage\Strategies\RetrieveAcceptableLanguagesExactMatchOnlyStrategy;
+use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesExactMatchStrategy;
 
-class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
+class PreferredLanguagesExactMatchStrategyTest extends TestCase
 {
     /** @test */
     public function it_can_retrieve_the_exact_match_language()
@@ -17,7 +17,7 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new RetrieveAcceptableLanguagesExactMatchOnlyStrategy();
+        $strategy = new PreferredLanguagesExactMatchStrategy();
         $result = $strategy->retrieve($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -38,7 +38,7 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new RetrieveAcceptableLanguagesExactMatchOnlyStrategy();
+        $strategy = new PreferredLanguagesExactMatchStrategy();
         $result = $strategy->retrieve($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -60,7 +60,7 @@ class RetrieveAcceptableLanguagesExactMatchOnlyStrategyTest extends TestCase
             $this->createLanguage('en'),
         ];
 
-        $strategy = new RetrieveAcceptableLanguagesExactMatchOnlyStrategy();
+        $strategy = new PreferredLanguagesExactMatchStrategy();
         $result = $strategy->retrieve($languages, $accepted);
 
         $this->assertCount(2, $result);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
-class RetrieveAcceptableLanguagesExactMatchOnlyStrategy implements AbstractRetrieveAcceptableLanguagesStrategy
+class PreferredLanguagesExactMatchStrategy implements AbstractPreferredLanguagesMatchStrategy
 {
     public function retrieve(array $languages, array $accepted): array
     {
