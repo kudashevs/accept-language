@@ -7,7 +7,7 @@ use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesExactMatchStrategy;
 class PreferredLanguagesExactMatchStrategyTest extends TestCase
 {
     /** @test */
-    public function it_can_retrieve_the_exact_match_language()
+    public function it_can_retrieve_the_exact_matching_language()
     {
         $languages = [
             $this->createLanguage('fr-CH', 0.5),
@@ -25,7 +25,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_exact_match_language_from_languages()
+    public function it_can_retrieve_the_exact_matching_language_from_languages()
     {
         $languages = [
             $this->createLanguage('fr', 1),
@@ -46,7 +46,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_exact_match_languages_from_languages()
+    public function it_can_retrieve_the_exact_matching_languages_from_languages()
     {
         $languages = [
             $this->createLanguage('fr', 1),
