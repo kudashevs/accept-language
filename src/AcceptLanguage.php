@@ -167,7 +167,7 @@ class AcceptLanguage
 
         $preferredLanguages = $this->retrievePreferredLanguages($applicableLanguages);
 
-        return $this->retrieveLanguage($preferredLanguages);
+        return $this->retrievePreferredLanguage($preferredLanguages);
     }
 
     /**
@@ -302,7 +302,7 @@ class AcceptLanguage
         return $this->options['exact_match_only'];
     }
 
-    protected function retrieveLanguage(array $languages): string
+    protected function retrievePreferredLanguage(array $languages): string
     {
         foreach ($languages as $language) {
             if ($this->isAnyLanguage($language)) {
