@@ -165,9 +165,9 @@ class AcceptLanguage
     {
         $applicableLanguages = $this->parseHeader($header);
 
-        $acceptableLanguages = $this->retrievePreferredLanguages($applicableLanguages);
+        $preferredLanguages = $this->retrievePreferredLanguages($applicableLanguages);
 
-        return $this->retrieveLanguage($acceptableLanguages);
+        return $this->retrieveLanguage($preferredLanguages);
     }
 
     /**
