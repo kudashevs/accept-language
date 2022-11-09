@@ -6,7 +6,7 @@ namespace Kudashevs\AcceptLanguage\Strategies;
 
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 
-interface AbstractRetrieveAcceptableLanguagesStrategy
+interface AbstractPreferredLanguagesMatchStrategy
 {
     /**
      * @param array<AbstractLanguage> $languages
