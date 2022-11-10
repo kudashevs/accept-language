@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
+use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 
 class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatchStrategy
@@ -14,7 +15,7 @@ class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatch
 
         foreach ($languages as $language) {
             foreach ($accepted as $accept) {
-                if ($this->isAcceptedLanguageMatch($accept->getSubtags(), $language->getSubtags())) {
+                if ($this->isAcceptedLanguageMatch($accept, $language)) {
                     $result[] = Language::create(
                         $accept->getTag(),
                         $language->getQuality(),
@@ -27,8 +28,11 @@ class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatch
         return $result;
     }
 
-    protected function isAcceptedLanguageMatch(array $accepted, array $language): bool
+    protected function isAcceptedLanguageMatch(AbstractLanguage $accepted, AbstractLanguage $language): bool
     {
-        return count(array_intersect($accepted, $language)) >= count($accepted);
+        $matchingSubtags = count(array_intersect($accepted->getSubtags(), $language->getSubtags()));
+        $matchingThreshold = count($accepted->getSubtags());
+
+        return $matchingSubtags >= $matchingThreshold;
     }
 }
