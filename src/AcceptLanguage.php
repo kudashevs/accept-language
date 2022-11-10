@@ -294,9 +294,7 @@ class AcceptLanguage
     protected function prepareAcceptedLanguagesForMatching(): array
     {
         return array_map(function ($language) {
-            $hyphenatedLanguage = str_replace($this->options['separator'], '-', $language);
-
-            return $this->prepareLanguageForComparison($hyphenatedLanguage);
+            return $this->factory->makeFromLanguageString($language);
         }, $this->options['accepted_languages']);
     }
 
