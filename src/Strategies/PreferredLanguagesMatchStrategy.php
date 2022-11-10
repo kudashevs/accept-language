@@ -14,7 +14,7 @@ class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatch
 
         foreach ($languages as $language) {
             foreach ($accepted as $accept) {
-                if ($this->isIntersected($accept->getSubtags(), $language->getSubtags())) {
+                if ($this->isAcceptedLanguageMatch($accept->getSubtags(), $language->getSubtags())) {
                     $result[] = Language::create(
                         $accept->getTag(),
                         $language->getQuality(),
@@ -27,8 +27,8 @@ class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatch
         return $result;
     }
 
-    protected function isIntersected(array $intersecting, array $intersected): bool
+    protected function isAcceptedLanguageMatch(array $accepted, array $language): bool
     {
-        return count(array_intersect($intersecting, $intersected)) >= count($intersecting);
+        return count(array_intersect($accepted, $language)) >= count($accepted);
     }
 }
