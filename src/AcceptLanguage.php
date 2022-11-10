@@ -281,9 +281,14 @@ class AcceptLanguage
 
     protected function retrieveMatchingStrategy(): AbstractPreferredLanguagesMatchStrategy
     {
-        return $this->options['exact_match_only']
+        return $this->isExactMatchOnlyCase()
             ? new PreferredLanguagesExactMatchStrategy()
             : new PreferredLanguagesMatchStrategy();
+    }
+
+    protected function isExactMatchOnlyCase(): bool
+    {
+        return $this->options['exact_match_only'];
     }
 
     protected function prepareAcceptedLanguagesForComparison(): array
@@ -304,11 +309,6 @@ class AcceptLanguage
         }
 
         return $languageTag->getPrimarySubtag();
-    }
-
-    protected function isExactMatchOnlyCase(): bool
-    {
-        return $this->options['exact_match_only'];
     }
 
     protected function retrievePreferredLanguage(array $languages): string
