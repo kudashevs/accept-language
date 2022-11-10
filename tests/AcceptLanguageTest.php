@@ -394,7 +394,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentTwoLetterOnlyOptions
      * @dataProvider provideDifferentUseExtlangScriptRegionSubtagOptions
-     * @dataProvider provideDifferentFullSearchOptions
+     * @dataProvider provideDifferentMatchingOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
     public function it_can_retrieve_the_preferred_language_with_different_options(array $options, string $expected)
@@ -476,7 +476,7 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentFullSearchOptions(): array
+    public function provideDifferentMatchingOptions(): array
     {
         return [
             'returns expected default with the exact match only option set to true' => [
