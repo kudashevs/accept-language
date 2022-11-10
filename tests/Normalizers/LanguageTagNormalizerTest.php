@@ -41,67 +41,67 @@ class LanguageTagNormalizerTest extends TestCase
                 '*',
                 '*',
             ],
-            'a two-letter primary results in no change' => [
+            'a two-letter language tag results in no change' => [
                 'en',
                 'en',
             ],
-            'a three-letter primary results in no change' => [
+            'a three-letter language tag results in no change' => [
                 'dum',
                 'dum',
             ],
-            'a two-letter primary with extlang results in remove extlang' => [
+            'a two-letter language tag with extlang results in remove extlang' => [
                 'zh-yue',
                 'zh',
             ],
-            'a two-letter primary with script results in no change' => [
+            'a two-letter language tag with script results in no change' => [
                 'sr-Latn',
                 'sr-Latn',
             ],
-            'a two-letter primary with region results in no change' => [
+            'a two-letter language tag with region results in no change' => [
                 'de-AT',
                 'de-AT',
             ],
-            'a two-letter primary with region in digits results in no change' => [
+            'a two-letter language tag with region in digits results in no change' => [
                 'es-005',
                 'es-005',
             ],
-            'a two-letter primary with extlang and region results in append only region' => [
+            'a two-letter language tag with extlang and region results in append only region' => [
                 'zh-cmn-CN',
                 'zh-CN',
             ],
-            'a two-letter primary with script and region results in append script and region' => [
+            'a two-letter language tag with script and region results in append script and region' => [
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region results in append only script and region' => [
+            'a two-letter language tag with extlang, script, and region results in append only script and region' => [
                 'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
-            'a two-letter primary with variant results in remove variant' => [
+            'a two-letter language tag with variant results in remove variant' => [
                 'sl-nedis',
                 'sl',
             ],
-            'a two-letter primary with region and variant results in remove variant' => [
+            'a two-letter language tag with region and variant results in remove variant' => [
                 'sl-IT-nedis',
                 'sl-IT',
             ],
-            'a two-letter primary with region and variant in digits results in remove variant' => [
+            'a two-letter language tag with region and variant in digits results in remove variant' => [
                 'de-CH-1901',
                 'de-CH',
             ],
-            'a two-letter primary with region and extended variant results in remove variant' => [
+            'a two-letter language tag with region and extended variant results in remove variant' => [
                 'fr-FR-1694acad',
                 'fr-FR',
             ],
-            'a two-letter primary with region and extension results in remove extension' => [
+            'a two-letter language tag with region and extension results in remove extension' => [
                 'de-DE-u-co-phonebk',
                 'de-DE',
             ],
-            'a two-letter primary with region and private results in remove private' => [
+            'a two-letter language tag with region and private results in remove private' => [
                 'en-US-x-twain',
                 'en-US',
             ],
-            'a two-letter primary with extlange, script, region, variant, extension and private-use subtags results in the expected' => [
+            'a two-letter language tag with extlange, script, region, variant, extension and private-use subtags results in the expected' => [
                 'th-tsq-thai-th-bauddha-t-th-x-foobar-private',
                 'th-Thai-TH',
             ],
@@ -122,91 +122,91 @@ class LanguageTagNormalizerTest extends TestCase
     public function provideLanguageTagsWithDifferentSeparatorOption(): array
     {
         return [
-            'a two-letter primary results in no change' => [
+            'a two-letter language tag results in no change' => [
                 'en',
                 [
                     'separator' => '_',
                 ],
                 'en',
             ],
-            'a two-letter primary with script with hyphen separator results in no change' => [
+            'a two-letter language tag with script with hyphen separator results in no change' => [
                 'sr-Latn',
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn',
             ],
-            'a two-letter primary with script and region with hyphen separator results in no change' => [
+            'a two-letter language tag with script and region with hyphen separator results in no change' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '-',
                 ],
                 'sr-Latn-RS',
             ],
-            'a two-letter primary with extlang, script, and region with hyphen separator results in no change' => [
+            'a two-letter language tag with extlang, script, and region with hyphen separator results in no change' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '-',
                 ],
                 'zh-Hant-CN',
             ],
-            'a three-letter primary with script with hyphen separator results in no change' => [
+            'a three-letter language tag with script with hyphen separator results in no change' => [
                 'sgn-Latn',
                 [
                     'separator' => '-',
                 ],
                 'sgn-Latn',
             ],
-            'a two-letter primary with script with underscore separator change the separator' => [
+            'a two-letter language tag with script with underscore separator change the separator' => [
                 'sr-Latn',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn',
             ],
-            'a two-letter primary with script and region with underscore separator change the separator' => [
+            'a two-letter language tag with script and region with underscore separator change the separator' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '_',
                 ],
                 'sr_Latn_RS',
             ],
-            'a two-letter primary with extlang, script, and region with underscore separator change the separator' => [
+            'a two-letter language tag with extlang, script, and region with underscore separator change the separator' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
                 ],
                 'zh_Hant_CN',
             ],
-            'a three-letter primary with script with underscore separator no change' => [
+            'a three-letter language tag with script with underscore separator no change' => [
                 'sgn-Latn',
                 [
                     'separator' => '_',
                 ],
                 'sgn_Latn',
             ],
-            'a two-letter primary with script with tilde separator change the separator' => [
+            'a two-letter language tag with script with tilde separator change the separator' => [
                 'sr-Latn',
                 [
                     'separator' => '~',
                 ],
                 'sr~Latn',
             ],
-            'a two-letter primary with script and region with tilde separator change the separator' => [
+            'a two-letter language tag with script and region with tilde separator change the separator' => [
                 'sr-Latn-RS',
                 [
                     'separator' => '~',
                 ],
                 'sr~Latn~RS',
             ],
-            'a two-letter primary with extlang, script, and region with tilde separator change the separator' => [
+            'a two-letter language tag with extlang, script, and region with tilde separator change the separator' => [
                 'zh-yue-Hant-CN',
                 [
                     'separator' => '~',
                 ],
                 'zh~Hant~CN',
             ],
-            'a three-letter primary with script with tilde separator no change' => [
+            'a three-letter language tag with script with tilde separator no change' => [
                 'sr-Latn',
                 [
                     'separator' => '~',
