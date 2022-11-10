@@ -298,17 +298,6 @@ class AcceptLanguage
         }, $this->options['accepted_languages']);
     }
 
-    protected function prepareLanguageForComparison(string $language): string
-    {
-        $languageTag = $this->factory->makeFromLanguageString($language);
-
-        if ($this->isExactMatchOnlyCase()) {
-            return $languageTag->getTag();
-        }
-
-        return $languageTag->getPrimarySubtag();
-    }
-
     protected function retrievePreferredLanguage(array $languages): string
     {
         foreach ($languages as $language) {
