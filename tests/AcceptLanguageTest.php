@@ -171,104 +171,104 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'es,*,de;q=0.7'],
                 'es',
             ],
-            'a two-letter primary language tag results in the language' => [
+            'a two-letter language tag results in the language' => [
                 ['http_accept_language' => 'fr'],
                 'fr',
             ],
-            'a three-letter primary language tag results in default' => [
+            'a three-letter language tag results in default' => [
                 ['http_accept_language' => 'sgn'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag with option results in default' => [
+            'a three-letter language tag with option results in default' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a four letters primary language tag results in default' => [
+            'a four letters language tag results in default' => [
                 ['http_accept_language' => 'test'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a two-letter primary language tag with region results in the language' => [
+            'a two-letter language tag with region results in the language' => [
                 ['http_accept_language' => 'en-us'],
                 'en_US',
             ],
-            'a two-letter primary language tag with script and region results in the language' => [
+            'a two-letter language tag with script and region results in the language' => [
                 ['http_accept_language' => 'zh-Hant-HK'],
                 'zh_Hant_HK',
             ],
-            'a two-letter primary language tag with 0 quality language tag results in default' => [
+            'a two-letter language tag with 0 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag with 0 quality language tag results in the language' => [
+            'a three-letter language tag with 0 quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a two-letter primary language tag with 0.001 quality language tag results in default' => [
+            'a two-letter language tag with 0.001 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0.001'],
                 'de',
             ],
-            'a three-letter primary language tag with 0.001 quality language tag results in the language' => [
+            'a three-letter language tag with 0.001 quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.001',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a two-letter primary language tag with quality language tag results in the language' => [
+            'a two-letter language tag with quality language tag results in the language' => [
                 ['http_accept_language' => 'de;q=0.5'],
                 'de',
             ],
-            'a three-letter primary language tag with quality language tag results in the language' => [
+            'a three-letter language tag with quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.5',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a two-letter primary language tag with 0.999 quality language tag results in default' => [
+            'a two-letter language tag with 0.999 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0.999'],
                 'de',
             ],
-            'a three-letter primary language tag with 0.999 quality language tag results in the language' => [
+            'a three-letter language tag with 0.999 quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=0.999',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a two-letter primary language tag with 1 quality language tag results in default' => [
+            'a two-letter language tag with 1 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=1'],
                 'de',
             ],
-            'a three-letter primary language tag with 1 quality language tag results in the language' => [
+            'a three-letter language tag with 1 quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a two-letter primary language tag with 1.001 quality language tag results in default' => [
+            'a two-letter language tag with 1.001 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=1.001'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag with 1.001 quality language tag results in the language' => [
+            'a three-letter language tag with 1.001 quality language tag results in the language' => [
                 [
                     'http_accept_language' => 'sgn;q=1.001',
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a four letters primary language tag with quality language tag results in default' => [
+            'a four letters language tag with quality language tag results in default' => [
                 ['http_accept_language' => 'test;q=0.5'],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a sequence of primary tags results in the language' => [
+            'a sequence of language tags results in the language' => [
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
                 'de',
             ],
@@ -660,105 +660,105 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength(): array
     {
         return [
-            'a two-letter primary language tag results in the primary subtag' => [
+            'a two-letter language tag results in the primary subtag' => [
                 [
                     'http_accept_language' => 'de',
                     'two_letter_only' => true,
                 ],
                 'de',
             ],
-            'a two-letter primary language tag with extlang results in the primary subtag' => [
+            'a two-letter language tag with extlang results in the primary subtag' => [
                 [
                     'http_accept_language' => 'de-ger',
                     'two_letter_only' => true,
                 ],
                 'de',
             ],
-            'a two-letter primary language tag with script results in the primary subtag with script' => [
+            'a two-letter language tag with script results in the primary subtag with script' => [
                 [
                     'http_accept_language' => 'de-Latn',
                     'two_letter_only' => true,
                 ],
                 'de_Latn',
             ],
-            'a two-letter primary language tag with region results in the primary subtag with region' => [
+            'a two-letter language tag with region results in the primary subtag with region' => [
                 [
                     'http_accept_language' => 'de-DE',
                     'two_letter_only' => true,
                 ],
                 'de_DE',
             ],
-            'a two-letter primary language tag with extlang, script, and region results in the primary subtag with script and region' => [
+            'a two-letter language tag with extlang, script, and region results in the primary subtag with script and region' => [
                 [
                     'http_accept_language' => 'de-ger-Latn-DE',
                     'two_letter_only' => true,
                 ],
                 'de_Latn_DE',
             ],
-            'a three-letter primary language tag without two_letter_only option results in default' => [
+            'a three-letter language tag without two_letter_only option results in default' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag without two_letter_only option with extlang results in default' => [
+            'a three-letter language tag without two_letter_only option with extlang results in default' => [
                 [
                     'http_accept_language' => 'sgn-ase',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag without two_letter_only option with script results in default' => [
+            'a three-letter language tag without two_letter_only option with script results in default' => [
                 [
                     'http_accept_language' => 'sgn-Latn',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag without two_letter_only option with region results in default' => [
+            'a three-letter language tag without two_letter_only option with region results in default' => [
                 [
                     'http_accept_language' => 'sgn-US',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag without two_letter_only option with extlang, script, and region results in default' => [
+            'a three-letter language tag without two_letter_only option with extlang, script, and region results in default' => [
                 [
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'two_letter_only' => true,
                 ],
                 self::DEFAULT_LANGUAGE,
             ],
-            'a three-letter primary language tag with two_letter_only option results in the primary subtag' => [
+            'a three-letter language tag with two_letter_only option results in the primary subtag' => [
                 [
                     'http_accept_language' => 'sgn',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a three-letter primary language tag with two_letter_only option with extlang results in the primary subtag' => [
+            'a three-letter language tag with two_letter_only option with extlang results in the primary subtag' => [
                 [
                     'http_accept_language' => 'sgn-ase',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a three-letter primary language tag with two_letter_only option with script results in the primary subtag with script' => [
+            'a three-letter language tag with two_letter_only option with script results in the primary subtag with script' => [
                 [
                     'http_accept_language' => 'sgn-Latn',
                     'two_letter_only' => false,
                 ],
                 'sgn_Latn',
             ],
-            'a three-letter primary language tag with two_letter_only option with region results in the primary subtag with region' => [
+            'a three-letter language tag with two_letter_only option with region results in the primary subtag with region' => [
                 [
                     'http_accept_language' => 'sgn-US',
                     'two_letter_only' => false,
                 ],
                 'sgn_US',
             ],
-            'a three-letter primary language tag with two_letter_only option with extlang, script, and region results in the primary subtag with script and region' => [
+            'a three-letter language tag with two_letter_only option with extlang, script, and region results in the primary subtag with script and region' => [
                 [
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'two_letter_only' => false,
