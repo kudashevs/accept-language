@@ -493,7 +493,73 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['fr'],
                     'exact_match_only' => false,
                 ],
+                'fr',
+            ],
+            'returns expected when language is with region and accepted language is with region and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'fr-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => true,
+                ],
                 'fr_CH',
+            ],
+            'returns expected when language is with region and accepted language is with region and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'fr-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => false,
+                ],
+                'fr_CH',
+            ],
+            'returns expected when language is with script and region and accepted language is with region, and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'fr-Latn-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected when language is with script and region and accepted language is with region, and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'fr-Latn-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => false,
+                ],
+                'fr_CH',
+            ],
+            'returns expected when language is with extlang, script and region and accepted language is with region, and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'fr-fsl-Latn-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected when language is with extlang, script and region and accepted language is with region, and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'fr-fsl-Latn-CH',
+                    'accepted_languages' => ['fr-CH'],
+                    'exact_match_only' => false,
+                ],
+                'fr_CH',
+            ],
+            'returns expected when language is with extlang, script and region and accepted language is with script and region, and the exact match only option set to true' => [
+                [
+                    'http_accept_language' => 'fr-fsl-Latn-CH-1694acad', // ?? should be considered as exact match
+                    'accepted_languages' => ['fr-Latn-CH'],
+                    'use_extlang_subtag' => true,
+                    'exact_match_only' => true,
+                ],
+                'en',
+            ],
+            'returns expected when language is with extlang, script and region and accepted language is with script and region, and the exact match only option set to false' => [
+                [
+                    'http_accept_language' => 'fr-fsl-Latn-CH-1694acad',
+                    'accepted_languages' => ['fr-Latn-CH'],
+                    'with_extlang' => true,
+                    'exact_match_only' => false,
+                ],
+                'fr_Latn_CH',
             ],
             'returns expected default with script and the exact match only option set to true' => [
                 [
@@ -527,7 +593,7 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                     'exact_match_only' => false,
                 ],
-                'sgn_Latn_US',
+                'sgn_US',
             ],
         ];
     }

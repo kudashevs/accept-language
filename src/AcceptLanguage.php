@@ -266,13 +266,12 @@ class AcceptLanguage
             return $languages;
         }
 
-        $preparedAcceptedLanguagesOption = $this->prepareAcceptedLanguagesForComparison();
+        $acceptedLanguages = $this->prepareAcceptedLanguagesForComparison();
 
-        return array_filter($languages, function ($language) use ($preparedAcceptedLanguagesOption) {
-            $preparedTag = $this->prepareLanguageForComparison($language->getTag());
-
-            return in_array($preparedTag, $preparedAcceptedLanguagesOption, true);
-        });
+        return $this->retrieveMatchingStrategy()->retrieve(
+            $languages,
+            $acceptedLanguages,
+        );
     }
 
     protected function isEmptyAcceptedLanguagesOption(): bool
