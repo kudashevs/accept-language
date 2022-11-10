@@ -51,7 +51,7 @@ class AcceptLanguage
         'http_accept_language' => '',
         'default_language' => 'en',
         'accepted_languages' => [],
-        'exact_match_only' => true,
+        'exact_match_only' => false,
         'two_letter_only' => true,
         'use_extlang_subtag' => false,
         'use_script_subtag' => true,
