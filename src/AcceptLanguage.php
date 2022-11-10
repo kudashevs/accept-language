@@ -266,7 +266,7 @@ class AcceptLanguage
             return $languages;
         }
 
-        $acceptedLanguages = $this->prepareAcceptedLanguagesForComparison();
+        $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
         return $this->retrieveMatchingStrategy()->retrieve(
             $languages,
@@ -291,7 +291,7 @@ class AcceptLanguage
         return $this->options['exact_match_only'];
     }
 
-    protected function prepareAcceptedLanguagesForComparison(): array
+    protected function prepareAcceptedLanguagesForMatching(): array
     {
         return array_map(function ($language) {
             $hyphenatedLanguage = str_replace($this->options['separator'], '-', $language);
