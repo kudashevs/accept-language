@@ -365,6 +365,32 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'fr~CH',
             ],
+            'a language that intersects with accepted_languages formatted with hyphen separator and mixed letters results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr-lAtn-Ch'],
+                ],
+                'fr_Latn_CH',
+
+            ],
+            'a language that intersects with accepted_languages formatted with underscore separator and mixed letters results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr_lAtn_Ch'],
+                    'separator' => '_',
+                ],
+                'fr_Latn_CH',
+
+            ],
+            'a language that intersects with accepted_languages formatted with tilde separator and mixed letters results in the accepted language' => [
+                [
+                    'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['fr~lAtn~Ch'],
+                    'separator' => '~',
+                ],
+                'fr~Latn~CH',
+
+            ],
             'a language that intersects with accepted_languages and a separator results in the accepted language' => [
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
