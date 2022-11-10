@@ -62,6 +62,11 @@ final class LanguageTag
         $this->tag = $this->normalizeTag($tag);
     }
 
+    private function prepareTag(string $tag): string
+    {
+        return str_replace($this->separator, '-', $tag);
+    }
+
     private function isValidTag($tag): bool
     {
         return $this->isWildcard($tag) || $this->isValidLanguageTag($tag);
