@@ -27,11 +27,12 @@ class LanguageFactory
 
     /**
      * @param string $language
+     * @param float $quality
      * @return AbstractLanguage
      */
-    public function makeFromLanguageString(string $language): AbstractLanguage
+    public function makeFromLanguageString(string $language, float $quality = 1): AbstractLanguage
     {
-        return $this->createValidLanguage($language, 1);
+        return $this->createValidLanguage($language, $quality);
     }
 
     /**

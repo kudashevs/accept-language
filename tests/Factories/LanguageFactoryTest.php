@@ -30,6 +30,17 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
+    public function it_can_create_a_language_tag_from_a_language_string_and_a_valid_quality()
+    {
+        $service = new LanguageFactory();
+        $language = $service->makeFromLanguageString('en-US', 0.8);
+
+        $this->assertSame('en-US', $language->getTag());
+        $this->assertSame(0.8, $language->getQuality());
+        $this->assertTrue($language->isValid());
+    }
+
+    /** @test */
     public function it_can_create_a_language_tag_from_a_language_range()
     {
         $service = new LanguageFactory();
