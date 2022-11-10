@@ -53,7 +53,7 @@ final class LanguageTag
     private function initTag(string $tag): void
     {
         if (!$this->isValidTag($tag)) {
-            $this->tag = $this->prepareTag($tag);
+            $this->tag = $this->prepareSafe($tag);
             $this->valid = false;
 
             return;
@@ -119,7 +119,7 @@ final class LanguageTag
         return strpos($tag, '-') === false;
     }
 
-    private function prepareTag(string $tag): string
+    private function prepareSafe(string $tag): string
     {
         return htmlspecialchars($tag, ENT_QUOTES, 'UTF-8');
     }
