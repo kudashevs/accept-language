@@ -2,6 +2,20 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.0.0 - 2022-11-11](https://github.com/kudashevs/accept-language/compare/v2.0.0...v3.0.0)
+
+- Increase the minimum supported PHP version to 7.4
+- Add support for PHP 8.2 version
+- Add new `process` and `getHeader` public methods
+- Add new `use_extlang_subtag`, `use_script_subtag`, `use_region_subtag` options
+- Add a new `exact_match_only` option for the restrictive matching
+- Add support for variant, extension, and private-use subtags
+- Update the `accepted_languages` option to accept different separators
+- Update the matching algorithm to retrieve language tag derivatives
+- Update the Laravel service provider
+- Update README.md
+- Massive refactoring
+
 ## [v2.0.0 - 2022-03-11](https://github.com/kudashevs/accept-language/compare/v1.9.0...v2.0.0)
 
 - Increase the minimum PHP version to 7.3
