@@ -54,7 +54,7 @@ class AcceptLanguage
         'exact_match_only' => false,
         'two_letter_only' => true,
         'use_extlang_subtag' => false,
-        'use_script_subtag' => true,
+        'use_script_subtag' => false,
         'use_region_subtag' => true,
         'separator' => '_',
     ];

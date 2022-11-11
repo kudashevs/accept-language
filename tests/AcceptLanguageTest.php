@@ -196,7 +196,7 @@ class AcceptLanguageTest extends TestCase
             ],
             'a two-letter language tag with script and region results in the language' => [
                 ['http_accept_language' => 'zh-Hant-HK'],
-                'zh_Hant_HK',
+                'zh_HK',
             ],
             'a two-letter language tag with 0 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0'],
@@ -369,6 +369,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['fr-lAtn-Ch'],
+                    'use_script_subtag' => true,
                 ],
                 'fr_Latn_CH',
 
@@ -377,6 +378,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['fr_lAtn_Ch'],
+                    'use_script_subtag' => true,
                     'separator' => '_',
                 ],
                 'fr_Latn_CH',
@@ -386,6 +388,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-Latn-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['fr~lAtn~Ch'],
+                    'use_script_subtag' => true,
                     'separator' => '~',
                 ],
                 'fr~Latn~CH',
@@ -395,6 +398,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['fr-CH'],
+                    'use_script_subtag' => true,
                     'separator' => '_',
                 ],
                 'fr_CH',
@@ -460,14 +464,14 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'zh-yue-Hans,fr;q=0.8, en;q=0.7',
                     'use_extlang_subtag' => true,
                 ],
-                'zh_yue_Hans',
+                'zh_yue',
             ],
             'returns expected with the use extlang subtag option set to false' => [
                 [
                     'http_accept_language' => 'zh-yue-Hans,fr;q=0.8, en;q=0.7',
                     'use_extlang_subtag' => false,
                 ],
-                'zh_Hans',
+                'zh',
             ],
             'returns expected with the use script subtag option set to true' => [
                 [
@@ -541,6 +545,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-Latn-CH',
                     'accepted_languages' => ['fr-CH'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => true,
                 ],
                 'en',
@@ -549,6 +554,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-Latn-CH',
                     'accepted_languages' => ['fr-CH'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => false,
                 ],
                 'fr_CH',
@@ -557,6 +563,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-fsl-Latn-CH',
                     'accepted_languages' => ['fr-CH'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => true,
                 ],
                 'en',
@@ -565,6 +572,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'fr-fsl-Latn-CH',
                     'accepted_languages' => ['fr-CH'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => false,
                 ],
                 'fr_CH',
@@ -583,6 +591,7 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'fr-fsl-Latn-CH-1694acad',
                     'accepted_languages' => ['fr-Latn-CH'],
                     'with_extlang' => true,
+                    'use_script_subtag' => true,
                     'exact_match_only' => false,
                 ],
                 'fr_Latn_CH',
@@ -591,6 +600,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'de-Latn-AT',
                     'accepted_languages' => ['de-AT'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => true,
                 ],
                 'en',
@@ -599,6 +609,7 @@ class AcceptLanguageTest extends TestCase
                 [
                     'http_accept_language' => 'de-gsg-AT',
                     'accepted_languages' => ['de-AT'],
+                    'use_script_subtag' => true,
                     'exact_match_only' => false,
                 ],
                 'de_AT',
@@ -608,6 +619,7 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'accepted_languages' => ['sgn_us'],
                     'two_letter_only' => false,
+                    'use_script_subtag' => true,
                     'exact_match_only' => true,
                 ],
                 'en',
@@ -617,6 +629,7 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'accepted_languages' => ['sgn_us'],
                     'two_letter_only' => false,
+                    'use_script_subtag' => true,
                     'exact_match_only' => false,
                 ],
                 'sgn_US',
@@ -686,6 +699,7 @@ class AcceptLanguageTest extends TestCase
             'a two-letter language tag with script results in the primary subtag with script' => [
                 [
                     'http_accept_language' => 'de-Latn',
+                    'use_script_subtag' => true,
                     'two_letter_only' => true,
                 ],
                 'de_Latn',
@@ -700,6 +714,7 @@ class AcceptLanguageTest extends TestCase
             'a two-letter language tag with extlang, script, and region results in the primary subtag with script and region' => [
                 [
                     'http_accept_language' => 'de-ger-Latn-DE',
+                    'use_script_subtag' => true,
                     'two_letter_only' => true,
                 ],
                 'de_Latn_DE',
@@ -758,7 +773,7 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'sgn-Latn',
                     'two_letter_only' => false,
                 ],
-                'sgn_Latn',
+                'sgn',
             ],
             'a three-letter language tag with two_letter_only option with region results in the primary subtag with region' => [
                 [
@@ -772,7 +787,7 @@ class AcceptLanguageTest extends TestCase
                     'http_accept_language' => 'sgn-ase-Latn-US',
                     'two_letter_only' => false,
                 ],
-                'sgn_Latn_US',
+                'sgn_US',
             ],
         ];
     }
