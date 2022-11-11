@@ -29,7 +29,7 @@ class AcceptLanguage
      * 'default_language' string A string with a default preferred language value.
      * 'accepted_languages' array An array with a list of supported languages.
      * 'exact_match_only' bool A boolean that defines whether to retrieve only languages that match exactly the supported languages.
-     * 'two_letter_only' bool A boolean that defines whether to retrieve only two-letter primary subtags or not.
+     * 'two_letter_only' bool A boolean that defines whether to retrieve only two-letter primary subtag or not.
      * 'use_extlang_subtag' bool A boolean that defines whether to include an extlang subtag in the result or not.
      * 'use_script_subtag' bool A boolean that defines whether to include a script subtag in the result or not.
      * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
