@@ -230,6 +230,9 @@ class AcceptLanguage
         return $languages;
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function splitLanguageRange(string $range): array
     {
         /**
@@ -239,6 +242,9 @@ class AcceptLanguage
         return preg_split('/;q=/i', trim($range));
     }
 
+    /**
+     * @return array<AbstractLanguage>
+     */
     protected function normalizeLanguages(array $languages): array
     {
         $applicable = $this->getApplicableLanguages($languages);
@@ -260,6 +266,9 @@ class AcceptLanguage
         });
     }
 
+    /**
+     * @return array<AbstractLanguage>
+     */
     protected function retrievePreferredLanguages(array $languages): array
     {
         if ($this->isEmptyAcceptedLanguagesOption()) {
@@ -291,6 +300,9 @@ class AcceptLanguage
         return $this->options['exact_match_only'];
     }
 
+    /**
+     * @return array<AbstractLanguage>
+     */
     protected function prepareAcceptedLanguagesForMatching(): array
     {
         return array_map(function ($language) {
