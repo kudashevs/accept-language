@@ -621,6 +621,15 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'sgn_US',
             ],
+            'returns default language with a malformed accepted language value' => [
+                [
+                    'http_accept_language' => 'de-gsg-AT',
+                    'accepted_languages' => ['de-AT-gsg'],
+                    'use_script_subtag' => true,
+                    'exact_match_only' => false,
+                ],
+                self::DEFAULT_LANGUAGE,
+            ],
         ];
     }
 
