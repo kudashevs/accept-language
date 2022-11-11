@@ -6,17 +6,18 @@ to make various decisions (for example, set a locale, redirect a user to the spe
 
 ## Features
 
-The Accept-Language package retrieves a language code with the highest priority (the highest language associated
-quality value) from an HTTP Accept-Language request-header field. The language code may consist of a 2-letter/3-letter
-primary language subtag, an optional script subtag, and an optional region subtag. Usually, the language code consists
-of a 2-letter primary subtag and an optional region subtag separated by the underscore (e.g. en_GB). This format is very 
-similar to the CLDR format (overlaps with the ISO 15897), and it is used by the majority of frameworks in localization.  
+The Accept-Language package retrieves a preferred language from an HTTP Accept-Language request-header field. It retrieves
+the language in the form of a language code. This code is pretty similar to the Unicode Locale Identifier which is widely
+used in localization. The code consists of a mandatory 2-letter/3-letter language subtag and a region subtag separated by
+an underscore (e.g. en_GB). It is worth noting that the package allows to control the presence of different subtags in
+the resulting code (including script and extlang subtags) and the representation of the separator.
 
-- Can return the default language value if a client accepts any language
-- Can override the predefined default value by providing the `default_language` option
-- Can retrieve the two-letter language code only by setting the `two_letter_only` option
-- Can override the default separator value by providing the `separator` option
-- Can restrict the language search by providing the `accepted_languages` option
+- Can return a default language value if a client accepts any language
+- Can configure a default returning language by providing the `default_language` option
+- Can configure a default separator value by providing the `separator` option
+- Can retrieve the two-letter languages only by setting the `two_letter_only` option
+- Can restrict the language search to specific values by providing the `accepted_languages` option
+- Can retrieve the exact match languages only by setting the `exact_match_only` option
 
 The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
 
