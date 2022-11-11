@@ -93,6 +93,28 @@ if you want to find languages including script subtags you should enable the `us
 algorithm to find only languages that exactly match the languages listed in the `accepted_languages` option. When
 set to `false`, the finding algorithm becomes more flexible and retrieves the language and its derivatives (default behavior).
 
+## Usage example
+
+Let's consider that we have a web application that uses three different languages: American, British, and Canadian English.
+We want to redirect users according to their HTTP Accept-Language header settings to specific sections: en_US, en_GB, en_CA.
+All routes are set correctly, and we just want to retrieve the preferred language, if user has any, to redirect them.
+
+To work properly in this case, the package requires us to provide two initial options:
+`default_language` let's give it the value `en_US`
+`accepted_languages` let's give it the value `['en_US', 'en_GB', 'en_CA']`
+
+```php
+$service = new AcceptLanguage([
+    'default_language' => 'en_US',
+    'accepted_languages' => ['en_US', 'en_GB', 'en_CA'],
+]);
+$service->process();
+```
+
+By doing that, we instruct the package to retrieve only the values that are listed in the `accepted_languages` option.
+If one of the language tags in a user HTTP Accept-Language header matches any of these values, it will be retained for
+the further processing. If none of them matches the listed values, the default language will be returned.
+
 ## Laravel usage
 
 If you don't use auto-discovery just add a ServiceProvider to the `config/app.php` file.
