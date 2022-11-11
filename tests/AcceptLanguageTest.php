@@ -123,20 +123,42 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
-    /** @test */
-    public function it_can_format_the_default_language_option_according_to_the_settings()
-    {
-        $options = [
-            'default_language' => 'sr-Latn-RS',
-            'accepted_languages' => ['en', 'de', 'es'],
-            'separator' => '~',
-        ];
-
+    /**
+     * @test
+     * @dataProvider provideDifferentDefaultLanguageOptions
+     */
+    public function it_can_format_the_default_language_option_according_to_the_settings(
+        array $options,
+        string $expected
+    ) {
         $service = new AcceptLanguage($options);
         $service->process();
 
-        $this->assertSame('sr~Latn~RS', $service->getPreferredLanguage());
-        $this->assertSame('sr~Latn~RS', $service->getLanguage());
+        $this->assertSame($expected, $service->getPreferredLanguage());
+        $this->assertSame($expected, $service->getLanguage());
+    }
+
+    public function provideDifferentDefaultLanguageOptions()
+    {
+        return [
+            'a two-letter language tag with script and region results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['en', 'de', 'es'],
+                    'separator' => '~',
+                ],
+                'sr~RS',
+            ],
+            'a two-letter language tag with script and region with the use script subtag option set to true results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['en', 'de', 'es'],
+                    'use_script_subtag' => true,
+                    'separator' => '~',
+                ],
+                'sr~Latn~RS',
+            ],
+        ];
     }
 
     /**
