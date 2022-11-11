@@ -97,7 +97,8 @@ If you want to add a Laravel Facade just add it to the aliases array in the `con
 ```
 
 ## Testing
-If you want to be sure that everything works as expected, just run the unit tests provided with the package.
+
+If you want to make sure that everything works as expected, just run the unit tests provided with the package.
 ```bash
 composer test
 ```
