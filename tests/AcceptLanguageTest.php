@@ -163,6 +163,44 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideDifferentAcceptedLanguagesOptions
+     */
+    public function it_can_format_the_accepted_languages_option_according_to_the_settings(
+        array $options,
+        string $expected
+    ) {
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame($expected, $service->getPreferredLanguage());
+        $this->assertSame($expected, $service->getLanguage());
+    }
+
+    public function provideDifferentAcceptedLanguagesOptions()
+    {
+        return [
+            'a two-letter language tag with script and region results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['sr-Latn-RS'],
+                    'separator' => '_',
+                ],
+                'sr_RS',
+            ],
+            'a two-letter language tag with script and region with the use script subtag option set to true results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['sr-Latn-RS'],
+                    'use_script_subtag' => true,
+                    'separator' => '_',
+                ],
+                'sr_Latn_RS',
+            ],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider provideDifferentRequestHeaderValues
      */
     public function it_can_retrieve_the_preferred_language(array $options, string $expected)
