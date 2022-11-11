@@ -333,7 +333,7 @@ class AcceptLanguage
         return $primarySubtagLength >= $primarySubtagMinLength && $primarySubtagLength <= $primarySubtagMaxLength;
     }
 
-    protected function isTwoLetterOnlyCase()
+    protected function isTwoLetterOnlyCase(): bool
     {
         return $this->options['two_letter_only'];
     }
