@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class QualityValueTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instanciated()
+    public function it_can_be_instantiated()
     {
         $quality = new QualityValue(1);
 
