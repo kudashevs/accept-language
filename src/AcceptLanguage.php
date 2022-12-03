@@ -277,7 +277,7 @@ class AcceptLanguage
 
         $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
-        return $this->retrieveMatchingStrategy()->retrieve(
+        return $this->resolveMatchingStrategy()->retrieve(
             $languages,
             $acceptedLanguages,
         );
@@ -288,7 +288,7 @@ class AcceptLanguage
         return count($this->options['accepted_languages']) === 0;
     }
 
-    protected function retrieveMatchingStrategy(): AbstractPreferredLanguagesMatchStrategy
+    protected function resolveMatchingStrategy(): AbstractPreferredLanguagesMatchStrategy
     {
         return $this->isExactMatchOnlyCase()
             ? new PreferredLanguagesExactMatchStrategy()
