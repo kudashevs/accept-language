@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Normalizers\AbstractTagNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
+use Kudashevs\AcceptLanguage\Normalizers\TagNormalizerInterface;
 
 final class LanguageTag
 {
@@ -15,7 +15,7 @@ final class LanguageTag
 
     private const DEFAULT_SEPARATOR = '-';
 
-    private AbstractTagNormalizer $normalizer;
+    private TagNormalizerInterface $normalizer;
 
     private string $separator;
 
@@ -40,7 +40,7 @@ final class LanguageTag
         $this->normalizer = $this->createTagNormalizer($options);
     }
 
-    private function createTagNormalizer(array $options): AbstractTagNormalizer
+    private function createTagNormalizer(array $options): TagNormalizerInterface
     {
         return new LanguageTagNormalizer($options);
     }

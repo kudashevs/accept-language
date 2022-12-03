@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
-final class LanguageTagNormalizer implements AbstractTagNormalizer
+final class LanguageTagNormalizer implements TagNormalizerInterface
 {
     /**
      * 'separator' A string with a custom separator to use in a normalized tag.
