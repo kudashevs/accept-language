@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
-final class LanguageQualityNormalizer implements AbstractQualityNormalizer
+final class LanguageQualityNormalizer implements QualityNormalizerInterface
 {
     /**
      * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred and

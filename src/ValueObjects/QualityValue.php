@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\ValueObjects;
 
-use Kudashevs\AcceptLanguage\Normalizers\AbstractQualityNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageQualityNormalizer;
+use Kudashevs\AcceptLanguage\Normalizers\QualityNormalizerInterface;
 
 class QualityValue
 {
-    private AbstractQualityNormalizer $normalizer;
+    private QualityNormalizerInterface $normalizer;
 
     private float $fallback;
 
@@ -34,7 +34,7 @@ class QualityValue
         $this->normalizer = $this->createQualityNormalizer($options);
     }
 
-    private function createQualityNormalizer(array $options): AbstractQualityNormalizer
+    private function createQualityNormalizer(array $options): QualityNormalizerInterface
     {
         return new LanguageQualityNormalizer($options);
     }
