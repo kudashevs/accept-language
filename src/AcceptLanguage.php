@@ -271,7 +271,7 @@ class AcceptLanguage
      */
     protected function retrievePreferredLanguages(array $languages): array
     {
-        if ($this->isEmptyAcceptedLanguagesOption()) {
+        if (!$this->isAnyAcceptedLanguagesProvided()) {
             return $languages;
         }
 
@@ -283,9 +283,9 @@ class AcceptLanguage
         );
     }
 
-    protected function isEmptyAcceptedLanguagesOption(): bool
+    protected function isAnyAcceptedLanguagesProvided(): bool
     {
-        return count($this->options['accepted_languages']) === 0;
+        return count($this->options['accepted_languages']) !== 0;
     }
 
     protected function resolveMatchingStrategy(): AbstractPreferredLanguagesMatchStrategy
