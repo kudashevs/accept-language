@@ -18,5 +18,5 @@ interface AbstractPreferredLanguagesMatchStrategy
      * @param array<AbstractLanguage> $accepted
      * @return array<AbstractLanguage>
      */
-    public function retrieve(array $languages, array $accepted): array;
+    public function match(array $languages, array $accepted): array;
 }
