@@ -10,7 +10,7 @@ namespace Kudashevs\AcceptLanguage\Language;
 abstract class AbstractLanguage
 {
     /**
-     * Return provided options.
+     * Return collected options.
      *
      * @return array<string, mixed>
      */
@@ -45,7 +45,7 @@ abstract class AbstractLanguage
     abstract public function getQuality();
 
     /**
-     * Determine whether the quality value is valid.
+     * Determine whether a language state is valid.
      *
      * @return bool
      */
