@@ -18,7 +18,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
@@ -36,7 +36,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
@@ -58,7 +58,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(3, $result);
         $this->assertContainsLanguage(['fr', 1], $result);
@@ -81,7 +81,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(3, $result);
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
@@ -104,7 +104,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['de-AT', 0.8], $result);

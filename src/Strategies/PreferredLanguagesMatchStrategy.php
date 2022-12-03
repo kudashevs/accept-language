@@ -9,7 +9,7 @@ use Kudashevs\AcceptLanguage\Language\Language;
 
 class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatchStrategy
 {
-    public function retrieve(array $languages, array $accepted): array
+    public function match(array $languages, array $accepted): array
     {
         $result = [];
 

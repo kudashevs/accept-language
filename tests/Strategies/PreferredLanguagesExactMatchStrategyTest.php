@@ -18,7 +18,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesExactMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
@@ -39,7 +39,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesExactMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
@@ -60,7 +60,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesExactMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
@@ -82,7 +82,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
         ];
 
         $strategy = new PreferredLanguagesExactMatchStrategy();
-        $result = $strategy->retrieve($languages, $accepted);
+        $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(2, $result);
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);

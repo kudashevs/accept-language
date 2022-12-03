@@ -277,7 +277,7 @@ class AcceptLanguage
 
         $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
-        return $this->resolveMatchingStrategy()->retrieve(
+        return $this->resolveMatchingStrategy()->match(
             $languages,
             $acceptedLanguages,
         );
