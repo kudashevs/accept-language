@@ -2,9 +2,9 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Strategies;
 
-use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesMatchStrategy;
+use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 
-class PreferredLanguagesMatchStrategyTest extends TestCase
+class FuzzyMatchStrategyTest extends TestCase
 {
     /** @test */
     public function it_can_retrieve_the_matching_language()
@@ -17,7 +17,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesMatchStrategy();
+        $strategy = new FuzzyMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -35,7 +35,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesMatchStrategy();
+        $strategy = new FuzzyMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -57,7 +57,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
             $this->createLanguage('en-us'),
         ];
 
-        $strategy = new PreferredLanguagesMatchStrategy();
+        $strategy = new FuzzyMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(3, $result);
@@ -80,7 +80,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesMatchStrategy();
+        $strategy = new FuzzyMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(3, $result);
@@ -103,7 +103,7 @@ class PreferredLanguagesMatchStrategyTest extends TestCase
             $this->createLanguage('de-AT'),
         ];
 
-        $strategy = new PreferredLanguagesMatchStrategy();
+        $strategy = new FuzzyMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);

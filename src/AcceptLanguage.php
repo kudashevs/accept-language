@@ -8,9 +8,9 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\MatchStrategyInterface;
 use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesExactMatchStrategy;
-use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesMatchStrategy;
 
 class AcceptLanguage
 {
@@ -292,7 +292,7 @@ class AcceptLanguage
     {
         return $this->isExactMatchOnlyCase()
             ? new PreferredLanguagesExactMatchStrategy()
-            : new PreferredLanguagesMatchStrategy();
+            : new FuzzyMatchStrategy();
     }
 
     protected function isExactMatchOnlyCase(): bool
