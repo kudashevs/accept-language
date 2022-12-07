@@ -30,9 +30,9 @@ class FuzzyMatchStrategy implements MatchStrategyInterface
 
     protected function isFuzzyMatch(AbstractLanguage $target, AbstractLanguage $source): bool
     {
-        $matchingSubtags = count(array_intersect($target->getSubtags(), $source->getSubtags()));
+        $matchingSubtagsNumber = count(array_intersect($target->getSubtags(), $source->getSubtags()));
         $matchingThreshold = count($target->getSubtags());
 
-        return $matchingSubtags >= $matchingThreshold;
+        return $matchingSubtagsNumber >= $matchingThreshold;
     }
 }
