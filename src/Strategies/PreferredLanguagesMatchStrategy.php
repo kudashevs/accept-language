@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Strategies;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 
-class PreferredLanguagesMatchStrategy implements AbstractPreferredLanguagesMatchStrategy
+class PreferredLanguagesMatchStrategy implements MatchStrategyInterface
 {
     public function match(array $languages, array $accepted): array
     {

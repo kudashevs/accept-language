@@ -7,9 +7,9 @@ namespace Kudashevs\AcceptLanguage\Strategies;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 
 /**
- * AbstractPreferredLanguagesMatchStrategy represents an abstraction that finds the matching preferred languages.
+ * MatchStrategyInterface represents an abstraction that finds the matching preferred languages.
  */
-interface AbstractPreferredLanguagesMatchStrategy
+interface MatchStrategyInterface
 {
     /**
      * Find and return values from languages that correspond to accepted languages using a matching algorithm.

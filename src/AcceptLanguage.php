@@ -8,7 +8,7 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
-use Kudashevs\AcceptLanguage\Strategies\AbstractPreferredLanguagesMatchStrategy;
+use Kudashevs\AcceptLanguage\Strategies\MatchStrategyInterface;
 use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesExactMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesMatchStrategy;
 
@@ -288,7 +288,7 @@ class AcceptLanguage
         return count($this->options['accepted_languages']) !== 0;
     }
 
-    protected function resolveMatchingStrategy(): AbstractPreferredLanguagesMatchStrategy
+    protected function resolveMatchingStrategy(): MatchStrategyInterface
     {
         return $this->isExactMatchOnlyCase()
             ? new PreferredLanguagesExactMatchStrategy()
