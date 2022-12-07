@@ -2,9 +2,9 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Strategies;
 
-use Kudashevs\AcceptLanguage\Strategies\PreferredLanguagesExactMatchStrategy;
+use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
 
-class PreferredLanguagesExactMatchStrategyTest extends TestCase
+class ExactMatchStrategyTest extends TestCase
 {
     /** @test */
     public function it_can_retrieve_the_exact_matching_language()
@@ -17,7 +17,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesExactMatchStrategy();
+        $strategy = new ExactMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -38,7 +38,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesExactMatchStrategy();
+        $strategy = new ExactMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -59,7 +59,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
             $this->createLanguage('fr-CH'),
         ];
 
-        $strategy = new PreferredLanguagesExactMatchStrategy();
+        $strategy = new ExactMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(1, $result);
@@ -81,7 +81,7 @@ class PreferredLanguagesExactMatchStrategyTest extends TestCase
             $this->createLanguage('en'),
         ];
 
-        $strategy = new PreferredLanguagesExactMatchStrategy();
+        $strategy = new ExactMatchStrategy();
         $result = $strategy->match($languages, $accepted);
 
         $this->assertCount(2, $result);

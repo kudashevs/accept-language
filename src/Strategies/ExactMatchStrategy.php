@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
-class PreferredLanguagesExactMatchStrategy implements MatchStrategyInterface
+class ExactMatchStrategy implements MatchStrategyInterface
 {
     public function match(array $languages, array $accepted): array
     {
