@@ -15,7 +15,7 @@ class FuzzyMatchStrategy implements MatchStrategyInterface
 
         foreach ($languages as $language) {
             foreach ($accepted as $accept) {
-                if ($this->isAcceptedLanguageMatch($accept, $language)) {
+                if ($this->isFuzzyMatch($accept, $language)) {
                     $result[] = Language::create(
                         $accept->getTag(),
                         $language->getQuality(),
@@ -28,7 +28,7 @@ class FuzzyMatchStrategy implements MatchStrategyInterface
         return $result;
     }
 
-    protected function isAcceptedLanguageMatch(AbstractLanguage $accepted, AbstractLanguage $language): bool
+    protected function isFuzzyMatch(AbstractLanguage $accepted, AbstractLanguage $language): bool
     {
         $matchingSubtags = count(array_intersect($accepted->getSubtags(), $language->getSubtags()));
         $matchingThreshold = count($accepted->getSubtags());
