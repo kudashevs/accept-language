@@ -2,6 +2,14 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.0.1 - 2022-12-18](https://github.com/kudashevs/accept-language/compare/v3.0.0...v3.0.1)
+
+- Fix the `AcceptLanguage` Laravel auto-discovery alias
+- Add acceptance tests
+- Refactor some abstractions
+- Refactor the structure of tests
+- Some improvements 
+
 ## [v3.0.0 - 2022-11-11](https://github.com/kudashevs/accept-language/compare/v2.0.0...v3.0.0)
 
 - Increase the minimum supported PHP version to 7.4
