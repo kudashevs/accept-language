@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests;
+namespace Kudashevs\AcceptLanguage\Tests\Unit;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;

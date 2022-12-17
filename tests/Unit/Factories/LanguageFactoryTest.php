@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Factories;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;

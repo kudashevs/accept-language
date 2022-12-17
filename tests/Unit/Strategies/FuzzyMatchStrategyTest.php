@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Strategies;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 

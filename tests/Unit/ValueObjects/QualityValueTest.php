@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\ValueObjects;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\ValueObjects;
 
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 use PHPUnit\Framework\TestCase;
