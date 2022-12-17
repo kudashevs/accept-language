@@ -36,7 +36,7 @@
                 "Kudashevs\\AcceptLanguage\\Providers\\AcceptLanguageServiceProvider"
             ],
             "aliases": {
-                "acceptlanguage": "Kudashevs\\AcceptLanguage\\Facades\\AcceptLanguage"
+                "AcceptLanguage": "Kudashevs\\AcceptLanguage\\Facades\\AcceptLanguage"
             }
         }
     }
