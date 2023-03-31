@@ -166,9 +166,9 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        $applicableLanguages = $this->parseHeader($header);
+        $retrievedLanguages = $this->parseHeader($header);
 
-        $preferredLanguages = $this->retrievePreferredLanguages($applicableLanguages);
+        $preferredLanguages = $this->retrievePreferredLanguages($retrievedLanguages);
 
         return $this->retrievePreferredLanguage($preferredLanguages);
     }
