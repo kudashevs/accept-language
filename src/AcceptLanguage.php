@@ -166,7 +166,7 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        $retrievedLanguages = $this->parseHeader($header);
+        $retrievedLanguages = $this->parseHeaderValue($header);
 
         $preferredLanguages = $this->retrievePreferredLanguages($retrievedLanguages);
 
@@ -176,7 +176,7 @@ class AcceptLanguage
     /**
      * @return array<AbstractLanguage>
      */
-    protected function parseHeader(string $header): array
+    protected function parseHeaderValue(string $header): array
     {
         /**
          * Some cases do not require further processing as they result in the default language.
