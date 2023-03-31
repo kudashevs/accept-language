@@ -275,17 +275,25 @@ class AcceptLanguage
             return $languages;
         }
 
+        return $this->retrieveSupportedLanguages($languages);
+    }
+
+    protected function isAnyAcceptedLanguagesProvided(): bool
+    {
+        return count($this->options['accepted_languages']) !== 0;
+    }
+
+    /**
+     * @return array<AbstractLanguage>
+     */
+    protected function retrieveSupportedLanguages(array $languages): array
+    {
         $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
         return $this->resolveMatchingStrategy()->match(
             $languages,
             $acceptedLanguages,
         );
-    }
-
-    protected function isAnyAcceptedLanguagesProvided(): bool
-    {
-        return count($this->options['accepted_languages']) !== 0;
     }
 
     protected function resolveMatchingStrategy(): MatchStrategyInterface
