@@ -247,7 +247,7 @@ class AcceptLanguage
      */
     protected function normalizeLanguages(array $languages): array
     {
-        $validLanguages = $this->getApplicableLanguages($languages);
+        $validLanguages = $this->getValidLanguages($languages);
 
         /**
          * Sorting by quality is a part of the normalization process.
@@ -259,7 +259,7 @@ class AcceptLanguage
         return $validLanguages;
     }
 
-    protected function getApplicableLanguages(array $languages): array
+    protected function getValidLanguages(array $languages): array
     {
         return array_filter($languages, static function ($language) {
             return $language->isValid() && $language->getQuality() > 0;
