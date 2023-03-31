@@ -247,16 +247,16 @@ class AcceptLanguage
      */
     protected function normalizeLanguages(array $languages): array
     {
-        $applicable = $this->getApplicableLanguages($languages);
+        $validLanguages = $this->getApplicableLanguages($languages);
 
         /**
          * Sorting by quality is a part of the normalization process.
          */
-        usort($applicable, static function ($a, $b) {
+        usort($validLanguages, static function ($a, $b) {
             return $b->getQuality() <=> $a->getQuality();
         });
 
-        return $applicable;
+        return $validLanguages;
     }
 
     protected function getApplicableLanguages(array $languages): array
