@@ -930,15 +930,20 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retieve_and_log_a_header_value()
+    public function it_can_retieve_and_log_valid_languages()
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->atLeastOnce())
+        $loggerMock->expects($this->exactly(2))
             ->method('info')
-            ->with($this->stringContains('de_DE'));
+            ->withConsecutive(
+                [$this->stringContains('fr-CH')],
+                [$this->stringContains('fr_CH;q=1,fr;q=0.9')],
+            );
 
         $service = new AcceptLanguage([
-            'http_accept_language' => 'de_DE',
+            'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
+            'accepted_languages' => ['en', 'de'],
+            'separator' => '_',
         ]);
         $service->useLogger($loggerMock);
         $service->process();
