@@ -165,6 +165,10 @@ class AcceptLanguage
     {
         $header = $this->retrieveAcceptLanguageHeader();
 
+        $this->logger->info(
+            sprintf('Retrieved a "%s" header.', $header)
+        );
+
         $this->header = $header;
         $this->language = $this->findPreferredLanguage($header);
     }

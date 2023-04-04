@@ -930,15 +930,18 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_use_a_non_default_logger()
+    public function it_can_retieve_and_log_a_header_value()
     {
-        $loggerStub = $this->createStub(LoggerInterface::class);
-        $service = new AcceptLanguage([]);
-        $service->useLogger($loggerStub);
-        $service->process();
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->atLeastOnce())
+            ->method('info')
+            ->with($this->stringContains('de_DE'));
 
-        // assert that no exception was thrown
-        $this->addToAssertionCount(1);
+        $service = new AcceptLanguage([
+            'http_accept_language' => 'de_DE',
+        ]);
+        $service->useLogger($loggerMock);
+        $service->process();
     }
 
     /**
