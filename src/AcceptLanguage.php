@@ -202,7 +202,13 @@ class AcceptLanguage
             )
         );
 
-        return $this->retrievePreferredLanguage($preferredLanguages);
+        $retrievePreferredLanguage = $this->retrievePreferredLanguage($preferredLanguages);
+
+        $this->logger->info(
+            sprintf('Retrieved a "%s" preferred language.', $retrievePreferredLanguage)
+        );
+
+        return $retrievePreferredLanguage;
     }
 
     /**
