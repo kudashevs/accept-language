@@ -11,9 +11,15 @@ use Kudashevs\AcceptLanguage\Language\Language;
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\MatchStrategyInterface;
+use Psr\Log\LoggerInterface;
 
 class AcceptLanguage
 {
+    /**
+     * Contain a PSR-3 compatible logger.
+     */
+    protected LoggerInterface $logger;
+
     /**
      * Contain an original header.
      */
