@@ -259,6 +259,13 @@ class AcceptLanguage
             $fallbackQuality -= $fallbackQualityStep;
         }
 
+        $this->logger->info(
+            sprintf('Raw languages "%s".', implode(',', array_map(function ($lang) {
+                    return $lang->getTag() . ';' . ($lang->isValid() ? 'valid' : 'invalid');
+                }, $languages))
+            )
+        );
+
         return $languages;
     }
 
