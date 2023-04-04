@@ -187,13 +187,20 @@ class AcceptLanguage
         $retrievedLanguages = $this->parseHeaderValue($header);
 
         $this->logger->info(
-            sprintf('Retrieved "%s" languages.', implode(',', array_map(function ($lang) {
+            sprintf('Retrieved languages "%s".', implode(',', array_map(function ($lang) {
                     return $lang->getTag() . ';q=' . $lang->getQuality();
                 }, $retrievedLanguages))
             )
         );
 
         $preferredLanguages = $this->retrievePreferredLanguages($retrievedLanguages);
+
+        $this->logger->info(
+            sprintf('Preferred languages "%s".', implode(',', array_map(function ($lang) {
+                    return $lang->getTag() . ';q=' . $lang->getQuality();
+                }, $preferredLanguages))
+            )
+        );
 
         return $this->retrievePreferredLanguage($preferredLanguages);
     }

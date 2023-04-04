@@ -933,16 +933,17 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retieve_and_log_valid_languages()
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->exactly(2))
+        $loggerMock->expects($this->exactly(3))
             ->method('info')
             ->withConsecutive(
                 [$this->stringContains('fr-CH')],
                 [$this->stringContains('fr_CH;q=1,fr;q=0.9')],
+                [$this->stringContains('en;q=0.8,de;q=0.7')],
             );
 
         $service = new AcceptLanguage([
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
-            'accepted_languages' => ['en', 'de'],
+            'accepted_languages' => ['de', 'en'],
             'separator' => '_',
         ]);
         $service->useLogger($loggerMock);
