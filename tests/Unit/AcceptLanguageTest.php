@@ -5,6 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit;
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class AcceptLanguageTest extends TestCase
 {
@@ -926,6 +927,18 @@ class AcceptLanguageTest extends TestCase
         $service->process();
 
         $this->assertSame('fr', $service->getPreferredLanguage());
+    }
+
+    /** @test */
+    public function it_can_use_a_non_default_logger()
+    {
+        $loggerStub = $this->createStub(LoggerInterface::class);
+        $service = new AcceptLanguage([]);
+        $service->useLogger($loggerStub);
+        $service->process();
+
+        // assert that no exception was thrown
+        $this->addToAssertionCount(1);
     }
 
     /**

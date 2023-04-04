@@ -382,6 +382,16 @@ class AcceptLanguage
     }
 
     /**
+     * Replace the default logger.
+     *
+     * @param LoggerInterface $logger
+     */
+    public function useLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
+
+    /**
      * Return the original HTTP Accept-Language header.
      *
      * @return string
