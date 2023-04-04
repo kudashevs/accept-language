@@ -8,6 +8,7 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\MatchStrategyInterface;
@@ -73,8 +74,15 @@ class AcceptLanguage
      */
     public function __construct(array $options = [])
     {
+        $this->initLogger();
+
         $this->initOptions($options);
         $this->initFactory();
+    }
+
+    protected function initLogger(): void
+    {
+        $this->logger = new DummyLogger();
     }
 
     /**
