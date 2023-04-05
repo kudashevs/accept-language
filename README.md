@@ -12,12 +12,12 @@ used in localization. The code consists of a mandatory 2-letter/3-letter languag
 an underscore (e.g. en_GB). It is worth noting that the package allows to control the presence of different subtags in
 the resulting code (including script and extlang subtags) and the representation of the separator.
 
-- Can return a default language value if a client accepts any language
+- Can return a default language when a client accepts any language (e.g. `Accept-Language: *`)
 - Can configure a default returning language by providing the `default_language` option
 - Can configure a default separator value by providing the `separator` option
 - Can retrieve the two-letter languages only by setting the `two_letter_only` option
 - Can restrict the language search to specific values by providing the `accepted_languages` option
-- Can retrieve the exact match languages only by setting the `exact_match_only` option
+- Can retrieve the exact match only languages by setting the `exact_match_only` option
 
 The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
 
