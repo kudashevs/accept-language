@@ -6,6 +6,7 @@ namespace Kudashevs\AcceptLanguage\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Kudashevs\AcceptLanguage\AcceptLanguage;
+use Psr\Log\LoggerInterface;
 
 class AcceptLanguageServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     {
         $this->app->singleton(AcceptLanguage::class, function () {
             $service = new AcceptLanguage($this->getInitialConfig());
+            $service->useLogger($this->getLogger());
             $service->process();
 
             return $service;
@@ -37,5 +39,10 @@ class AcceptLanguageServiceProvider extends ServiceProvider
         ];
 
         return array_filter($config);
+    }
+
+    private function getLogger(): LoggerInterface
+    {
+        return $this->app['log'] ?? $this->app->make(LoggerInterface::class);
     }
 }
