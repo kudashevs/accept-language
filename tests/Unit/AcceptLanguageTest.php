@@ -930,7 +930,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retieve_and_log_valid_languages()
+    public function it_can_retrieve_and_log_valid_languages()
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->exactly(5))
