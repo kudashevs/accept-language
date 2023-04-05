@@ -952,6 +952,29 @@ class AcceptLanguageTest extends TestCase
         $service->process();
     }
 
+    /** @test */
+    public function it_can_retrieve_and_log_invalid_languages()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->exactly(5))
+            ->method('info')
+            ->withConsecutive(
+                [$this->stringContains('completely wrong')],
+                [$this->stringContains('completely wrong;invalid')],
+                [$this->stringContains('""')],
+                [$this->stringContains('""')],
+                [$this->stringContains('en')]
+            );
+
+        $service = new AcceptLanguage([
+            'http_accept_language' => 'completely wrong',
+            'accepted_languages' => ['de', 'en'],
+            'separator' => '_',
+        ]);
+        $service->useLogger($loggerMock);
+        $service->process();
+    }
+
     /**
      * Caught bugs section.
      */
