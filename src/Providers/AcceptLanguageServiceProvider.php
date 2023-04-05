@@ -17,7 +17,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(AcceptLanguage::class, function () {
-            $service = new AcceptLanguage($this->getConfig());
+            $service = new AcceptLanguage($this->getInitialConfig());
             $service->process();
 
             return $service;
@@ -29,7 +29,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     /**
      * @return array<string, string|array>
      */
-    private function getConfig(): array
+    private function getInitialConfig(): array
     {
         $config = [
             'default_language' => config('app.locale', ''),
