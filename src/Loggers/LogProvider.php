@@ -16,6 +16,11 @@ final class LogProvider
 
     public function __construct(LoggerInterface $logger)
     {
+        $this->initLogger($logger);
+    }
+
+    private function initLogger(LoggerInterface $logger): void
+    {
         $this->logger = $logger;
     }
 
