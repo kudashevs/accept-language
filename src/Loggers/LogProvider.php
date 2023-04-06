@@ -23,14 +23,28 @@ class LogProvider
      * Log an event with the provided context.
      *
      * @param string $event
-     * @param array $context
+     * @param array|string $data
      *
      * @throws InvalidLoggableEvent
      */
-    public function log(string $event, array $context): void
+    public function log(string $event, $data): void
     {
-        throw new InvalidLoggableEvent(
-            sprintf('The provided event "%s" is invalid.', $event)
+        switch ($event) {
+            case 'retrieve_header':
+                $this->handleRetrieveHeader($data);
+                break;
+
+            default:
+                throw new InvalidLoggableEvent(
+                    sprintf('The provided event "%s" is invalid.', $event)
+                );
+        }
+    }
+
+    private function handleRetrieveHeader(string $header): void
+    {
+        $this->logger->info(
+            sprintf('Retrieved a "%s" header.', $header)
         );
     }
 }
