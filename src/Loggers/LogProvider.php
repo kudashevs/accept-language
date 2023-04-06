@@ -93,23 +93,23 @@ final class LogProvider
 
         switch ($event) {
             case 'retrieve_header':
-                $this->handleRetrieveHeader($data);
+                $this->handleRetrieveHeader($event, $data);
                 break;
 
             case 'retrieve_raw_languages':
-                $this->handleRetrieveRawLanguages($data);
+                $this->handleRetrieveRawLanguages($event, $data);
                 break;
 
             case 'retrieve_normalized_languages':
-                $this->handleRetrieveNormalizedLanguages($data);
+                $this->handleRetrieveNormalizedLanguages($event, $data);
                 break;
 
             case 'retrieve_preferred_languages':
-                $this->handleRetrievePreferredLanguages($data);
+                $this->handleRetrievePreferredLanguages($event, $data);
                 break;
 
             case 'retrieve_preferred_language':
-                $this->handleRetrievePreferredLanguage($data);
+                $this->handleRetrievePreferredLanguage($event, $data);
                 break;
 
             default:
@@ -122,38 +122,38 @@ final class LogProvider
         return array_key_exists($event, $this->options) && $this->options[$event] === false;
     }
 
-    private function handleRetrieveHeader(string $header): void
+    private function handleRetrieveHeader(string $event, string $header): void
     {
         $this->logger->info(
-            sprintf('Retrieved a "%s" header.', $header)
+            sprintf('Retrieved a "%s" header on %s.', $header, $event)
         );
     }
 
-    private function handleRetrieveRawLanguages(string $languages): void
+    private function handleRetrieveRawLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Raw languages "%s".', $languages)
+            sprintf('Raw languages "%s" on %s.', $languages, $event)
         );
     }
 
-    private function handleRetrieveNormalizedLanguages(string $languages): void
+    private function handleRetrieveNormalizedLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Retrieved languages "%s".', $languages)
+            sprintf('Retrieved languages "%s" on %s.', $languages, $event)
         );
     }
 
-    private function handleRetrievePreferredLanguages(string $languages): void
+    private function handleRetrievePreferredLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Preferred languages "%s".', $languages)
+            sprintf('Preferred languages "%s" on %s.', $languages, $event)
         );
     }
 
-    private function handleRetrievePreferredLanguage(string $language): void
+    private function handleRetrievePreferredLanguage(string $event, string $language): void
     {
         $this->logger->info(
-            sprintf('Retrieved a "%s" preferred language.', $language)
+            sprintf('Retrieved a preferred language "%s" on %s.', $language, $event)
         );
     }
 
