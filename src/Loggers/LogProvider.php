@@ -66,6 +66,10 @@ final class LogProvider
      */
     public function log(string $event, string $data): void
     {
+        if ($this->shouldSkipLogging($event)) {
+            return;
+        }
+
         switch ($event) {
             case 'retrieve_header':
                 $this->handleRetrieveHeader($data);
@@ -90,6 +94,11 @@ final class LogProvider
             default:
                 $this->handleUnexpectedEvent($event);
         }
+    }
+
+    private function shouldSkipLogging(string $event): bool
+    {
+        return array_key_exists($event, $this->options) && $this->options[$event] === false;
     }
 
     private function handleUnexpectedEvent(string $event): void

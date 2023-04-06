@@ -20,6 +20,20 @@ class LogProviderTest extends TestCase
         $provider->log('wrong', '');
     }
 
+    /** @test */
+    public function it_can_skip_an_event_when_it_is_disabled()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->never())
+            ->method('info');
+
+        $provider = new LogProvider($loggerMock, [
+            'retrieve_header' => false,
+        ]);
+
+        $provider->log('retrieve_header', 'fr-CH');
+    }
+
     /**
      * @test
      * @dataProvider provideDifferentEvents
