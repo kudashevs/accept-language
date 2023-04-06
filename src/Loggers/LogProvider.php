@@ -55,7 +55,7 @@ class LogProvider
         }
     }
 
-    protected function handleUnexpectedEvent(string $event): void
+    private function handleUnexpectedEvent(string $event): void
     {
         throw new InvalidLoggableEvent(
             sprintf('The provided event "%s" is invalid.', $event)
