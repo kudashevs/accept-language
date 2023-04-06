@@ -122,13 +122,6 @@ final class LogProvider
         return array_key_exists($event, $this->options) && $this->options[$event] === false;
     }
 
-    private function handleUnexpectedEvent(string $event): void
-    {
-        throw new InvalidLoggableEvent(
-            sprintf('The provided event "%s" is invalid.', $event)
-        );
-    }
-
     private function handleRetrieveHeader(string $header): void
     {
         $this->logger->info(
@@ -161,6 +154,13 @@ final class LogProvider
     {
         $this->logger->info(
             sprintf('Retrieved a "%s" preferred language.', $language)
+        );
+    }
+
+    private function handleUnexpectedEvent(string $event): void
+    {
+        throw new InvalidLoggableEvent(
+            sprintf('The provided event "%s" is invalid.', $event)
         );
     }
 }
