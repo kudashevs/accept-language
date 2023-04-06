@@ -23,11 +23,11 @@ class LogProvider
      * Log an event with the provided context.
      *
      * @param string $event
-     * @param array|string $data
+     * @param string $data
      *
      * @throws InvalidLoggableEvent
      */
-    public function log(string $event, $data): void
+    public function log(string $event, string $data): void
     {
         switch ($event) {
             case 'retrieve_header':

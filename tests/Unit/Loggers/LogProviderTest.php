@@ -17,7 +17,7 @@ class LogProviderTest extends TestCase
         $this->expectExceptionMessage('wrong');
 
         $provider = new LogProvider(new DummyLogger());
-        $provider->log('wrong', []);
+        $provider->log('wrong', '');
     }
 
     /** @test */
@@ -26,10 +26,10 @@ class LogProviderTest extends TestCase
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->once())
             ->method('info')
-            ->with($this->stringContains('fr-CH,fr'));
+            ->with($this->stringContains('retrieve_header'));
 
         $provider = new LogProvider($loggerMock);
-        $provider->log('retrieve_header', 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5');
+        $provider->log('retrieve_header', 'retrieve_header');
     }
 
 }
