@@ -125,35 +125,35 @@ final class LogProvider
     private function handleRetrieveHeader(string $event, string $header): void
     {
         $this->logger->info(
-            sprintf('Retrieved a "%s" header on %s.', $header, $event)
+            sprintf('Retrieved "%s" header [%s event].', $header, $event)
         );
     }
 
     private function handleRetrieveRawLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Raw languages "%s" on %s.', $languages, $event)
+            sprintf('Retrieved "%s" raw languages [%s event].', $languages, $event)
         );
     }
 
     private function handleRetrieveNormalizedLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Retrieved languages "%s" on %s.', $languages, $event)
+            sprintf('Retrieved "%s" normalized languages [%s event].', $languages, $event)
         );
     }
 
     private function handleRetrievePreferredLanguages(string $event, string $languages): void
     {
         $this->logger->info(
-            sprintf('Preferred languages "%s" on %s.', $languages, $event)
+            sprintf('Retrieved "%s" preferred languages [%s event].', $languages, $event)
         );
     }
 
     private function handleRetrievePreferredLanguage(string $event, string $language): void
     {
         $this->logger->info(
-            sprintf('Retrieved a preferred language "%s" on %s.', $language, $event)
+            sprintf('Retrieved "%s" resulting language [%s event].', $language, $event)
         );
     }
 
