@@ -42,7 +42,18 @@ final class LogProvider
      */
     private function initOptions(array $options): void
     {
-        $this->options = array_merge($this->options, $options);
+        $applicable = $this->retrieveApplicableOptions($options);
+
+        $this->options = array_merge($this->options, $applicable);
+    }
+
+    /**
+     * @param array<string, bool> $options
+     * @return array<string, bool>
+     */
+    private function retrieveApplicableOptions(array $options): array
+    {
+        return array_filter($options, 'is_bool');
     }
 
     /**
