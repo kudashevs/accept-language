@@ -72,7 +72,13 @@ final class LogProvider
     }
 
     /**
-     * Log an event with the provided context.
+     * Log an event with the provided data. The supported events are:
+     *
+     * 'retrieve_header' allows logging a retrieved HTTP Accept-Language header
+     * 'retrieve_raw_languages' allows logging retrieved languages before normalization process
+     * 'retrieve_normalized_languages' allows logging retrieved languages after normalization process
+     * 'retrieve_preferred_languages' allows logging the preferred languages that match the accepted languages
+     * 'retrieve_preferred_language' allows logging the resulting preferred language
      *
      * @param string $event
      * @param string $data
