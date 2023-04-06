@@ -20,27 +20,27 @@ class LogProviderTest extends TestCase
         $provider->log('wrong', '');
     }
 
-    /** @test */
-    public function it_can_handle_the_retrieve_header_event()
+    /**
+     * @test
+     * @dataProvider provideDifferentEvents
+     */
+    public function it_can_handle_an_event(string $event, string $data, string $method, string $expected): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->once())
-            ->method('info')
-            ->with($this->stringContains('retrieve_header'));
+            ->method($method)
+            ->with($this->stringContains($expected));
 
         $provider = new LogProvider($loggerMock);
-        $provider->log('retrieve_header', 'retrieve_header');
+        $provider->log($event, $data);
+
     }
 
-    /** @test */
-    public function it_can_handle_the_retrieve_raw_languages()
+    public function provideDifferentEvents(): array
     {
-        $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->once())
-            ->method('info')
-            ->with($this->stringContains('retrieve_raw_languages'));
-
-        $provider = new LogProvider($loggerMock);
-        $provider->log('retrieve_raw_languages', 'retrieve_raw_languages');
+        return [
+            'the retrieve_header event' => ['retrieve_header', 'en_GB', 'info', 'en_GB'],
+            'the retrieve_raw_languages event' => ['retrieve_raw_languages', 'en_GB', 'info', 'en_GB'],
+        ];
     }
 }
