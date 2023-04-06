@@ -31,7 +31,7 @@ class LogProviderTest extends TestCase
             'retrieve_header' => false,
         ]);
 
-        $provider->log('retrieve_header', 'fr-CH');
+        $provider->log('retrieve_header', 'anything');
     }
 
     /**
