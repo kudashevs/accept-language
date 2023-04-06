@@ -66,7 +66,7 @@ final class LogProvider
      */
     public function log(string $event, string $data): void
     {
-        if ($this->shouldSkipLogging($event)) {
+        if ($this->shouldSkipHandleEvent($event)) {
             return;
         }
 
@@ -96,7 +96,7 @@ final class LogProvider
         }
     }
 
-    private function shouldSkipLogging(string $event): bool
+    private function shouldSkipHandleEvent(string $event): bool
     {
         return array_key_exists($event, $this->options) && $this->options[$event] === false;
     }
