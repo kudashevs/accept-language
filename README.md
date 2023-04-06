@@ -71,25 +71,24 @@ The class accepts some options which help you to control the result:
 'use_region_subtag'         # A boolean defines whether to include a region subtag in the result (default is true).
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
 ```
-<sub><sup>1 - the default language should be a valid Language Tag (it will be formatted according to the settings)</sup></sub>  
-<sub><sup>2 - the value of the `accepted_languages` option should include only valid Language Tags</sup></sub>  
+<sub><sup>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sup></sub>  
+<sub><sup>2 - the `accepted_languages` option should include valid Language Tags only</sup></sub>  
 <sub><sup>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sup></sub>
 
 ### Notes
 
 Some options require additional explanations:
 
-- the `accepted_languages` option should contain only string values that represent valid Language Tags. However,
-these values may be written in any case (as standard says) and may include a separator value from the `separator` option
-(for example, the values ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca'] if the `separator` value is an underscore).
-If no values are given the package returns the found languages in their natural order (returns the first language found).
+- the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as standard says)
+and may use a separator different from the `separator` option (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']).
+If no values are given the package will return a first valid language found.
 
 **Important note!** the values of the `accepted_languages` option will be formatted according to the settings. Therefore,
-if you want to find languages including script subtags you should enable the `use_script_subtag` option.
+if you want to retrieve languages including script subtags you should enable the `use_script_subtag` option.
 
-- the `exact_match_only` option is set to `false` by default. When set to `true`, the option restricts the searching
-algorithm to find only languages that exactly match the languages listed in the `accepted_languages` option. When
-set to `false`, the finding algorithm becomes more flexible and retrieves the language and its derivatives (default behavior).
+- the `exact_match_only` option is set to `false` by default. When set to `true`, it restricts the matching algorithm to find only
+the languages that exactly match the languages listed in the `accepted_languages` option. When set to `false`, the matching algorithm
+becomes more flexible and retrieves the language and its derivatives.
 
 ## Usage example
 
