@@ -51,10 +51,15 @@ class LogProvider
                 break;
 
             default:
-                throw new InvalidLoggableEvent(
-                    sprintf('The provided event "%s" is invalid.', $event)
-                );
+                $this->handleUnexpectedEvent($event);
         }
+    }
+
+    protected function handleUnexpectedEvent(string $event): void
+    {
+        throw new InvalidLoggableEvent(
+            sprintf('The provided event "%s" is invalid.', $event)
+        );
     }
 
     private function handleRetrieveHeader(string $header): void
