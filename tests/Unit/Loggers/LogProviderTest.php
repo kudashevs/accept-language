@@ -32,4 +32,15 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_header', 'retrieve_header');
     }
 
+    /** @test */
+    public function it_can_handle_the_retrieve_raw_languages()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->once())
+            ->method('info')
+            ->with($this->stringContains('retrieve_raw_languages'));
+
+        $provider = new LogProvider($loggerMock);
+        $provider->log('retrieve_raw_languages', 'retrieve_raw_languages');
+    }
 }

@@ -34,6 +34,10 @@ class LogProvider
                 $this->handleRetrieveHeader($data);
                 break;
 
+            case 'retrieve_raw_languages':
+                $this->handleRetrieveRawLanguages($data);
+                break;
+
             default:
                 throw new InvalidLoggableEvent(
                     sprintf('The provided event "%s" is invalid.', $event)
@@ -45,6 +49,13 @@ class LogProvider
     {
         $this->logger->info(
             sprintf('Retrieved a "%s" header.', $header)
+        );
+    }
+
+    private function handleRetrieveRawLanguages(string $languages): void
+    {
+        $this->logger->info(
+            sprintf('Raw languages "%s".', $languages)
         );
     }
 }
