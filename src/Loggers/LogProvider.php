@@ -14,14 +14,35 @@ final class LogProvider
      */
     private LoggerInterface $logger;
 
-    public function __construct(LoggerInterface $logger)
+    private array $options = [
+        'retrieve_header' => true,
+        'retrieve_raw_languages' => true,
+        'retrieve_normalized_languages' => true,
+        'retrieve_preferred_languages' => true,
+        'retrieve_preferred_language' => true,
+    ];
+
+    /**
+     * @param LoggerInterface $logger
+     * @param array<string, bool> $options
+     */
+    public function __construct(LoggerInterface $logger, array $options = [])
     {
         $this->initLogger($logger);
+        $this->initOptions($options);
     }
 
     private function initLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * @param array<string, bool> $options
+     */
+    private function initOptions(array $options): void
+    {
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
