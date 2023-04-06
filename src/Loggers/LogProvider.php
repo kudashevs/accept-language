@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Loggers;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLoggableEvent;
 use Psr\Log\LoggerInterface;
 
-class LogProvider
+final class LogProvider
 {
     /**
      * Contain a PSR-3 compatible logger.
