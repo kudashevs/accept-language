@@ -24,11 +24,11 @@ class LogProviderTest extends TestCase
      * @test
      * @dataProvider provideDifferentEvents
      */
-    public function it_can_handle_an_event(string $event, string $data, string $method, string $expected): void
+    public function it_can_handle_an_event(string $event, string $data, string $expected): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->once())
-            ->method($method)
+            ->method('info')
             ->with($this->stringContains($expected));
 
         $provider = new LogProvider($loggerMock);
@@ -39,8 +39,8 @@ class LogProviderTest extends TestCase
     public function provideDifferentEvents(): array
     {
         return [
-            'the retrieve_header event' => ['retrieve_header', 'en_GB', 'info', 'en_GB'],
-            'the retrieve_raw_languages event' => ['retrieve_raw_languages', 'en_GB', 'info', 'en_GB'],
+            'the retrieve_header event' => ['retrieve_header', 'en_GB', 'en_GB'],
+            'the retrieve_raw_languages event' => ['retrieve_raw_languages', 'en_GB', 'en_GB'],
         ];
     }
 }
