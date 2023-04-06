@@ -14,6 +14,21 @@ final class LogProvider
      */
     private LoggerInterface $logger;
 
+    /**
+     * 'retrieve_header' bool A boolean that defines whether to handle the `retrieve_header` event.
+     * 'retrieve_raw_languages' bool A boolean that defines whether to handle the `retrieve_raw_languages` event.
+     * 'retrieve_normalized_languages' bool A boolean that defines whether to handle the `retrieve_normalized_languages` event.
+     * 'retrieve_preferred_languages' bool A boolean that defines whether to handle the `retrieve_preferred_languages` event.
+     * 'retrieve_preferred_language' bool A boolean that defines whether to handle the `retrieve_preferred_language` event.
+     *
+     * @var array{
+     *     'retrieve_header': bool,
+     *     'retrieve_raw_languages': bool,
+     *     'retrieve_normalized_languages': bool,
+     *     'retrieve_preferred_languages': bool,
+     *     'retrieve_preferred_language': bool,
+     * }
+     */
     private array $options = [
         'retrieve_header' => true,
         'retrieve_raw_languages' => true,
