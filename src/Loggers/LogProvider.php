@@ -38,6 +38,18 @@ class LogProvider
                 $this->handleRetrieveRawLanguages($data);
                 break;
 
+            case 'retrieve_normalized_languages':
+                $this->handleRetrieveNormalizedLanguages($data);
+                break;
+
+            case 'retrieve_preferred_languages':
+                $this->handleRetrievePreferredLanguages($data);
+                break;
+
+            case 'retrieve_preferred_language':
+                $this->handleRetrievePreferredLanguage($data);
+                break;
+
             default:
                 throw new InvalidLoggableEvent(
                     sprintf('The provided event "%s" is invalid.', $event)
@@ -56,6 +68,27 @@ class LogProvider
     {
         $this->logger->info(
             sprintf('Raw languages "%s".', $languages)
+        );
+    }
+
+    private function handleRetrieveNormalizedLanguages(string $languages): void
+    {
+        $this->logger->info(
+            sprintf('Retrieved languages "%s".', $languages)
+        );
+    }
+
+    private function handleRetrievePreferredLanguages(string $languages): void
+    {
+        $this->logger->info(
+            sprintf('Preferred languages "%s".', $languages)
+        );
+    }
+
+    private function handleRetrievePreferredLanguage(string $language): void
+    {
+        $this->logger->info(
+            sprintf('Retrieved a "%s" preferred language.', $language)
         );
     }
 }

@@ -39,8 +39,31 @@ class LogProviderTest extends TestCase
     public function provideDifferentEvents(): array
     {
         return [
-            'the retrieve_header event' => ['retrieve_header', 'en_GB', 'en_GB'],
-            'the retrieve_raw_languages event' => ['retrieve_raw_languages', 'en_GB', 'en_GB'],
+            'the retrieve_header event' => [
+                'retrieve_header',
+                'accept_header',
+                'accept_header',
+            ],
+            'the retrieve_raw_languages event' => [
+                'retrieve_raw_languages',
+                'raw_languages',
+                'raw_languages',
+            ],
+            'the retrieve_normalized_languages event' => [
+                'retrieve_normalized_languages',
+                'normalized_languages',
+                'normalized_languages',
+            ],
+            'the retrieve_preferred_languages event' => [
+                'retrieve_preferred_languages',
+                'preferred_languages',
+                'preferred_languages',
+            ],
+            'the retrieve_preferred_language event' => [
+                'retrieve_preferred_language',
+                'preferred_language',
+                'preferred_language',
+            ],
         ];
     }
 }
