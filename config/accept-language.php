@@ -42,6 +42,19 @@ return [
     'exact_match_only' => false,
 
     /*
+     |--------------------------------------------------------------------------
+     | Two letter only
+     |--------------------------------------------------------------------------
+     |
+     | This option defines whether to retrieve two-letter primary subtags only or
+     | not. When set to `true`, it will retrieve only the languages with the two-
+     | letter primary subtag. For more information, refer to the Notes section.
+     |
+     */
+
+    'two_letter_only' => true,
+
+    /*
     |--------------------------------------------------------------------------
     | Log activity
     |--------------------------------------------------------------------------
