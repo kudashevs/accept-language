@@ -72,9 +72,9 @@ The class accepts some options which help you to control the result:
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
 'log_activity'              # A boolean defines whether to log the activity of the package or not (default if false).
 ```
-<sub><sup>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sup></sub>  
-<sub><sup>2 - the `accepted_languages` option should include valid Language Tags only</sup></sub>  
-<sub><sup>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sup></sub>
+<sub>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sub>  
+<sub>2 - the `accepted_languages` option should include valid Language Tags only</sub>  
+<sub>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sub>
 
 ### Notes
 
