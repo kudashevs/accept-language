@@ -112,7 +112,7 @@ By doing that, we instruct the package to retrieve only the values that are list
 If one of the language tags in a user HTTP Accept-Language header matches any of these values, it will be retained for
 the further processing. If none of them matches the listed values, the default language will be returned.
 
-## Laravel usage
+## Laravel integration
 
 If you don't use auto-discovery just add a ServiceProvider to the `config/app.php` file.
 ```php
