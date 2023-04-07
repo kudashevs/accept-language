@@ -174,7 +174,7 @@ composer test
 ## References
 
 - [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://tools.ietf.org/html/rfc7231#section-5.3.5)
-- [RFC 4646 Tags for Identifying Languages](https://tools.ietf.org/html/rfc4646#section-2)  
+- [RFC 4646 Tags for Identifying Languages](https://tools.ietf.org/html/rfc4646#section-2)
 - [RFC 4647 Matching of Language Tags](https://tools.ietf.org/html/rfc4647#section-2)
 
 ## Contributing
