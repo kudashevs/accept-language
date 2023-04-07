@@ -140,6 +140,11 @@ All of the available configuration settings are located in the `config/accept-la
 'log_activity' => bool              # Sets the `log_activity` option value (default is false)
 ```
 
+If you want to change the defaults, don't forget to publish the configuration file.
+```bash
+php artisan vendor:publish --provider="Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider"
+```
+
 ## Testing
 
 If you want to make sure that everything works as expected, just run the unit tests provided with the package.
