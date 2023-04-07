@@ -930,7 +930,23 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_and_log_valid_languages()
+    public function it_cannot_log_activity_by_default()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->never())
+            ->method('info');
+
+        $service = new AcceptLanguage([
+            'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
+            'accepted_languages' => ['de', 'en'],
+            'separator' => '_',
+        ]);
+        $service->useLogger($loggerMock);
+        $service->process();
+    }
+
+    /** @test */
+    public function it_can_log_valid_languages_when_log_activity_is_enabled()
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->exactly(5))
@@ -947,13 +963,14 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
             'accepted_languages' => ['de', 'en'],
             'separator' => '_',
+            'log_activity' => true,
         ]);
         $service->useLogger($loggerMock);
         $service->process();
     }
 
     /** @test */
-    public function it_can_retrieve_and_log_invalid_languages()
+    public function it_can_log_invalid_languages_when_log_activity_is_enabled()
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->exactly(5))
@@ -970,6 +987,7 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'completely wrong',
             'accepted_languages' => ['de', 'en'],
             'separator' => '_',
+            'log_activity' => true,
         ]);
         $service->useLogger($loggerMock);
         $service->process();
