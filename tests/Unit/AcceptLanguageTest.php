@@ -514,6 +514,22 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'ast',
             ],
+            'returns expected second of accepted languages with the two-letter only option set to true' => [
+                [
+                    'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
+                    'accepted_languages' => ['ast', 'de'],
+                    'two_letter_only' => true,
+                ],
+                'de',
+            ],
+            'returns expected first of accepted languages with the two-letter only option set to false' => [
+                [
+                    'http_accept_language' => 'ast,en;q=0.8,de;q=0.7,*;q=0.5',
+                    'accepted_languages' => ['ast', 'de'],
+                    'two_letter_only' => false,
+                ],
+                'ast',
+            ],
         ];
     }
 
