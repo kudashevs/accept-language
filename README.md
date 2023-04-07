@@ -128,8 +128,8 @@ $service = new AcceptLanguage([
 $service->process();
 ```
 
-By doing that, we instruct the package to retrieve only the values that are listed in the `accepted_languages` option.
-If one of the language tags in a user HTTP Accept-Language header matches any of these values, it will be retained for
+These options instruct the package to retrieve only the values that are listed in the `accepted_languages` option.
+If one of the language tags in an HTTP Accept-Language header matches any of these values, it will be retained for
 the further processing. If none of them matches the listed values, the default language will be returned.
 
 ## Laravel integration
