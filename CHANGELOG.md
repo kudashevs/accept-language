@@ -2,6 +2,18 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.1.0 - 2023-04-07](https://github.com/kudashevs/accept-language/compare/v3.0.1...v3.1.0)
+
+- Add logging functionality
+- Add a new LogProvider abstraction
+- Add a new `useLogger` public method
+- Add a Laravel configuration file
+- Add support for Laravel 10
+- Add a `psr/log` dependency
+- Update the Laravel service provider
+- Massive update of README.md
+- Some improvements
+
 ## [v3.0.1 - 2022-12-18](https://github.com/kudashevs/accept-language/compare/v3.0.0...v3.0.1)
 
 - Fix the `AcceptLanguage` Laravel auto-discovery alias
