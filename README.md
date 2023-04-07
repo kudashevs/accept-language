@@ -32,9 +32,10 @@ composer require kudashevs/accept-language
 ## Usage
 
 The usage is quite simple. Just instantiate the `AcceptLanguage` class and call a `process` method on the instance.
-Do it somewhere before a place where you want to use the user's preferred language (for example, in a front controller
-or in a middleware). The method will retrieve an HTTP Accept-Language header, parse it, and analyze retrieved languages.
-Then it will retrieve and retain a valid language tag with the highest priority value (the preferred language).
+Do it somewhere before a place where you want to get the user's preferred language (for example, in a front controller
+or in a middleware). This method will retrieve an HTTP Accept-Language header, parse it, and find valid language tags.
+Then it will apply a matching algorithm to the language tags and, finally, it will find and retain a language tag with
+the highest priority value (e.g. the preferred language).
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
