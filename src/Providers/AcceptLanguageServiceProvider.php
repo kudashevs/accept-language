@@ -48,6 +48,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
         $config = [
             'default_language' => config('accept-language.default_language', $fallbackLanguage),
             'accepted_languages' => config('accept-language.accepted_languages', []),
+            'exact_match_only' => config('accept-language.exact_match_only', false),
             'log_activity' => config('accept-language.log_activity', 'false'),
         ];
 

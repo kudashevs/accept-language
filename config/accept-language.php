@@ -29,6 +29,19 @@ return [
     'accepted_languages' => [],
 
     /*
+     |--------------------------------------------------------------------------
+     | Matching strategy
+     |--------------------------------------------------------------------------
+     |
+     | It defines the matching strategy. When set to `true`, it is restricted to
+     | finding only the languages that exactly match the languages listed in the
+     | `accepted_languages`. For more information, refer to the Notes section.
+     |
+     */
+
+    'exact_match_only' => false,
+
+    /*
     |--------------------------------------------------------------------------
     | Log activity
     |--------------------------------------------------------------------------
