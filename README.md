@@ -91,6 +91,20 @@ if you want to retrieve languages including script subtags you should enable the
 the languages that exactly match the languages listed in the `accepted_languages` option. When set to `false`, the matching algorithm
 becomes more flexible and retrieves the language and its derivatives.
 
+## Logging
+
+There is the possibility to log information gathered throughout the execution process. To activate it the package requires an instance
+of `Psr\Log\LoggerInterface` implementation. 
+```php
+use \Kudashevs\AcceptLanguage\AcceptLanguage;
+
+$service = new AcceptLanguage([
+    'log_activity' => true,
+]);
+$service->useLogger(new PsrCompatibleLogger());
+$service->process();
+```
+
 ## Usage example
 
 Let's consider that we have a web application that uses three different languages: American, British, and Canadian English.
