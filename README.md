@@ -133,8 +133,12 @@ If you want to add a Laravel Facade just add it to the aliases array in the `con
 ];
 ```
 
-The service provider by default uses two Laravel options (`app.locale` and `app.accepted_locales`). These options
-correspond respectively to the `default_language` and `accepted_languages` package options.
+All of the available configuration settings are located in the `config/accept-language.php` file.
+```
+'default_language' => 'value'       # Sets the `default_language` option value (default is 'en')
+'accepted_languages' => []          # Sets the `accepted_languages` option value (default is [[)
+'log_activity' => bool              # Sets the `log_activity` option value (default is false)
+```
 
 ## Testing
 
