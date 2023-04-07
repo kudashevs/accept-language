@@ -52,7 +52,7 @@ class AcceptLanguageTest extends TestCase
         ]);
         $service->process();
 
-        $this->assertEquals('en-US,en;q=0.5', $service->getHeader());
+        $this->assertSame('en-US,en;q=0.5', $service->getHeader());
     }
 
     /**
