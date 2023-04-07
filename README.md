@@ -80,16 +80,20 @@ The class accepts some options which help you to control the result:
 
 Some options require additional explanations:
 
-- the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as standard says)
+- the `accepted_languages` option should include valid Language Tags. These values may be written in any case (as the standard says)
 and may use a separator different from the `separator` option (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']).
-If no accepted languages are provided, the resulting language will be equal to the `default_language` value.
+If no accepted languages provided, the resulting language will be equal to the `default_language` value.
 
 **Important note!** the values of the `accepted_languages` option will be formatted according to the settings. Therefore,
 if you want to retrieve languages including script subtags you should enable the `use_script_subtag` option.
 
-- the `exact_match_only` option is set to `false` by default. When set to `true`, it restricts the matching algorithm to find only
+- the `exact_match_only` option is set to `false` by default. When set to `true`, it restricts the matching algorithm to finding only
 the languages that exactly match the languages listed in the `accepted_languages` option. When set to `false`, the matching algorithm
 becomes more flexible and retrieves the language and its derivatives.
+
+- the `two_letter_only` option is set to `true` by default. When set to `true`, it orders the instance to retrieve only the languages
+with the two-letter primary subtag. This option has a **higher priority** than the `accepted_languages` option. Thus, if you want to
+accept languages with three-letter primary subtag (by listing them in the `accepted_languages`), don't forget to disable this option.
 
 ## Logging
 
