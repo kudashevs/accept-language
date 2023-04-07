@@ -20,9 +20,9 @@ return [
     | Accepted languages
     |--------------------------------------------------------------------------
     |
-    | This option contains a list of supported languages. It should include only
-    | valid Language Tags. If no accepted languages are provided, the resulting
-    | language will be equal to the `default_language` value.
+    | This option contains a list of accepted languages. The package will match
+    | languages found in a header to the provided list. If no accepted languages
+    | provided, the `default_language` value will be returned.
     |
     */
 
@@ -76,7 +76,7 @@ return [
     |
     | This option defines whether to log the activity of the package or not. If
     | set to `true`, it will log information gathered throughout the execution
-    | process. For more information, refer to the Logging section in README.md.
+    | process. For more information, refer to the Logging section.
     |
     */
 
