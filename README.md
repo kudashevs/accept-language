@@ -48,7 +48,7 @@ $service->getPreferredLanguage();   # Returns the user's preferred language
 $service->getLanguage();            # Does the same (an alias of the getPreferredLanguage() method)
 ```
 
-If for some reason you need the original HTTP Accept-Language header, it is available through `getHeader` method.
+If for some reason you need the original HTTP Accept-Language header, it is available through the `getHeader` method.
 ```php
 $service->getHeader();
 ```
