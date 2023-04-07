@@ -70,6 +70,7 @@ The class accepts some options which help you to control the result:
 'use_script_subtag'         # A boolean defines whether to include a script subtag in the result (default is false).
 'use_region_subtag'         # A boolean defines whether to include a region subtag in the result (default is true).
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
+'log_activity'              # A boolean defines whether to log the activity of the package or not (default if false).
 ```
 <sub><sup>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sup></sub>  
 <sub><sup>2 - the `accepted_languages` option should include valid Language Tags only</sup></sub>  
