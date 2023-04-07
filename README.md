@@ -98,8 +98,8 @@ accept languages with three-letter primary subtag (by listing them in the `accep
 
 ## Logging
 
-There is the possibility to log information gathered throughout the execution process. To activate it the package requires an instance
-of `Psr\Log\LoggerInterface` implementation. 
+There is the possibility to log information gathered throughout the execution process. To activate it you should set the configuration
+option `log_activity` to `true` and provide an instance of `Psr\Log\LoggerInterface` implementation to the `useLogger` method. 
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
