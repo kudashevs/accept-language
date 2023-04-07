@@ -34,8 +34,9 @@ class AcceptLanguageServiceProvider extends ServiceProvider
 
             return $service;
         });
-
         $this->app->alias(AcceptLanguage::class, 'acceptlanguage');
+
+        $this->mergeConfigFrom(__DIR__ . '/../../config/accept-language.php', 'accept-language');
     }
 
     /**
