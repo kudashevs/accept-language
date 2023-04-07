@@ -82,7 +82,7 @@ Some options require additional explanations:
 
 - the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as standard says)
 and may use a separator different from the `separator` option (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']).
-If no values are given the package will return a first valid language found.
+If no accepted languages are provided, the resulting language will be equal to the `default_language` value.
 
 **Important note!** the values of the `accepted_languages` option will be formatted according to the settings. Therefore,
 if you want to retrieve languages including script subtags you should enable the `use_script_subtag` option.
