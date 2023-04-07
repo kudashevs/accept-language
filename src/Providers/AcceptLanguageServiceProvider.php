@@ -50,6 +50,9 @@ class AcceptLanguageServiceProvider extends ServiceProvider
             'accepted_languages' => config('accept-language.accepted_languages', []),
             'exact_match_only' => config('accept-language.exact_match_only', false),
             'two_letter_only' => config('accept-language.two_letter_only', true),
+            'use_extlang_subtag' => config('accept-language.use_extlang_subtag', false),
+            'use_script_subtag' => config('accept-language.use_script_subtag', false),
+            'use_region_subtag' => config('accept-language.use_region_subtag', true),
             'log_activity' => config('accept-language.log_activity', 'false'),
         ];
 

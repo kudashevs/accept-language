@@ -55,6 +55,21 @@ return [
     'two_letter_only' => true,
 
     /*
+     |--------------------------------------------------------------------------
+     | Use different subtags
+     |--------------------------------------------------------------------------
+     |
+     | These options define which of the language subtags should be included in
+     | or excluded from a resulting preferred language. By default, it includes
+     | only the region subtag to be similar to the Unicode Locale Identifier.
+     |
+     */
+
+    'use_extlang_subtag' => false,
+    'use_script_subtag' => false,
+    'use_region_subtag' => true,
+
+    /*
     |--------------------------------------------------------------------------
     | Log activity
     |--------------------------------------------------------------------------
