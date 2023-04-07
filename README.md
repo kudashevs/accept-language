@@ -121,9 +121,9 @@ If you don't use auto-discovery just add a ServiceProvider to the `config/app.ph
 ];
 ```
 
-Once added, the `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class, call the `process` method,
-and put the instance into the Laravel container. To get a preferred language just refer to the object in the container
-(through a dependency injection mechanism or by using an alias `app('acceptlanguage')`).
+Once added, the `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class, apply some initial configuration
+settings, and call the `process` method. After finishing the setup process, it binds the instance into the Laravel service container.
+Thus, the instance becomes accessible through a dependency injection mechanism or an alias (e.g `app('acceptlanguage')`).
 
 If you want to add a Laravel Facade just add it to the aliases array in the `config/app.php` file.
 ```php
