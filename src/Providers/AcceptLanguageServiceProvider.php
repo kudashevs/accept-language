@@ -11,6 +11,16 @@ use Psr\Log\LoggerInterface;
 class AcceptLanguageServiceProvider extends ServiceProvider
 {
     /**
+     * Bootstrap any package services.
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../../config/accept-language.php' => config_path('accept-language.php'),
+        ]);
+    }
+
+    /**
      * Register services.
      *
      * @return void
