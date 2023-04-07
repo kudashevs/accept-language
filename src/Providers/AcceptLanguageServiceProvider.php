@@ -33,9 +33,12 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      */
     private function getInitialConfig(): array
     {
+        $fallbackLanguage = config('app.locale', 'en');
+
         $config = [
-            'default_language' => config('app.locale', ''),
-            'accepted_languages' => config('app.accepted_locales', []),
+            'default_language' => config('accept-language.default_language', $fallbackLanguage),
+            'accepted_languages' => config('accept-language.accepted_languages', []),
+            'log_activity' => config('accept-language.log_activity', 'false'),
         ];
 
         return array_filter($config);
