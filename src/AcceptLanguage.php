@@ -43,6 +43,7 @@ class AcceptLanguage
      * 'use_script_subtag' bool A boolean that defines whether to include a script subtag in the result or not.
      * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
      * 'separator' string A string with a character that will be used as a separator in the result.
+     * 'log_activity' bool A boolean that defines whether to log the activity of the package or not.
      *
      * @var array{
      *     'http_accept_language': string,
@@ -53,7 +54,8 @@ class AcceptLanguage
      *     'use_extlang_subtag': bool,
      *     'use_script_subtag': bool,
      *     'use_region_subtag': bool,
-     *     'separator': string
+     *     'separator': string,
+     *     'log_activity': bool
      * }
      */
     protected array $options = [
@@ -66,6 +68,7 @@ class AcceptLanguage
         'use_script_subtag' => false,
         'use_region_subtag' => true,
         'separator' => '_',
+        'log_activity' => false,
     ];
 
     protected LanguageFactory $factory;
