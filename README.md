@@ -24,7 +24,6 @@ The package goes with the built-in Laravel framework support. For more informati
 ## Installation
 
 You can install the package via composer:
-
 ```bash
 composer require kudashevs/accept-language
 ```
