@@ -58,9 +58,9 @@ class QualityValue
 
     private function isValidQuality($quality): bool
     {
-        return is_null($quality) ||
-            $this->isEmptyQuality($quality) ||
-            $this->isInsideValidRange($quality);
+        return is_null($quality)
+            || $this->isEmptyQuality($quality)
+            || $this->isInsideValidRange($quality);
     }
 
     private function isEmptyQuality($quality): bool
@@ -94,9 +94,9 @@ class QualityValue
 
     private function isStringInteger($quality): bool
     {
-        return is_string($quality) &&
-            is_numeric($quality) &&
-            strpos($quality, '.') === false;
+        return is_string($quality)
+            && is_numeric($quality)
+            && strpos($quality, '.') === false;
     }
 
     private function normalizeQuality($quality)
