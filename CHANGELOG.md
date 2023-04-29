@@ -2,6 +2,11 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.1.1 - 2023-04-29](https://github.com/kudashevs/accept-language/compare/v3.1.0...v3.1.1)
+
+- Fix the default log option type in the Laravel service provider
+- Some insignificant improvements
+
 ## [v3.1.0 - 2023-04-07](https://github.com/kudashevs/accept-language/compare/v3.0.1...v3.1.0)
 
 - Add logging functionality
