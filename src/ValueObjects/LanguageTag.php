@@ -111,9 +111,9 @@ final class LanguageTag
         /**
          * The primary language subtag is the first subtag in a language tag. See RFC 5646, Section 2.2.1.
          */
-        return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH &&
-            strlen($tag) <= self::MAXIMUM_PRIMARY_SUBTAG_LENGTH &&
-            $this->isSeparatorLess($tag);
+        return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH
+            && strlen($tag) <= self::MAXIMUM_PRIMARY_SUBTAG_LENGTH
+            && $this->isSeparatorLess($tag);
     }
 
     private function isPrimaryWithSubtags(string $tag): bool
