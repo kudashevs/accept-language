@@ -54,7 +54,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
             'use_extlang_subtag' => config('accept-language.use_extlang_subtag', false),
             'use_script_subtag' => config('accept-language.use_script_subtag', false),
             'use_region_subtag' => config('accept-language.use_region_subtag', true),
-            'log_activity' => config('accept-language.log_activity', 'false'),
+            'log_activity' => config('accept-language.log_activity', false),
         ];
 
         return array_filter($config);
