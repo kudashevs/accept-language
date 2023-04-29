@@ -1,8 +1,8 @@
 # Accept-Language ![test workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
 
 This PHP package retrieves a language of preference (a preferred language) from an HTTP Accept-Language request-header field.
-It can be used in any web application to identify the visitors' language of choice. Later this information may be used to
-make various decisions (for example, set a locale, redirect a user to the specific page, etc.).
+The package can be used in any web app to identify the visitors' language of choice. The retrieved information might be used
+to make various decisions (for example, set a locale, redirect a user to the specific page, etc.).
 
 ## Features
 
