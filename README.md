@@ -170,7 +170,7 @@ php artisan vendor:publish --provider="Kudashevs\AcceptLanguage\Providers\Accept
 
 ## Testing
 
-If you want to make sure that everything works as expected, just run the unit tests provided with the package.
+If you want to make sure that everything works as expected, you can run unit tests provided with the package.
 ```bash
 composer test
 ```
