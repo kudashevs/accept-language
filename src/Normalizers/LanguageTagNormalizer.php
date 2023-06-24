@@ -89,6 +89,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     private function generateNormalizedTag(string $tag, array $subtags): string
     {
+        // If no valid set of subtags is present, the tag is returned unchanged.
         if (!$this->isValidSetOfSubtags($subtags)) {
             return $tag;
         }
