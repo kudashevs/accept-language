@@ -213,9 +213,7 @@ class AcceptLanguage
      */
     protected function parseHeaderValue(string $header): array
     {
-        /**
-         * Some cases do not require further processing as they result in the default language.
-         */
+        // Some cases do not require further processing as they result in the default language.
         if ($this->isDefaultLanguageCase($header)) {
             return [];
         }
@@ -248,9 +246,7 @@ class AcceptLanguage
 
         $languages = [];
         foreach (explode(',', $header) as $languageRange) {
-            /**
-             * For more information about language ranges see RFC 4647, Section 2.1.
-             */
+            // For more information about language ranges see RFC 4647, Section 2.1.
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
             /** @var array<AbstractLanguage> $languages */
@@ -275,10 +271,8 @@ class AcceptLanguage
      */
     protected function splitLanguageRange(string $range): array
     {
-        /**
-         * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
-         * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
-         */
+        // Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
+        // to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
         return preg_split('/;q=/i', trim($range));
     }
 
@@ -289,9 +283,7 @@ class AcceptLanguage
     {
         $validLanguages = $this->getValidLanguages($languages);
 
-        /**
-         * Sorting by quality is a part of the normalization process.
-         */
+        // Sorting by quality is a part of the normalization process.
         usort($validLanguages, static function ($a, $b) {
             return $b->getQuality() <=> $a->getQuality();
         });
