@@ -224,7 +224,7 @@ class AcceptLanguage
 
     protected function isDefaultLanguageCase(string $header): bool
     {
-        return trim($header) === '' || trim($header) === '*';
+        return $header === '' || $header === '*';
     }
 
     /**
