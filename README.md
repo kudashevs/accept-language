@@ -53,7 +53,7 @@ If for some reason you need the original HTTP Accept-Language header, it is avai
 $service->getHeader();
 ```
 
-**Important note!** The `AcceptLanguage` class can throw an `InvalidOptionArgumentException` exception when one of
+**Important note!** The `AcceptLanguage` class can throw an `InvalidOptionType` exception when one of
 the provided options is of an incorrect type.
 
 ## Options

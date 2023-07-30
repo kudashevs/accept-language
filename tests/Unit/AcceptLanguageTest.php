@@ -3,7 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
-use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -17,7 +17,7 @@ class AcceptLanguageTest extends TestCase
      */
     public function it_can_throw_exception_when_an_option_of_a_wrong_type(array $option)
     {
-        $this->expectException(InvalidOptionArgumentException::class);
+        $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "' . key($option) . '" has a wrong value type');
 
         new AcceptLanguage($option);

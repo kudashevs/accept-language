@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
@@ -75,7 +75,8 @@ class AcceptLanguage
 
     /**
      * @param array<string, bool|string|array> $options
-     * @throws InvalidOptionArgumentException
+     *
+     * @throws InvalidOptionType
      */
     public function __construct(array $options = [])
     {
@@ -91,7 +92,7 @@ class AcceptLanguage
     }
 
     /**
-     * @throws InvalidOptionArgumentException
+     * @throws InvalidOptionType
      */
     protected function initOptions(array $options): void
     {
@@ -103,7 +104,7 @@ class AcceptLanguage
     /**
      * @return array<string, bool|string|array>
      *
-     * @throws InvalidOptionArgumentException
+     * @throws InvalidOptionType
      */
     protected function retrieveValidOptions(array $options): array
     {
@@ -117,7 +118,7 @@ class AcceptLanguage
     }
 
     /**
-     * @throws InvalidOptionArgumentException
+     * @throws InvalidOptionType
      */
     protected function validateOption(string $name, $value): void
     {
@@ -129,7 +130,7 @@ class AcceptLanguage
         $internalOptionType = gettype($this->options[$name]);
 
         if ($externalOptionType !== $internalOptionType) {
-            throw new InvalidOptionArgumentException(
+            throw new InvalidOptionType(
                 sprintf(
                     'The option "%s" has a wrong value type %s. This option requires a value of the type %s.',
                     $name,

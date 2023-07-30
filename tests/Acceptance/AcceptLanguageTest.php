@@ -3,7 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Acceptance;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
-use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionArgumentException;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
@@ -12,7 +12,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     /** @test */
     public function an_instance_can_throw_invalid_option_argument_when_a_wrong_option_provided()
     {
-        $this->expectException(InvalidOptionArgumentException::class);
+        $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('wrong value');
 
         new AcceptLanguage(['separator' => 42]);
