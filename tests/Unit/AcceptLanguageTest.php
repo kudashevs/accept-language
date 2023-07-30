@@ -58,18 +58,6 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_a_language()
-    {
-        $service = new AcceptLanguage();
-        $service->process();
-
-        $this->assertNotEmpty($service->getPreferredLanguage());
-        $this->assertNotEmpty($service->getLanguage());
-    }
-
-    /**
-     * @test
-     */
     public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided()
     {
         $service = new AcceptLanguage();
