@@ -29,16 +29,16 @@ class AcceptLanguageTest extends TestCase
             'an http_accept_language option with a wrong value' => [
                 ['http_accept_language' => null],
             ],
-            'an default_language option with a wrong value' => [
+            'a default_language option with a wrong value' => [
                 ['default_language' => null],
             ],
             'an accepted_languages option with a wrong value' => [
                 ['accepted_languages' => null],
             ],
-            'an two_letter_only option with a wrong value' => [
+            'a two_letter_only option with a wrong value' => [
                 ['two_letter_only' => null],
             ],
-            'an separator option with a wrong value' => [
+            'a separator option with a wrong value' => [
                 ['separator' => null],
             ],
         ];
