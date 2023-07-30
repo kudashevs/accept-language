@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\AcceptLanguage\Loggers;
+namespace Kudashevs\AcceptLanguage\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Psr\Log\LoggerInterface;

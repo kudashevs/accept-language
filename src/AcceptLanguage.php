@@ -9,7 +9,7 @@ use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
-use Kudashevs\AcceptLanguage\Loggers\LogProvider;
+use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 use Kudashevs\AcceptLanguage\Strategies\MatchStrategyInterface;

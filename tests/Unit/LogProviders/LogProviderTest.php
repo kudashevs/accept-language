@@ -1,10 +1,10 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit\Loggers;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
-use Kudashevs\AcceptLanguage\Loggers\LogProvider;
+use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
