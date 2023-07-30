@@ -53,9 +53,8 @@ If for some reason you need the original HTTP Accept-Language header, it is avai
 $service->getHeader();
 ```
 
-In case, if the HTTP Accept-Language request-header field doesn't contain any of the accepted languages (see options),
-or if something went wrong, a default language will be returned. The class can throw an `InvalidOptionArgumentException`
-in case when any of the given options were of the incorrect type.
+**Important note!** The `AcceptLanguage` class can throw an `InvalidOptionArgumentException` exception when one of
+the provided options is of an incorrect type.
 
 ## Options
 
