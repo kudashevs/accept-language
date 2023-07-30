@@ -15,7 +15,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentWrongOptions
      */
-    public function it_can_throw_exception_when_an_option_of_a_wrong_type(array $option)
+    public function it_can_throw_an_exception_when_an_option_of_a_wrong_type(array $option)
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "' . key($option) . '" has a wrong value type');
@@ -58,7 +58,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_default_language_when_no_options_and_no_header_are_provided()
+    public function it_can_retrieve_a_default_language_when_no_header_and_no_options_are_provided()
     {
         $service = new AcceptLanguage();
         $service->process();
@@ -70,7 +70,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_preferred_language_from_options()
+    public function it_can_retrieve_a_preferred_language_from_options()
     {
         $options = ['default_language' => 'de'];
         $service = new AcceptLanguage($options);
@@ -83,7 +83,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_default_language_when_a_language_is_not_listed_in_accepted_languages()
+    public function it_can_retrieve_a_default_language_when_a_language_is_not_listed_in_accepted_languages()
     {
         $options = [
             'http_accept_language' => 'pp',
@@ -99,7 +99,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_preferred_language_when_a_language_is_listed_in_accepted_languages()
+    public function it_can_retrieve_a_preferred_language_when_a_language_is_listed_in_accepted_languages()
     {
         $options = [
             'default_language' => 'es',
@@ -192,7 +192,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeaderValues
      */
-    public function it_can_retrieve_the_preferred_language(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -356,7 +356,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentAcceptedLanguagesValues
      */
-    public function it_can_retrieve_the_preferred_language_when_the_accepted_languages_is_set(
+    public function it_can_retrieve_a_preferred_language_when_the_accepted_languages_is_set(
         array $options,
         string $expected
     ) {
@@ -476,7 +476,7 @@ class AcceptLanguageTest extends TestCase
      * @dataProvider provideDifferentMatchingOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
-    public function it_can_retrieve_the_preferred_language_with_different_options(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language_with_different_options(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -735,7 +735,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeadersWithDifferentLanguageLetterLength
      */
-    public function it_can_retrieve_the_preferred_language_of_different_length(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language_of_different_length(array $options, string $expected)
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -861,7 +861,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeadersWithMalformedValues
      */
-    public function it_can_retrieve_the_preferred_language_when_the_header_is_malformed(
+    public function it_can_retrieve_a_preferred_language_when_the_header_is_malformed(
         array $options,
         string $expected
     ) {
@@ -917,7 +917,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_the_preferred_language_when_the_header_quality_parameter_is_empty()
+    public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty()
     {
         /**
          * This is an exceptional case where we want to handle an empty quality parameter value.
