@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Loggers;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidLoggableEvent;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Psr\Log\LoggerInterface;
 
 final class LogProvider
@@ -83,7 +83,7 @@ final class LogProvider
      * @param string $event
      * @param string $data
      *
-     * @throws InvalidLoggableEvent
+     * @throws InvalidLogEventName
      */
     public function log(string $event, string $data): void
     {
@@ -159,7 +159,7 @@ final class LogProvider
 
     private function handleUnexpectedEvent(string $event): void
     {
-        throw new InvalidLoggableEvent(
+        throw new InvalidLogEventName(
             sprintf('The provided event "%s" is invalid.', $event)
         );
     }
