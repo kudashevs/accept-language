@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Factories;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgumentException;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Language\Language;
 
@@ -40,7 +40,7 @@ class LanguageFactory
      * @param float $fallbackQuality
      * @return AbstractLanguage
      *
-     * @throws InvalidFactoryArgumentException
+     * @throws InvalidFactoryArgument
      */
     public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): AbstractLanguage
     {
@@ -62,7 +62,7 @@ class LanguageFactory
     protected function checkValidLanguageRange(array $range): void
     {
         if (count($range) === 0) {
-            throw new InvalidFactoryArgumentException('Cannot process an empty language range.');
+            throw new InvalidFactoryArgument('Cannot process an empty language range.');
         }
     }
 
