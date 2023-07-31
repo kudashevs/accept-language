@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
-use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
@@ -85,12 +84,17 @@ final class LogProvider
      */
     public function log(string $event, $data): void
     {
-        if (!array_key_exists($event, $this->handlers)) {
+        if (!$this->isRegisteredEvent($event)) {
             $this->handleUnexpectedEvent($event);
         }
 
         $handler = $this->initHandler($event);
         $handler->handle($event, $data);
+    }
+
+    protected function isRegisteredEvent(string $event): bool
+    {
+        return array_key_exists($event, $this->handlers);
     }
 
     private function initHandler(string $event): LogHandlerInterface
