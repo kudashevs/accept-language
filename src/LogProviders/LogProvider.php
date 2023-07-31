@@ -5,6 +5,13 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguageLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguagesLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveRawLanguagesLogHandler;
 use Psr\Log\LoggerInterface;
 
 final class LogProvider
@@ -14,27 +21,18 @@ final class LogProvider
      */
     private LoggerInterface $logger;
 
-    /**
-     * 'retrieve_header' bool A boolean that defines whether to handle the `retrieve_header` event.
-     * 'retrieve_raw_languages' bool A boolean that defines whether to handle the `retrieve_raw_languages` event.
-     * 'retrieve_normalized_languages' bool A boolean that defines whether to handle the `retrieve_normalized_languages` event.
-     * 'retrieve_preferred_languages' bool A boolean that defines whether to handle the `retrieve_preferred_languages` event.
-     * 'retrieve_preferred_language' bool A boolean that defines whether to handle the `retrieve_preferred_language` event.
-     *
-     * @var array{
-     *     'retrieve_header': bool,
-     *     'retrieve_raw_languages': bool,
-     *     'retrieve_normalized_languages': bool,
-     *     'retrieve_preferred_languages': bool,
-     *     'retrieve_preferred_language': bool,
-     * }
-     */
     private array $options = [
-        'retrieve_header' => true,
-        'retrieve_raw_languages' => true,
-        'retrieve_normalized_languages' => true,
-        'retrieve_preferred_languages' => true,
-        'retrieve_preferred_language' => true,
+    ];
+
+    /**
+     * @var array
+     */
+    private array $handlers = [ // @note can be a mapper
+        'retrieve_header' => RetrieveHeaderLogHandler::class,
+        'retrieve_raw_languages' => RetrieveRawLanguagesLogHandler::class,
+        'retrieve_normalized_languages' => RetrieveNormalizedLanguagesLogHandler::class,
+        'retrieve_preferred_languages' => RetrievePreferredLanguagesLogHandler::class,
+        'retrieve_preferred_language' => RetrievePreferredLanguageLogHandler::class,
     ];
 
     /**
@@ -81,80 +79,25 @@ final class LogProvider
      * 'retrieve_preferred_language' allows logging the resulting preferred language
      *
      * @param string $event
-     * @param string $data
+     * @param string|array $data
      *
      * @throws InvalidLogEventName
      */
-    public function log(string $event, string $data): void
+    public function log(string $event, $data): void
     {
-        if ($this->shouldSkipHandleEvent($event)) {
-            return;
+        if (!array_key_exists($event, $this->handlers)) {
+            $this->handleUnexpectedEvent($event);
         }
 
-        switch ($event) {
-            case 'retrieve_header':
-                $this->handleRetrieveHeader($event, $data);
-                break;
-
-            case 'retrieve_raw_languages':
-                $this->handleRetrieveRawLanguages($event, $data);
-                break;
-
-            case 'retrieve_normalized_languages':
-                $this->handleRetrieveNormalizedLanguages($event, $data);
-                break;
-
-            case 'retrieve_preferred_languages':
-                $this->handleRetrievePreferredLanguages($event, $data);
-                break;
-
-            case 'retrieve_preferred_language':
-                $this->handleRetrievePreferredLanguage($event, $data);
-                break;
-
-            default:
-                $this->handleUnexpectedEvent($event);
-        }
+        $handler = $this->initHandler($event);
+        $handler->handle($event, $data);
     }
 
-    private function shouldSkipHandleEvent(string $event): bool
+    private function initHandler(string $event): LogHandlerInterface
     {
-        return array_key_exists($event, $this->options) && $this->options[$event] === false;
-    }
+        $handlerClass = $this->handlers[$event];
 
-    private function handleRetrieveHeader(string $event, string $header): void
-    {
-        $this->logger->info(
-            sprintf('Retrieved "%s" header [%s event].', $header, $event)
-        );
-    }
-
-    private function handleRetrieveRawLanguages(string $event, string $languages): void
-    {
-        $this->logger->info(
-            sprintf('Retrieved "%s" raw languages [%s event].', $languages, $event)
-        );
-    }
-
-    private function handleRetrieveNormalizedLanguages(string $event, string $languages): void
-    {
-        $this->logger->info(
-            sprintf('Retrieved "%s" normalized languages [%s event].', $languages, $event)
-        );
-    }
-
-    private function handleRetrievePreferredLanguages(string $event, string $languages): void
-    {
-        $this->logger->info(
-            sprintf('Retrieved "%s" preferred languages [%s event].', $languages, $event)
-        );
-    }
-
-    private function handleRetrievePreferredLanguage(string $event, string $language): void
-    {
-        $this->logger->info(
-            sprintf('Retrieved "%s" resulting language [%s event].', $language, $event)
-        );
+        return new $handlerClass($this->logger);
     }
 
     private function handleUnexpectedEvent(string $event): void

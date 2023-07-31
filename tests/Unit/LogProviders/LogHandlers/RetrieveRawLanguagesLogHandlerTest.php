@@ -2,6 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\LogHandlers;
 
+use Kudashevs\AcceptLanguage\Language\Language;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveRawLanguagesLogHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -15,10 +16,10 @@ class RetrieveRawLanguagesLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->stringContains('retrieve_header')
+                $this->matchesRegularExpression('/any.*retrieve_raw_languages/')
             );
 
         $handler = new RetrieveRawLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_header', 'anything');
+        $handler->handle('retrieve_raw_languages', [Language::create('any', 1)]);
     }
 }

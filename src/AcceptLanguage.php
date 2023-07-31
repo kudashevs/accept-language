@@ -190,17 +190,11 @@ class AcceptLanguage
     {
         $retrievedLanguages = $this->parseHeaderValue($header);
 
-        $this->logger->log('retrieve_normalized_languages', implode(',', array_map(function ($lang) {
-                return $lang->getTag() . ';q=' . $lang->getQuality();
-            }, $retrievedLanguages))
-        );
+        $this->logger->log('retrieve_normalized_languages', $retrievedLanguages);
 
         $preferredLanguages = $this->retrievePreferredLanguages($retrievedLanguages);
 
-        $this->logger->log('retrieve_preferred_languages', implode(',', array_map(function ($lang) {
-                return $lang->getTag() . ';q=' . $lang->getQuality();
-            }, $preferredLanguages))
-        );
+        $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
 
         $retrievePreferredLanguage = $this->retrievePreferredLanguage($preferredLanguages);
 
@@ -259,10 +253,7 @@ class AcceptLanguage
             $fallbackQuality -= $fallbackQualityStep;
         }
 
-        $this->logger->log('retrieve_raw_languages', implode(',', array_map(function ($lang) {
-                return $lang->getTag() . ';' . ($lang->isValid() ? 'valid' : 'invalid');
-            }, $languages))
-        );
+        $this->logger->log('retrieve_raw_languages', $languages);
 
         return $languages;
     }
