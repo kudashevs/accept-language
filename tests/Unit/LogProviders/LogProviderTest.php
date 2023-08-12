@@ -3,6 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Language\Language;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
@@ -11,6 +12,17 @@ use Psr\Log\LoggerInterface;
 
 class LogProviderTest extends TestCase
 {
+    /** @test */
+    public function it_can_throw_an_exception_when_an_option_of_a_wrong_type()
+    {
+        $this->expectException(InvalidOptionType::class);
+        $this->expectExceptionMessage('The option "log_only" has a wrong value type');
+
+        new LogProvider(new DummyLogger(), [
+            'log_only' => [],
+        ]);
+    }
+
     /** @test */
     public function it_can_throw_an_exception_when_a_wrong_event_provided()
     {

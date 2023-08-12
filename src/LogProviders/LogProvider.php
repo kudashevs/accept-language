@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
@@ -21,6 +22,7 @@ final class LogProvider
     private LoggerInterface $logger;
 
     private array $options = [
+        'log_only' => '',
     ];
 
     /**
@@ -36,7 +38,7 @@ final class LogProvider
 
     /**
      * @param LoggerInterface $logger
-     * @param array<string, bool> $options
+     * @param array<string, string|array> $options
      */
     public function __construct(LoggerInterface $logger, array $options = [])
     {
@@ -54,18 +56,45 @@ final class LogProvider
      */
     private function initOptions(array $options): void
     {
-        $applicable = $this->retrieveApplicableOptions($options);
+        $validated = $this->retrieveValidOptions($options);
 
-        $this->options = array_merge($this->options, $applicable);
+        $this->options = array_merge($this->options, $validated);
     }
 
     /**
-     * @param array<string, bool> $options
-     * @return array<string, bool>
+     * @return array<string, string|array>
+     *
+     * @throws InvalidOptionType
      */
-    private function retrieveApplicableOptions(array $options): array
+    protected function retrieveValidOptions(array $options): array
     {
-        return array_filter($options, 'is_bool');
+        $allowedOptions = array_intersect_key($options, $this->options);
+
+        foreach ($allowedOptions as $name => $value) {
+            $this->validateOption($name, $value);
+        }
+
+        return $allowedOptions;
+    }
+
+    /**
+     * @throws InvalidOptionType
+     */
+    protected function validateOption(string $name, $value): void
+    {
+        $externalOptionType = gettype($value);
+        $internalOptionType = gettype($this->options[$name]);
+
+        if ($externalOptionType !== $internalOptionType) {
+            throw new InvalidOptionType(
+                sprintf(
+                    'The option "%s" has a wrong value type %s. This option requires a value of the type %s.',
+                    $name,
+                    $externalOptionType,
+                    $internalOptionType
+                )
+            );
+        }
     }
 
     /**
