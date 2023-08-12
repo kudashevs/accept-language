@@ -117,6 +117,10 @@ final class LogProvider
             $this->handleUnexpectedEvent($event);
         }
 
+        if (!$this->isDesiredEvent($event)) {
+            return;
+        }
+
         $handler = $this->initHandler($event);
         $handler->handle($event, $data);
     }
@@ -124,6 +128,28 @@ final class LogProvider
     protected function isRegisteredEvent(string $event): bool
     {
         return array_key_exists($event, $this->handlers);
+    }
+
+    private function isDesiredEvent(string $event): bool
+    {
+        if ($this->isLogOnlyCase()) {
+            return in_array($event, $this->retrieveDesiredHandlers());
+        }
+
+        return true;
+    }
+
+    private function isLogOnlyCase(): bool
+    {
+        return trim($this->options['log_only']) !== '';
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function retrieveDesiredHandlers(): array
+    {
+        return [trim($this->options['log_only'])];
     }
 
     private function initHandler(string $event): LogHandlerInterface

@@ -33,6 +33,40 @@ class LogProviderTest extends TestCase
         $provider->log('wrong', '');
     }
 
+    /** @test */
+    public function it_can_skip_handling_an_event_not_listed_in_log_only()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->never())
+            ->method('info');
+
+        $provider = new LogProvider($loggerMock, [
+            'log_only' => 'retrieve_preferred_language',
+        ]);
+
+        $provider->log('retrieve_header', 'anything');
+        $provider->log('retrieve_raw_languages', 'anything');
+    }
+
+    /** @test */
+    public function is_can_handle_only_an_event_listed_in_log_only()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->once())
+            ->method('info')
+            ->with(
+                $this->stringContains('retrieve_header')
+            );
+
+        $provider = new LogProvider($loggerMock, [
+            'log_only' => 'retrieve_header',
+        ]);
+
+        $provider->log('retrieve_header', 'fr-CH');
+        $provider->log('retrieve_raw_languages', ['anything']);
+        $provider->log('retrieve_preferred_language', 'en');
+    }
+
     /**
      * @test
      * @dataProvider provideDifferentEvents
