@@ -24,7 +24,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throw_an_exception_when_a_wrong_event_provided()
+    public function it_can_throw_an_exception_when_a_wrong_event_name()
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessage('wrong');
