@@ -149,7 +149,9 @@ final class LogProvider
      */
     private function retrieveDesiredHandlers(): array
     {
-        return [trim($this->options['log_only'])];
+        return array_map(function ($value) {
+            return trim($value);
+        }, explode('|', $this->options['log_only']));
     }
 
     private function initHandler(string $event): LogHandlerInterface

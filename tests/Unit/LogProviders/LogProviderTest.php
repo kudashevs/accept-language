@@ -67,6 +67,26 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_preferred_language', 'en');
     }
 
+    /** @test */
+    public function it_can_handle_only_events_listed_in_log_only()
+    {
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->exactly(2))
+            ->method('info')
+            ->withConsecutive(
+                [$this->stringContains('retrieve_header')],
+                [$this->stringContains('retrieve_preferred_language')],
+            );
+
+        $provider = new LogProvider($loggerMock, [
+            'log_only' => 'retrieve_header|retrieve_preferred_language',
+        ]);
+
+        $provider->log('retrieve_header', 'fr-CH');
+        $provider->log('retrieve_raw_languages', 'anything');
+        $provider->log('retrieve_preferred_language', 'en');
+    }
+
     /**
      * @test
      * @dataProvider provideDifferentEvents
