@@ -35,9 +35,13 @@ class LanguageTagTest extends TestCase
                 '',
                 '',
             ],
-            'a letter results in no change' => [
+            'a 1 character results in no change (refers to MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
                 'a',
                 'a',
+            ],
+            'a 4 characters results in not change (refers to MAXIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
+                'alfa',
+                'alfa',
             ],
             'a language tag with space results in no change' => [
                 'de Latn',
