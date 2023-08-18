@@ -188,6 +188,12 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
+        // There are several situations when there is no need to continue
+        // further processing as they result in the default language.
+        if ($this->isDefaultLanguageCase($header)) {
+            return $this->retrieveDefaultLanguage();
+        }
+
         $retrievedLanguages = $this->parseHeaderValue($header);
 
         $this->logger->log('retrieve_normalized_languages', $retrievedLanguages);
@@ -208,11 +214,6 @@ class AcceptLanguage
      */
     protected function parseHeaderValue(string $header): array
     {
-        // Some cases do not require further processing as they result in the default language.
-        if ($this->isDefaultLanguageCase($header)) {
-            return [];
-        }
-
         return $this->parseHeaderWithNormalization($header);
     }
 
