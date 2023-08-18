@@ -16,6 +16,11 @@ use Psr\Log\LoggerInterface;
 
 final class LogProvider
 {
+    private const LOG_ONLY_SEPARATORS = [
+        ',',
+        '|',
+    ];
+
     /**
      * Contain a PSR-3 compatible logger.
      */
@@ -149,9 +154,18 @@ final class LogProvider
      */
     private function retrieveDesiredHandlers(): array
     {
-        return array_map(function ($value) {
+        $handlers = preg_split('/' . $this->concatenateLogOnlySeparators() . '/iSu', $this->options['log_only']);
+
+        return array_map(static function ($value) {
             return trim($value);
-        }, explode('|', $this->options['log_only']));
+        }, $handlers);
+    }
+
+    private function concatenateLogOnlySeparators(): string
+    {
+        return implode('|', array_map(static function ($separator) {
+            return preg_quote($separator, '/');
+        }, self::LOG_ONLY_SEPARATORS));
     }
 
     private function initHandler(string $event): LogHandlerInterface

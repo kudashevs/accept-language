@@ -67,8 +67,11 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_preferred_language', 'en');
     }
 
-    /** @test */
-    public function it_can_handle_only_events_listed_in_log_only()
+    /**
+     * @test
+     * @dataProvider provideDifferentLogOnlySeparators
+     */
+    public function it_can_handle_only_events_listed_in_log_only(array $options)
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->exactly(2))
@@ -78,13 +81,23 @@ class LogProviderTest extends TestCase
                 [$this->stringContains('retrieve_preferred_language')],
             );
 
-        $provider = new LogProvider($loggerMock, [
-            'log_only' => 'retrieve_header|retrieve_preferred_language',
-        ]);
+        $provider = new LogProvider($loggerMock, $options);
 
         $provider->log('retrieve_header', 'fr-CH');
         $provider->log('retrieve_raw_languages', 'anything');
         $provider->log('retrieve_preferred_language', 'en');
+    }
+
+    public function provideDifferentLogOnlySeparators(): array
+    {
+        return [
+            'a pipe separator' => [
+                ['log_only' => 'retrieve_header|retrieve_preferred_language'],
+            ],
+            'a comma separator' => [
+                ['log_only' => 'retrieve_header,retrieve_preferred_language'],
+            ],
+        ];
     }
 
     /**
