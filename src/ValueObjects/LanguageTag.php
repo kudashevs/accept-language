@@ -96,7 +96,7 @@ final class LanguageTag
 
     private function isValidCharacterRange(string $tag): bool
     {
-        return preg_match('/[a-z0-9\-]/i', $tag) === 1;
+        return preg_match('/^[a-z0-9\-]+$/iSU', $tag) === 1;
     }
 
     private function isLikeLanguageTag($tag)
