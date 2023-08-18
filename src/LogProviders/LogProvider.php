@@ -154,11 +154,17 @@ final class LogProvider
      */
     private function retrieveDesiredHandlers(): array
     {
-        $handlers = preg_split('/' . $this->concatenateLogOnlySeparators() . '/iSu', $this->options['log_only']);
-
         return array_map(static function ($value) {
             return trim($value);
-        }, $handlers);
+        }, $this->retrieveLogOnlyValues());
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function retrieveLogOnlyValues(): array
+    {
+        return preg_split('/' . $this->concatenateLogOnlySeparators() . '/iSu', $this->options['log_only']);
     }
 
     private function concatenateLogOnlySeparators(): string
