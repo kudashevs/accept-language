@@ -27,6 +27,16 @@ class LanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
+    /** @test */
+    public function it_can_create_an_invalid_language_from_invalid_data()
+    {
+        $language = Language::create(42, 1);
+
+        $this->assertNotEmpty($language->getTag());
+        $this->assertNotEmpty($language->getQuality());
+        $this->assertFalse($language->isValid());
+    }
+
     /**
      * @test
      * @dataProvider provideDifferentValidLanguageAndQualityValues

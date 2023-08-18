@@ -43,6 +43,10 @@ class LanguageTagTest extends TestCase
                 'alfa',
                 'alfa',
             ],
+            'a language tag with a number results in no change' => [
+                'a2',
+                'a2',
+            ],
             'a language tag with space results in no change' => [
                 'de Latn',
                 'de Latn',
