@@ -385,11 +385,11 @@ class AcceptLanguage
 
     protected function retrieveDefaultLanguage(): string
     {
-        $formattedDefaultLanguage = $this->factory->makeFromLanguageString(
+        $defaultLanguage = $this->factory->makeFromLanguageString(
             $this->options['default_language']
         );
 
-        return $formattedDefaultLanguage->getTag();
+        return $defaultLanguage->getTag();
     }
 
     /**
