@@ -314,8 +314,8 @@ class LanguageTagTest extends TestCase
                 [
                     'separator' => '~',
                 ],
-                'sr-Latn',
-                'sr~Latn',
+                'sgn-Latn',
+                'sgn~Latn',
             ],
             'a three-letter language tag with script and region with tilde separator change the separator' => [
                 [
