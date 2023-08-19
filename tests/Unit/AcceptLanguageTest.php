@@ -69,15 +69,91 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideDifferentDefaultLanguageOptions
      */
-    public function it_can_retrieve_a_preferred_language_from_options()
-    {
-        $options = ['default_language' => 'de'];
+    public function it_can_retrieve_a_default_language_when_the_default_language_is_set(
+        array $options,
+        string $expected
+    ) {
         $service = new AcceptLanguage($options);
         $service->process();
 
-        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
-        $this->assertSame($options['default_language'], $service->getLanguage());
+        $this->assertSame($expected, $service->getPreferredLanguage());
+        $this->assertSame($expected, $service->getLanguage());
+    }
+
+    public function provideDifferentDefaultLanguageOptions(): array
+    {
+        return [
+            'a two-letter language tag as the default language' => [
+                [
+                    'default_language' => 'de',
+                ],
+                'de',
+            ],
+            'a two-letter language tag with region subtag' => [
+                [
+                    'default_language' => 'de-DE',
+                ],
+                'de_DE',
+            ],
+
+            'a two-letter language tag with script subtag' => [
+                [
+                    'default_language' => 'de-Latn',
+                ],
+                'de',
+            ],
+            'a two-letter language tag with script and region subtags' => [
+                [
+                    'default_language' => 'de-Latn-DE',
+                ],
+                'de_DE',
+            ],
+            'a two-letter language tag with extlang, script, and region subtags' => [
+                [
+                    'default_language' => 'de-gsg-Latn-DE',
+                ],
+                'de_DE',
+            ],
+
+            'a three-letter language tag as the default language' => [
+                [
+                    'default_language' => 'sgn',
+                    'two_letter_only' => false,
+                ],
+                'sgn',
+            ],
+            'a three-letter language tag with region subtag' => [
+                [
+                    'default_language' => 'sgn-RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+
+            'a three-letter language tag with script subtag' => [
+                [
+                    'default_language' => 'sgn-Latn',
+                    'two_letter_only' => false,
+                ],
+                'sgn',
+            ],
+            'a three-letter language tag with region and script subtags' => [
+                [
+                    'default_language' => 'sgn-Latn-RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+            'a three-letter language tag with extlang, script, and region subtags' => [
+                [
+                    'default_language' => 'sgn-ysl-Latn-RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+        ];
     }
 
     /**
