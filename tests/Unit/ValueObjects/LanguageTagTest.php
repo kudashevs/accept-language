@@ -229,6 +229,20 @@ class LanguageTagTest extends TestCase
                 'sgn-Latn',
                 'sgn-Latn',
             ],
+            'a three-letter language tag with script and region with hyphen separator results in no change' => [
+                [
+                    'separator' => '-',
+                ],
+                'sgn-Latn-RS',
+                'sgn-Latn-RS',
+            ],
+            'a three-letter language tag with extlang, script, and region with hyphen separator results in remove extlang' => [
+                [
+                    'separator' => '-',
+                ],
+                'sgn-ysl-Latn-RS',
+                'sgn-Latn-RS',
+            ],
             'a two-letter language tag with script with underscore separator change the separator' => [
                 [
                     'separator' => '_',
@@ -257,6 +271,20 @@ class LanguageTagTest extends TestCase
                 'sgn-Latn',
                 'sgn_Latn',
             ],
+            'a three-letter language tag with script and region with underscore separator change the separator' => [
+                [
+                    'separator' => '_',
+                ],
+                'sgn-Latn-RS',
+                'sgn_Latn_RS',
+            ],
+            'a three-letter language tag with extlang, script, and region with underscore separator change the separator' => [
+                [
+                    'separator' => '_',
+                ],
+                'sgn-ysl-Latn-RS',
+                'sgn_Latn_RS',
+            ],
             'a two-letter language tag with script with tilde separator change the separator' => [
                 [
                     'separator' => '~',
@@ -284,6 +312,20 @@ class LanguageTagTest extends TestCase
                 ],
                 'sr-Latn',
                 'sr~Latn',
+            ],
+            'a three-letter language tag with script and region with tilde separator change the separator' => [
+                [
+                    'separator' => '~',
+                ],
+                'sgn-Latn-RS',
+                'sgn~Latn~RS',
+            ],
+            'a three-letter language tag with extlang, script, and region with tilde separator change the separator' => [
+                [
+                    'separator' => '~',
+                ],
+                'sgn-ysl-Latn-RS',
+                'sgn~Latn~RS',
             ],
         ];
     }
