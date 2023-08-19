@@ -9,9 +9,11 @@ use Kudashevs\AcceptLanguage\Normalizers\TagNormalizerInterface;
 
 final class LanguageTag
 {
-    private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 2;
-
-    private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 3;
+    // The language range starts from the 1*8ALPHA notation which means that
+    // the minimum length is equal to 1 and the maximum length is equal to 8.
+    // For more information about language ranges see RFC 4647, Section 2.2.
+    private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
+    private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 8;
 
     private const DEFAULT_SEPARATOR = '-';
 
@@ -120,7 +122,9 @@ final class LanguageTag
 
     private function isPrimaryWithSubtags(string $tag): bool
     {
-        return strlen($tag) > self::MAXIMUM_PRIMARY_SUBTAG_LENGTH && !$this->isSeparatorLess($tag);
+        $subtags = explode('-', $tag);
+
+        return count($subtags) > 1 && $this->isPrimarySubtag($subtags[0]);
     }
 
     private function isSeparatorLess(string $tag): bool

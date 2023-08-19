@@ -126,8 +126,8 @@ class LogProviderTest extends TestCase
             ],
             'retrieve_raw_languages log event' => [
                 'retrieve_raw_languages',
-                [Language::create('fr-CH', 1.0), Language::create('wrong', 0)],
-                '/wrong.*invalid/',
+                [Language::create('fr-CH', 1.0), Language::create('trulywrong', 0)],
+                '/trulywrong.*invalid/',
             ],
             'retrieve_normalized_languages log event' => [
                 'retrieve_normalized_languages',

@@ -31,33 +31,21 @@ class LanguageTagTest extends TestCase
     public function provideDifferentInvalidLanguageValues(): array
     {
         return [
-            'an empty tag results in no change' => [
+            'an empty tag results in the invalid language (no change)' => [
                 '',
                 '',
             ],
-            'a one character results in no change (refers to MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
-                'a',
-                'a',
-            ],
-            'four characters results in no change (refers to MAXIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
-                'alfa',
-                'alfa',
-            ],
-            'a language tag with a number results in no change' => [
+            'a language tag with a number results in the invalid language (no change)' => [
                 'a2',
                 'a2',
             ],
-            'a language tag with space results in no change' => [
+            'a language tag with space results in the invalid language (no change)' => [
                 'de Latn',
                 'de Latn',
             ],
-            'a language tag with one-letter primary subtag results in no change' => [
-                'a-t',
-                'a-t',
-            ],
-            'a language tag with five-letter primary subtag results in no change' => [
-                'wrong',
-                'wrong',
+            'a language tag longer than the maximum length results in the invalid language (no change)' => [
+                'trulywrong',
+                'trulywrong',
             ],
         ];
     }
@@ -81,9 +69,25 @@ class LanguageTagTest extends TestCase
     public function provideDifferentValidLanguageValues(): array
     {
         return [
+            'a one character results in the language (refers to the MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
+                'a',
+                'a',
+            ],
             'a two-letter language tag results in the language' => [
                 'en',
                 'en',
+            ],
+            'four characters results in the language (refers to old value of the maximum length constant)' => [
+                'alfa',
+                'alfa',
+            ],
+            'eight characters results in the language (refers to the MAXIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
+                'enochian',
+                'enochian',
+            ],
+            'a language tag with one-letter primary subtag results in the language' => [
+                'a-t',
+                'a-t',
             ],
             'a two-letter language tag with region subtag results in the language' => [
                 'de-DE',

@@ -41,6 +41,10 @@ class LanguageTagNormalizerTest extends TestCase
                 '*',
                 '*',
             ],
+            'a one-letter language tag results in no change' => [
+                'a',
+                'a',
+            ],
             'a two-letter language tag results in no change' => [
                 'en',
                 'en',
@@ -48,6 +52,10 @@ class LanguageTagNormalizerTest extends TestCase
             'a three-letter language tag results in no change' => [
                 'dum',
                 'dum',
+            ],
+            'an eight-letter language tag results in no change' => [
+                'enochian',
+                'enochian',
             ],
             'a two-letter language tag with extlang results in remove extlang' => [
                 'zh-yue',

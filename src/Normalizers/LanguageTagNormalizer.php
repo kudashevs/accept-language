@@ -60,7 +60,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     {
         preg_match(
             '/^
-                        (?<primary>[a-z]{2,3})
+                        (?<primary>[a-z]{1,8})
                         (-(?<extlang>[a-z]{3})?)?
                         (-(?<script>[a-z]{4})?)?
                         (-(?<region>[a-z]{2}|[0-9]{3})?)?
