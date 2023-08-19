@@ -35,11 +35,11 @@ class LanguageTagTest extends TestCase
                 '',
                 '',
             ],
-            'a 1 character results in no change (refers to MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
+            'a one character results in no change (refers to MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
                 'a',
                 'a',
             ],
-            'a 4 characters results in not change (refers to MAXIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
+            'four characters results in no change (refers to MAXIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
                 'alfa',
                 'alfa',
             ],
@@ -215,7 +215,7 @@ class LanguageTagTest extends TestCase
                 'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
-            'a two-letter language tag with extlang, script, and region with hyphen separator results in no change' => [
+            'a two-letter language tag with extlang, script, and region with hyphen separator results in remove extlang' => [
                 [
                     'separator' => '-',
                 ],
@@ -250,7 +250,7 @@ class LanguageTagTest extends TestCase
                 'zh-yue-Hant-CN',
                 'zh_Hant_CN',
             ],
-            'a three-letter language tag with script with underscore separator no change' => [
+            'a three-letter language tag with script with underscore separator change the separator' => [
                 [
                     'separator' => '_',
                 ],
@@ -278,7 +278,7 @@ class LanguageTagTest extends TestCase
                 'zh-yue-Hant-CN',
                 'zh~Hant~CN',
             ],
-            'a three-letter language tag with script with tilde separator no change' => [
+            'a three-letter language tag with script with tilde separator change the separator' => [
                 [
                     'separator' => '~',
                 ],
