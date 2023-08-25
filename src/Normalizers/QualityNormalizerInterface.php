@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
 /**
- * QualityNormalizerInterface represents an abstraction that normalizes a quality value to a specification.
- * If the quality does not match the certain specification the default quality value might be used.
+ * QualityNormalizerInterface represents an abstraction that normalizes a quality value to the certain specification.
  */
 interface QualityNormalizerInterface
 {
