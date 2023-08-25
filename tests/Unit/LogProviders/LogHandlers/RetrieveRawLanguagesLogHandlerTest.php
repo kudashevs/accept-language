@@ -16,10 +16,10 @@ class RetrieveRawLanguagesLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->matchesRegularExpression('/any.*retrieve_raw_languages/')
+                $this->matchesRegularExpression('/fr-CH.*retrieve_raw_languages/')
             );
 
         $handler = new RetrieveRawLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_raw_languages', [Language::create('any', 1)]);
+        $handler->handle('retrieve_raw_languages', [Language::create('fr-CH,fr;q=0.9', 1)]);
     }
 }

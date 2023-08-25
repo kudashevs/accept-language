@@ -16,10 +16,10 @@ class RetrievePreferredLanguagesLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->matchesRegularExpression('/any.*retrieve_preferred_languages/')
+                $this->matchesRegularExpression('/fr-CH.*retrieve_preferred_languages/')
             );
 
         $handler = new RetrievePreferredLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_preferred_languages', [Language::create('any', 1)]);
+        $handler->handle('retrieve_preferred_languages', [Language::create('fr-CH,fr;q=0.9', 1)]);
     }
 }

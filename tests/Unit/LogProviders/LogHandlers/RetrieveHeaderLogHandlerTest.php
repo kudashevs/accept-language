@@ -15,10 +15,10 @@ class RetrieveHeaderLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->matchesRegularExpression('/any.*retrieve_header/')
+                $this->matchesRegularExpression('/fr-CH.*retrieve_header/')
             );
 
         $handler = new RetrieveHeaderLogHandler($loggerMock);
-        $handler->handle('retrieve_header', 'any');
+        $handler->handle('retrieve_header', 'fr-CH,fr;q=0.9');
     }
 }

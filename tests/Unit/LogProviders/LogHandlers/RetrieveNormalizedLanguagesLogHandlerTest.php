@@ -16,10 +16,10 @@ class RetrieveNormalizedLanguagesLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->matchesRegularExpression('/any.*retrieve_normalized_languages/')
+                $this->matchesRegularExpression('/fr-CH.*retrieve_normalized_languages/')
             );
 
         $handler = new RetrieveNormalizedLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_normalized_languages', [Language::create('any', 1)]);
+        $handler->handle('retrieve_normalized_languages', [Language::create('fr-CH,fr;q=0.9', 1)]);
     }
 }

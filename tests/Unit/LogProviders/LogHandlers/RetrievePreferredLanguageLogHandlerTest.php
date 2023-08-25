@@ -15,10 +15,10 @@ class RetrievePreferredLanguageLogHandlerTest extends TestCase
         $loggerMock->expects($this->once())
             ->method('info')
             ->with(
-                $this->matchesRegularExpression('/any.*retrieve_preferred_language/')
+                $this->matchesRegularExpression('/fr-CH.*retrieve_preferred_language/')
             );
 
         $handler = new RetrievePreferredLanguageLogHandler($loggerMock);
-        $handler->handle('retrieve_preferred_language', 'any');
+        $handler->handle('retrieve_preferred_language', 'fr-CH,fr;q=0.9');
     }
 }
