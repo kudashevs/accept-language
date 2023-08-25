@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Normalizers;
 
 /**
- * TagNormalizerInterface represents an abstraction that normalizes a tag to a certain specification.
+ * TagNormalizerInterface represents an abstraction that normalizes a tag value to the certain specification.
  */
 interface TagNormalizerInterface
 {
