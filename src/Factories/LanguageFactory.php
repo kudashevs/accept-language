@@ -32,7 +32,7 @@ class LanguageFactory
      */
     public function makeFromLanguageString(string $language, float $quality = 1): AbstractLanguage
     {
-        return $this->createValidLanguage($language, $quality);
+        return $this->createLanguage($language, $quality);
     }
 
     /**
@@ -74,7 +74,7 @@ class LanguageFactory
     /**
      * @param int|float|string $quality
      */
-    protected function createValidLanguage(string $tag, $quality): Language
+    protected function createLanguage(string $tag, $quality): Language
     {
         return Language::create($tag, $quality, $this->options);
     }
