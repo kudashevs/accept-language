@@ -72,6 +72,10 @@ class LanguageFactory
     }
 
     /**
+     * Create a Language instance. The correctness of a provided language value will be
+     * determined during the validation process (the language state might be invalid).
+     * @see \Kudashevs\AcceptLanguage\Language\Language
+     *
      * @param int|float|string $quality
      */
     protected function createLanguage(string $tag, $quality): Language
@@ -80,6 +84,9 @@ class LanguageFactory
     }
 
     /**
+     * Create a Language instance with a predefined invalid language state.
+     * @see \Kudashevs\AcceptLanguage\Language\Language
+     *
      * @param mixed $quality
      */
     protected function createInvalidLanguage(string $tag, $quality): Language
