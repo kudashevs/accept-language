@@ -215,17 +215,17 @@ class AcceptLanguage
         return $retrievePreferredLanguage;
     }
 
+    protected function isDefaultLanguageCase(string $header): bool
+    {
+        return $header === '' || $header === '*';
+    }
+
     /**
      * @return array<AbstractLanguage>
      */
     protected function parseHeaderValue(string $header): array
     {
         return $this->parseHeaderWithNormalization($header);
-    }
-
-    protected function isDefaultLanguageCase(string $header): bool
-    {
-        return $header === '' || $header === '*';
     }
 
     /**
@@ -236,9 +236,9 @@ class AcceptLanguage
      */
     protected function parseHeaderWithNormalization(string $header): array
     {
-        $languages = $this->retrieveLanguages($header);
+        $rawLanguages = $this->retrieveLanguages($header);
 
-        return $this->normalizeLanguages($languages);
+        return $this->normalizeLanguages($rawLanguages);
     }
 
     protected function retrieveLanguages(string $header): array
