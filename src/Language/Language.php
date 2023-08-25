@@ -86,6 +86,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return array<string, bool|string>
      */
     public function getOptions(): array
@@ -94,6 +96,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getTag(): string
@@ -102,6 +106,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return array<int, string>
      */
     public function getSubtags(): array
@@ -110,6 +116,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getPrimarySubtag(): string
@@ -118,6 +126,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return int|float
      */
     public function getQuality()
@@ -126,6 +136,8 @@ final class Language extends AbstractLanguage
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return bool
      */
     public function isValid(): bool

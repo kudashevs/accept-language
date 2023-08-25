@@ -5,47 +5,47 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Language;
 
 /**
- * AbstractLanguage represents an abstraction of a language that consists of a language tag and a quality value.
+ * AbstractLanguage represents an abstraction of a Language that consists of a language tag and a quality value.
  */
 abstract class AbstractLanguage
 {
     /**
-     * Return collected options.
+     * Return the provided options.
      *
      * @return array<string, mixed>
      */
     abstract public function getOptions(): array;
 
     /**
-     * Return a language tag.
+     * Return the language tag.
      *
      * @return string
      */
     abstract public function getTag(): string;
 
     /**
-     * Return subtags of a language tag.
+     * Return all subtags of the language tag.
      *
      * @return array
      */
     abstract public function getSubtags(): array;
 
     /**
-     * Return a primary subtag of a language tag.
+     * Return a primary subtag of the language tag.
      *
      * @return string
      */
     abstract public function getPrimarySubtag(): string;
 
     /**
-     * Return a quality value.
+     * Return the quality value.
      *
      * @return int|float
      */
     abstract public function getQuality();
 
     /**
-     * Determine whether a language state is valid.
+     * Determine whether a provided language value was valid.
      *
      * @return bool
      */
