@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class LanguageFactoryTest extends TestCase
 {
     /** @test */
-    public function it_can_throw_exception_when_language_range_is_empty()
+    public function it_can_throw_an_exception_when_language_range_is_empty()
     {
         $this->expectException(InvalidFactoryArgument::class);
         $this->expectExceptionMessage('empty');
@@ -19,7 +19,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_language_tag_from_a_language_string()
+    public function it_can_create_a_language_tag_from_a_valid_language_string()
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageString('en-US');
