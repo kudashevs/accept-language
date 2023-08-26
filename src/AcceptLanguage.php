@@ -168,8 +168,8 @@ class AcceptLanguage
     }
 
     /**
-     * Retrieve an HTTP Accept-Language header, process its value, find
-     * a language of preference, and update the state for further use.
+     * Retrieve an HTTP Accept-Language header, parse its value, retrieve valid
+     * languages, find a preferred language, and retain it for further use.
      *
      * @return void
      */
@@ -177,19 +177,19 @@ class AcceptLanguage
     {
         $header = $this->retrieveAcceptLanguageHeader();
 
-        $this->logger->log('retrieve_header', $header);
-
         $this->header = $header;
         $this->language = $this->findPreferredLanguage($header);
     }
 
     protected function retrieveAcceptLanguageHeader(): string
     {
-        $value = trim($this->options['http_accept_language']) === ''
+        $header = trim($this->options['http_accept_language']) === ''
             ? (string)@$_SERVER['HTTP_ACCEPT_LANGUAGE']
             : $this->options['http_accept_language'];
 
-        return trim($value);
+        $this->logger->log('retrieve_header', $header);
+
+        return trim($header);
     }
 
     protected function findPreferredLanguage(string $header): string
