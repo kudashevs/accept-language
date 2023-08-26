@@ -66,7 +66,7 @@ The class accepts some options which help you to control the result:
 'http_accept_language'      # A string with a custom HTTP Accept-Language header.
 'default_language'          # A string with a default preferred language value (default is 'en')¹.
 'accepted_languages'        # An array with a list of supported languages (default is [])².
-'exact_match_only'          # A boolean defines whether to retrieve only languages that match exactly a supported language (default is true).
+'exact_match_only'          # A boolean defines whether to retrieve only languages that match exactly a supported languages (default is false).
 'two_letter_only'           # A boolean defines whether to retrieve only two-letter primary subtags (default is true).
 'use_extlang_subtag'        # A boolean defines whether to include an extlang subtag in the result (default is false).
 'use_script_subtag'         # A boolean defines whether to include a script subtag in the result (default is false).
