@@ -4,6 +4,7 @@ This PHP package retrieves a language of preference (a preferred language) from 
 The package can be used in any web app to identify the visitors' language of choice. The retrieved information might be used
 to make various decisions (for example, set a locale, redirect a user to the specific page, etc.).
 
+
 ## Features
 
 The Accept-Language package retrieves a preferred language from an HTTP Accept-Language request-header field. The preferred
@@ -21,12 +22,14 @@ script and extlang subtags) and the possibility to set up the representation of 
 
 The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
 
+
 ## Installation
 
 You can install the package via composer:
 ```bash
 composer require kudashevs/accept-language
 ```
+
 
 ## Usage
 
@@ -55,6 +58,7 @@ $service->getHeader();
 
 **Important note!** The `AcceptLanguage` class can throw an `InvalidOptionType` exception when one of
 the provided options is of an incorrect type.
+
 
 ## Options
 
@@ -94,6 +98,7 @@ becomes more flexible and retrieves the language and its derivatives.
 with the two-letter primary subtag. This option has a **higher priority** than the `accepted_languages` option. Thus, if you want to
 accept languages with three-letter primary subtag (by listing them in the `accepted_languages`), don't forget to disable this option.
 
+
 ## Logging
 
 There is the possibility to log information gathered throughout the execution process. To activate it you should set the configuration
@@ -107,6 +112,7 @@ $service = new AcceptLanguage([
 $service->useLogger(new PsrCompatibleLogger());
 $service->process();
 ```
+
 
 ## Usage example
 
@@ -167,6 +173,7 @@ If you want to change the defaults, don't forget to publish the configuration fi
 php artisan vendor:publish --provider="Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider"
 ```
 
+
 ## Testing
 
 If you want to make sure that everything works as expected, you can run unit tests provided with the package.
@@ -174,11 +181,13 @@ If you want to make sure that everything works as expected, you can run unit tes
 composer test
 ```
 
+
 ## References
 
 - [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://tools.ietf.org/html/rfc7231#section-5.3.5)
 - [RFC 4646 Tags for Identifying Languages](https://tools.ietf.org/html/rfc4646#section-2)
 - [RFC 4647 Matching of Language Tags](https://tools.ietf.org/html/rfc4647#section-2)
+
 
 ## Contributing
 
