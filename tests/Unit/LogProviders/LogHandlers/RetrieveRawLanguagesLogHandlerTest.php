@@ -20,6 +20,6 @@ class RetrieveRawLanguagesLogHandlerTest extends TestCase
             );
 
         $handler = new RetrieveRawLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_raw_languages', [Language::create('fr-CH,fr;q=0.9', 1)]);
+        $handler->handle('retrieve_raw_languages', [Language::create('fr-CH', 1), Language::create('fr', 0.9)]);
     }
 }
