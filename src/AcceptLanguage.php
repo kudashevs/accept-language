@@ -200,11 +200,15 @@ class AcceptLanguage
             return $this->retrieveDefaultLanguage();
         }
 
-        $retrievedLanguages = $this->parseHeaderValue($header);
+        $rawLanguages = $this->parseHeaderValue($header);
 
-        $this->logger->log('retrieve_normalized_languages', $retrievedLanguages);
+        $this->logger->log('retrieve_raw_languages', $rawLanguages);
 
-        $preferredLanguages = $this->retrievePreferredLanguages($retrievedLanguages);
+        $normalizedLanguages = $this->normalizeLanguages($rawLanguages);
+
+        $this->logger->log('retrieve_normalized_languages', $normalizedLanguages);
+
+        $preferredLanguages = $this->retrievePreferredLanguages($normalizedLanguages);
 
         $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
 
@@ -221,24 +225,13 @@ class AcceptLanguage
     }
 
     /**
+     * Parse a header value and return raw languages (languages without normalization).
+     *
      * @return array<AbstractLanguage>
      */
     protected function parseHeaderValue(string $header): array
     {
-        return $this->parseHeaderWithNormalization($header);
-    }
-
-    /**
-     * Parse an HTTP Accept-Language header, retrieve languages, and prepare them for further processing.
-     *
-     * @param string $header
-     * @return array<AbstractLanguage>
-     */
-    protected function parseHeaderWithNormalization(string $header): array
-    {
-        $rawLanguages = $this->retrieveLanguages($header);
-
-        return $this->normalizeLanguages($rawLanguages);
+        return $this->retrieveLanguages($header);
     }
 
     protected function retrieveLanguages(string $header): array
@@ -259,8 +252,6 @@ class AcceptLanguage
 
             $fallbackQuality -= $fallbackQualityStep;
         }
-
-        $this->logger->log('retrieve_raw_languages', $languages);
 
         return $languages;
     }
