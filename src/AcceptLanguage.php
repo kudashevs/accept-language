@@ -283,6 +283,8 @@ class AcceptLanguage
     }
 
     /**
+     * Return valid languages sorted by the quality value.
+     *
      * @return array<AbstractLanguage>
      */
     protected function normalizeLanguages(array $languages): array
@@ -375,8 +377,7 @@ class AcceptLanguage
      * Return a preferred language from the preferred languages. If none of
      * the languages were appropriate, the default language will be returned.
      *
-     *
-     * @param array $languages
+     * @param array<AbstractLanguage> $languages
      * @return string
      */
     protected function processPreferredLanguages(array $languages): string
@@ -394,6 +395,10 @@ class AcceptLanguage
         return $preferredLanguage;
     }
 
+    /**
+     * @param array<AbstractLanguage> $languages
+     * @return string|null
+     */
     protected function retrievePreferredLanguage(array $languages): ?string
     {
         foreach ($languages as $language) {
@@ -446,7 +451,7 @@ class AcceptLanguage
     }
 
     /**
-     * Replace the default logger.
+     * Replace a default logger.
      *
      * @param LoggerInterface $logger
      */
@@ -473,7 +478,7 @@ class AcceptLanguage
     }
 
     /**
-     * Return the language of preference.
+     * Return a preferred language from an HTTP Accept-Language header.
      *
      * @return string
      */
@@ -483,7 +488,7 @@ class AcceptLanguage
     }
 
     /**
-     * Return the language of preference.
+     * Return a preferred language from an HTTP Accept-Language header.
      *
      * @return string
      */
