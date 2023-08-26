@@ -324,16 +324,16 @@ class AcceptLanguage
      */
     protected function retrievePreferredLanguages(array $languages): array
     {
-        if (!$this->isAnyLanguageSupported()) {
+        if ($this->isAnyLanguageAccepted()) {
             return $languages;
         }
 
         return $this->retrieveSupportedLanguages($languages);
     }
 
-    protected function isAnyLanguageSupported(): bool
+    protected function isAnyLanguageAccepted(): bool
     {
-        return count($this->options['accepted_languages']) !== 0;
+        return count($this->options['accepted_languages']) === 0;
     }
 
     /**
