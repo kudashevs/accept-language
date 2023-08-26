@@ -367,7 +367,7 @@ class AcceptLanguage
         }, $this->options['accepted_languages']);
     }
 
-    protected function retrievePreferredLanguage(array $languages): string
+    protected function retrievePreferredLanguage(array $languages): ?string
     {
         foreach ($languages as $language) {
             if ($this->isAnyLanguage($language)) {
@@ -379,7 +379,7 @@ class AcceptLanguage
             }
         }
 
-        return $this->retrieveDefaultLanguage();
+        return null;
     }
 
     protected function isAnyLanguage(Language $language): bool
