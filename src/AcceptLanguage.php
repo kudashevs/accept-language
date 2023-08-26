@@ -200,9 +200,9 @@ class AcceptLanguage
             return $this->processDefaultLanguageCase();
         }
 
-        $validLanguages = $this->processAcceptLanguageValue($header);
+        $languages = $this->processAcceptLanguageValue($header);
 
-        return $this->processValidLanguages($validLanguages);
+        return $this->processNormalizedLanguages($languages);
     }
 
     protected function isDefaultLanguageCase(string $header): bool
@@ -302,7 +302,7 @@ class AcceptLanguage
         });
     }
 
-    protected function processValidLanguages(array $languages): string
+    protected function processNormalizedLanguages(array $languages): string
     {
         $preferredLanguages = $this->retrievePreferredLanguages($languages);
 
