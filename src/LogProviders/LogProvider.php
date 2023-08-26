@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveDefaultLanguageLogHandler;
@@ -14,6 +15,7 @@ use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguageL
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguagesLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveRawLanguagesLogHandler;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 final class LogProvider
 {
@@ -28,6 +30,7 @@ final class LogProvider
     private LoggerInterface $logger;
 
     private array $options = [
+        'log_level' => 'info',
         'log_only' => '',
     ];
 
@@ -46,11 +49,15 @@ final class LogProvider
     /**
      * @param LoggerInterface $logger
      * @param array<string, string|array> $options
+     *
+     * @throws InvalidOptionType|InvalidLogLevelName
      */
     public function __construct(LoggerInterface $logger, array $options = [])
     {
         $this->initLogger($logger);
         $this->initOptions($options);
+
+        $this->checkValidLogLevel();
     }
 
     private function initLogger(LoggerInterface $logger): void
@@ -102,6 +109,29 @@ final class LogProvider
                 )
             );
         }
+    }
+
+    /**
+     * @throws InvalidLogLevelName
+     */
+    private function checkValidLogLevel(): void
+    {
+        $validLevels = $this->retrieveValidLogLevels();
+        $requestedLevel = strtolower($this->options['log_level']);
+
+        if (!in_array($requestedLevel, $validLevels, true)) {
+            throw new InvalidLogLevelName(
+                sprintf('The log level %s does not exist. Use %s instead.',
+                    $requestedLevel,
+                    implode(', ', $validLevels)
+                )
+            );
+        }
+    }
+
+    private function retrieveValidLogLevels(): array
+    {
+        return (new \ReflectionClass(LogLevel::class))->getConstants();
     }
 
     /**

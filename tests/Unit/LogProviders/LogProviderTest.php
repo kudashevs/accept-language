@@ -3,6 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Language\Language;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
@@ -23,6 +24,20 @@ class LogProviderTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     * @see LogProviderTest::it_can_handle_a_valid_log_level_option()
+     */
+    public function it_can_throw_an_exception_when_a_wrong_log_level()
+    {
+        $this->expectException(InvalidLogLevelName::class);
+        $this->expectExceptionMessage('wrong');
+
+        new LogProvider(new DummyLogger(), [
+            'log_level' => 'wrong',
+        ]);
+    }
+
     /** @test */
     public function it_can_throw_an_exception_when_a_wrong_event_name()
     {
@@ -31,6 +46,20 @@ class LogProviderTest extends TestCase
 
         $provider = new LogProvider(new DummyLogger());
         $provider->log('wrong', '');
+    }
+
+    /**
+     * @test
+     * @see LogProviderTest::it_can_throw_an_exception_when_a_wrong_log_level()
+     */
+    public function it_can_handle_a_valid_log_level_option()
+    {
+        new LogProvider(new DummyLogger(), [
+            'log_level' => 'Emergency',
+        ]);
+
+        // assert that no exceptions were thrown
+        $this->addToAssertionCount(1);
     }
 
     /** @test */
@@ -113,7 +142,6 @@ class LogProviderTest extends TestCase
 
         $provider = new LogProvider($loggerMock);
         $provider->log($event, $data);
-
     }
 
     public function provideDifferentEvents(): array
