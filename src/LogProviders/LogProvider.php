@@ -129,9 +129,17 @@ final class LogProvider
         }
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function retrieveValidLogLevels(): array
     {
-        return (new \ReflectionClass(LogLevel::class))->getConstants();
+        $levels = (new \ReflectionClass(LogLevel::class))
+            ->getConstants();
+
+        return array_map(function ($level) {
+            return strtolower($level);
+        }, $levels);
     }
 
     /**
