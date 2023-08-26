@@ -157,13 +157,13 @@ If you want to add a Laravel Facade just add it to the aliases array in the `con
 
 All of the available configuration settings are located in the `config/accept-language.php` file.
 ```
-'default_language' => 'value'       # Sets the `default_language` option value (default is 'en')
-'accepted_languages' => []          # Sets the `accepted_languages` option value (default is [])
-'exact_match_only' => bool,         # Sets the `exact_match_only` option value (default is false)
-'use_extlang_subtag' => bool,       # Sets the `use_extlang_subtag` option value (default is false)
-'use_script_subtag' => bool,        # Sets the `use_script_subtag` option value (default is false)
-'use_region_subtag' => bool,        # Sets the `use_region_subtag` option value (default is true)
-'log_activity' => bool              # Sets the `log_activity` option value (default is false)
+'default_language' => 'string'      # Set the `default_language` option value (default is `en`)
+'accepted_languages' => []          # Set the `accepted_languages` option value (default is [])
+'exact_match_only' => bool,         # Set the `exact_match_only` option value (default is `false`)
+'use_extlang_subtag' => bool,       # Set the `use_extlang_subtag` option value (default is `false`)
+'use_script_subtag' => bool,        # Set the `use_script_subtag` option value (default is `false`)
+'use_region_subtag' => bool,        # Set the `use_region_subtag` option value (default is `true`)
+'log_activity' => bool              # Set the `log_activity` option value (default is `false`)
 ```
 <sub>for more information about different options, please refer to the [Options](#options) section</sub>
 
