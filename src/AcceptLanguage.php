@@ -200,7 +200,7 @@ class AcceptLanguage
             return $this->processDefaultLanguageCase();
         }
 
-        $validLanguages = $this->retrieveNormalizedLanguages($header);
+        $validLanguages = $this->processAcceptLanguageValue($header);
 
         return $this->processValidLanguages($validLanguages);
     }
@@ -225,7 +225,7 @@ class AcceptLanguage
      * @param string $header
      * @return array<AbstractLanguage>
      */
-    protected function retrieveNormalizedLanguages(string $header): array
+    protected function processAcceptLanguageValue(string $header): array
     {
         $rawLanguages = $this->parseAcceptLanguageValue($header);
 
