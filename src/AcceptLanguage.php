@@ -200,11 +200,9 @@ class AcceptLanguage
             return $this->processDefaultLanguageCase();
         }
 
-        $rawLanguages = $this->parseAcceptLanguageHeader($header);
+        $validLanguages = $this->processAcceptLanguageHeader($header);
 
-        $this->logger->log('retrieve_raw_languages', $rawLanguages);
-
-        $normalizedLanguages = $this->normalizeLanguages($rawLanguages);
+        $preferredLanguages = $this->retrievePreferredLanguages($validLanguages);
 
         $this->logger->log('retrieve_normalized_languages', $normalizedLanguages);
 
@@ -231,6 +229,25 @@ class AcceptLanguage
         $this->logger->log('retrieve_default_language', $defaultLanguage);
 
         return $defaultLanguage;
+    }
+
+    /**
+     * Retrieve and normalize languages from an HTTP Accept-Language header.
+     *
+     * @param string $header
+     * @return array<AbstractLanguage>
+     */
+    protected function processAcceptLanguageHeader(string $header): array
+    {
+        $rawLanguages = $this->parseAcceptLanguageHeader($header);
+
+        $this->logger->log('retrieve_raw_languages', $rawLanguages);
+
+        $normalizedLanguages = $this->normalizeLanguages($rawLanguages);
+
+        $this->logger->log('retrieve_normalized_languages', $normalizedLanguages);
+
+        return $normalizedLanguages;
     }
 
     /**
