@@ -53,6 +53,7 @@ final class LogProvider
         $this->initOptions($options);
 
         $this->checkValidLogLevel();
+        $this->checkValidLogEvents();
     }
 
     private function initLogger(LoggerInterface $logger): void
@@ -120,6 +121,33 @@ final class LogProvider
                     'The log level "%s" does not exist. Use %s instead.',
                     $requestedLevel,
                     implode(', ', $validLevels),
+                )
+            );
+        }
+    }
+
+    /**
+     * @throws InvalidLogEventName
+     */
+    private function checkValidLogEvents(): void
+    {
+        if (!$this->isLogOnlyCase()) {
+            return;
+        }
+
+        $logOnlyEvents = $this->retrieveLogOnlyEvents();
+        $registeredEvents = array_flip($this->handlers);
+
+        $difference = array_diff($logOnlyEvents, $registeredEvents);
+
+        if (count($difference) > 0) {
+            throw new InvalidLogEventName(
+                sprintf(
+                    'The log name%s "%s" %s not registered. Use %s instead.',
+                    (count($difference) > 1) ? 's' : '',
+                    implode(', ', $difference),
+                    (count($difference) > 1) ? 'are' : 'is',
+                    implode(', ', $registeredEvents),
                 )
             );
         }

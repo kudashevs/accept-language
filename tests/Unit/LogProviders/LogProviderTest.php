@@ -24,6 +24,31 @@ class LogProviderTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function it_can_throw_an_exception_when_a_wrong_log_only_event()
+    {
+        $this->expectException(InvalidLogEventName::class);
+        $this->expectExceptionMessageMatches('/wrong.+is not/');
+
+        new LogProvider(new DummyLogger(), [
+            'log_only' => ['wrong'],
+        ]);
+    }
+
+    /** @test */
+    public function it_can_throw_an_exception_when_wrong_log_only_events()
+    {
+        $this->expectException(InvalidLogEventName::class);
+        $this->expectExceptionMessageMatches('/mistaken.+incorrect.+are not/');
+
+        new LogProvider(new DummyLogger(), [
+            'log_only' => [
+                'mistaken',
+                'incorrect',
+            ],
+        ]);
+    }
+
     /**
      * @test
      * @see LogProviderTest::it_can_handle_a_valid_log_level_option()
