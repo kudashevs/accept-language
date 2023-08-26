@@ -200,9 +200,11 @@ class AcceptLanguage
             return $this->processDefaultLanguageCase();
         }
 
-        $languages = $this->processAcceptLanguageValue($header);
+        $normalizedLanguages = $this->processAcceptLanguageValue($header);
 
-        return $this->processNormalizedLanguages($languages);
+        $preferredLanguages = $this->processNormalizedLanguages($normalizedLanguages);
+
+        return $this->processPreferredLanguages($preferredLanguages);
     }
 
     protected function isDefaultLanguageCase(string $header): bool
@@ -302,17 +304,19 @@ class AcceptLanguage
         });
     }
 
-    protected function processNormalizedLanguages(array $languages): string
+    /**
+     * Return the preferred languages that are accepted and match the matching criteria.
+     *
+     * @param array $languages
+     * @return array<AbstractLanguage>
+     */
+    protected function processNormalizedLanguages(array $languages): array
     {
-        $preferredLanguages = $this->retrievePreferredLanguages($languages);
+        $acceptedLanguages = $this->retrievePreferredLanguages($languages);
 
-        $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
+        $this->logger->log('retrieve_preferred_languages', $acceptedLanguages);
 
-        $retrievePreferredLanguage = $this->retrievePreferredLanguage($preferredLanguages);
-
-        $this->logger->log('retrieve_preferred_language', $retrievePreferredLanguage);
-
-        return $retrievePreferredLanguage;
+        return $acceptedLanguages;
     }
 
     /**
