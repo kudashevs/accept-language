@@ -178,7 +178,7 @@ final class LogProvider
     private function isDesiredEvent(string $event): bool
     {
         if ($this->isLogOnlyCase()) {
-            return in_array($event, $this->retrieveDesiredHandlers());
+            return in_array($event, $this->retrieveLogOnlyEvents());
         }
 
         return true;
@@ -192,7 +192,7 @@ final class LogProvider
     /**
      * @return array<int, string>
      */
-    private function retrieveDesiredHandlers(): array
+    private function retrieveLogOnlyEvents(): array
     {
         return array_map(static function ($value) {
             return trim($value);
