@@ -116,9 +116,10 @@ final class LogProvider
 
         if (!in_array($requestedLevel, $validLevels, true)) {
             throw new InvalidLogLevelName(
-                sprintf('The log level %s does not exist. Use %s instead.',
+                sprintf(
+                    'The log level "%s" does not exist. Use %s instead.',
                     $requestedLevel,
-                    implode(', ', $validLevels)
+                    implode(', ', $validLevels),
                 )
             );
         }
