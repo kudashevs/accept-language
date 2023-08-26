@@ -202,19 +202,7 @@ class AcceptLanguage
 
         $validLanguages = $this->processAcceptLanguageHeader($header);
 
-        $preferredLanguages = $this->retrievePreferredLanguages($validLanguages);
-
-        $this->logger->log('retrieve_normalized_languages', $normalizedLanguages);
-
-        $preferredLanguages = $this->retrievePreferredLanguages($normalizedLanguages);
-
-        $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
-
-        $retrievePreferredLanguage = $this->retrievePreferredLanguage($preferredLanguages);
-
-        $this->logger->log('retrieve_preferred_language', $retrievePreferredLanguage);
-
-        return $retrievePreferredLanguage;
+        return $this->processValidLanguages($validLanguages);
     }
 
     protected function isDefaultLanguageCase(string $header): bool
@@ -312,6 +300,19 @@ class AcceptLanguage
         return array_filter($languages, static function ($language) {
             return $language->isValid() && $language->getQuality() > 0;
         });
+    }
+
+    protected function processValidLanguages(array $languages): string
+    {
+        $preferredLanguages = $this->retrievePreferredLanguages($languages);
+
+        $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
+
+        $retrievePreferredLanguage = $this->retrievePreferredLanguage($preferredLanguages);
+
+        $this->logger->log('retrieve_preferred_language', $retrievePreferredLanguage);
+
+        return $retrievePreferredLanguage;
     }
 
     /**
