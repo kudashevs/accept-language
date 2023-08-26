@@ -367,6 +367,29 @@ class AcceptLanguage
         }, $this->options['accepted_languages']);
     }
 
+    /**
+     * Return a preferred language from the preferred languages. If none of
+     * the languages were appropriate, the default language will be returned.
+     *
+     *
+     * @param array $languages
+     * @return string
+     */
+    protected function processPreferredLanguages(array $languages): string
+    {
+        $preferredLanguage = $this->retrievePreferredLanguage($languages);
+
+        if (is_null($preferredLanguage)) {
+            $this->logger->log('retrieve_preferred_language', '');
+
+            return $this->retrieveDefaultLanguage();
+        }
+
+        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
+
+        return $preferredLanguage;
+    }
+
     protected function retrievePreferredLanguage(array $languages): ?string
     {
         foreach ($languages as $language) {
