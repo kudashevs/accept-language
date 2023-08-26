@@ -19,11 +19,6 @@ use Psr\Log\LogLevel;
 
 final class LogProvider
 {
-    private const LOG_ONLY_SEPARATORS = [
-        ',',
-        '|',
-    ];
-
     /**
      * Contain a PSR-3 compatible logger.
      */
@@ -31,7 +26,7 @@ final class LogProvider
 
     private array $options = [
         'log_level' => 'info',
-        'log_only' => '',
+        'log_only' => [],
     ];
 
     /**
@@ -186,7 +181,7 @@ final class LogProvider
 
     private function isLogOnlyCase(): bool
     {
-        return trim($this->options['log_only']) !== '';
+        return count($this->options['log_only']) > 0;
     }
 
     /**
@@ -194,24 +189,9 @@ final class LogProvider
      */
     private function retrieveLogOnlyEvents(): array
     {
-        return array_map(static function ($value) {
-            return trim($value);
-        }, $this->retrieveLogOnlyValues());
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    private function retrieveLogOnlyValues(): array
-    {
-        return preg_split('/' . $this->concatenateLogOnlySeparators() . '/iSu', $this->options['log_only']);
-    }
-
-    private function concatenateLogOnlySeparators(): string
-    {
-        return implode('|', array_map(static function ($separator) {
-            return preg_quote($separator, '/');
-        }, self::LOG_ONLY_SEPARATORS));
+        return array_map(static function ($event) {
+            return trim($event);
+        }, $this->options['log_only']);
     }
 
     private function initHandler(string $event): LogHandlerInterface
