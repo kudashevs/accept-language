@@ -330,7 +330,7 @@ class AcceptLanguage
             return $languages;
         }
 
-        return $this->retrieveSupportedLanguages($languages);
+        return $this->retrieveAcceptedLanguages($languages);
     }
 
     protected function isAnyLanguageAccepted(): bool
@@ -341,7 +341,7 @@ class AcceptLanguage
     /**
      * @return array<AbstractLanguage>
      */
-    protected function retrieveSupportedLanguages(array $languages): array
+    protected function retrieveAcceptedLanguages(array $languages): array
     {
         $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
