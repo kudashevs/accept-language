@@ -86,10 +86,9 @@ class AcceptLanguage
      */
     public function __construct(array $options = [])
     {
-        $this->initLogger();
-
         $this->initOptions($options);
         $this->initFactory();
+        $this->initLogger();
     }
 
     protected function initLogger(): void
