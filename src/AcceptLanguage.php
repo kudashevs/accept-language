@@ -197,7 +197,11 @@ class AcceptLanguage
         // There are several situations when there is no need to continue
         // further processing as they result in the default language.
         if ($this->isDefaultLanguageCase($header)) {
-            return $this->retrieveDefaultLanguage();
+            $defaultLanguage = $this->retrieveDefaultLanguage();
+
+            $this->logger->log('retrieve_default_language', $defaultLanguage);
+
+            return $defaultLanguage;
         }
 
         $rawLanguages = $this->parseAcceptLanguageHeader($header);

@@ -7,6 +7,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
+use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveDefaultLanguageLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
 use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguageLogHandler;
@@ -35,6 +36,7 @@ final class LogProvider
      */
     private array $handlers = [ // @note can be a mapper
         'retrieve_header' => RetrieveHeaderLogHandler::class,
+        'retrieve_default_language' => RetrieveDefaultLanguageLogHandler::class,
         'retrieve_raw_languages' => RetrieveRawLanguagesLogHandler::class,
         'retrieve_normalized_languages' => RetrieveNormalizedLanguagesLogHandler::class,
         'retrieve_preferred_languages' => RetrievePreferredLanguagesLogHandler::class,
