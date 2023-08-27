@@ -9,7 +9,7 @@ use Kudashevs\AcceptLanguage\Normalizers\TagNormalizerInterface;
 
 final class LanguageTag
 {
-    // The language range starts from the 1*8ALPHA notation which means that
+    // The language range starts with the 1*8ALPHA notation which means that
     // the minimum length is equal to 1 and the maximum length is equal to 8.
     // For more information about language ranges see RFC 4647, Section 2.2.
     private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
