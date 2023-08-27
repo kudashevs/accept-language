@@ -15,6 +15,8 @@ final class LanguageTag
     private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
     private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 8;
 
+    // Subtags are distinguished and separated from one another by a hyphen.
+    // For more information about a separator see RFC 5646, Section 2.1.
     private const DEFAULT_SEPARATOR = '-';
 
     private TagNormalizerInterface $normalizer;
