@@ -6,7 +6,7 @@ use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
-class AcceptLanguageCaughtBugsTest extends ExtendedTestCase
+class CaughtBugsTest extends ExtendedTestCase
 {
     /**
      * @test
