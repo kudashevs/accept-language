@@ -53,7 +53,7 @@ class LanguageFactory
             return $this->createInvalidLanguage($possibleTag, $possibleQuality);
         }
 
-        $tag = $rawLanguageRange[0];
+        $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
 
         return $this->createValidLanguageWithFallback($tag, $quality, $fallbackQuality);
