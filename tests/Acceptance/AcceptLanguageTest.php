@@ -24,16 +24,20 @@ class AcceptLanguageTest extends ExtendedTestCase
         $service = new AcceptLanguage();
         $service->process();
 
-        $result = $service->getLanguage();
+        $language = $service->getLanguage();
 
-        $this->assertNotEmpty($result);
-        $this->assertSame('en', $result);
+        $this->assertNotEmpty($language);
+        $this->assertSame('en', $language);
     }
 
     /** @test */
     public function a_facade_can_retrieve_a_language()
     {
-        $result = AcceptLanguageFacade::getLanguage();
+        $language = AcceptLanguageFacade::getLanguage();
+
+        $this->assertNotEmpty($language);
+        $this->assertStringContainsString('en', $language);
+    }
 
         $this->assertNotEmpty($result);
         $this->assertStringContainsString('en', $result);
