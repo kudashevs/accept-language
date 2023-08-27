@@ -19,4 +19,13 @@ class RetrieveNormalizedLanguagesLogPresenterTest extends TestCase
 
         $this->assertMatchesRegularExpression('/fr-CH.*retrieve_normalized_languages/', $presentation);
     }
+
+    /** @test */
+    public function it_can_present_an_event_with_empty_data()
+    {
+        $handler = new RetrieveNormalizedLanguagesLogPresenter();
+        $presentation = $handler->present('retrieve_normalized_languages', []);
+
+        $this->assertStringContainsString('empty', $presentation);
+    }
 }

@@ -16,11 +16,20 @@ final class RetrieveNormalizedLanguagesLogPresenter implements LogPresenterInter
      */
     public function present(string $event, $languages): string
     {
+        if ($this->isEmptyData($languages)) {
+            return sprintf('Retrieved no normalized languages - the list is empty [%s event].', $event);
+        }
+
         return sprintf(
             'Retrieved "%s" normalized languages [%s event].',
             $this->processLanguages($languages),
             $event,
         );
+    }
+
+    private function isEmptyData(array $data): bool
+    {
+        return count($data) === 0;
     }
 
     private function processLanguages(array $languages): string
