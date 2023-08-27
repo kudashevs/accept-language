@@ -306,18 +306,21 @@ class AcceptLanguage
     }
 
     /**
-     * Return the preferred languages that are accepted and match the matching criteria.
+     * Return the found preferred languages. A preferred language is a
+     * valid language that was accepted and met all matching criteria.
      *
      * @param array $languages
      * @return array<AbstractLanguage>
      */
     protected function processNormalizedLanguages(array $languages): array
     {
-        $acceptedLanguages = $this->retrievePreferredLanguages($languages);
+        $preferredLanguages = $this->retrievePreferredLanguages($languages);
 
         $this->logger->log('retrieve_preferred_languages', $acceptedLanguages);
 
-        return $acceptedLanguages;
+        $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
+
+        return $preferredLanguages;
     }
 
     /**
