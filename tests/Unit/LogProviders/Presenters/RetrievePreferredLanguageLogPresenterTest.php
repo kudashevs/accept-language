@@ -18,4 +18,13 @@ class RetrievePreferredLanguageLogPresenterTest extends TestCase
 
         $this->assertMatchesRegularExpression('/fr-CH.*retrieve_preferred_language/', $presentation);
     }
+
+    /** @test */
+    public function it_can_present_an_event_with_empty_data()
+    {
+        $handler = new RetrievePreferredLanguageLogPresenter();
+        $presentation = $handler->present('retrieve_preferred_language', '');
+
+        $this->assertStringContainsString('Warning', $presentation);
+    }
 }
