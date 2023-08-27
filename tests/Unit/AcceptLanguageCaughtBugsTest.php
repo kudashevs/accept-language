@@ -3,6 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
+use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
 class AcceptLanguageCaughtBugsTest extends ExtendedTestCase
@@ -47,5 +48,23 @@ class AcceptLanguageCaughtBugsTest extends ExtendedTestCase
         $service->process();
 
         $this->assertSame('en', $service->getPreferredLanguage());
+    }
+
+    /** @test */
+    public function it_can_apply_boolean_options_using_the_initial_config()
+    {
+        /*
+         * Bug found: 27.08.2023
+         * Details: The AcceptLanguageServiceProvider class was not able to apply the boolean options due to
+         * a wrong assumption in the use of array_filter() function with the initial options. For more details
+         * @see AcceptLanguageServiceProvider::getInitialConfig()
+         */
+        config()->set('accept-language.default_language', 'fr-Latn-CH');
+        config()->set('accept-language.use_script_subtag', false);
+        config()->set('accept-language.use_region_subtag', false);
+        $language = AcceptLanguageFacade::getLanguage();
+
+        $this->assertNotEmpty($language);
+        $this->assertSame('fr', $language);
     }
 }
