@@ -7,13 +7,13 @@ namespace Kudashevs\AcceptLanguage\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\DefaultLanguageLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\HeaderLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\LogPresenterInterface;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveDefaultLanguageLogPresenter;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveHeaderLogPresenter;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveNormalizedLanguagesLogPresenter;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrievePreferredLanguageLogPresenter;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrievePreferredLanguagesLogPresenter;
-use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveRawLanguagesLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\NormalizedLanguagesLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\PreferredLanguageLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\PreferredLanguagesLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RawLanguagesLogPresenter;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -33,12 +33,12 @@ final class LogProvider
      * @var array
      */
     private array $presenters = [ // @note can be a mapper
-        'retrieve_header' => RetrieveHeaderLogPresenter::class,
-        'retrieve_default_language' => RetrieveDefaultLanguageLogPresenter::class,
-        'retrieve_raw_languages' => RetrieveRawLanguagesLogPresenter::class,
-        'retrieve_normalized_languages' => RetrieveNormalizedLanguagesLogPresenter::class,
-        'retrieve_preferred_languages' => RetrievePreferredLanguagesLogPresenter::class,
-        'retrieve_preferred_language' => RetrievePreferredLanguageLogPresenter::class,
+        'retrieve_header' => HeaderLogPresenter::class,
+        'retrieve_default_language' => DefaultLanguageLogPresenter::class,
+        'retrieve_raw_languages' => RawLanguagesLogPresenter::class,
+        'retrieve_normalized_languages' => NormalizedLanguagesLogPresenter::class,
+        'retrieve_preferred_languages' => PreferredLanguagesLogPresenter::class,
+        'retrieve_preferred_language' => PreferredLanguageLogPresenter::class,
     ];
 
     /**

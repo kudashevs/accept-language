@@ -6,7 +6,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 
-final class RetrievePreferredLanguagesLogPresenter implements LogPresenterInterface
+final class NormalizedLanguagesLogPresenter implements LogPresenterInterface
 {
     private string $event;
 
@@ -23,11 +23,11 @@ final class RetrievePreferredLanguagesLogPresenter implements LogPresenterInterf
     public function present($languages): string
     {
         if ($this->isEmptyData($languages)) {
-            return sprintf('Retrieved no preferred languages - the list is empty [%s event].', $this->event);
+            return sprintf('Retrieved no normalized languages - the list is empty [%s event].', $this->event);
         }
 
         return sprintf(
-            'Retrieved "%s" preferred languages [%s event].',
+            'Retrieved "%s" normalized languages [%s event].',
             $this->processLanguages($languages),
             $this->event,
         );

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-final class RetrievePreferredLanguageLogPresenter implements LogPresenterInterface
+final class DefaultLanguageLogPresenter implements LogPresenterInterface
 {
     private string $event;
 
@@ -21,10 +21,12 @@ final class RetrievePreferredLanguageLogPresenter implements LogPresenterInterfa
     public function present($language): string
     {
         if ($this->isEmptyData($language)) {
-            return sprintf('Warning! An empty resulting language was retrieved [%s event].', $this->event);
+            return sprintf(
+                'Warning! An empty language was returned in the default language case [%s event].',
+                $this->event);
         }
 
-        return sprintf('Retrieved "%s" resulting language [%s event].', $language, $this->event);
+        return sprintf('Returned "%s" as a default language case [%s event].', $language, $this->event);
     }
 
     private function isEmptyData(string $data): bool

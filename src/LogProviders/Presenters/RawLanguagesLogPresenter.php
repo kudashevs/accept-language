@@ -6,7 +6,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 
-final class RetrieveRawLanguagesLogPresenter implements LogPresenterInterface
+final class RawLanguagesLogPresenter implements LogPresenterInterface
 {
     private string $event;
 

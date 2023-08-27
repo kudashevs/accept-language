@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-final class RetrieveHeaderLogPresenter implements LogPresenterInterface
+final class HeaderLogPresenter implements LogPresenterInterface
 {
     private string $event;
 
