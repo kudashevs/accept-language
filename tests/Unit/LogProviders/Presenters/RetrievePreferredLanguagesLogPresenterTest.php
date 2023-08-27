@@ -11,9 +11,8 @@ class RetrievePreferredLanguagesLogPresenterTest extends TestCase
     /** @test */
     public function it_can_present_an_event_with_data()
     {
-        $presenter = new RetrievePreferredLanguagesLogPresenter();
+        $presenter = new RetrievePreferredLanguagesLogPresenter('retrieve_preferred_languages');
         $presentation = $presenter->present(
-            'retrieve_preferred_languages',
             [Language::create('fr-CH', 1), Language::create('fr', 0.9)],
         );
 
@@ -23,8 +22,8 @@ class RetrievePreferredLanguagesLogPresenterTest extends TestCase
     /** @test */
     public function it_can_present_an_event_with_empty_data()
     {
-        $handler = new RetrievePreferredLanguagesLogPresenter();
-        $presentation = $handler->present('retrieve_preferred_languages', []);
+        $presenter = new RetrievePreferredLanguagesLogPresenter('retrieve_preferred_languages');
+        $presentation = $presenter->present([]);
 
         $this->assertStringContainsString('empty', $presentation);
     }

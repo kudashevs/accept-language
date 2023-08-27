@@ -192,7 +192,7 @@ final class LogProvider
 
         $logLevel = $this->options['log_level'];
         $presenter = $this->initPresenter($event);
-        $presentation = $presenter->present($event, $data);
+        $presentation = $presenter->present($data);
 
         $this->logger->{$logLevel}($presentation);
     }
@@ -230,7 +230,7 @@ final class LogProvider
     {
         $presenterClass = $this->presenters[$event];
 
-        return new $presenterClass($this->logger);
+        return new $presenterClass($event);
     }
 
     private function handleUnexpectedEvent(string $event): void

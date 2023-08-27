@@ -11,9 +11,8 @@ class RetrieveRawLanguagesLogPresenterTest extends TestCase
     /** @test */
     public function it_can_present_an_event_with_data()
     {
-        $presenter = new RetrieveRawLanguagesLogPresenter();
+        $presenter = new RetrieveRawLanguagesLogPresenter('retrieve_raw_languages');
         $presentation = $presenter->present(
-            'retrieve_raw_languages',
             [Language::create('fr-CH', 1), Language::create('fr', 0.9)],
         );
 
@@ -23,8 +22,8 @@ class RetrieveRawLanguagesLogPresenterTest extends TestCase
     /** @test */
     public function it_can_present_an_event_with_empty_data()
     {
-        $handler = new RetrieveRawLanguagesLogPresenter();
-        $presentation = $handler->present('retrieve_raw_languages', []);
+        $presenter = new RetrieveRawLanguagesLogPresenter('retrieve_raw_languages');
+        $presentation = $presenter->present([]);
 
         $this->assertStringContainsString('empty', $presentation);
     }
