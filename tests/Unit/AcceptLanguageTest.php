@@ -1072,8 +1072,8 @@ class AcceptLanguageTest extends TestCase
             ->withConsecutive(
                 [$this->stringContains('completely wrong')],
                 [$this->stringContains('completely wrong;invalid')],
-                [$this->stringContains('""')],
-                [$this->stringContains('""')],
+                [$this->stringContains('empty')],
+                [$this->stringContains('empty')],
                 [$this->stringContains('en')]
             );
 
