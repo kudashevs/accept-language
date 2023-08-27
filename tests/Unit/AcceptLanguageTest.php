@@ -1111,7 +1111,7 @@ class AcceptLanguageTest extends TestCase
      */
     public function it_can_handle_a_bug_in_the_retrieve_acceptable_languages_intersection()
     {
-        /**
+        /*
          * Bug found: 14.02.2021
          * Details: The returned language doesn't follow the order from an HTTP Accept-Language header value.
          * The bug is in the retrieveAcceptableLanguagesIntersection() method and is related to a wrong order
@@ -1132,7 +1132,7 @@ class AcceptLanguageTest extends TestCase
      */
     public function it_can_handle_a_bug_in_the_parse_header()
     {
-        /**
+        /*
          * Bug found: 13.01.2022
          * Details: The package crashes with a message array_combine(): Both parameters should have an equal number of elements.
          * The bug happens in the parseHeaderValue() method due to the specific HTTP Accept-Language header which is sent
