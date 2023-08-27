@@ -7,11 +7,9 @@ to make various decisions (for example, set a locale, redirect a user to the spe
 
 ## Features
 
-The Accept-Language package retrieves a preferred language from an HTTP Accept-Language request-header field. The preferred
-language information comes in the form of a language code that is pretty similar to the Unicode Locale Identifier. The code
-consists of a mandatory 2-letter/3-letter primary language subtag and a region subtag separated by an underscore (e.g. en_GB).
-Besides, the package provides the possibility to control the presence of different subtags in the resulting code (including
-script and extlang subtags) and the possibility to set up the representation of a separator.
+The package retrieves a language of preference in the format that is pretty similar to the Unicode Locale Identifier. The code
+consists of a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g. `en_GB`).
+There are different possibilities to include other subtags and change the representation of the resulting code.
 
 - Can return a default language when a client accepts any language (e.g. `Accept-Language: *`)
 - Can configure a default returning language by providing the `default_language` option
