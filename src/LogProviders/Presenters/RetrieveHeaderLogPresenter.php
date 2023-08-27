@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-class RetrieveHeaderLogPresenter implements LogPresenterInterface
+final class RetrieveHeaderLogPresenter implements LogPresenterInterface
 {
     /**
      * {@inheritDoc}

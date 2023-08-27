@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-class RetrievePreferredLanguageLogPresenter implements LogPresenterInterface
+final class RetrievePreferredLanguageLogPresenter implements LogPresenterInterface
 {
     /**
      * {@inheritDoc}

@@ -6,7 +6,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
 
-class RetrieveNormalizedLanguagesLogPresenter implements LogPresenterInterface
+final class RetrieveNormalizedLanguagesLogPresenter implements LogPresenterInterface
 {
     /**
      * {@inheritDoc}
