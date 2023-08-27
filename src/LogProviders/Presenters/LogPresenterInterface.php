@@ -11,6 +11,7 @@ interface LogPresenterInterface
      *
      * @param string $event
      * @param string|array $data
+     * @return string
      */
-    public function present(string $event, $data): void;
+    public function present(string $event, $data): string;
 }

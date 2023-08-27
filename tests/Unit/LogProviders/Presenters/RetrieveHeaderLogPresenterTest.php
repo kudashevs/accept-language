@@ -4,21 +4,18 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveHeaderLogPresenter;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 class RetrieveHeaderLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_handle_an_event()
+    public function it_can_present_an_event_with_data()
     {
-        $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->once())
-            ->method('info')
-            ->with(
-                $this->matchesRegularExpression('/fr-CH.*retrieve_header/')
-            );
+        $presenter = new RetrieveHeaderLogPresenter();
+        $presentation = $presenter->present(
+            'retrieve_header',
+            'fr-CH,fr;q=0.9',
+        );
 
-        $handler = new RetrieveHeaderLogPresenter($loggerMock);
-        $handler->present('retrieve_header', 'fr-CH,fr;q=0.9');
+        $this->assertMatchesRegularExpression('/fr-CH.*retrieve_header/', $presentation);
     }
 }

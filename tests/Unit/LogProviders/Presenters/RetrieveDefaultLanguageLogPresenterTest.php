@@ -4,21 +4,18 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveDefaultLanguageLogPresenter;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 class RetrieveDefaultLanguageLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_handle_an_event()
+    public function it_can_present_an_event_with_data()
     {
-        $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->once())
-            ->method('info')
-            ->with(
-                $this->matchesRegularExpression('/fr-CH.*retrieve_default_language/')
-            );
+        $presenter = new RetrieveDefaultLanguageLogPresenter();
+        $presentation = $presenter->present(
+            'retrieve_default_language',
+            'fr-CH,fr;q=0.9',
+        );
 
-        $handler = new RetrieveDefaultLanguageLogPresenter($loggerMock);
-        $handler->present('retrieve_default_language', 'fr-CH,fr;q=0.9');
+        $this->assertMatchesRegularExpression('/fr-CH.*retrieve_default_language/', $presentation);
     }
 }
