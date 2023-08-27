@@ -190,8 +190,11 @@ final class LogProvider
             return;
         }
 
+        $logLevel = $this->options['log_level'];
         $presenter = $this->initPresenter($event);
-        $presenter->present($event, $data);
+        $presentation = $presenter->present($event, $data);
+
+        $this->logger->{$logLevel}($presentation);
     }
 
     protected function isRegisteredEvent(string $event): bool
