@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit;
+namespace Kudashevs\AcceptLanguage\Tests\Bugs;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
