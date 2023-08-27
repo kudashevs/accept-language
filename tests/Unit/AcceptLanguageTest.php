@@ -435,6 +435,21 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'],
                 'fr_CH',
             ],
+            'the mozilla Accept-Language page a complex example with space and not present accept language results in predefined default' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['gr'],
+                ],
+                'en',
+            ],
+            'the mozilla Accept-Language page a complex example with space and default and not present accept language results in provided default' => [
+                [
+                    'default_language' => 'es',
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['gr'],
+                ],
+                'es',
+            ],
             'the RFC 2616 14.4 Accept-Language example results in the language' => [
                 ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7'],
                 'da',
