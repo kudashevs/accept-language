@@ -1,13 +1,13 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\LogHandlers;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\Language\Language;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveNormalizedLanguagesLogPresenter;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-class RetrieveNormalizedLanguagesLogHandlerTest extends TestCase
+class RetrieveNormalizedLanguagesLogPresenterTest extends TestCase
 {
     /** @test */
     public function it_can_handle_an_event()
@@ -19,7 +19,7 @@ class RetrieveNormalizedLanguagesLogHandlerTest extends TestCase
                 $this->matchesRegularExpression('/fr-CH.*retrieve_normalized_languages/')
             );
 
-        $handler = new RetrieveNormalizedLanguagesLogHandler($loggerMock);
-        $handler->handle('retrieve_normalized_languages', [Language::create('fr-CH', 1), Language::create('fr', 0.9)]);
+        $handler = new RetrieveNormalizedLanguagesLogPresenter($loggerMock);
+        $handler->present('retrieve_normalized_languages', [Language::create('fr-CH', 1), Language::create('fr', 0.9)]);
     }
 }

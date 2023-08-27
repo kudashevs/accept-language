@@ -1,12 +1,12 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\LogHandlers;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveHeaderLogPresenter;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-class RetrieveHeaderLogHandlerTest extends TestCase
+class RetrieveHeaderLogPresenterTest extends TestCase
 {
     /** @test */
     public function it_can_handle_an_event()
@@ -18,7 +18,7 @@ class RetrieveHeaderLogHandlerTest extends TestCase
                 $this->matchesRegularExpression('/fr-CH.*retrieve_header/')
             );
 
-        $handler = new RetrieveHeaderLogHandler($loggerMock);
-        $handler->handle('retrieve_header', 'fr-CH,fr;q=0.9');
+        $handler = new RetrieveHeaderLogPresenter($loggerMock);
+        $handler->present('retrieve_header', 'fr-CH,fr;q=0.9');
     }
 }

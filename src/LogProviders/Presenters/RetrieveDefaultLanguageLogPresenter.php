@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\AcceptLanguage\LogProviders\LogHandlers;
+namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
 use Psr\Log\LoggerInterface;
 
-class RetrieveDefaultLanguageLogHandler implements LogHandlerInterface
+class RetrieveDefaultLanguageLogPresenter implements LogPresenterInterface
 {
     private LoggerInterface $logger;
 
@@ -21,7 +21,7 @@ class RetrieveDefaultLanguageLogHandler implements LogHandlerInterface
      * @param string $event
      * @param string $language
      */
-    public function handle(string $event, $language): void
+    public function present(string $event, $language): void
     {
         $this->logger->info(
             sprintf('Returned "%s" as a default language case [%s event].', $language, $event)

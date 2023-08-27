@@ -7,13 +7,13 @@ namespace Kudashevs\AcceptLanguage\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\LogHandlerInterface;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveDefaultLanguageLogHandler;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveHeaderLogHandler;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveNormalizedLanguagesLogHandler;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguageLogHandler;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguagesLogHandler;
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrieveRawLanguagesLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\LogPresenterInterface;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveDefaultLanguageLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveHeaderLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveNormalizedLanguagesLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrievePreferredLanguageLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrievePreferredLanguagesLogPresenter;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrieveRawLanguagesLogPresenter;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -32,13 +32,13 @@ final class LogProvider
     /**
      * @var array
      */
-    private array $handlers = [ // @note can be a mapper
-        'retrieve_header' => RetrieveHeaderLogHandler::class,
-        'retrieve_default_language' => RetrieveDefaultLanguageLogHandler::class,
-        'retrieve_raw_languages' => RetrieveRawLanguagesLogHandler::class,
-        'retrieve_normalized_languages' => RetrieveNormalizedLanguagesLogHandler::class,
-        'retrieve_preferred_languages' => RetrievePreferredLanguagesLogHandler::class,
-        'retrieve_preferred_language' => RetrievePreferredLanguageLogHandler::class,
+    private array $presenters = [ // @note can be a mapper
+        'retrieve_header' => RetrieveHeaderLogPresenter::class,
+        'retrieve_default_language' => RetrieveDefaultLanguageLogPresenter::class,
+        'retrieve_raw_languages' => RetrieveRawLanguagesLogPresenter::class,
+        'retrieve_normalized_languages' => RetrieveNormalizedLanguagesLogPresenter::class,
+        'retrieve_preferred_languages' => RetrievePreferredLanguagesLogPresenter::class,
+        'retrieve_preferred_language' => RetrievePreferredLanguageLogPresenter::class,
     ];
 
     /**
@@ -136,7 +136,7 @@ final class LogProvider
         }
 
         $logOnlyEvents = $this->retrieveLogOnlyEvents();
-        $registeredEvents = array_flip($this->handlers);
+        $registeredEvents = array_flip($this->presenters);
 
         $difference = array_diff($logOnlyEvents, $registeredEvents);
 
@@ -190,13 +190,13 @@ final class LogProvider
             return;
         }
 
-        $handler = $this->initHandler($event);
-        $handler->handle($event, $data);
+        $presenter = $this->initPresenter($event);
+        $presenter->present($event, $data);
     }
 
     protected function isRegisteredEvent(string $event): bool
     {
-        return array_key_exists($event, $this->handlers);
+        return array_key_exists($event, $this->presenters);
     }
 
     private function isDesiredEvent(string $event): bool
@@ -223,11 +223,11 @@ final class LogProvider
         }, $this->options['log_only']);
     }
 
-    private function initHandler(string $event): LogHandlerInterface
+    private function initPresenter(string $event): LogPresenterInterface
     {
-        $handlerClass = $this->handlers[$event];
+        $presenterClass = $this->presenters[$event];
 
-        return new $handlerClass($this->logger);
+        return new $presenterClass($this->logger);
     }
 
     private function handleUnexpectedEvent(string $event): void

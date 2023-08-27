@@ -1,12 +1,12 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\LogHandlers;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\LogProviders\LogHandlers\RetrievePreferredLanguageLogHandler;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\RetrievePreferredLanguageLogPresenter;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
-class RetrievePreferredLanguageLogHandlerTest extends TestCase
+class RetrievePreferredLanguageLogPresenterTest extends TestCase
 {
     /** @test */
     public function it_can_handle_an_event()
@@ -18,7 +18,7 @@ class RetrievePreferredLanguageLogHandlerTest extends TestCase
                 $this->matchesRegularExpression('/fr-CH.*retrieve_preferred_language/')
             );
 
-        $handler = new RetrievePreferredLanguageLogHandler($loggerMock);
-        $handler->handle('retrieve_preferred_language', 'fr-CH,fr;q=0.9');
+        $handler = new RetrievePreferredLanguageLogPresenter($loggerMock);
+        $handler->present('retrieve_preferred_language', 'fr-CH,fr;q=0.9');
     }
 }

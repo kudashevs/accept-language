@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kudashevs\AcceptLanguage\LogProviders\LogHandlers;
+namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
 use Psr\Log\LoggerInterface;
 
-class RetrievePreferredLanguageLogHandler implements LogHandlerInterface
+class RetrieveHeaderLogPresenter implements LogPresenterInterface
 {
     private LoggerInterface $logger;
 
@@ -18,10 +18,10 @@ class RetrievePreferredLanguageLogHandler implements LogHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function handle(string $event, $language): void
+    public function present(string $event, $header): void
     {
         $this->logger->info(
-            sprintf('Retrieved "%s" resulting language [%s event].', $language, $event)
+            sprintf('Retrieved "%s" header [%s event].', $header, $event)
         );
     }
 }
