@@ -18,4 +18,13 @@ class RetrieveHeaderLogPresenterTest extends TestCase
 
         $this->assertMatchesRegularExpression('/fr-CH.*retrieve_header/', $presentation);
     }
+
+    /** @test */
+    public function it_can_present_an_event_with_empty_data()
+    {
+        $handler = new RetrieveHeaderLogPresenter();
+        $presentation = $handler->present('retrieve_header', '');
+
+        $this->assertStringContainsString('Warning', $presentation);
+    }
 }

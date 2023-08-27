@@ -14,6 +14,15 @@ final class RetrieveHeaderLogPresenter implements LogPresenterInterface
      */
     public function present(string $event, $header): string
     {
+        if ($this->isEmptyData($header)) {
+            return sprintf('Warning! An empty header was retrieved [%s event].', $event);
+        }
+
         return sprintf('Retrieved "%s" header [%s event].', $header, $event);
+    }
+
+    private function isEmptyData(string $data): bool
+    {
+        return trim($data) === '';
     }
 }
