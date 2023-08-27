@@ -11,12 +11,15 @@ The package retrieves a language of preference in the format that is pretty simi
 consists of a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g. `en_GB`).
 There are different possibilities to include other subtags and change the representation of the resulting code.
 
-- Can return a default language when a client accepts any language (e.g. `Accept-Language: *`)
-- Can configure a default returning language by providing the `default_language` option
-- Can configure a default separator value by providing the `separator` option
-- Can retrieve the two-letter languages only by setting the `two_letter_only` option
-- Can restrict the language search to specific values by providing the `accepted_languages` option
-- Can retrieve the exact match only languages by setting the `exact_match_only` option
+Main package features:
+- it can return a default language value when a client accepts any language (e.g. `Accept-Language: *`)
+- it can set up the default language value by providing the `default_language` option
+- it can retrieve only the languages that are listed in the `accepted_languages` option and their derivatives
+- it can retrieve only the languages that match exactly the `accepted_languages` by setting the `exact_match_only` option
+- it can retrieve only the two-letter language codes by setting the `two_letter_only` option
+- it can include extlang, script, and region subtags by setting the `use_<subtag-name>_subtag` options
+- it can set the default separator value by providing the `separator` option
+- it can log its activity for further examination by setting the `log_activity` option
 
 The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
 
