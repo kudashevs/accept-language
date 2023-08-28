@@ -870,6 +870,34 @@ class AcceptLanguageTest extends TestCase
     public function provideDifferentSeparatorOptions(): array
     {
         return [
+            'default language is hyphenated and separator is a hyphen' => [
+                [
+                    'default_language' => 'de-DE',
+                    'separator' => '-',
+                ],
+                'de-DE',
+            ],
+            'default language is hyphenated and separator is an underscore' => [
+                [
+                    'default_language' => 'de-DE',
+                    'separator' => '_',
+                ],
+                'de_DE',
+            ],
+            'default language is underscored and separator is an underscore' => [
+                [
+                    'default_language' => 'de_DE',
+                    'separator' => '_',
+                ],
+                'de_DE',
+            ],
+            'default language is underscored and separator is a hyphen' => [
+                [
+                    'default_language' => 'de_DE',
+                    'separator' => '-',
+                ],
+                'de-DE',
+            ],
             'returns expected with the underscore separator' => [
                 [
                     'http_accept_language' => 'en-gb,fr;q=0.8, en;q=0.7',
