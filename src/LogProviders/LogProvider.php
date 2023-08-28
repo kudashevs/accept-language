@@ -192,9 +192,9 @@ final class LogProvider
 
         $logLevel = $this->options['log_level'];
         $presenter = $this->initPresenter($event);
-        $presentation = $presenter->present($data);
+        $representation = $presenter->present($data);
 
-        $this->logger->{$logLevel}($presentation);
+        $this->logger->{$logLevel}($representation);
     }
 
     protected function isUnregisteredEvent(string $event): bool
