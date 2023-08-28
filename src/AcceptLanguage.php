@@ -469,7 +469,7 @@ class AcceptLanguage
     public function useLogger(LoggerInterface $logger): void
     {
         if ($this->isLogActivityAllowed()) {
-            $this->logger = new LogProvider($logger);
+            $this->logger = new LogProvider($logger, $this->options);
         }
     }
 
