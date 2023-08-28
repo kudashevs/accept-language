@@ -143,8 +143,8 @@ final class LogProvider
         if (count($difference) > 0) {
             throw new InvalidLogEventName(
                 sprintf(
-                    'The log name%s "%s" %s not registered. Use %s instead.',
-                    (count($difference) > 1) ? 's' : '',
+                    'The log %s "%s" %s not registered. Use %s instead.',
+                    (count($difference) > 1) ? 'names' : 'name',
                     implode(', ', $difference),
                     (count($difference) > 1) ? 'are' : 'is',
                     implode(', ', $registeredEvents),
