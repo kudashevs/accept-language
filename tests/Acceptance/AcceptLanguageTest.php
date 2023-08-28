@@ -2,6 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Acceptance;
 
+use Illuminate\Log\Logger;
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
@@ -84,5 +85,20 @@ class AcceptLanguageTest extends ExtendedTestCase
 
         $this->assertNotEmpty($language);
         $this->assertSame('fr', $language);
+    }
+
+    /** @test */
+    public function an_instance_can_apply_log_related_options()
+    {
+        $this->partialMock(Logger::class, function ($mock) {
+            $mock->shouldReceive('debug')->atLeast(1);
+        });
+
+        app('config')->set('accept-language.log_activity', true);
+        app('config')->set('accept-language.log_level', 'debug');
+        $language = AcceptLanguageFacade::getLanguage();
+
+        $this->assertNotEmpty($language);
+        $this->assertSame('en', $language);
     }
 }
