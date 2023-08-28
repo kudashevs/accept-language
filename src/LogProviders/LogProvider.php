@@ -62,7 +62,7 @@ final class LogProvider
     }
 
     /**
-     * @param array<string, bool> $options
+     * @param array<string, string|array> $options
      */
     private function initOptions(array $options): void
     {
