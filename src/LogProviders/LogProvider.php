@@ -199,12 +199,7 @@ final class LogProvider
 
     protected function isUnregisteredEvent(string $event): bool
     {
-        return !$this->isRegisteredEvent($event);
-    }
-
-    protected function isRegisteredEvent(string $event): bool
-    {
-        return array_key_exists($event, $this->presenters);
+        return !array_key_exists($event, $this->presenters);
     }
 
     protected function isUndesiredEvent(string $event): bool
