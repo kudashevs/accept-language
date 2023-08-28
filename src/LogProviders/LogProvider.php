@@ -45,7 +45,7 @@ final class LogProvider
      * @param LoggerInterface $logger
      * @param array<string, string|array> $options
      *
-     * @throws InvalidOptionType|InvalidLogLevelName
+     * @throws InvalidOptionType|InvalidLogLevelName|InvalidLogEventName
      */
     public function __construct(LoggerInterface $logger, array $options = [])
     {
