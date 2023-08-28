@@ -91,32 +91,54 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'de',
             ],
-            'a two-letter language tag with region subtag' => [
+            'a two-letter hyphenated language tag with region subtag change the separator' => [
                 [
                     'default_language' => 'de-DE',
                 ],
                 'de_DE',
             ],
-
-            'a two-letter language tag with script subtag' => [
+            'a two-letter hyphenated language tag with script subtag remove script subtag' => [
                 [
                     'default_language' => 'de-Latn',
                 ],
                 'de',
             ],
-            'a two-letter language tag with script and region subtags' => [
+            'a two-letter hyphenated language tag with script and region subtags remove script subtag and change the separator' => [
                 [
                     'default_language' => 'de-Latn-DE',
                 ],
                 'de_DE',
             ],
-            'a two-letter language tag with extlang, script, and region subtags' => [
+            'a two-letter hyphenated language tag with extlang, script, and region subtags remove subtags and change the separator' => [
                 [
                     'default_language' => 'de-gsg-Latn-DE',
                 ],
                 'de_DE',
             ],
-
+            'a two-letter underscored language tag with region subtag results in no change' => [
+                [
+                    'default_language' => 'de_DE',
+                ],
+                'de_DE',
+            ],
+            'a two-letter underscored language tag with script subtag remove script subtag' => [
+                [
+                    'default_language' => 'de_Latn',
+                ],
+                'de',
+            ],
+            'a two-letter underscored language tag with script and region subtags remove script subtag and no separator change' => [
+                [
+                    'default_language' => 'de_Latn_DE',
+                ],
+                'de_DE',
+            ],
+            'a two-letter underscored language tag with extlang, script, and region subtags remove subtags and no separator change' => [
+                [
+                    'default_language' => 'de_gsg_Latn_DE',
+                ],
+                'de_DE',
+            ],
             'a three-letter language tag as the default language' => [
                 [
                     'default_language' => 'sgn',
@@ -124,7 +146,7 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'sgn',
             ],
-            'a three-letter language tag with region subtag' => [
+            'a three-letter hyphenated language tag with region subtag change the separator' => [
                 [
                     'default_language' => 'sgn-RS',
                     'two_letter_only' => false,
@@ -132,23 +154,52 @@ class AcceptLanguageTest extends TestCase
                 'sgn_RS',
             ],
 
-            'a three-letter language tag with script subtag' => [
+            'a three-letter hyphenated language tag with script subtag remove script subtag' => [
                 [
                     'default_language' => 'sgn-Latn',
                     'two_letter_only' => false,
                 ],
                 'sgn',
             ],
-            'a three-letter language tag with region and script subtags' => [
+            'a three-letter hyphenated language tag with region and script subtags remove script subtag and change the separator' => [
                 [
                     'default_language' => 'sgn-Latn-RS',
                     'two_letter_only' => false,
                 ],
                 'sgn_RS',
             ],
-            'a three-letter language tag with extlang, script, and region subtags' => [
+            'a three-letter hyphenated language tag with extlang, script, and region subtags remove subtags and change the separator' => [
                 [
                     'default_language' => 'sgn-ysl-Latn-RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+            'a three-letter underscored language tag with region subtag results in no change' => [
+                [
+                    'default_language' => 'sgn_RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+
+            'a three-letter underscored language tag with script subtag remove script subtag' => [
+                [
+                    'default_language' => 'sgn_Latn',
+                    'two_letter_only' => false,
+                ],
+                'sgn',
+            ],
+            'a three-letter underscored language tag with region and script subtags remove script subtag and no separator change' => [
+                [
+                    'default_language' => 'sgn_Latn_RS',
+                    'two_letter_only' => false,
+                ],
+                'sgn_RS',
+            ],
+            'a three-letter underscored language tag with extlang, script, and region subtags remove subtags and no separator change' => [
+                [
+                    'default_language' => 'sgn_ysl_Latn_RS',
                     'two_letter_only' => false,
                 ],
                 'sgn_RS',
