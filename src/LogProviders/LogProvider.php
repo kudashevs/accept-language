@@ -182,7 +182,7 @@ final class LogProvider
      */
     public function log(string $event, $data): void
     {
-        if (!$this->isRegisteredEvent($event)) {
+        if ($this->isUnregisteredEvent($event)) {
             $this->handleUnexpectedEvent($event);
         }
 
@@ -195,6 +195,11 @@ final class LogProvider
         $presentation = $presenter->present($data);
 
         $this->logger->{$logLevel}($presentation);
+    }
+
+    protected function isUnregisteredEvent(string $event): bool
+    {
+        return !$this->isRegisteredEvent($event);
     }
 
     protected function isRegisteredEvent(string $event): bool
