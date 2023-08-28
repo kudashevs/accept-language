@@ -79,12 +79,18 @@ class LogProviderTest extends TestCase
      */
     public function it_can_handle_a_valid_log_level_option()
     {
-        new LogProvider(new DummyLogger(), [
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->once())
+            ->method('emergency')
+            ->with(
+                $this->stringContains('retrieve_header')
+            );
+
+        $provider = new LogProvider($loggerMock, [
             'log_level' => 'Emergency',
         ]);
 
-        // assert that no exceptions were thrown
-        $this->addToAssertionCount(1);
+        $provider->log('retrieve_header', 'anything');
     }
 
     /** @test */
