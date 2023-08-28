@@ -99,14 +99,6 @@ class AcceptLanguage
         $this->initLogger();
     }
 
-    protected function initLogger(): void
-    {
-        $this->logger = new LogProvider(new DummyLogger(), [
-            'log_level' => $this->options['log_level'],
-            'log_only' => $this->options['log_only'],
-        ]);
-    }
-
     /**
      * @throws InvalidOptionType
      */
@@ -174,6 +166,14 @@ class AcceptLanguage
             'with_extlang' => $this->options['use_extlang_subtag'],
             'with_script' => $this->options['use_script_subtag'],
             'with_region' => $this->options['use_region_subtag'],
+        ]);
+    }
+
+    protected function initLogger(): void
+    {
+        $this->logger = new LogProvider(new DummyLogger(), [
+            'log_level' => $this->options['log_level'],
+            'log_only' => $this->options['log_only'],
         ]);
     }
 
