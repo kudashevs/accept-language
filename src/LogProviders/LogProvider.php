@@ -202,6 +202,13 @@ final class LogProvider
         return !array_key_exists($event, $this->presenters);
     }
 
+    private function handleUnexpectedEvent(string $event): void
+    {
+        throw new InvalidLogEventName(
+            sprintf('The provided event "%s" is invalid.', $event)
+        );
+    }
+
     protected function isUndesiredEvent(string $event): bool
     {
         return !$this->isDesiredEvent($event);
@@ -236,12 +243,5 @@ final class LogProvider
         $presenterClass = $this->presenters[$event];
 
         return new $presenterClass($event);
-    }
-
-    private function handleUnexpectedEvent(string $event): void
-    {
-        throw new InvalidLogEventName(
-            sprintf('The provided event "%s" is invalid.', $event)
-        );
     }
 }
