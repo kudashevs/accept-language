@@ -87,9 +87,14 @@ The class accepts some options which help you to control the result:
 
 Some options require additional explanations:
 
-- the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as the standard says)
-and may use a different separator than in the `separator` option (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']).
-If the `accepted_languages` is empty, the first valid language from an HTTP Accept-Language header will be returned. 
+- the `default_language` option should contain a valid Language Tag. This default value may be written in any case (as the standard says).
+Different separators may be used too (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']). 
+
+**Important note!** the package supports the `-` and `_` separators by default. If you want to use any other separator, use the `separator` option. 
+
+- the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as the standard says).
+Different separators may be used too (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']). If the `accepted_languages`
+is empty, the package will retrieve a return the first valid language from an HTTP Accept-Language header as a preferred language. 
 
 **Important note!** the values of the `accepted_languages` option will be formatted according to the settings. Therefore,
 if you want to retrieve languages including script subtags you should enable the `use_script_subtag` option.
