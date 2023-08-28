@@ -51,7 +51,14 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertStringContainsString('en', $language);
     }
 
-        $this->assertNotEmpty($result);
-        $this->assertStringContainsString('en', $result);
+    /** @test */
+    public function an_instance_can_apply_separator_related_options()
+    {
+        app('config')->set('accept-language.default_language', 'fr_CH');
+        app('config')->set('accept-language.separator', '-');
+        $language = AcceptLanguageFacade::getLanguage();
+
+        $this->assertNotEmpty($language);
+        $this->assertSame('fr-CH', $language);
     }
 }

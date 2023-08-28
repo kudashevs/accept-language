@@ -76,6 +76,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Separator
+    |--------------------------------------------------------------------------
+    |
+    | This option defines a language tag separator. The separator is a character
+    | that is used in a language tag to distinguish and separate its parts (also
+    | known as subtags).
+    |
+    | For more information, refer to the Notes section in README.md.
+    |
+    */
+
+    'separator' => '_',
+
+    /*
+    |--------------------------------------------------------------------------
     | Log activity
     |--------------------------------------------------------------------------
     |
