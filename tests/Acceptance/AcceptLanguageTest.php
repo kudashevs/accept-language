@@ -73,4 +73,16 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertNotEmpty($language);
         $this->assertSame('fr-CH', $language);
     }
+
+    /** @test */
+    public function an_instance_can_apply_use_different_subtags_related_options()
+    {
+        app('config')->set('accept-language.default_language', 'fr-Latn-CH');
+        app('config')->set('accept-language.use_script_subtag', false);
+        app('config')->set('accept-language.use_region_subtag', false);
+        $language = AcceptLanguageFacade::getLanguage();
+
+        $this->assertNotEmpty($language);
+        $this->assertSame('fr', $language);
+    }
 }
