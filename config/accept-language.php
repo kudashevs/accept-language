@@ -7,9 +7,10 @@ return [
     | Default language
     |--------------------------------------------------------------------------
     |
-    | If an HTTP Accept-Language header value doesn't contain any of languages
-    | that match the languages listed in the `accepted_languages` option, this
-    | default value will be returned.
+    | If an HTTP Accept-Language header value doesn't contain any valid language
+    | or a client accepts any language, this default value is returned. Another
+    | use case of the default language is when the header value doesn't contain
+    | any of the languages listed in the `accepted_languages` option.
     |
     */
 
@@ -22,7 +23,7 @@ return [
     |
     | This option contains a list of accepted languages. The package will match
     | languages found in a header to the provided list. If no accepted languages
-    | provided, the `default_language` value will be returned.
+    | provided, the first valid language from the header will be retrieved.
     |
     */
 
@@ -33,9 +34,11 @@ return [
      | Matching strategy
      |--------------------------------------------------------------------------
      |
-     | It defines the matching strategy. When set to `true`, it is restricted to
-     | finding only the languages that exactly match the languages listed in the
-     | `accepted_languages`. For more information, refer to the Notes section.
+     | It defines the matching strategy. When set to `true`, it will restrict the
+     | strategy to find only the languages that exactly match the languages listed
+     | in the `accepted_languages` option's value.
+     |
+     | For more information, refer to the Notes section in README.md.
      |
      */
 
@@ -46,9 +49,11 @@ return [
      | Two letter only
      |--------------------------------------------------------------------------
      |
-     | This option defines whether to retrieve two-letter primary subtags only or
-     | not. When set to `true`, it will retrieve only the languages with the two-
-     | letter primary subtag. For more information, refer to the Notes section.
+     | This option defines whether to retrieve only languages with the two-letter
+     | primary subtags or not. When set to `true`, the package will retrieve only
+     | the languages with the two-letter primary subtag.
+     |
+     | For more information, refer to the Notes section in README.md.
      |
      */
 
@@ -75,8 +80,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option defines whether to log the activity of the package or not. If
-    | set to `true`, it will log information gathered throughout the execution
-    | process. For more information, refer to the Logging section.
+    | set to `true`, it will log the information gathered throughout different
+    | stages of the execution process.
+    |
+    | For more information, refer to the Logging section in README.md.
     |
     */
 
