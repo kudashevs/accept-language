@@ -101,14 +101,14 @@ class QualityValue
 
     private function normalizeQuality($quality)
     {
-        if ($this->isFallbackable()) {
+        if ($this->isAppropriateFallback()) {
             return $this->normalizer->normalizeWithFallback($quality, $this->fallback);
         }
 
         return $this->normalizer->normalize($quality);
     }
 
-    private function isFallbackable(): bool
+    private function isAppropriateFallback(): bool
     {
         return $this->fallback > 0;
     }
