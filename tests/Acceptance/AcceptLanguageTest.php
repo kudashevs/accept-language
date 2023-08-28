@@ -10,7 +10,7 @@ use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 class AcceptLanguageTest extends ExtendedTestCase
 {
     /** @test */
-    public function an_instance_can_throw_invalid_option_argument_when_a_wrong_option_provided()
+    public function an_instance_can_throw_an_invalid_option_type_exception_when_a_wrong_option_provided()
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('wrong value');
