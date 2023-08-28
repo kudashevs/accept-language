@@ -56,7 +56,7 @@ class LanguageFactory
         $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
 
-        return $this->createValidLanguageWithFallback($tag, $quality, $fallbackQuality);
+        return $this->createLanguageWithFallbackQuality($tag, $quality, $fallbackQuality);
     }
 
     protected function checkValidLanguageRange(array $range): void
@@ -95,9 +95,13 @@ class LanguageFactory
     }
 
     /**
+     * Create a Language instance. The correctness of a provided language value will be
+     * determined during the validation process (the language state might be invalid).
+     * @see \Kudashevs\AcceptLanguage\Language\Language*
+     *
      * @param int|float|string|null $quality
      */
-    protected function createValidLanguageWithFallback(string $tag, $quality, float $fallbackQuality): Language
+    protected function createLanguageWithFallbackQuality(string $tag, $quality, float $fallbackQuality): Language
     {
         $options = array_merge($this->options, [
             'fallback_value' => $fallbackQuality,
