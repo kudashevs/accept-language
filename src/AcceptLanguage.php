@@ -257,10 +257,10 @@ class AcceptLanguage
      */
     protected function parseAcceptLanguageValue(string $header): array
     {
-        return $this->retrieveLanguages($header);
+        return $this->retrieveRawLanguages($header);
     }
 
-    protected function retrieveLanguages(string $header): array
+    protected function retrieveRawLanguages(string $header): array
     {
         $fallbackQuality = 1;
         $fallbackQualityStep = 0.1;
