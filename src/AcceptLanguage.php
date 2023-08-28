@@ -50,6 +50,7 @@ class AcceptLanguage
      * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
      * 'separator' string A string with a character that will be used as a separator in the result.
      * 'log_activity' bool A boolean that defines whether to log the activity of the package or not.
+     * 'log_level' string A string with a PSR-3 compatible log level value.
      *
      * @var array{
      *     'http_accept_language': string,
@@ -61,7 +62,8 @@ class AcceptLanguage
      *     'use_script_subtag': bool,
      *     'use_region_subtag': bool,
      *     'separator': string,
-     *     'log_activity': bool
+     *     'log_activity': bool,
+     *     'log_level': string,
      * }
      */
     protected array $options = [
@@ -75,6 +77,7 @@ class AcceptLanguage
         'use_region_subtag' => true,
         'separator' => '_',
         'log_activity' => false,
+        'log_level' => 'info',
     ];
 
     protected LanguageFactory $factory;
@@ -93,7 +96,9 @@ class AcceptLanguage
 
     protected function initLogger(): void
     {
-        $this->logger = new LogProvider(new DummyLogger());
+        $this->logger = new LogProvider(new DummyLogger(), [
+            'log_level' => $this->options['log_level'],
+        ]);
     }
 
     /**

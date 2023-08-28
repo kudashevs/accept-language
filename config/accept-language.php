@@ -82,4 +82,17 @@ return [
 
     'log_activity' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Log level
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the log level at which the gathered information will
+    | be logged. The package uses the PSR-3 compatible log levels. These levels
+    | are: emergency, alert, critical, error, warning, notice, info, debug.
+    |
+    */
+
+    'log_level' => 'info',
+
 ];
