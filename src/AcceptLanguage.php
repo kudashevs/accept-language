@@ -327,8 +327,6 @@ class AcceptLanguage
     {
         $preferredLanguages = $this->retrievePreferredLanguages($languages);
 
-        $this->logger->log('retrieve_preferred_languages', $acceptedLanguages);
-
         $this->logger->log('retrieve_preferred_languages', $preferredLanguages);
 
         return $preferredLanguages;
