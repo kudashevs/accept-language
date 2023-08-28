@@ -40,7 +40,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      * Return a normalized language tag. The normalization process includes:
      * - replacing a separator (a hyphen character) with a value of the "separator" option
      * - omitting unwanted subtags according to the pre-selected options
-     * - formatting subtags according to RFC 4646 and RFC 4647
+     * - formatting subtags according to RFC 5646 and RFC 4647
      *
      * @param string $tag
      * @return string
@@ -89,7 +89,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     private function generateNormalizedTag(string $tag, array $subtags): string
     {
-        // If no valid set of subtags is present, the tag is returned unchanged.
+        // If no valid set of subtags is provided, the tag is returned unchanged.
         if (!$this->isValidSetOfSubtags($subtags)) {
             return $tag;
         }
