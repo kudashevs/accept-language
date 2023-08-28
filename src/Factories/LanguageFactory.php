@@ -36,7 +36,7 @@ class LanguageFactory
     }
 
     /**
-     * @param array<string, mixed> $rawLanguageRange
+     * @param array<int, string|mixed> $rawLanguageRange
      * @param float $fallbackQuality
      * @return AbstractLanguage
      *
