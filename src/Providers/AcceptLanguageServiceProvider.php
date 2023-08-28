@@ -57,6 +57,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
             'separator' => config('accept-language.separator', '-'),
             'log_activity' => config('accept-language.log_activity', false),
             'log_level' => config('accept-language.log_level', 'info'),
+            'log_only' => config('accept-language.log_only', []),
         ];
     }
 

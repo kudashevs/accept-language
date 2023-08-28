@@ -117,4 +117,17 @@ return [
 
     'log_level' => 'info',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Log only
+    |--------------------------------------------------------------------------
+    |
+    | This option contains a list of log events. If any log events are provided,
+    | the package will log these events and their related data. If no log events
+    | provided, the package will log all known events.
+    |
+    */
+
+    'log_only' => [],
+
 ];

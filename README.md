@@ -21,6 +21,7 @@ Main package features:
 - it can set the default separator value by providing the `separator` option
 - it can log its activity for further examination by setting the `log_activity` option
 - it can log its activity at the specific log level by providing the `log_level` option
+- it can log only the events that are listed in the `log_only` option
 
 The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
 
@@ -76,6 +77,7 @@ The class accepts some options which help you to control the result:
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
 'log_activity'              # A boolean defines whether to log the activity of the package or not (default if false).
 'log_level'                 # A string with a PSR-3 compatible log level (default is 'info').
+'log_only'                  # An array with a list of log events to log (default is []).
 ```
 <sub>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sub>  
 <sub>2 - the `accepted_languages` option should include valid Language Tags only</sub>  

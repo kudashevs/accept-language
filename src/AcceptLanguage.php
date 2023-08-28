@@ -51,6 +51,7 @@ class AcceptLanguage
      * 'separator' string A string with a character that will be used as a separator in the result.
      * 'log_activity' bool A boolean that defines whether to log the activity of the package or not.
      * 'log_level' string A string with a PSR-3 compatible log level value.
+     * 'log_only' array An array with a list of log only events.
      *
      * @var array{
      *     'http_accept_language': string,
@@ -64,6 +65,7 @@ class AcceptLanguage
      *     'separator': string,
      *     'log_activity': bool,
      *     'log_level': string,
+     *     'log_only': array<int, string>,
      * }
      */
     protected array $options = [
@@ -78,6 +80,7 @@ class AcceptLanguage
         'separator' => '_',
         'log_activity' => false,
         'log_level' => 'info',
+        'log_only' => [],
     ];
 
     protected LanguageFactory $factory;
@@ -98,6 +101,7 @@ class AcceptLanguage
     {
         $this->logger = new LogProvider(new DummyLogger(), [
             'log_level' => $this->options['log_level'],
+            'log_only' => $this->options['log_only'],
         ]);
     }
 

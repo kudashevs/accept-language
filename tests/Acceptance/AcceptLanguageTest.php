@@ -3,6 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Acceptance;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
@@ -27,6 +28,17 @@ class AcceptLanguageTest extends ExtendedTestCase
 
         new AcceptLanguage([
             'log_level' => 'wrong',
+        ]);
+    }
+
+    /** @test */
+    public function an_instance_can_throw_an_invalid_log_event_name_exception_when_a_wrong_log_event_name_provided()
+    {
+        $this->expectException(InvalidLogEventName::class);
+        $this->expectExceptionMessage('wrong');
+
+        new AcceptLanguage([
+            'log_only' => ['wrong'],
         ]);
     }
 
