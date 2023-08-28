@@ -2,6 +2,22 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.2.0 - 2023-08-28](https://github.com/kudashevs/accept-language/compare/v3.1.1...v3.2.0)
+
+- Fix an issue with boolean configuration values in the Laravel service provider
+- Add a fallback language for the `default_language` option
+- Add new log events to make logging more convenient
+- Add a new LogPresenterInterface abstraction
+- Add a `log_level` option and related functionality
+- Add a `log_only` option and related functionality
+- Update the Laravel configuration file
+- Update some test suites to cover more test cases
+- Update composer.json bump the PHPUnit version
+- Update README.md
+- Some improvements
+
+Note: this release adds some new options, please update your Laravel config file (optional).
+
 ## [v3.1.1 - 2023-04-29](https://github.com/kudashevs/accept-language/compare/v3.1.0...v3.1.1)
 
 - Fix the default log option type in the Laravel service provider
