@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage;
 
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
@@ -88,7 +90,7 @@ class AcceptLanguage
     /**
      * @param array<string, bool|string|array> $options
      *
-     * @throws InvalidOptionType
+     * @throws InvalidOptionType|InvalidLogLevelName|InvalidLogEventName
      */
     public function __construct(array $options = [])
     {
