@@ -186,7 +186,7 @@ final class LogProvider
             $this->handleUnexpectedEvent($event);
         }
 
-        if (!$this->isDesiredEvent($event)) {
+        if ($this->isUndesiredEvent($event)) {
             return;
         }
 
@@ -205,6 +205,11 @@ final class LogProvider
     protected function isRegisteredEvent(string $event): bool
     {
         return array_key_exists($event, $this->presenters);
+    }
+
+    protected function isUndesiredEvent(string $event): bool
+    {
+        return !$this->isDesiredEvent($event);
     }
 
     private function isDesiredEvent(string $event): bool
