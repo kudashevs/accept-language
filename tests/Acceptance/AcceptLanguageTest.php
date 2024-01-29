@@ -13,7 +13,7 @@ use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 class AcceptLanguageTest extends ExtendedTestCase
 {
     /** @test */
-    public function an_instance_can_throw_an_invalid_option_type_exception_when_a_wrong_option_provided()
+    public function an_instance_can_throw_an_exception_when_a_wrong_option_provided()
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('wrong value');
@@ -22,7 +22,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_throw_an_invalid_log_level_name_exception_when_a_wrong_log_level_provided()
+    public function an_instance_can_throw_an_exception_when_a_wrong_log_level_provided()
     {
         $this->expectException(InvalidLogLevelName::class);
         $this->expectExceptionMessage('wrong');
@@ -33,7 +33,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_throw_an_invalid_log_event_name_exception_when_a_wrong_log_event_name_provided()
+    public function an_instance_can_throw_an_exception_when_a_wrong_log_event_name_provided()
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessage('wrong');
@@ -76,7 +76,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_apply_use_different_subtags_related_options()
+    public function an_instance_can_apply_different_subtag_related_options()
     {
         app('config')->set('accept-language.default_language', 'fr-Latn-CH');
         app('config')->set('accept-language.use_script_subtag', false);
