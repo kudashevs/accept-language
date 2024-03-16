@@ -127,7 +127,7 @@ To distinguish the stages of the execution process the package introduces the **
 and the related data, please add these events to the `log_only` option. If the `log_only` is empty, the package logs all known events.
 
 - `retrieve_header` occurs after retrieving an HTTP Accept-Language header. It logs a raw Accept-Language header value.
-- `retrieve_default_language` occurs when it returns the default language without further processing (the default language case). ???
+- `retrieve_default_language` occurs when it returns the default language without further processing (the default language case).
 - `retrieve_raw_languages` occurs after retrieving raw languages from the header value. It logs the raw languages and their correctness.
 - `retrieve_normalized_languages` occurs after applying the normalization process to the raw languages. It logs the normalized languages.
 - `retrieve_preferred_languages` occurs after applying the matching algorithm to the normalized languages. It logs the found preferred languages.
