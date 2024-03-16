@@ -15,7 +15,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentWrongOptions
      */
-    public function it_can_throw_an_exception_when_an_option_of_a_wrong_type(array $option)
+    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type(array $option)
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "' . key($option) . '" has a wrong value type');
