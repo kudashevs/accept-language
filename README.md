@@ -217,4 +217,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see the [License file](LICENSE.md) for more information.
