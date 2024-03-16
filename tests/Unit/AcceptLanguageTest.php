@@ -1111,6 +1111,7 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'fr;q=,en;q=,gr',
             'accepted_languages' => ['fr', 'en'],
         ];
+
         $service = new AcceptLanguage($options);
         $service->process();
 
