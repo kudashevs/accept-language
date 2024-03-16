@@ -214,6 +214,7 @@ class AcceptLanguageTest extends TestCase
             'default_language' => 'wrong',
             'two_letter_only' => false,
         ];
+
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -230,6 +231,7 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'pp',
             'accepted_languages' => ['en', 'de', 'fr'],
         ];
+
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -246,6 +248,7 @@ class AcceptLanguageTest extends TestCase
             'default_language' => 'es',
             'accepted_languages' => ['en', 'de', 'es'],
         ];
+
         $service = new AcceptLanguage($options);
         $service->process();
 
