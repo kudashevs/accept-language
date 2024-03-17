@@ -108,8 +108,8 @@ accept languages with three-letter primary subtag (by listing them in the `accep
 
 ## Logging
 
-There is the possibility to log information gathered throughout the execution process. To activate it you should set the configuration
-option `log_activity` to `true` and provide an instance of `Psr\Log\LoggerInterface` implementation to the `useLogger` method. 
+There is the possibility to log information gathered throughout the execution process. To start logging set the configuration
+option `log_activity` to `true` and provide an instance of `Psr\Log\LoggerInterface` implementation through the `useLogger` method.
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
@@ -122,8 +122,8 @@ $service->process();
 
 ### Log events
 
-To distinguish the stages of the execution process the package introduces the **log events**. If you want to log only the specific events
-and the related data, please add these events to the `log_only` option. If the `log_only` is empty, the package logs all known events.
+To distinguish the stages of the execution process the package introduces the **log events**. If you want to log only specific
+events, please add these events to the `log_only` option. If the `log_only` set to empty, the package logs all known events.
 
 - `retrieve_header` occurs after retrieving an HTTP Accept-Language header. It logs a raw Accept-Language header value.
 - `retrieve_default_language` occurs when it returns the default language without further processing (the default language case).
