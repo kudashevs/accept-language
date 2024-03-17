@@ -2,6 +2,13 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.3.0 - 2024-03-17](https://github.com/kudashevs/accept-language/compare/v3.2.0...v3.3.0)
+
+- Add support for PHP 8.3
+- Add support for PHPUnit 11
+- Update README.md
+- Some improvements
+
 ## [v3.2.0 - 2023-08-28](https://github.com/kudashevs/accept-language/compare/v3.1.1...v3.2.0)
 
 - Fix an issue with boolean configuration values in the Laravel service provider
