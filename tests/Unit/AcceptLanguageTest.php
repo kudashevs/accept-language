@@ -1213,4 +1213,17 @@ class AcceptLanguageTest extends TestCase
         $service->useLogger($loggerMock);
         $service->process();
     }
+
+    private function resolveInvocations(\PHPUnit\Framework\MockObject\Rule\InvocationOrder $matcher): int
+    {
+        if (method_exists($matcher, 'numberOfInvocations')) {
+            return $matcher->numberOfInvocations();
+        }
+
+        if (method_exists($matcher, 'getInvocationCount')) {
+            return $matcher->getInvocationCount();
+        }
+
+        $this->fail('Cannot count the number of invocations.');
+    }
 }
