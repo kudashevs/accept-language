@@ -1163,7 +1163,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_valid_languages_when_log_activity_is_enabled()
+    public function it_can_log_a_valid_language_all_the_stages_when_log_activity_is_enabled()
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1171,16 +1171,24 @@ class AcceptLanguageTest extends TestCase
             'separator' => '_',
             'log_activity' => true,
         ];
+        $expectedArguments = [
+            'fr-CH',
+            'fr_CH;valid,fr;valid',
+            'fr_CH;q=1,fr;q=0.9',
+            'en;q=0.8,de;q=0.7',
+            'en',
+        ];
 
         $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->exactly(5))
+        $matcher = $this->exactly(count($expectedArguments));
+        $loggerMock->expects($matcher)
             ->method('info')
-            ->withConsecutive(
-                [$this->stringContains('fr-CH')],
-                [$this->stringContains('fr_CH;valid,fr;valid')],
-                [$this->stringContains('fr_CH;q=1,fr;q=0.9')],
-                [$this->stringContains('en;q=0.8,de;q=0.7')],
-                [$this->stringContains('en')]
+            ->with(
+                $this->callback(function ($param) use ($expectedArguments, $matcher) {
+                    $needle = $expectedArguments[$this->resolveInvocations($matcher) - 1];
+                    $this->assertStringContainsString($needle, $param);
+                    return true;
+                })
             );
 
         $service = new AcceptLanguage($options);
@@ -1189,7 +1197,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_invalid_languages_when_log_activity_is_enabled()
+    public function it_can_log_an_invalid_language_all_the_stages_when_log_activity_is_enabled()
     {
         $options = [
             'http_accept_language' => 'completely wrong',
@@ -1197,16 +1205,24 @@ class AcceptLanguageTest extends TestCase
             'separator' => '_',
             'log_activity' => true,
         ];
+        $expectedArguments = [
+            'completely wrong',
+            'completely wrong;invalid',
+            'empty',
+            'empty',
+            'en',
+        ];
 
         $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->exactly(5))
+        $matcher = $this->exactly(count($expectedArguments));
+        $loggerMock->expects($matcher)
             ->method('info')
-            ->withConsecutive(
-                [$this->stringContains('completely wrong')],
-                [$this->stringContains('completely wrong;invalid')],
-                [$this->stringContains('empty')],
-                [$this->stringContains('empty')],
-                [$this->stringContains('en')]
+            ->with(
+                $this->callback(function ($param) use ($expectedArguments, $matcher) {
+                    $needle = $expectedArguments[$this->resolveInvocations($matcher) - 1];
+                    $this->assertStringContainsString($needle, $param);
+                    return true;
+                })
             );
 
         $service = new AcceptLanguage($options);
