@@ -1142,6 +1142,27 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_log_a_language_when_log_activity_is_enabled()
+    {
+        $options = [
+            'http_accept_language' => 'fr-CH',
+            'accepted_languages' => [],
+            'separator' => '_',
+            'log_activity' => true,
+            'log_only' => ['retrieve_header'],
+        ];
+
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->once())
+            ->method('info')
+            ->with($this->stringContains('fr-CH'));
+
+        $service = new AcceptLanguage($options);
+        $service->useLogger($loggerMock);
+        $service->process();
+    }
+
+    /** @test */
     public function it_can_log_valid_languages_when_log_activity_is_enabled()
     {
         $options = [
