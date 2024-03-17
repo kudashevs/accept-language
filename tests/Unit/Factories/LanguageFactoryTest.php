@@ -79,7 +79,7 @@ class LanguageFactoryTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    public function provideDifferentInvalidLanguageRanges(): array
+    public static function provideDifferentInvalidLanguageRanges(): array
     {
         return [
             'a language range with too many values results in an invalid language' => [
@@ -107,7 +107,7 @@ class LanguageFactoryTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentValidLanguageRanges(): array
+    public static function provideDifferentValidLanguageRanges(): array
     {
         return [
             'a language range without a quality results in the language with fallback' => [
