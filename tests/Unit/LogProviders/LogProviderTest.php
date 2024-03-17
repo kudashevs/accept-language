@@ -142,7 +142,7 @@ class LogProviderTest extends TestCase
         $provider->log($event, $data);
     }
 
-    public function provideDifferentEvents(): array
+    public static function provideDifferentEvents(): array
     {
         return [
             'retrieve_header log event' => [

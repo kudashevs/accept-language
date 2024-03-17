@@ -28,7 +28,7 @@ class LanguageTagTest extends TestCase
         $this->assertFalse($quality->isValid());
     }
 
-    public function provideDifferentInvalidLanguageValues(): array
+    public static function provideDifferentInvalidLanguageValues(): array
     {
         return [
             'an empty tag results in no change and an invalid language' => [
@@ -66,7 +66,7 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentValidLanguageValues(): array
+    public static function provideDifferentValidLanguageValues(): array
     {
         return [
             'a one character results in a valid language (refers to the MINIMUM_PRIMARY_SUBTAG_LENGTH constant)' => [
@@ -132,7 +132,7 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentLanguageValuesWithDifferentSubtagOptions(): array
+    public static function provideDifferentLanguageValuesWithDifferentSubtagOptions(): array
     {
         return [
             'a two-letter language tag with all options disabled results in the language' => [
@@ -195,7 +195,7 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentLanguageValuesWithDifferentSeparatorOption(): array
+    public static function provideDifferentLanguageValuesWithDifferentSeparatorOption(): array
     {
         return [
             'a two-letter language tag results in no change' => [
@@ -480,7 +480,7 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentLanguageValues(): array
+    public static function provideDifferentLanguageValues(): array
     {
         return [
             'a two-letter language tag results in the subtags' => [

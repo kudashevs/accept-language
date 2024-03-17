@@ -53,7 +53,7 @@ class LanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentValidLanguageAndQualityValues(): array
+    public static function provideDifferentValidLanguageAndQualityValues(): array
     {
         return [
             'a language tag and a minimum quality results in a valid language' => [
@@ -105,7 +105,7 @@ class LanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    public function provideDifferentInvalidLanguageAndQualityValues(): array
+    public static function provideDifferentInvalidLanguageAndQualityValues(): array
     {
         return [
             'an empty language tag and a valid quality results in a non valid language' => [
@@ -162,7 +162,7 @@ class LanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    public function provideDifferentLanguageAndQualityValuesWithDifferentOptions(): array
+    public static function provideDifferentLanguageAndQualityValuesWithDifferentOptions(): array
     {
         return [
             'a language tag with all options disabled results in the expected language' => [

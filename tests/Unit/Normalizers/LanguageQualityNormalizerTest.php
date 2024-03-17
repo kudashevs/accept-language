@@ -26,7 +26,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($quality));
     }
 
-    public function provideDifferentQualityValues(): array
+    public static function provideDifferentQualityValues(): array
     {
         return [
             'a null quality results in the default weight' => [
@@ -83,7 +83,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
     }
 
-    public function provideDifferentQualityValuesWithFallback(): array
+    public static function provideDifferentQualityValuesWithFallback(): array
     {
         return [
             'a null quality with an invalid fallback results in the not acceptable' => [
@@ -168,7 +168,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
     }
 
-    public function provideDifferentAllowEmptyOptions(): array
+    public static function provideDifferentAllowEmptyOptions(): array
     {
         return [
             'an empty quality with the allowed option set to true results in the provided fallback' => [
@@ -195,7 +195,7 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($quality));
     }
 
-    public function providedDifferentQualityBoundaryValues(): array
+    public static function providedDifferentQualityBoundaryValues(): array
     {
         return [
             'a negative out of bounds 0.001 results in the not acceptable' => [

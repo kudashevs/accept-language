@@ -26,7 +26,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideDifferentLanguageTags(): array
+    public static function provideDifferentLanguageTags(): array
     {
         return [
             'an empty string results in no change' => [
@@ -127,7 +127,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideLanguageTagsWithDifferentSeparatorOption(): array
+    public static function provideLanguageTagsWithDifferentSeparatorOption(): array
     {
         return [
             'a two-letter language tag results in no change' => [
@@ -235,7 +235,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideLanguageTagsWithDifferentWithOptions(): array
+    public static function provideLanguageTagsWithDifferentWithOptions(): array
     {
         return [
             'returns a language tag without extlang, variant, extension and private-use subtags by default' => [
@@ -331,7 +331,7 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertSame($expected, $normalizer->normalize($tag));
     }
 
-    public function provideExceptionalCases(): array
+    public static function provideExceptionalCases(): array
     {
         return [
             'a two-letter tag RFC 5646 section 2.1.1 case insensitive example 1 returns formatted' => [

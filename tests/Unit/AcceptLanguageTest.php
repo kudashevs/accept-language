@@ -23,7 +23,7 @@ class AcceptLanguageTest extends TestCase
         new AcceptLanguage($options);
     }
 
-    public function provideDifferentWrongOptions(): array
+    public static function provideDifferentWrongOptions(): array
     {
         return [
             'an http_accept_language option with a wrong value' => [
@@ -84,7 +84,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public function provideDifferentDefaultLanguageOptions(): array
+    public static function provideDifferentDefaultLanguageOptions(): array
     {
         return [
             'a two-letter language tag as the default language' => [
@@ -273,7 +273,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public function provideDifferentDefaultLanguageOptionsWithFormatting()
+    public static function provideDifferentDefaultLanguageOptionsWithFormatting()
     {
         return [
             'a two-letter language tag with script and region results in the language' => [
@@ -311,7 +311,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public function provideDifferentAcceptedLanguagesOptions()
+    public static function provideDifferentAcceptedLanguagesOptions()
     {
         return [
             'a two-letter language tag with script and region results in the language' => [
@@ -347,7 +347,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeaderValues(): array
+    public static function provideDifferentRequestHeaderValues(): array
     {
         return [
             'any language tag results in default' => [
@@ -528,7 +528,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentAcceptedLanguagesValues(): array
+    public static function provideDifferentAcceptedLanguagesValues(): array
     {
         return [
             'a language that intersects with accepted_languages results in the accepted language' => [
@@ -646,7 +646,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentTwoLetterOnlyOptions(): array
+    public static function provideDifferentTwoLetterOnlyOptions(): array
     {
         return [
             'returns expected second in row language with the two-letter only option set to true' => [
@@ -682,7 +682,7 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentUseExtlangScriptRegionSubtagOptions(): array
+    public static function provideDifferentUseExtlangScriptRegionSubtagOptions(): array
     {
         return [
             'returns expected with the use extlang subtag option set to true' => [
@@ -732,7 +732,7 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentMatchingOptions(): array
+    public static function provideDifferentMatchingOptions(): array
     {
         return [
             'returns expected default with the exact match only option set to true' => [
@@ -872,7 +872,7 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    public function provideDifferentSeparatorOptions(): array
+    public static function provideDifferentSeparatorOptions(): array
     {
         return [
             'default language is hyphenated and separator is a hyphen' => [
@@ -933,7 +933,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeadersWithDifferentLanguageLetterLength(): array
+    public static function provideDifferentRequestHeadersWithDifferentLanguageLetterLength(): array
     {
         return [
             'a two-letter language tag results in the primary subtag' => [
@@ -1061,7 +1061,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $result);
     }
 
-    public function provideDifferentRequestHeadersWithMalformedValues(): array
+    public static function provideDifferentRequestHeadersWithMalformedValues(): array
     {
         return [
             'one empty language tag results in default' => [

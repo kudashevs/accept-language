@@ -28,7 +28,7 @@ class QualityValueTest extends TestCase
         $this->assertFalse($quality->isValid());
     }
 
-    public function provideDifferentInvalidQualityValues(): array
+    public static function provideDifferentInvalidQualityValues(): array
     {
         return [
             'a random string results in zero' => [
@@ -66,7 +66,7 @@ class QualityValueTest extends TestCase
         $this->assertTrue($quality->isValid());
     }
 
-    public function provideDifferentValidQualityValues(): array
+    public static function provideDifferentValidQualityValues(): array
     {
         return [
             'a null quality results in the default weight' => [
@@ -116,7 +116,7 @@ class QualityValueTest extends TestCase
         $this->assertSame($valid, $quality->isValid());
     }
 
-    public function providedDifferentQualityBoundaryValues(): array
+    public static function providedDifferentQualityBoundaryValues(): array
     {
         return [
             'a negative out of bounds 0.001 results in the not acceptable' => [
@@ -164,7 +164,7 @@ class QualityValueTest extends TestCase
         $this->assertTrue($quality->isValid());
     }
 
-    public function provideDifferentQualityValuesWithDifferentFallbacks(): array
+    public static function provideDifferentQualityValuesWithDifferentFallbacks(): array
     {
         return [
             'a null quality with a fallback results in the fallback' => [
