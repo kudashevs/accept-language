@@ -7,9 +7,9 @@ decisions (e.g. set a locale, redirect a user to the specific page, etc.).
 
 ## Features
 
-The package retrieves a language of preference in the format that is pretty similar to the Unicode Locale Identifier. The code
-consists of a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g. `en_GB`).
-There are different possibilities to include other subtags and change the representation of the resulting code.
+The preferred language comes in the format that is pretty similar to the Unicode Locale Identifier. The code consists
+of a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g. `en_GB`).
+The format and a set of subtags can be changed by using various options.
 
 Main package features:
 - it can return a default language value when a client accepts any language (e.g. `Accept-Language: *`)
