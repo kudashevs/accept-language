@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 class LogProviderTest extends TestCase
 {
     /** @test */
-    public function it_can_throw_an_exception_when_an_option_of_a_wrong_type()
+    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type()
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "log_only" has a wrong value type');
