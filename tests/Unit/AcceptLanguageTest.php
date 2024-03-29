@@ -45,6 +45,20 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_handle_an_unknown_option()
+    {
+        $options = [
+            'unknown_option' => false,
+        ];
+
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        // assert that no exceptions were thrown
+        $this->addToAssertionCount(1);
+    }
+
+    /** @test */
     public function it_can_retain_the_original_header()
     {
         $options = [

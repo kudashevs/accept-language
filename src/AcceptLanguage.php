@@ -132,10 +132,6 @@ class AcceptLanguage
      */
     protected function validateOption(string $name, $value): void
     {
-        if (!$this->isValidOptionName($name)) {
-            return;
-        }
-
         $externalOptionType = gettype($value);
         $internalOptionType = gettype($this->options[$name]);
 
@@ -149,11 +145,6 @@ class AcceptLanguage
                 )
             );
         }
-    }
-
-    protected function isValidOptionName(string $name): bool
-    {
-        return array_key_exists($name, $this->options);
     }
 
     protected function initFactory(): void
