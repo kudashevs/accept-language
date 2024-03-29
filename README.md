@@ -7,13 +7,13 @@ any web app to identify the visitors' language of preference. The retrieved lang
 
 ## Features
 
-The preferred language comes in the format that is pretty similar to the Unicode Locale Identifier. The code consists
-of a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g. `en_GB`).
-The format and a set of subtags can be changed by using various options.
+By default, the preferred language comes in a format pretty similar to the Unicode Locale Identifier. It consists of
+a mandatory 2-/3-letter primary language subtag and a region subtag separated with an underscore (e.g., `en_GB`). The
+format of the language and the set of included subtags are customizable and can be changed by using various options.
 
 Main package features:
-- it can return a default language value when a client accepts any language (e.g. `Accept-Language: *`)
-- it can set up the default language value by providing the `default_language` option
+- it can use the default language value set by the `default_language` option
+- it can return a default language value when a client accepts any language (e.g., `Accept-Language: *`)
 - it can retrieve only the languages that are listed in the `accepted_languages` option and their derivatives
 - it can retrieve only the languages that match exactly the `accepted_languages` by setting the `exact_match_only` option
 - it can retrieve only the two-letter language codes by setting the `two_letter_only` option
