@@ -106,7 +106,7 @@ class AcceptLanguage
      */
     protected function initValidOptions(array $options): void
     {
-        $validated = $this->retrieveValidOptions($options);
+        $validated = $this->retrieveOptionsWithTypeValidation($options);
 
         $this->options = array_merge($this->options, $validated);
     }
@@ -116,7 +116,7 @@ class AcceptLanguage
      *
      * @throws InvalidOptionType
      */
-    protected function retrieveValidOptions(array $options): array
+    protected function retrieveOptionsWithTypeValidation(array $options): array
     {
         $allowedOptions = array_intersect_key($options, $this->options);
 
