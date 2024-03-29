@@ -71,7 +71,7 @@ final class Language extends AbstractLanguage
     {
         $languageTag = new LanguageTag($tag, $this->options);
         $qualityValue = new QualityValue($quality, $this->options);
-        $valid = $this->isValidState($languageTag, $qualityValue);
+        $valid = $this->isValidLanguage($languageTag, $qualityValue);
 
         return [
             'tag' => $languageTag,
@@ -80,7 +80,7 @@ final class Language extends AbstractLanguage
         ];
     }
 
-    private function isValidState(LanguageTag $tag, QualityValue $quality): bool
+    private function isValidLanguage(LanguageTag $tag, QualityValue $quality): bool
     {
         return $tag->isValid() && $quality->isValid();
     }
