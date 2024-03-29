@@ -97,8 +97,9 @@ class AcceptLanguage
     public function __construct(array $options = [])
     {
         $this->initOptions($options);
-        $this->initFactory();
-        $this->initLogger();
+
+        $this->initFactory($this->options);
+        $this->initLogger($this->options);
     }
 
     /**
@@ -147,26 +148,26 @@ class AcceptLanguage
         }
     }
 
-    protected function initFactory(): void
+    protected function initFactory(array $options): void
     {
-        $this->factory = $this->createFactory();
+        $this->factory = $this->createFactory($options);
     }
 
-    protected function createFactory(): LanguageFactory
+    protected function createFactory(array $options): LanguageFactory
     {
         return new LanguageFactory([
-            'separator' => $this->options['separator'],
-            'with_extlang' => $this->options['use_extlang_subtag'],
-            'with_script' => $this->options['use_script_subtag'],
-            'with_region' => $this->options['use_region_subtag'],
+            'separator' => $options['separator'],
+            'with_extlang' => $options['use_extlang_subtag'],
+            'with_script' => $options['use_script_subtag'],
+            'with_region' => $options['use_region_subtag'],
         ]);
     }
 
-    protected function initLogger(): void
+    protected function initLogger(array $options): void
     {
         $this->logger = new LogProvider(new DummyLogger(), [
-            'log_level' => $this->options['log_level'],
-            'log_only' => $this->options['log_only'],
+            'log_level' => $options['log_level'],
+            'log_only' => $options['log_only'],
         ]);
     }
 
