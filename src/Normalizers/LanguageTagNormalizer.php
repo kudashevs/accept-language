@@ -38,7 +38,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     /**
      * Return a normalized language tag. The normalization process includes:
-     * - replacing a separator (a hyphen character) with a value of the "separator" option
+     * - replacing a separator (a hyphen character) with a value from the "separator" option
      * - omitting unwanted subtags according to the pre-selected options
      * - formatting subtags according to RFC 5646 and RFC 4647
      *
