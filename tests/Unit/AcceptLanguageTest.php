@@ -45,7 +45,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_an_unknown_option()
+    public function it_can_handle_an_unknown_option_without_throwing_an_exception()
     {
         $options = [
             'unknown_option' => false,
