@@ -153,6 +153,10 @@ class AcceptLanguage
         $this->logger = $this->createLogger($this->options);
     }
 
+    /**
+     * @param array<string, bool|string> $options
+     * @return LanguageFactory
+     */
     protected function createFactory(array $options): LanguageFactory
     {
         return new LanguageFactory([
@@ -163,6 +167,10 @@ class AcceptLanguage
         ]);
     }
 
+    /**
+     * @param array<string, string> $options
+     * @return LogProvider
+     */
     protected function createLogger(array $options): LogProvider
     {
         return new LogProvider(new DummyLogger(), [
