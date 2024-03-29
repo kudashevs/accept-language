@@ -32,7 +32,7 @@ class AcceptLanguage
     protected LogProvider $logger;
 
     /**
-     * Contain an original header.
+     * Contain an original HTTP Accept-Language header.
      */
     protected string $header;
 
