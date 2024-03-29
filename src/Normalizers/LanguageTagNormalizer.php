@@ -60,7 +60,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     /**
      * @return array<string, string>
      */
-    private function extractSubtags($tag): array
+    private function extractSubtags(string $tag): array
     {
         preg_match(
             '/^
