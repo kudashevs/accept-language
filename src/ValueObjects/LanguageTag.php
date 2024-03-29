@@ -19,7 +19,7 @@ final class LanguageTag
     // For more information about a separator see RFC 5646, Section 2.1.
     private const DEFAULT_SEPARATOR = '-';
 
-    private const LANGUAGE_SEPARATORS = ['_', '-'];
+    private const SUPPORTED_SEPARATORS = ['_', '-'];
 
     private TagNormalizerInterface $normalizer;
 
@@ -77,7 +77,7 @@ final class LanguageTag
 
     private function retrieveSeparators(): array
     {
-        return array_merge([$this->separator], self::LANGUAGE_SEPARATORS);
+        return array_merge([$this->separator], self::SUPPORTED_SEPARATORS);
     }
 
     private function isValidTag($tag): bool
