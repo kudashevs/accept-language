@@ -47,10 +47,14 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     public function normalize(string $tag): string
     {
-        return $this->generateNormalizedTag(
-            $tag,
-            $this->extractSubtags($tag)
-        );
+        // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
+        $subtags = $this->extractSubtags($tag);
+
+        if ($this->isValidSetOfSubtags($subtags)) {
+            return $this->generateNormalizedTagFromSubtags($subtags);
+        }
+
+        return $tag;
     }
 
     /**
@@ -87,16 +91,9 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         );
     }
 
-    private function generateNormalizedTag(string $tag, array $subtags): string
-    {
-        // If no valid set of subtags is provided, the tag is returned unchanged.
-        if (!$this->isValidSetOfSubtags($subtags)) {
-            return $tag;
-        }
-
-        return $this->generateNormalizedTagFromSubtags($subtags);
-    }
-
+    /**
+     * @param array<string, string> $subtags
+     */
     private function isValidSetOfSubtags(array $subtags): bool
     {
         return count($subtags) === 4;
