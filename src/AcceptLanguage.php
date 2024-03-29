@@ -98,8 +98,7 @@ class AcceptLanguage
     {
         $this->initValidOptions($options);
 
-        $this->initFactory($this->options);
-        $this->initLogger($this->options);
+        $this->initDependenciesWithOptions();
     }
 
     /**
@@ -148,9 +147,10 @@ class AcceptLanguage
         }
     }
 
-    protected function initFactory(array $options): void
+    protected function initDependenciesWithOptions(): void
     {
-        $this->factory = $this->createFactory($options);
+        $this->factory = $this->createFactory($this->options);
+        $this->logger = $this->createLogger($this->options);
     }
 
     protected function createFactory(array $options): LanguageFactory
@@ -163,9 +163,9 @@ class AcceptLanguage
         ]);
     }
 
-    protected function initLogger(array $options): void
+    protected function createLogger(array $options): LogProvider
     {
-        $this->logger = new LogProvider(new DummyLogger(), [
+        return new LogProvider(new DummyLogger(), [
             'log_level' => $options['log_level'],
             'log_only' => $options['log_only'],
         ]);
