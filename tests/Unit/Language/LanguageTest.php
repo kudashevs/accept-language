@@ -28,9 +28,19 @@ class LanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_an_invalid_language_from_invalid_data()
+    public function it_can_create_an_invalid_language_from_an_invalid_type()
     {
         $language = Language::create(42, 1);
+
+        $this->assertNotEmpty($language->getTag());
+        $this->assertNotEmpty($language->getQuality());
+        $this->assertFalse($language->isValid());
+    }
+
+    /** @test */
+    public function it_can_create_an_invalid_language_from_an_invalid_language_string()
+    {
+        $language = Language::create('verywrong_language', 1);
 
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
