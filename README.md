@@ -135,11 +135,11 @@ events, please add these events to the `log_only` option. If the `log_only` set 
 
 ## Usage example
 
-Let's consider that we have a web application that uses three different languages: American, British, and Canadian English.
+Let's imaging that we have a web application that uses three different languages: American, British, and Canadian English.
 We want to redirect users according to their HTTP Accept-Language header settings to specific sections: en_US, en_GB, en_CA.
 All routes are set correctly, and we just want to retrieve the preferred language, if user has any, to redirect them.
 
-To work properly in this case, the package requires us to provide two initial options:
+To work properly, the package requires us to provide two initial options:
 `default_language` let's give it the value `en_US`
 `accepted_languages` let's give it the value `['en_US', 'en_GB', 'en_CA']`
 
