@@ -42,6 +42,8 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      * - omitting unwanted subtags according to the pre-selected options
      * - formatting subtags according to RFC 5646 and RFC 4647
      *
+     * If the provided tag is not valid, it is returned unchanged.
+     *
      * @param string $tag
      * @return string
      */
