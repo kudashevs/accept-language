@@ -101,7 +101,9 @@ class AcceptLanguage
     {
         $this->initOptionsWithTypeValidation($options);
 
-        $this->initDependenciesWithOptions();
+        $this->initFactory();
+        $this->initLogger();
+
         $this->initDefaultLanguageFromOptions();
     }
 
@@ -172,10 +174,9 @@ class AcceptLanguage
         $this->defaultLanguage = $defaultLanguage;
     }
 
-    protected function initDependenciesWithOptions(): void
+    protected function initFactory(): void
     {
         $this->factory = $this->createFactory($this->options);
-        $this->logger = $this->createLogger($this->options);
     }
 
     /**
@@ -190,6 +191,11 @@ class AcceptLanguage
             'with_script' => $options['use_script_subtag'],
             'with_region' => $options['use_region_subtag'],
         ]);
+    }
+
+    protected function initLogger(): void
+    {
+        $this->logger = $this->createLogger($this->options);
     }
 
     /**
