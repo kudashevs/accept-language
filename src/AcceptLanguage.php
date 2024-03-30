@@ -450,7 +450,7 @@ class AcceptLanguage
     {
         foreach ($languages as $language) {
             if ($this->isAnyLanguage($language)) {
-                return $this->retrieveDefaultLanguage();
+                return $this->processAnyLanguageCase();
             }
 
             if ($this->isAppropriateLanguage($language)) {
@@ -459,6 +459,15 @@ class AcceptLanguage
         }
 
         return null;
+    }
+
+    protected function processAnyLanguageCase(): string
+    {
+        $preferredLanguage = $this->retrieveDefaultLanguage();
+
+        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
+
+        return $preferredLanguage;
     }
 
     protected function isAnyLanguage(LanguageInterface $language): bool
