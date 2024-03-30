@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Languages;
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 
-final class DefaultLanguage implements LanguageInterface
+final class DefaultLanguage implements LanguageInterface, ConfigurableInterface
 {
     private array $options;
 

@@ -10,13 +10,6 @@ namespace Kudashevs\AcceptLanguage\Languages;
 interface LanguageInterface
 {
     /**
-     * Return the provided options.
-     *
-     * @return array<string, mixed>
-     */
-    public function getOptions(): array;
-
-    /**
      * Return the language tag.
      *
      * @return string
