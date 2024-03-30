@@ -44,11 +44,13 @@ class LanguageFactory
      */
     public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): LanguageInterface
     {
+        // handles the situation when the language range is empty
         if (count($rawLanguageRange) === 0) {
             return $this->createInvalidLanguage('', 0);
         }
 
-        if ($this->isSuspiciousLanguageRange($rawLanguageRange)) {
+        // handles the situation when the language range is suspicious
+        if (count($rawLanguageRange) > 2) {
             $possibleTag = (string)$rawLanguageRange[0];
             $possibleQuality = $rawLanguageRange[1];
 
@@ -59,11 +61,6 @@ class LanguageFactory
         $quality = $rawLanguageRange[1] ?? null;
 
         return $this->createLanguageWithFallbackQuality($tag, $quality, $fallbackQuality);
-    }
-
-    protected function isSuspiciousLanguageRange(array $range): bool
-    {
-        return count($range) > 2;
     }
 
     /**
