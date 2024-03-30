@@ -448,7 +448,7 @@ class AcceptLanguage
             }
         }
 
-        return $this->processNoLanguageFoundCase();
+        return $this->processLanguageNotFoundCase();
     }
 
     protected function processAnyLanguageCase(): string
@@ -469,7 +469,7 @@ class AcceptLanguage
         return $preferredLanguage;
     }
 
-    protected function processNoLanguageFoundCase(): string
+    protected function processLanguageNotFoundCase(): string
     {
         $this->logger->log('retrieve_preferred_language', '');
 
