@@ -46,7 +46,7 @@ final class LanguageFactory
     {
         // handles the situation when the language range is empty
         if (count($rawLanguageRange) === 0) {
-            return $this->createInvalidLanguage('', 0);
+            return DefaultLanguage::createInvalid('', 0, $this->options);
         }
 
         // handles the situation when the language range is suspicious
@@ -54,24 +54,13 @@ final class LanguageFactory
             $possibleTag = (string)$rawLanguageRange[0];
             $possibleQuality = $rawLanguageRange[1];
 
-            return $this->createInvalidLanguage($possibleTag, $possibleQuality);
+            return DefaultLanguage::createInvalid($possibleTag, $possibleQuality, $this->options);
         }
 
         $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
 
         return $this->createLanguageWithFallbackQuality($tag, $quality, $fallbackQuality);
-    }
-
-    /**
-     * Create a Language instance with a predefined invalid language state.
-     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage
-     *
-     * @param mixed $quality
-     */
-    protected function createInvalidLanguage(string $tag, $quality): DefaultLanguage
-    {
-        return DefaultLanguage::createInvalid($tag, $quality, $this->options);
     }
 
     /**
