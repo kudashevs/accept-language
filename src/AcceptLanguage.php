@@ -444,9 +444,9 @@ class AcceptLanguage
 
     /**
      * @param array<LanguageInterface> $languages
-     * @return string|null
+     * @return string
      */
-    protected function retrievePreferredLanguage(array $languages): ?string
+    protected function retrievePreferredLanguage(array $languages): string
     {
         foreach ($languages as $language) {
             if ($this->isAnyLanguage($language)) {
