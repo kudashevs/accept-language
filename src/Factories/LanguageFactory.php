@@ -57,6 +57,10 @@ final class LanguageFactory
             return DefaultLanguage::createInvalid($possibleTag, $possibleQuality, $this->options);
         }
 
+        /*
+         * For more information about possible types of $tag and $quality variables,
+         * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage::create()
+         */
         $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
         $optionsWithFallback = array_merge($this->options, [
@@ -65,12 +69,4 @@ final class LanguageFactory
 
         return DefaultLanguage::create($tag, $quality, $optionsWithFallback);
     }
-
-    /**
-     * Create a Language instance. The correctness of a provided language value will be
-     * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage*
-     *
-     * @param int|float|string|null $quality
-     */
 }
