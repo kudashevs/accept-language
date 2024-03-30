@@ -25,12 +25,6 @@ class AcceptLanguage
     protected const PRIMARY_SUBTAG_MAX_LENGTH = 3;
 
     /**
-     * This fallback will be used as the default language value when
-     * a `default_language` option contains an invalid language tag.
-     */
-    private const FALLBACK_LANGUAGE = 'en';
-
-    /**
      * The Factory is responsible for creating a Language from different sources.
      */
     protected LanguageFactory $factory;
@@ -491,13 +485,7 @@ class AcceptLanguage
 
     protected function retrieveDefaultLanguage(): string
     {
-        $defaultLanguage = $this->factory->makeFromLanguageString(
-            $this->options['default_language']
-        );
-
-        return $this->isAppropriateLanguage($defaultLanguage)
-            ? $defaultLanguage->getTag()
-            : self::FALLBACK_LANGUAGE;
+        return $this->defaultLanguage->getTag();
     }
 
     /**

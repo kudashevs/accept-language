@@ -235,21 +235,6 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    /** @test */
-    public function it_can_retrieve_a_fallback_language_when_a_default_language_value_is_wrong()
-    {
-        $options = [
-            'default_language' => 'wrong',
-            'two_letter_only' => false,
-        ];
-
-        $service = new AcceptLanguage($options);
-        $service->process();
-
-        $this->assertSame('en', $service->getPreferredLanguage());
-        $this->assertSame('en', $service->getLanguage());
-    }
-
     /**
      * @test
      */
