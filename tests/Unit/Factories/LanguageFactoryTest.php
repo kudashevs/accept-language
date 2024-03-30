@@ -2,20 +2,27 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Factories;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use PHPUnit\Framework\TestCase;
 
 class LanguageFactoryTest extends TestCase
 {
     /** @test */
-    public function it_can_throw_an_exception_when_language_range_is_empty()
+    public function it_can_hande_when_language_range_is_empty()
     {
-        $this->expectException(InvalidFactoryArgument::class);
-        $this->expectExceptionMessage('empty');
-
         $service = new LanguageFactory();
-        $service->makeFromLanguageRange([], 1);
+        $language = $service->makeFromLanguageRange([], 1);
+
+        $this->assertFalse($language->isValid());
+    }
+
+    /** @test */
+    public function it_can_handle_when_language_range_is_suspicious()
+    {
+        $service = new LanguageFactory();
+        $language = $service->makeFromLanguageRange(['en', 1, 'wrong', 42], 1);
+
+        $this->assertFalse($language->isValid());
     }
 
     /** @test */
