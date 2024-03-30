@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
-use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
-use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
+use Kudashevs\AcceptLanguage\Languages\Language;
 
 class LanguageFactory
 {
@@ -74,7 +74,7 @@ class LanguageFactory
     /**
      * Create a Language instance. The correctness of a provided language value will be
      * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Language\Language
+     * @see \Kudashevs\AcceptLanguage\Languages\Language
      *
      * @param int|float|string $quality
      */
@@ -85,7 +85,7 @@ class LanguageFactory
 
     /**
      * Create a Language instance with a predefined invalid language state.
-     * @see \Kudashevs\AcceptLanguage\Language\Language
+     * @see \Kudashevs\AcceptLanguage\Languages\Language
      *
      * @param mixed $quality
      */
@@ -97,7 +97,7 @@ class LanguageFactory
     /**
      * Create a Language instance. The correctness of a provided language value will be
      * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Language\Language*
+     * @see \Kudashevs\AcceptLanguage\Languages\Language*
      *
      * @param int|float|string|null $quality
      */

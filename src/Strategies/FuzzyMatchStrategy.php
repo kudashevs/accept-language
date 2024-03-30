@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
-use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
-use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
+use Kudashevs\AcceptLanguage\Languages\Language;
 
 class FuzzyMatchStrategy implements MatchStrategyInterface
 {

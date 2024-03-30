@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Language;
 
-use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Languages\Language;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTest extends TestCase

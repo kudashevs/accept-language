@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Languages\Language;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\RawLanguagesLogPresenter;
 use PHPUnit\Framework\TestCase;
 

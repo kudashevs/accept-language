@@ -5,7 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
-use Kudashevs\AcceptLanguage\Language\Language;
+use Kudashevs\AcceptLanguage\Languages\Language;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
 use PHPUnit\Framework\TestCase;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
+use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
 
 final class RawLanguagesLogPresenter implements LogPresenterInterface
 {
