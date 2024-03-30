@@ -461,7 +461,7 @@ class AcceptLanguage
         return null;
     }
 
-    protected function isAnyLanguage(DefaultLanguage $language): bool
+    protected function isAnyLanguage(LanguageInterface $language): bool
     {
         return $language->getTag() === '*';
     }
