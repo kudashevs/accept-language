@@ -5,7 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
 use PHPUnit\Framework\TestCase;
@@ -152,17 +152,25 @@ class LogProviderTest extends TestCase
             ],
             'retrieve_raw_languages log event' => [
                 'retrieve_raw_languages',
-                [Language::create('fr-CH', 1.0), Language::create('trulywrong', 0)],
+                [DefaultLanguage::create('fr-CH', 1.0), DefaultLanguage::create('trulywrong', 0)],
                 '/trulywrong.*invalid/',
             ],
             'retrieve_normalized_languages log event' => [
                 'retrieve_normalized_languages',
-                [Language::create('fr-CH', 1.0), Language::create('fr', 0.9), Language::create('en', 0.8)],
+                [
+                    DefaultLanguage::create('fr-CH', 1.0),
+                    DefaultLanguage::create('fr', 0.9),
+                    DefaultLanguage::create('en', 0.8),
+                ],
                 '/fr-CH.*0.8/',
             ],
             'retrieve_preferred_languages log event' => [
                 'retrieve_preferred_languages',
-                [Language::create('fr-CH', 1.0), Language::create('fr', 0.9), Language::create('en', 0.8)],
+                [
+                    DefaultLanguage::create('fr-CH', 1.0),
+                    DefaultLanguage::create('fr', 0.9),
+                    DefaultLanguage::create('en', 0.8),
+                ],
                 '/fr-CH.*0.8/',
             ],
             'retrieve_preferred_language log event' => [

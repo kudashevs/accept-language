@@ -2,15 +2,15 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Language;
 
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use PHPUnit\Framework\TestCase;
 
-class LanguageTest extends TestCase
+class DefaultLanguageTest extends TestCase
 {
     /** @test */
     public function it_can_create_a_language()
     {
-        $language = Language::create('en', 1);
+        $language = DefaultLanguage::create('en', 1);
 
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
@@ -20,7 +20,7 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_create_an_invalid_language_from_valid_data()
     {
-        $language = Language::createInvalid('en', 1);
+        $language = DefaultLanguage::createInvalid('en', 1);
 
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
@@ -30,7 +30,7 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_create_an_invalid_language_from_an_invalid_type()
     {
-        $language = Language::create(42, 1);
+        $language = DefaultLanguage::create(42, 1);
 
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
@@ -41,7 +41,7 @@ class LanguageTest extends TestCase
     public function it_can_create_an_invalid_language_from_an_invalid_language_string()
     {
         // For more information about language ranges see RFC 4647, Section 2.1.
-        $language = Language::create('verywrong_language', 1);
+        $language = DefaultLanguage::create('verywrong_language', 1);
 
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
@@ -57,7 +57,7 @@ class LanguageTest extends TestCase
         string $expectedTag,
         $expectedQuality
     ) {
-        $language = Language::create(...$input);
+        $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
         $this->assertSame($expectedQuality, $language->getQuality());
@@ -109,7 +109,7 @@ class LanguageTest extends TestCase
         string $expectedTag,
         $expectedQuality
     ) {
-        $language = Language::create(...$input);
+        $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
         $this->assertSame($expectedQuality, $language->getQuality());
@@ -166,7 +166,7 @@ class LanguageTest extends TestCase
         string $expectedTag,
         $expectedQuality
     ) {
-        $language = Language::create(...$input);
+        $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
         $this->assertSame($expectedQuality, $language->getQuality());
@@ -233,7 +233,7 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_retain_the_provided_options()
     {
-        $language = Language::create('zh-yue-Hant-CN', 1, [
+        $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [
             'separator' => '~',
             'fallback_value' => 0.5,
         ]);
@@ -248,7 +248,7 @@ class LanguageTest extends TestCase
     {
         $expectedSubtags = ['de', 'Latn', 'DE'];
 
-        $language = Language::create('de-Latn-DE', 1);
+        $language = DefaultLanguage::create('de-Latn-DE', 1);
 
         $this->assertCount(3, $language->getSubtags());
         $this->assertSame($expectedSubtags, $language->getSubtags());
@@ -258,7 +258,7 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_retrieve_a_primary_subtag()
     {
-        $language = Language::create('zh-yue-Hant-CN', 1);
+        $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);
 
         $this->assertSame('zh', $language->getPrimarySubtag());
         $this->assertTrue($language->isValid());

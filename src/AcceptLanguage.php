@@ -9,7 +9,7 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
@@ -36,7 +36,7 @@ class AcceptLanguage
      */
     protected LogProvider $logger;
 
-    protected Language $defaultLanguage;
+    protected DefaultLanguage $defaultLanguage;
 
     /**
      * Contain an original HTTP Accept-Language header.
@@ -262,7 +262,7 @@ class AcceptLanguage
      * Retrieve and normalize languages from an HTTP Accept-Language header.
      *
      * @param string $header
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function processAcceptLanguageValue(string $header): array
     {
@@ -280,7 +280,7 @@ class AcceptLanguage
     /**
      * Parse a header value and return raw unordered languages.
      *
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function parseAcceptLanguageValue(string $header): array
     {
@@ -322,7 +322,7 @@ class AcceptLanguage
     /**
      * Return valid languages sorted by the quality value.
      *
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function normalizeLanguages(array $languages): array
     {
@@ -348,7 +348,7 @@ class AcceptLanguage
      * valid language that was accepted and met all matching criteria.
      *
      * @param array $languages
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function processNormalizedLanguages(array $languages): array
     {
@@ -360,7 +360,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function retrievePreferredLanguages(array $languages): array
     {
@@ -377,7 +377,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function retrieveAcceptedLanguages(array $languages): array
     {
@@ -402,7 +402,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<Language>
+     * @return array<DefaultLanguage>
      */
     protected function prepareAcceptedLanguagesForMatching(): array
     {
@@ -415,7 +415,7 @@ class AcceptLanguage
      * Return a preferred language from the preferred languages. If none of
      * the languages were appropriate, the default language will be returned.
      *
-     * @param array<Language> $languages
+     * @param array<DefaultLanguage> $languages
      * @return string
      */
     protected function processPreferredLanguages(array $languages): string
@@ -434,7 +434,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array<Language> $languages
+     * @param array<DefaultLanguage> $languages
      * @return string|null
      */
     protected function retrievePreferredLanguage(array $languages): ?string
@@ -452,12 +452,12 @@ class AcceptLanguage
         return null;
     }
 
-    protected function isAnyLanguage(Language $language): bool
+    protected function isAnyLanguage(DefaultLanguage $language): bool
     {
         return $language->getTag() === '*';
     }
 
-    protected function isAppropriateLanguage(Language $language): bool
+    protected function isAppropriateLanguage(DefaultLanguage $language): bool
     {
         $primarySubtagMinLength = 2;
         $primarySubtagMaxLength = 3;

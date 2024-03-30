@@ -2,7 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\NormalizedLanguagesLogPresenter;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ class NormalizedLanguagesLogPresenterTest extends TestCase
     {
         $handler = new NormalizedLanguagesLogPresenter('retrieve_normalized_languages');
         $presentation = $handler->present(
-            [Language::create('fr-CH', 1), Language::create('fr', 0.9)],
+            [DefaultLanguage::create('fr-CH', 1), DefaultLanguage::create('fr', 0.9)],
         );
 
         $this->assertMatchesRegularExpression('/fr-CH.*retrieve_normalized_languages/', $presentation);

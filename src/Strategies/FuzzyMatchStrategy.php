@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 class FuzzyMatchStrategy implements MatchStrategyInterface
@@ -16,7 +16,7 @@ class FuzzyMatchStrategy implements MatchStrategyInterface
         foreach ($languages as $language) {
             foreach ($accepted as $accept) {
                 if ($this->isFuzzyMatch($accept, $language)) {
-                    $result[] = Language::create(
+                    $result[] = DefaultLanguage::create(
                         $accept->getTag(),
                         $language->getQuality(),
                         $language->getOptions(),

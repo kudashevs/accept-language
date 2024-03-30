@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Languages;
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 
-final class Language implements LanguageInterface
+final class DefaultLanguage implements LanguageInterface
 {
     private array $options;
 
@@ -21,22 +21,22 @@ final class Language implements LanguageInterface
      * @param string $tag
      * @param int|float|string $quality
      * @param array<string, bool|string> $options
-     * @return Language
+     * @return DefaultLanguage
      */
-    public static function create(string $tag, $quality, array $options = []): Language
+    public static function create(string $tag, $quality, array $options = []): DefaultLanguage
     {
-        return new Language($tag, $quality, $options);
+        return new DefaultLanguage($tag, $quality, $options);
     }
 
     /**
      * @param string $tag
      * @param mixed $quality
      * @param array<string, bool|string> $options
-     * @return Language
+     * @return DefaultLanguage
      */
-    public static function createInvalid(string $tag, $quality, array $options = []): Language
+    public static function createInvalid(string $tag, $quality, array $options = []): DefaultLanguage
     {
-        $language = new Language($tag, $quality, $options);
+        $language = new DefaultLanguage($tag, $quality, $options);
         $language->valid = false;
 
         return $language;

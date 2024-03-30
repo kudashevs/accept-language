@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
-use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 class LanguageFactory
@@ -74,39 +74,39 @@ class LanguageFactory
     /**
      * Create a Language instance. The correctness of a provided language value will be
      * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Languages\Language
+     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage
      *
      * @param int|float|string $quality
      */
-    protected function createLanguage(string $tag, $quality): Language
+    protected function createLanguage(string $tag, $quality): DefaultLanguage
     {
-        return Language::create($tag, $quality, $this->options);
+        return DefaultLanguage::create($tag, $quality, $this->options);
     }
 
     /**
      * Create a Language instance with a predefined invalid language state.
-     * @see \Kudashevs\AcceptLanguage\Languages\Language
+     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage
      *
      * @param mixed $quality
      */
-    protected function createInvalidLanguage(string $tag, $quality): Language
+    protected function createInvalidLanguage(string $tag, $quality): DefaultLanguage
     {
-        return Language::createInvalid($tag, $quality, $this->options);
+        return DefaultLanguage::createInvalid($tag, $quality, $this->options);
     }
 
     /**
      * Create a Language instance. The correctness of a provided language value will be
      * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Languages\Language*
+     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage*
      *
      * @param int|float|string|null $quality
      */
-    protected function createLanguageWithFallbackQuality(string $tag, $quality, float $fallbackQuality): Language
+    protected function createLanguageWithFallbackQuality(string $tag, $quality, float $fallbackQuality): DefaultLanguage
     {
         $options = array_merge($this->options, [
             'fallback_value' => $fallbackQuality,
         ]);
 
-        return Language::create($tag, $quality, $options);
+        return DefaultLanguage::create($tag, $quality, $options);
     }
 }
