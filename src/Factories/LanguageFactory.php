@@ -32,7 +32,7 @@ final class LanguageFactory
      */
     public function makeFromLanguageString(string $language, float $quality = 1): LanguageInterface
     {
-        return $this->createLanguage($language, $quality);
+        return DefaultLanguage::create($language, $quality, $this->options);
     }
 
     /**
@@ -61,18 +61,6 @@ final class LanguageFactory
         $quality = $rawLanguageRange[1] ?? null;
 
         return $this->createLanguageWithFallbackQuality($tag, $quality, $fallbackQuality);
-    }
-
-    /**
-     * Create a Language instance. The correctness of a provided language value will be
-     * determined during the validation process (the language state might be invalid).
-     * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage
-     *
-     * @param int|float|string $quality
-     */
-    protected function createLanguage(string $tag, $quality): DefaultLanguage
-    {
-        return DefaultLanguage::create($tag, $quality, $this->options);
     }
 
     /**
