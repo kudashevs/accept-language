@@ -271,7 +271,7 @@ class AcceptLanguage
      * Retrieve and normalize languages from an HTTP Accept-Language header.
      *
      * @param string $header
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function processAcceptLanguageValue(string $header): array
     {
@@ -289,7 +289,7 @@ class AcceptLanguage
     /**
      * Parse a header value and return raw unordered languages.
      *
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function parseAcceptLanguageValue(string $header): array
     {
@@ -331,7 +331,7 @@ class AcceptLanguage
     /**
      * Return valid languages sorted by the quality value.
      *
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function normalizeLanguages(array $languages): array
     {
@@ -357,7 +357,7 @@ class AcceptLanguage
      * valid language that was accepted and met all matching criteria.
      *
      * @param array $languages
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function processNormalizedLanguages(array $languages): array
     {
@@ -369,7 +369,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function retrievePreferredLanguages(array $languages): array
     {
@@ -386,7 +386,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function retrieveAcceptedLanguages(array $languages): array
     {
@@ -411,7 +411,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<DefaultLanguage>
+     * @return array<LanguageInterface>
      */
     protected function prepareAcceptedLanguagesForMatching(): array
     {
@@ -424,7 +424,7 @@ class AcceptLanguage
      * Return a preferred language from the preferred languages. If none of
      * the languages were appropriate, the default language will be returned.
      *
-     * @param array<DefaultLanguage> $languages
+     * @param array<LanguageInterface> $languages
      * @return string
      */
     protected function processPreferredLanguages(array $languages): string
@@ -443,7 +443,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array<DefaultLanguage> $languages
+     * @param array<LanguageInterface> $languages
      * @return string|null
      */
     protected function retrievePreferredLanguage(array $languages): ?string
