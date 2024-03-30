@@ -40,9 +40,9 @@ class LanguageFactoryTest extends TestCase
     public function it_can_create_a_language_from_an_invalid_language_string()
     {
         $service = new LanguageFactory();
-        $language = $service->makeFromLanguageString('trulywrong');
+        $language = $service->makeFromLanguageString('verywrong');
 
-        $this->assertSame('trulywrong', $language->getTag());
+        $this->assertSame('verywrong', $language->getTag());
         $this->assertSame(1, $language->getQuality());
         $this->assertFalse($language->isValid());
     }
