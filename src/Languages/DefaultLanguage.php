@@ -19,7 +19,7 @@ final class DefaultLanguage implements LanguageInterface
 
     /**
      * @param string $tag
-     * @param int|float|string $quality
+     * @param int|float|string|null $quality
      * @param array<string, bool|string> $options
      * @return DefaultLanguage
      */

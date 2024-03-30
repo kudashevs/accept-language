@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class DefaultLanguageTest extends TestCase
 {
     /** @test */
-    public function it_can_create_a_language()
+    public function it_can_create_a_valid_language()
     {
         $language = DefaultLanguage::create('en', 1);
 
@@ -45,6 +45,26 @@ class DefaultLanguageTest extends TestCase
         $this->assertNotEmpty($language->getTag());
         $this->assertNotEmpty($language->getQuality());
         $this->assertFalse($language->isValid());
+    }
+
+    /** @test */
+    public function it_can_create_a_valid_language_when_quality_is_string()
+    {
+        $language = DefaultLanguage::create('en', '0.5');
+
+        $this->assertSame('en', $language->getTag());
+        $this->assertSame(0.5, $language->getQuality());
+        $this->assertTrue($language->isValid());
+    }
+
+    /** @test */
+    public function it_can_create_a_valid_language_when_quality_is_null()
+    {
+        $language = DefaultLanguage::create('en', null);
+
+        $this->assertSame('en', $language->getTag());
+        $this->assertSame(1, $language->getQuality());
+        $this->assertTrue($language->isValid());
     }
 
     /**
