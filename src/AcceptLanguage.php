@@ -9,7 +9,6 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
-use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
@@ -466,7 +465,7 @@ class AcceptLanguage
         return $language->getTag() === '*';
     }
 
-    protected function isAppropriateLanguage(DefaultLanguage $language): bool
+    protected function isAppropriateLanguage(LanguageInterface $language): bool
     {
         $primarySubtagMinLength = 2;
         $primarySubtagMaxLength = 3;
