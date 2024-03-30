@@ -245,7 +245,7 @@ class AcceptLanguage
     protected function findPreferredLanguage(string $header): string
     {
         // There are several situations when there is no need to continue
-        // further processing as they result in the default language.
+        // further processing as they result into the default language.
         if ($this->isDefaultLanguageCase($header)) {
             return $this->processDefaultLanguageCase();
         }
