@@ -279,7 +279,7 @@ class AcceptLanguage
      */
     protected function processHeaderValue(string $header): array
     {
-        $rawLanguages = $this->parseAcceptLanguageValue($header);
+        $rawLanguages = $this->parseHeaderValue($header);
 
         $this->logger->log('retrieve_raw_languages', $rawLanguages);
 
@@ -295,7 +295,7 @@ class AcceptLanguage
      *
      * @return array<LanguageInterface>
      */
-    protected function parseAcceptLanguageValue(string $header): array
+    protected function parseHeaderValue(string $header): array
     {
         return $this->retrieveRawLanguages($header);
     }
