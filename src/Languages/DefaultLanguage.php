@@ -23,7 +23,7 @@ final class DefaultLanguage implements LanguageInterface
      * @param array<string, bool|string> $options
      * @return DefaultLanguage
      */
-    public static function create(string $tag, $quality, array $options = []): DefaultLanguage
+    public static function create(string $tag, $quality, array $options = []): self
     {
         return new DefaultLanguage($tag, $quality, $options);
     }
@@ -34,7 +34,7 @@ final class DefaultLanguage implements LanguageInterface
      * @param array<string, bool|string> $options
      * @return DefaultLanguage
      */
-    public static function createInvalid(string $tag, $quality, array $options = []): DefaultLanguage
+    public static function createInvalid(string $tag, $quality, array $options = []): self
     {
         $language = new DefaultLanguage($tag, $quality, $options);
         $language->valid = false;
