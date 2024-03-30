@@ -21,7 +21,10 @@ final class PreferredLanguageLogPresenter implements LogPresenterInterface
     public function present($language): string
     {
         if ($this->isEmptyData($language)) {
-            return sprintf('Warning! An empty resulting language was retrieved [%s event].', $this->event);
+            return sprintf(
+                'Warning! The preferred language was not found, the default language will be used [%s event].',
+                $this->event
+            );
         }
 
         return sprintf('Retrieved "%s" resulting language [%s event].', $language, $this->event);
