@@ -36,7 +36,10 @@ class AcceptLanguage
      */
     protected LogProvider $logger;
 
-    protected DefaultLanguage $defaultLanguage;
+    /**
+     * Contain a default language for different default language cases.
+     */
+    protected LanguageInterface $defaultLanguage;
 
     /**
      * Contain an original HTTP Accept-Language header.
