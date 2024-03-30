@@ -96,7 +96,7 @@ class AcceptLanguage
      */
     public function __construct(array $options = [])
     {
-        $this->initValidOptions($options);
+        $this->initOptionsWithTypeValidation($options);
 
         $this->initDependenciesWithOptions();
     }
@@ -104,7 +104,7 @@ class AcceptLanguage
     /**
      * @throws InvalidOptionType
      */
-    protected function initValidOptions(array $options): void
+    protected function initOptionsWithTypeValidation(array $options): void
     {
         $validated = $this->retrieveOptionsWithTypeValidation($options);
 
