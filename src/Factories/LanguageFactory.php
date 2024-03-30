@@ -8,7 +8,7 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
-class LanguageFactory
+final class LanguageFactory
 {
     protected array $options = [];
 
