@@ -44,8 +44,8 @@ class LanguageTagTest extends TestCase
                 'de Latn',
             ],
             'a language tag longer than the maximum length results in no change and an invalid language' => [
-                'trulywrong',
-                'trulywrong',
+                'verywrong',
+                'verywrong',
             ],
         ];
     }
