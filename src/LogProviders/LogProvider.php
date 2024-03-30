@@ -7,6 +7,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\LogProviders\Presenters\AcceptedLanguagesLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\DefaultLanguageLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\HeaderLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\LogPresenterInterface;
@@ -37,6 +38,7 @@ final class LogProvider
         'retrieve_default_language' => DefaultLanguageLogPresenter::class,
         'retrieve_raw_languages' => RawLanguagesLogPresenter::class,
         'retrieve_normalized_languages' => NormalizedLanguagesLogPresenter::class,
+        'retrieve_accepted_languages' => AcceptedLanguagesLogPresenter::class,
         'retrieve_preferred_languages' => PreferredLanguagesLogPresenter::class,
         'retrieve_preferred_language' => PreferredLanguageLogPresenter::class,
     ];

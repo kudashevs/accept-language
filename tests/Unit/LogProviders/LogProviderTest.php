@@ -167,6 +167,15 @@ class LogProviderTest extends TestCase
                 ],
                 '/fr-CH.*0.8/',
             ],
+            'retrieve_accepted_languages log event' => [
+                'retrieve_accepted_languages',
+                [
+                    DefaultLanguage::create('fr-CH', null),
+                    DefaultLanguage::create('fr', null),
+                    DefaultLanguage::create('en', null),
+                ],
+                '/fr-CH,fr/',
+            ],
             'retrieve_preferred_languages log event' => [
                 'retrieve_preferred_languages',
                 [
