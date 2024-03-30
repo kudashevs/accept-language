@@ -1186,6 +1186,7 @@ class AcceptLanguageTest extends TestCase
             'fr-CH',
             'fr_CH;valid,fr;valid',
             'fr_CH;q=1,fr;q=0.9',
+            'de,en',
             'en;q=0.8,de;q=0.7',
             'en',
         ];
@@ -1220,6 +1221,7 @@ class AcceptLanguageTest extends TestCase
             'completely wrong',
             'completely wrong;invalid',
             'empty',
+            '',
             'empty',
             'en',
         ];

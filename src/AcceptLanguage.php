@@ -390,6 +390,8 @@ class AcceptLanguage
     {
         $acceptedLanguages = $this->prepareAcceptedLanguagesForMatching();
 
+        $this->logger->log('retrieve_accepted_languages', $acceptedLanguages);
+
         return $this->resolveMatchingStrategy()->match(
             $languages,
             $acceptedLanguages,
