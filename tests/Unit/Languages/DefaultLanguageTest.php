@@ -1,6 +1,6 @@
 <?php
 
-namespace Kudashevs\AcceptLanguage\Tests\Unit\Language;
+namespace Kudashevs\AcceptLanguage\Tests\Unit\Languages;
 
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use PHPUnit\Framework\TestCase;
