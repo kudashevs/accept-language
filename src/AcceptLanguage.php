@@ -454,7 +454,7 @@ class AcceptLanguage
             }
 
             if ($this->isAppropriateLanguage($language)) {
-                return $language->getTag();
+                return $this->processAppropriateLanguageCase($language);
             }
         }
 
@@ -464,6 +464,15 @@ class AcceptLanguage
     protected function processAnyLanguageCase(): string
     {
         $preferredLanguage = $this->retrieveDefaultLanguage();
+
+        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
+
+        return $preferredLanguage;
+    }
+
+    protected function processAppropriateLanguageCase(LanguageInterface $language): string
+    {
+        $preferredLanguage = $language->getTag();
 
         $this->logger->log('retrieve_preferred_language', $preferredLanguage);
 
