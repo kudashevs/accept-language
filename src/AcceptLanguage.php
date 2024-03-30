@@ -19,6 +19,11 @@ use Psr\Log\LoggerInterface;
 
 class AcceptLanguage
 {
+    // The length of the primary language subtag is limited from 2 to 3 letters.
+    // However, we might want to change these values in the future.
+    protected const PRIMARY_SUBTAG_MIN_LENGTH = 2;
+    protected const PRIMARY_SUBTAG_MAX_LENGTH = 3;
+
     /**
      * This fallback will be used as the default language value when
      * a `default_language` option contains an invalid language tag.
@@ -467,8 +472,6 @@ class AcceptLanguage
 
     protected function isAppropriateLanguage(LanguageInterface $language): bool
     {
-        $primarySubtagMinLength = 2;
-        $primarySubtagMaxLength = 3;
         $primarySubtagLength = strlen(
             $language->getPrimarySubtag()
         );
@@ -477,7 +480,8 @@ class AcceptLanguage
             return $primarySubtagLength === 2;
         }
 
-        return $primarySubtagLength >= $primarySubtagMinLength && $primarySubtagLength <= $primarySubtagMaxLength;
+        return $primarySubtagLength >= static::PRIMARY_SUBTAG_MIN_LENGTH
+            && $primarySubtagLength <= static::PRIMARY_SUBTAG_MAX_LENGTH;
     }
 
     protected function isTwoLetterOnlyCase(): bool
