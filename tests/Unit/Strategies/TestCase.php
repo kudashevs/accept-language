@@ -3,7 +3,7 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
-use Kudashevs\AcceptLanguage\Language\AbstractLanguage;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
@@ -12,21 +12,21 @@ class TestCase extends PHPUnitTestCase
     /**
      * @param string $language
      * @param int|float $quality
-     * @return AbstractLanguage
+     * @return LanguageInterface
      */
-    protected function createLanguage(string $language, float $quality = 1): AbstractLanguage
+    protected function createLanguage(string $language, float $quality = 1): LanguageInterface
     {
         return (new LanguageFactory())->makeFromLanguageString($language, $quality);
     }
 
     /**
-     * @param AbstractLanguage|array|string $needle
-     * @param array<AbstractLanguage> $haystack
+     * @param LanguageInterface|array|string $needle
+     * @param array<LanguageInterface> $haystack
      * @return void
      */
     protected function assertContainsLanguage($needle, array $haystack): void
     {
-        if (is_a($needle, AbstractLanguage::class)) {
+        if (is_a($needle, LanguageInterface::class)) {
             $found = array_filter($haystack, function ($language) use ($needle) {
                 return $language->getTag() === $needle->getTag() &&
                     $language->getQuality() === $needle->getQuality();

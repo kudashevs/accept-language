@@ -9,8 +9,8 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
-use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
@@ -297,7 +297,7 @@ class AcceptLanguage
             // For more information about language ranges see RFC 4647, Section 2.1.
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
-            /** @var array<AbstractLanguage> $languages */
+            /** @var array<LanguageInterface> $languages */
             $languages[] = $this->factory->makeFromLanguageRange(
                 $splitLanguageRange,
                 $fallbackQuality

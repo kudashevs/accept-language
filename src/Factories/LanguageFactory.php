@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Factories;
 
 use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
-use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 class LanguageFactory
 {
@@ -28,9 +28,9 @@ class LanguageFactory
     /**
      * @param string $language
      * @param float $quality
-     * @return AbstractLanguage
+     * @return LanguageInterface
      */
-    public function makeFromLanguageString(string $language, float $quality = 1): AbstractLanguage
+    public function makeFromLanguageString(string $language, float $quality = 1): LanguageInterface
     {
         return $this->createLanguage($language, $quality);
     }
@@ -38,11 +38,11 @@ class LanguageFactory
     /**
      * @param array<int, string|mixed> $rawLanguageRange
      * @param float $fallbackQuality
-     * @return AbstractLanguage
+     * @return LanguageInterface
      *
      * @throws InvalidFactoryArgument
      */
-    public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): AbstractLanguage
+    public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): LanguageInterface
     {
         $this->checkValidLanguageRange($rawLanguageRange);
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Strategies;
 
-use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Languages\Language;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 class FuzzyMatchStrategy implements MatchStrategyInterface
 {
@@ -28,7 +28,7 @@ class FuzzyMatchStrategy implements MatchStrategyInterface
         return $result;
     }
 
-    protected function isFuzzyMatch(AbstractLanguage $target, AbstractLanguage $source): bool
+    protected function isFuzzyMatch(LanguageInterface $target, LanguageInterface $source): bool
     {
         $matchingSubtagsNumber = count(array_intersect($target->getSubtags(), $source->getSubtags()));
         $minimumThreshold = count($target->getSubtags());

@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Languages;
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 
-final class Language extends AbstractLanguage
+final class Language implements LanguageInterface
 {
     private array $options;
 

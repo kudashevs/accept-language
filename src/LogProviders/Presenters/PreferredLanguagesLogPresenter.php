@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\LogProviders\Presenters;
 
-use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 final class PreferredLanguagesLogPresenter implements LogPresenterInterface
 {
@@ -18,7 +18,7 @@ final class PreferredLanguagesLogPresenter implements LogPresenterInterface
     /**
      * {@inheritDoc}
      *
-     * @param array<AbstractLanguage> $languages
+     * @param array<LanguageInterface> $languages
      */
     public function present($languages): string
     {
@@ -40,7 +40,7 @@ final class PreferredLanguagesLogPresenter implements LogPresenterInterface
 
     private function processLanguages(array $languages): string
     {
-        return implode(',', array_map(static function (AbstractLanguage $lang) {
+        return implode(',', array_map(static function (LanguageInterface $lang) {
             return $lang->getTag() . ';q=' . $lang->getQuality();
         }, $languages));
     }
