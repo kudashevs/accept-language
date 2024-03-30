@@ -59,8 +59,11 @@ final class LanguageFactory
 
         $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
+        $optionsWithFallback = array_merge($this->options, [
+            'fallback_value' => $fallbackQuality,
+        ]);
 
-        return $this->createLanguageWithFallbackQuality($tag, $quality, $fallbackQuality);
+        return DefaultLanguage::create($tag, $quality, $optionsWithFallback);
     }
 
     /**
@@ -70,12 +73,4 @@ final class LanguageFactory
      *
      * @param int|float|string|null $quality
      */
-    protected function createLanguageWithFallbackQuality(string $tag, $quality, float $fallbackQuality): DefaultLanguage
-    {
-        $options = array_merge($this->options, [
-            'fallback_value' => $fallbackQuality,
-        ]);
-
-        return DefaultLanguage::create($tag, $quality, $options);
-    }
 }
