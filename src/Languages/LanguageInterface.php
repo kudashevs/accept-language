@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kudashevs\AcceptLanguage\Languages;
 
 /**
- * AbstractLanguage represents an abstraction of a Language that consists of a language tag and a quality value.
+ * LanguageInterface is an abstraction of a Language that consists of a language tag and a quality value.
  */
 interface LanguageInterface
 {
