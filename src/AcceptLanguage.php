@@ -429,17 +429,7 @@ class AcceptLanguage
      */
     protected function processPreferredLanguages(array $languages): string
     {
-        $preferredLanguage = $this->retrievePreferredLanguage($languages);
-
-        if (is_null($preferredLanguage)) {
-            $this->logger->log('retrieve_preferred_language', '');
-
-            return $this->retrieveDefaultLanguage();
-        }
-
-        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
-
-        return $preferredLanguage;
+        return $this->retrievePreferredLanguage($languages);
     }
 
     /**
