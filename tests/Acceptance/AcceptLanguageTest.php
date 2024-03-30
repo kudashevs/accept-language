@@ -7,6 +7,7 @@ use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
@@ -19,6 +20,15 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->expectExceptionMessage('wrong value');
 
         new AcceptLanguage(['separator' => 42]);
+    }
+
+    /** @test */
+    public function an_instance_can_throw_an_exceptions_when_a_wrong_default_language_provided()
+    {
+        $this->expectException(InvalidOptionValue::class);
+        $this->expectExceptionMessage('verywrong_language');
+
+        new AcceptLanguage(['default_language' => 'verywrong_language']);
     }
 
     /** @test */

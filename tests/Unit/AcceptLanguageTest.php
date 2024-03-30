@@ -4,6 +4,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit;
 
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -42,6 +43,17 @@ class AcceptLanguageTest extends TestCase
                 ['separator' => null],
             ],
         ];
+    }
+
+    /** @test */
+    public function it_can_throw_an_exception_when_a_wrong_default_language()
+    {
+        $this->expectException(InvalidOptionValue::class);
+        $this->expectExceptionMessage('The value "verywrong_language" is invalid');
+
+        new AcceptLanguage([
+            'default_language' => 'verywrong_language',
+        ]);
     }
 
     /** @test */

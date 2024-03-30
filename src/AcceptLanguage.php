@@ -7,6 +7,7 @@ namespace Kudashevs\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Languages\AbstractLanguage;
 use Kudashevs\AcceptLanguage\Languages\Language;
@@ -34,6 +35,8 @@ class AcceptLanguage
      * The LogProvider is a convenient abstraction over the logger.
      */
     protected LogProvider $logger;
+
+    protected Language $defaultLanguage;
 
     /**
      * Contain an original HTTP Accept-Language header.
@@ -92,13 +95,14 @@ class AcceptLanguage
     /**
      * @param array<string, bool|string|array> $options
      *
-     * @throws InvalidOptionType|InvalidLogLevelName|InvalidLogEventName
+     * @throws InvalidOptionType|InvalidOptionValue|InvalidLogLevelName|InvalidLogEventName
      */
     public function __construct(array $options = [])
     {
         $this->initOptionsWithTypeValidation($options);
 
         $this->initDependenciesWithOptions();
+        $this->initDefaultLanguageFromOptions();
     }
 
     /**
@@ -145,6 +149,27 @@ class AcceptLanguage
                 )
             );
         }
+    }
+
+    /**
+     * @throws InvalidOptionValue
+     */
+    protected function initDefaultLanguageFromOptions(): void
+    {
+        $defaultLanguage = $this->factory->makeFromLanguageString(
+            $this->options['default_language']
+        );
+
+        if (!$defaultLanguage->isValid()) {
+            throw new InvalidOptionValue(
+                sprintf(
+                    'The value "%s" is invalid. The option default_language should contain a valid Language tag.',
+                    $this->options['default_language']
+                )
+            );
+        }
+
+        $this->defaultLanguage = $defaultLanguage;
     }
 
     protected function initDependenciesWithOptions(): void
