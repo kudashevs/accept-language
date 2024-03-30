@@ -40,6 +40,7 @@ class LanguageTest extends TestCase
     /** @test */
     public function it_can_create_an_invalid_language_from_an_invalid_language_string()
     {
+        // For more information about language ranges see RFC 4647, Section 2.1.
         $language = Language::create('verywrong_language', 1);
 
         $this->assertNotEmpty($language->getTag());
