@@ -458,7 +458,7 @@ class AcceptLanguage
             }
         }
 
-        return null;
+        return $this->processNoLanguageFoundCase();
     }
 
     protected function processAnyLanguageCase(): string
@@ -477,6 +477,13 @@ class AcceptLanguage
         $this->logger->log('retrieve_preferred_language', $preferredLanguage);
 
         return $preferredLanguage;
+    }
+
+    protected function processNoLanguageFoundCase(): string
+    {
+        $this->logger->log('retrieve_preferred_language', '');
+
+        return $this->retrieveDefaultLanguage();
     }
 
     protected function isAnyLanguage(LanguageInterface $language): bool
