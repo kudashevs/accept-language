@@ -10,7 +10,7 @@ use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 final class LanguageFactory
 {
-    protected array $options = [];
+    private array $options = [];
 
     /**
      * @param array<string, bool|string> $options
