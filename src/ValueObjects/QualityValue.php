@@ -26,7 +26,7 @@ class QualityValue
      */
     public function __construct($quality, array $options = [])
     {
-        $this->initNormalizer($options);
+        $this->initNormalizer();
         $this->initOptions($options);
 
         $this->initQuality($quality);
@@ -42,14 +42,14 @@ class QualityValue
         $this->options = array_merge($this->options, $allowed);
     }
 
-    private function initNormalizer(array $options): void
+    private function initNormalizer(): void
     {
-        $this->normalizer = $this->createDefaultNormalizer($options);
+        $this->normalizer = $this->createDefaultNormalizer();
     }
 
-    private function createDefaultNormalizer(array $options): QualityNormalizerInterface
+    private function createDefaultNormalizer(): QualityNormalizerInterface
     {
-        return new LanguageQualityNormalizer($options);
+        return new LanguageQualityNormalizer();
     }
 
     private function initQuality($quality): void
