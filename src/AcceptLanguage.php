@@ -64,18 +64,18 @@ class AcceptLanguage
      * 'log_only' array An array with a list of log only events.
      *
      * @var array{
-     *     'http_accept_language': string,
-     *     'default_language': string,
-     *     'accepted_languages': array<int, string>,
-     *     'exact_match_only': bool,
-     *     'two_letter_only': bool,
-     *     'use_extlang_subtag': bool,
-     *     'use_script_subtag': bool,
-     *     'use_region_subtag': bool,
-     *     'separator': string,
-     *     'log_activity': bool,
-     *     'log_level': string,
-     *     'log_only': array<int, string>,
+     *     http_accept_language: string,
+     *     default_language: string,
+     *     accepted_languages: array<int, string>,
+     *     exact_match_only: bool,
+     *     two_letter_only: bool,
+     *     use_extlang_subtag: bool,
+     *     use_script_subtag: bool,
+     *     use_region_subtag: bool,
+     *     separator: string,
+     *     log_activity: bool,
+     *     log_level: string,
+     *     log_only: array<int, string>,
      * }
      */
     protected array $options = [
