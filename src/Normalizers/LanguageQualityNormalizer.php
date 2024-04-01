@@ -46,7 +46,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         }
 
         if ($this->isValidQuality($quality)) {
-            return $this->prepareQuality($quality);
+            return $this->generateForValid($quality);
         }
 
         return self::NOT_ACCEPTABLE_QUALITY;
@@ -85,6 +85,15 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     }
 
     /**
+     * @param int|float|string|null $quality
+     * @return int|float
+     */
+    private function generateForValid($quality)
+    {
+        return $this->prepareQuality($quality);
+    }
+
+    /**
      * @inheritDoc
      */
     public function normalizeWithFallback($quality, float $fallback)
@@ -104,7 +113,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         }
 
         if ($this->isValidQuality($quality)) {
-            return $this->prepareQuality($quality);
+            return $this->generateForValid($quality);
         }
 
         return self::NOT_ACCEPTABLE_QUALITY;
