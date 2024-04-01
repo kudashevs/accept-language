@@ -120,11 +120,6 @@ class QualityValue
         return $this->normalizer->normalize($quality, $this->options);
     }
 
-    private function isAppropriateFallback(): bool
-    {
-        return $this->fallback > 0;
-    }
-
     /**
      * @return int|float
      */
