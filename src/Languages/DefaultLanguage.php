@@ -65,7 +65,7 @@ final class DefaultLanguage implements LanguageInterface
     /**
      * @param string $tag
      * @param int|float|string $quality
-     * @return array{tag: LanguageTag,quality: QualityValue,valid: bool}
+     * @return array{tag: LanguageTag, quality: QualityValue, valid: bool}
      */
     private function prepareLanguageState(string $tag, $quality): array
     {
