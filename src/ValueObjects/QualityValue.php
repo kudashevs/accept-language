@@ -13,7 +13,12 @@ class QualityValue
 
     private float $fallback;
 
-    private $quality; // @todo add int|float
+    private $quality;
+
+    private array $options = [
+        'fallback' => 0,
+        'allow_empty' => true,
+    ];
 
     private bool $valid = true;
 
@@ -24,9 +29,20 @@ class QualityValue
     public function __construct($quality, array $options = [])
     {
         $this->initNormalizer($options);
+        $this->initOptions($options);
         $this->initFallback($options);
 
         $this->initQuality($quality);
+    }
+
+    /**
+     * @param array<string, bool> $options
+     */
+    private function initOptions(array $options): void
+    {
+        $allowed = array_intersect_key($options, $this->options);
+
+        $this->options = array_merge($this->options, $allowed);
     }
 
     private function initNormalizer(array $options): void
