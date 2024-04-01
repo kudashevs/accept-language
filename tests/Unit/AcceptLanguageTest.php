@@ -1111,6 +1111,10 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'de;en;q=0.5'],
                 self::DEFAULT_LANGUAGE,
             ],
+            'three languages without qualities results in the first language' => [
+                ['http_accept_language' => 'de,en,es'],
+                'de',
+            ],
         ];
     }
 
