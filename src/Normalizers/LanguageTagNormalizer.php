@@ -87,10 +87,14 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     private function retrieveAppropriateSubtags(array $subtags): array
     {
-        return array_map(
-            'strval',
-            array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY)
-        );
+        $groups = $this->collectNamedGroups($subtags);
+
+        return array_map('strval', $groups);
+    }
+
+    private function collectNamedGroups(array $subtags): array
+    {
+        return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
     }
 
     /**
