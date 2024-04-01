@@ -15,9 +15,10 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     /**
      * 'allow_empty' A boolean that defines whether to handle an empty quality when a fallback is available.
      *
-     * @var array{allow_empty: bool}
+     * @var array{fallback: int, allow_empty: bool}
      */
     private array $options = [
+        'fallback' => -1,
         'allow_empty' => true,
     ];
 
@@ -39,10 +40,18 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     /**
      * @inheritDoc
      */
-    public function normalize($quality)
+    public function normalize($quality, array $options = [])
     {
+        $this->initOptions($options);
+
         if ($this->isUndefinedQuality($quality)) {
             return $this->generateForUndefined();
+        }
+
+        // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
+        // this is not a serious violation, we might want to handle this empty value when a fallback is available.
+        if ($this->isEmptyQuality($quality)) {
+            return $this->generateForEmpty();
         }
 
         if ($this->isValidQuality($quality)) {
@@ -127,12 +136,12 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     /**
      * @return int|float
      */
-    private function generateForEmpty(float $fallback)
+    private function generateForEmpty()
     {
         $quality = self::NOT_ACCEPTABLE_QUALITY;
 
-        if ($this->isValidQuality($fallback)) {
-            $quality = $fallback;
+        if ($this->isValidFallback()) {
+            $quality = $this->options['fallback'];
         }
 
         return $this->prepareQuality($quality);

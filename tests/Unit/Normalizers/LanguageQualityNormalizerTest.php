@@ -76,82 +76,99 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentQualityValuesWithFallback
      */
-    public function it_can_normalize_a_quality_with_fallback(array $range, $expected)
+    public function it_can_normalize_a_quality_with_fallback($quality, array $options, $expected)
     {
         $normalizer = new LanguageQualityNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
+        $this->assertSame($expected, $normalizer->normalize($quality, $options));
     }
 
     public static function provideDifferentQualityValuesWithFallback(): array
     {
         return [
             'a null quality with an invalid fallback results in the not acceptable' => [
-                [null, -1],
-                0,
+                null,
+                ['fallback' => -1],
+                1,
             ],
             'a null quality with a valid fallback 0.5 results in the provided fallback' => [
-                [null, 0.5],
+                null,
+                ['fallback' => 0.5],
                 0.5,
             ],
             'a null quality with a valid fallback 1.0 results in the provided fallback' => [
-                [null, 1.0],
+                null,
+                ['fallback' => 1.0],
                 1,
             ],
             'an empty quality with an invalid fallback results in the not acceptable' => [
-                ['', 2],
+                '',
+                ['fallback' => 2],
                 0,
             ],
             'an empty quality with a valid fallback 0.5 results in the provided fallback' => [
-                ['', 0.5],
+                '',
+                ['fallback' => 0.5],
                 0.5,
             ],
             'an empty quality with a valid fallback 1.0 results in the provided fallback' => [
-                ['', 1.0],
+                '',
+                ['fallback' => 1.0],
                 1,
             ],
             'a random string with a valid fallback results in the not acceptable' => [
-                ['wrong', 0.5],
+                'wrong',
+                ['fallback' => 0.5],
                 0,
             ],
             'a numerical string with an invalid quality and a valid fallback results in the not acceptable' => [
-                ['2', 0.5],
+                '2',
+                ['fallback' => 0.5],
                 0,
             ],
             'a numerical string with a valid quality and a valid fallback results in the quality' => [
-                ['1', 0.5],
+                '1',
+                ['fallback' => 0.5],
                 1,
             ],
             'an invalid negative quality with a valid fallback results in the not acceptable' => [
-                [-1, 0.5],
+                -1,
+                ['fallback' => 0.5],
                 0,
             ],
             'an invalid positive quality with a valid fallback results in the provided default' => [
-                [2, 0.5],
+                2,
+                ['fallback' => 0.5],
                 0,
             ],
             'an empty quality with a fallback 0 results in the minimum fallback provided fallback' => [
-                ['', 0],
+                '',
+                ['fallback' => 0],
                 0,
             ],
             'an empty quality with a fallback 0.5 results in the provided fallback' => [
-                ['', 0.5],
+                '',
+                ['fallback' => 0.5],
                 0.5,
             ],
             'an empty quality with a fallback 1 results in the provided fallback' => [
-                ['', 1],
+                '',
+                ['fallback' => 1],
                 1,
             ],
             'a valid quality 0 with a valid fallback results in the the not acceptable' => [
-                [0, 1],
+                0,
+                ['fallback' => 1],
                 0,
             ],
             'a valid quality 0.3 with a valid fallback results in the quality' => [
-                [0.3, 0.5],
+                0.3,
+                ['fallback' => 0.5],
                 0.3,
             ],
             'a valid quality 1 with a valid fallback results in the quality' => [
-                [1, 0.5],
+                1,
+                ['fallback' => 0.5],
                 1,
             ],
         ];
@@ -161,24 +178,30 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentAllowEmptyOptions
      */
-    public function it_can_normalize_an_empty_quality_with_different_options(array $options, array $range, $expected)
+    public function it_can_normalize_an_empty_quality_with_different_options(string $quality, array $options, $expected)
     {
         $normalizer = new LanguageQualityNormalizer($options);
 
-        $this->assertSame($expected, $normalizer->normalizeWithFallback(...$range));
+        $this->assertSame($expected, $normalizer->normalize($quality, $options));
     }
 
     public static function provideDifferentAllowEmptyOptions(): array
     {
         return [
             'an empty quality with the allowed option set to true results in the provided fallback' => [
-                ['allow_empty' => true],
-                ['', 0.5],
+                '',
+                [
+                    'fallback' => 0.5,
+                    'allow_empty' => true,
+                ],
                 0.5,
             ],
             'an empty quality with the allowed options set to false results in the not acceptable' => [
-                ['allow_empty' => false],
-                ['', 0.5],
+                '',
+                [
+                    'fallback' => 0.5,
+                    'allow_empty' => false,
+                ],
                 0,
             ],
         ];
