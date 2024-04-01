@@ -64,7 +64,7 @@ final class LanguageFactory
         $tag = (string)$rawLanguageRange[0];
         $quality = $rawLanguageRange[1] ?? null;
         $optionsWithFallback = array_merge($this->options, [
-            'fallback_value' => $fallbackQuality,
+            'fallback' => $fallbackQuality,
         ]);
 
         return DefaultLanguage::create($tag, $quality, $optionsWithFallback);
