@@ -12,10 +12,11 @@ interface QualityNormalizerInterface
     /**
      * Perform a normalization process and return a normalized quality.
      *
-     * @param int|float|string $quality
+     * @param int|float|string|null $quality
+     * @param array<string, int|float|bool> $options
      * @return int|float
      */
-    public function normalize($quality);
+    public function normalize($quality, array $options);
 
     /**
      * Perform a normalization process and return a normalized quality.
