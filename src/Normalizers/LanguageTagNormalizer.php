@@ -79,13 +79,13 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
             PREG_UNMATCHED_AS_NULL,
         );
 
-        return $this->prepareSubtags($subtags);
+        return $this->retrieveAppropriateSubtags($subtags);
     }
 
     /**
      * @return array<string, string>
      */
-    private function prepareSubtags(array $subtags): array
+    private function retrieveAppropriateSubtags(array $subtags): array
     {
         return array_map(
             'strval',
