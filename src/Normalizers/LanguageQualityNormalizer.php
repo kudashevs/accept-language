@@ -41,9 +41,8 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     public function normalize($quality)
     {
-        // If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
         if ($this->isUndefinedQuality($quality)) {
-            return $this->prepareQuality(1);
+            return $this->generateForUndefined();
         }
 
         if ($this->isValidQuality($quality)) {
@@ -56,6 +55,24 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     private function isUndefinedQuality($quality): bool
     {
         return is_null($quality);
+    }
+
+    private function generateForUndefined()
+    {
+        // If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
+        $quality = 1;
+
+        if ($this->isValidFallback()) {
+            $quality = $this->options['fallback'];
+        }
+
+        return $this->prepareQuality($quality);
+    }
+
+    private function isValidFallback(): bool
+    {
+        return isset($this->options['fallback'])
+            && $this->isValidQuality($this->options['fallback']);
     }
 
     private function isValidQuality($quality): bool
