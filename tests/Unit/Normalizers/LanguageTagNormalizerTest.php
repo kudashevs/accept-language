@@ -122,9 +122,9 @@ class LanguageTagNormalizerTest extends TestCase
      */
     public function it_can_normalize_with_a_provided_separator(string $tag, array $options, string $expected)
     {
-        $normalizer = new LanguageTagNormalizer($options);
+        $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize($tag));
+        $this->assertSame($expected, $normalizer->normalize($tag, $options));
     }
 
     public static function provideLanguageTagsWithDifferentSeparatorOption(): array
@@ -230,9 +230,9 @@ class LanguageTagNormalizerTest extends TestCase
      */
     public function it_can_normalize_with_provided_options(string $tag, array $options, string $expected)
     {
-        $normalizer = new LanguageTagNormalizer($options);
+        $normalizer = new LanguageTagNormalizer();
 
-        $this->assertSame($expected, $normalizer->normalize($tag));
+        $this->assertSame($expected, $normalizer->normalize($tag, $options));
     }
 
     public static function provideLanguageTagsWithDifferentWithOptions(): array

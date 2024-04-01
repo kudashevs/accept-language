@@ -47,8 +47,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      * @param string $tag
      * @return string
      */
-    public function normalize(string $tag): string
+    public function normalize(string $tag, array $options = []): string
     {
+        $this->initOptions($options);
+
         // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
         $subtags = $this->extractSubtags($tag);
 
