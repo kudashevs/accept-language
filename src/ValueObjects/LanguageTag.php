@@ -80,7 +80,7 @@ final class LanguageTag
         return array_merge([$this->separator], self::SUPPORTED_SEPARATORS);
     }
 
-    private function isValidTag($tag): bool
+    private function isValidTag(string $tag): bool
     {
         return $this->isWildcard($tag) || $this->isValidLanguageTag($tag);
     }
@@ -110,7 +110,7 @@ final class LanguageTag
         return preg_match('/^[a-z0-9\-]+$/iSU', $tag) === 1;
     }
 
-    private function isLikeLanguageTag($tag)
+    private function isLikeLanguageTag(string $tag): bool
     {
         return $this->isPrimarySubtag($tag) || $this->isPrimaryWithSubtags($tag);
     }
