@@ -31,10 +31,10 @@ class QualityValue
 
     private function initNormalizer(array $options): void
     {
-        $this->normalizer = $this->createQualityNormalizer($options);
+        $this->normalizer = $this->createDefaultNormalizer($options);
     }
 
-    private function createQualityNormalizer(array $options): QualityNormalizerInterface
+    private function createDefaultNormalizer(array $options): QualityNormalizerInterface
     {
         return new LanguageQualityNormalizer($options);
     }
