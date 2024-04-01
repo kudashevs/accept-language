@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Languages;
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 
-final class DefaultLanguage implements LanguageInterface, ConfigurableInterface
+final class DefaultLanguage implements LanguageInterface
 {
     private array $options;
 
@@ -88,7 +88,7 @@ final class DefaultLanguage implements LanguageInterface, ConfigurableInterface
     /**
      * {@inheritDoc}
      *
-     * @return array<string, bool|string>
+     * @return array<string, string|bool>
      */
     public function getOptions(): array
     {
