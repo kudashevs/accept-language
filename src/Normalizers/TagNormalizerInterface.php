@@ -15,5 +15,5 @@ interface TagNormalizerInterface
      * @param string $tag
      * @return string
      */
-    public function normalize(string $tag): string;
+    public function normalize(string $tag, array $options): string;
 }
