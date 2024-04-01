@@ -156,7 +156,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentQualityValuesWithDifferentFallbacks
      */
-    public function it_can_normalize_an_ivalid_quality_with_fallback(array $options, $input, $expected)
+    public function it_can_normalize_an_ivalid_quality_with_fallback($input, array $options, $expected)
     {
         $quality = new QualityValue($input, $options);
 
@@ -167,32 +167,39 @@ class QualityValueTest extends TestCase
     public static function provideDifferentQualityValuesWithDifferentFallbacks(): array
     {
         return [
-            'a null quality with a fallback results in the fallback' => [
-                [
-                    'fallback_value' => 1,
-                ],
+            'a null quality with a valid fallback results in the fallback' => [
                 null,
+                [
+                    'fallback' => 1,
+                ],
+                1,
+            ],
+            'a null quality with an invalid fallback results in the not acceptable' => [
+                null,
+                [
+                    'fallback' => 2,
+                ],
+                1,
+            ],
+            'a null quality with a fallback results in the fallback' => [
+                null,
+                [
+                    'fallback' => 1,
+                ],
                 1,
             ],
             'an empty quality with a fallback results in the fallback' => [
-                [
-                    'fallback_value' => 0.5,
-                ],
                 '',
+                [
+                    'fallback' => 0.5,
+                ],
                 0.5,
             ],
-            'a null quality with an invalid fallback results in the not acceptable' => [
-                [
-                    'fallback_value' => 2,
-                ],
-                null,
-                0,
-            ],
             'an empty quality with an invalid fallback results in the not acceptable' => [
-                [
-                    'fallback_value' => -1,
-                ],
                 '',
+                [
+                    'fallback' => -1,
+                ],
                 0,
             ],
         ];
