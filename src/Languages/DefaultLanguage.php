@@ -42,7 +42,7 @@ final class DefaultLanguage implements LanguageInterface, ConfigurableInterface
         return $language;
     }
 
-    private function __construct(string $tag, $quality, array $options = []) // @todo add union int|float
+    private function __construct(string $tag, $quality, array $options = [])
     {
         $this->initOptions($options);
         $this->initLanguage($tag, $quality);
