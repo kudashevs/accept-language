@@ -20,7 +20,7 @@ final class LanguageFactory
         $this->initOptions($options);
     }
 
-    protected function initOptions(array $options): void
+    private function initOptions(array $options): void
     {
         $this->options = $options;
     }
