@@ -11,8 +11,6 @@ class QualityValue
 {
     private QualityNormalizerInterface $normalizer;
 
-    private float $fallback;
-
     private $quality;
 
     private array $options = [
@@ -30,7 +28,6 @@ class QualityValue
     {
         $this->initNormalizer($options);
         $this->initOptions($options);
-        $this->initFallback($options);
 
         $this->initQuality($quality);
     }
@@ -53,11 +50,6 @@ class QualityValue
     private function createDefaultNormalizer(array $options): QualityNormalizerInterface
     {
         return new LanguageQualityNormalizer($options);
-    }
-
-    private function initFallback(array $options): void
-    {
-        $this->fallback = $options['fallback_value'] ?? 0;
     }
 
     private function initQuality($quality): void
