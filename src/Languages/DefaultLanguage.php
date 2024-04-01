@@ -9,11 +9,11 @@ use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
 
 final class DefaultLanguage implements LanguageInterface
 {
-    private array $options;
-
     private LanguageTag $tag;
 
     private QualityValue $quality;
+
+    private array $options;
 
     private bool $valid = false;
 
