@@ -52,11 +52,11 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
         $subtags = $this->extractSubtags($tag);
 
-        if ($this->isValidSetOfSubtags($subtags)) {
-            return $this->generateNormalizedTagFromSubtags($subtags);
+        if ($this->isInvalidSetOfSubtags($subtags)) {
+            return $tag;
         }
 
-        return $tag;
+        return $this->generateNormalizedTagFromSubtags($subtags);
     }
 
     /**
@@ -100,9 +100,9 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     /**
      * @param array<string, string> $subtags
      */
-    private function isValidSetOfSubtags(array $subtags): bool
+    private function isInvalidSetOfSubtags(array $subtags): bool
     {
-        return count($subtags) === 4;
+        return count($subtags) !== 4;
     }
 
     private function generateNormalizedTagFromSubtags(array $subtags): string
