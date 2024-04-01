@@ -22,12 +22,8 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         'allow_empty' => true,
     ];
 
-    /**
-     * @param array<string, bool|string> $options
-     */
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        $this->initOptions($options);
     }
 
     private function initOptions(array $options): void

@@ -180,7 +180,7 @@ class LanguageQualityNormalizerTest extends TestCase
      */
     public function it_can_normalize_an_empty_quality_with_different_options(string $quality, array $options, $expected)
     {
-        $normalizer = new LanguageQualityNormalizer($options);
+        $normalizer = new LanguageQualityNormalizer();
 
         $this->assertSame($expected, $normalizer->normalize($quality, $options));
     }
