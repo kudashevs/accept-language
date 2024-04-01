@@ -102,30 +102,6 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return $this->prepareQuality($quality);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function normalizeWithFallback($quality, float $fallback)
-    {
-        if ($this->isUndefinedQuality($quality)) {
-            return $this->prepareQuality(
-                $this->prepareFallback($fallback)
-            );
-        }
-
-        // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
-        // this is not a serious violation, we might want to handle this empty value when a fallback is available.
-        if ($this->isEmptyQuality($quality)) {
-            return $this->generateForEmpty($fallback);
-        }
-
-        if ($this->isValidQuality($quality)) {
-            return $this->generateForValid($quality);
-        }
-
-        return self::NOT_ACCEPTABLE_QUALITY;
-    }
-
     private function isEmptyQuality($quality): bool
     {
         return is_string($quality)
@@ -157,13 +133,5 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         }
 
         return (float)$quality;
-    }
-
-    /**
-     * @return int|float
-     */
-    private function prepareFallback(float $fallback)
-    {
-        return $this->isValidQuality($fallback) ? $fallback : self::NOT_ACCEPTABLE_QUALITY;
     }
 }

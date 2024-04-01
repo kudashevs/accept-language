@@ -17,14 +17,4 @@ interface QualityNormalizerInterface
      * @return int|float
      */
     public function normalize($quality, array $options);
-
-    /**
-     * Perform a normalization process and return a normalized quality.
-     * If the quality is not valid the fallback quality value might be used.
-     *
-     * @param int|float|string $quality
-     * @param float $fallback
-     * @return int|float
-     */
-    public function normalizeWithFallback($quality, float $fallback);
 }
