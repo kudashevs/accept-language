@@ -105,7 +105,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         }
 
         // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
-        // this is not a serious mistake, we might want to handle this empty value when a fallback is available.
+        // this is not a serious violation, we might want to handle this empty value when a fallback is available.
         if ($this->isEmptyQuality($quality)) {
             return $this->generateForEmpty($fallback);
         }
