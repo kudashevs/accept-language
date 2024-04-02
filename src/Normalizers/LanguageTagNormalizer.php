@@ -6,6 +6,8 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements TagNormalizerInterface
 {
+    private const DEFAULT_SEPARATOR = '-';
+
     /**
      * 'separator' A string with a custom separator to use in a normalized tag.
      * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
@@ -15,7 +17,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      * @var array{separator: string, with_extlang: bool, with_script: bool, with_region: bool}
      */
     private array $options = [
-        'separator' => '-',
         'with_extlang' => false,
         'with_script' => true,
         'with_region' => true,
@@ -38,7 +39,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     /**
      * Return a normalized language tag. The normalization process includes:
-     * - replacing a separator (a hyphen character) with a value from the "separator" option
      * - omitting unwanted subtags according to the pre-selected options
      * - formatting subtags according to RFC 5646 and RFC 4647
      *
@@ -116,7 +116,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
             $this->options['with_region'] ? $this->normalizeRegion($subtags['region']) : '',
         ];
 
-        return implode($this->options['separator'], array_filter($normalizedSubtags, 'strlen'));
+        return implode(
+            self::DEFAULT_SEPARATOR,
+            array_filter($normalizedSubtags, 'strlen')
+        );
     }
 
     private function normalizePrimary(string $subtag): string
