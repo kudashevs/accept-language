@@ -63,8 +63,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
 
     private function isValidFallback($fallback): bool
     {
-        return isset($fallback)
-            && $this->isValidQuality($fallback);
+        return $this->isValidQuality($fallback);
     }
 
     private function isValidQuality($quality): bool
