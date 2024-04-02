@@ -23,6 +23,10 @@ final class LanguageTag
 
     private TagNormalizerInterface $normalizer;
 
+    private string $tag;
+
+    private bool $valid = true;
+
     private string $separator;
 
     /**
@@ -37,10 +41,6 @@ final class LanguageTag
         'with_script' => true,
         'with_region' => true,
     ];
-
-    private string $tag;
-
-    private bool $valid = true;
 
     /**
      * @param string $tag
