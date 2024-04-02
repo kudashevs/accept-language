@@ -6,6 +6,12 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements TagNormalizerInterface
 {
+    private const SUBTAG_NORMALIZERS = [
+        'primary' => 'normalizePrimary',
+        'extlang' => 'normalizeExtlang',
+        'script' => 'normalizeScript',
+        'region' => 'normalizeRegion',
+    ];
 
     /**
      * 'separator' A string with a custom separator to use in a normalized tag.
@@ -124,6 +130,17 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
             '-',
             array_filter($normalizedSubtags, 'strlen')
         );
+    }
+
+    private function normalizeSubtags(array $subtags): array
+    {
+        $normalizedSubtags = [];
+
+        foreach ($subtags as $title => $value) {
+            $normalizedSubtags[$title] = [$this, self::SUBTAG_NORMALIZERS[$title]]($value);
+        }
+
+        return $normalizedSubtags;
     }
 
     private function normalizePrimary(string $subtag): string
