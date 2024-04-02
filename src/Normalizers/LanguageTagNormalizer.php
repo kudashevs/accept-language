@@ -26,7 +26,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     {
     }
 
-    private function initOptions(array $options): void
+    private function applyOptions(array $options): void
     {
         $allowed = array_intersect_key($options, $this->options);
 
@@ -45,7 +45,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     public function normalize(string $tag, array $options = []): string
     {
-        $this->initOptions($options);
+        $this->applyOptions($options);
 
         // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
         $subtags = $this->extractSubtags($tag);
