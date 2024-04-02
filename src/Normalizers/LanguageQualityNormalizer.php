@@ -14,25 +14,8 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
 
     private const ALLOW_EMPTY_DEFAULT = true;
 
-    /**
-     * 'allow_empty' A boolean that defines whether to handle an empty quality when a fallback is available.
-     *
-     * @var array{fallback: int, allow_empty: bool}
-     */
-    private array $options = [
-        'fallback' => -1,
-        'allow_empty' => true,
-    ];
-
     public function __construct()
     {
-    }
-
-    private function initOptions(array $options): void
-    {
-        $allowed = array_intersect_key($options, $this->options);
-
-        $this->options = array_merge($this->options, $allowed);
     }
 
     /**
@@ -40,8 +23,6 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     public function normalize($quality, array $options = [])
     {
-        $this->initOptions($options);
-
         if ($this->isUndefinedQuality($quality)) {
             return $this->generateForUndefined($options);
         }
@@ -107,8 +88,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     private function isEmptyQuality($quality): bool
     {
         return is_string($quality)
-            && trim((string)$quality) === ''
-            && $this->options['allow_empty'];
+            && trim((string)$quality) === '';
     }
 
     /**
