@@ -26,13 +26,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     {
     }
 
-    private function applyOptions(array $options): void
-    {
-        $allowed = array_intersect_key($options, $this->options);
-
-        $this->options = array_merge($this->options, $allowed);
-    }
-
     /**
      * Return a normalized language tag. The normalization process includes:
      * - omitting unwanted subtags according to the pre-selected options
@@ -55,6 +48,16 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         }
 
         return $this->generateNormalizedTagFromSubtags($subtags);
+    }
+
+    /**
+     * @param array<string, string|bool> $options
+     */
+    private function applyOptions(array $options): void
+    {
+        $allowed = array_intersect_key($options, $this->options);
+
+        $this->options = array_merge($this->options, $allowed);
     }
 
     /**
