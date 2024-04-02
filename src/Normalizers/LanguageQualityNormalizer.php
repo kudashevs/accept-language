@@ -54,16 +54,11 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         // If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
         $quality = 1;
 
-        if (isset($options['fallback']) && $this->isValidFallback($options['fallback'])) {
+        if (isset($options['fallback']) && $this->isValidQuality($options['fallback'])) {
             $quality = $options['fallback'];
         }
 
         return $this->prepareQuality($quality);
-    }
-
-    private function isValidFallback($fallback): bool
-    {
-        return $this->isValidQuality($fallback);
     }
 
     private function isValidQuality($quality): bool
@@ -111,7 +106,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     {
         $quality = self::NOT_ACCEPTABLE_QUALITY;
 
-        if (isset($options['fallback']) && $this->isValidFallback($options['fallback'])) {
+        if (isset($options['fallback']) && $this->isValidQuality($options['fallback'])) {
             $quality = $options['fallback'];
         }
 
