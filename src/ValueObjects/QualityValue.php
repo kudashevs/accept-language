@@ -60,7 +60,7 @@ class QualityValue
 
     private function initQuality($quality): void
     {
-        if (!$this->isValidQuality($quality)) {
+        if ($this->isInvalidQuality($quality)) {
             $this->quality = $this->prepareQuality($quality);
             $this->valid = false;
 
@@ -68,6 +68,11 @@ class QualityValue
         }
 
         $this->quality = $this->normalizeQuality($quality);
+    }
+
+    private function isInvalidQuality($quality): bool
+    {
+        return !$this->isValidQuality($quality);
     }
 
     private function isValidQuality($quality): bool
