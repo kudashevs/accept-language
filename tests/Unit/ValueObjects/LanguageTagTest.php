@@ -469,6 +469,20 @@ class LanguageTagTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_can_handle_an_empty_separator()
+    {
+        // The empty separator doesn't have a lot of sense, but let's consider it as a boundary case.
+        $language = new LanguageTag('de-DE', [
+            'separator' => '',
+        ]);
+
+        $this->assertCount(2, $language->getSubtags());
+        $this->assertTrue($language->isValid());
+    }
+
+    /**
+     * @test
      * @dataProvider provideDifferentLanguageValues
      */
     public function it_can_retrieve_a_primary_subtag_and_subtags(string $input, array $options, array $expected)
@@ -483,6 +497,13 @@ class LanguageTagTest extends TestCase
     public static function provideDifferentLanguageValues(): array
     {
         return [
+            'a two-letter language tag with script and region with empty separator results in the subtags' => [
+                'sr-Latn-RS',
+                [
+                    'separator' => '',
+                ],
+                ['sr', 'Latn', 'RS'],
+            ],
             'a two-letter language tag results in the subtags' => [
                 'en',
                 [
