@@ -16,7 +16,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentWrongOptions
      */
-    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type(array $options)
+    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type(array $options): void
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "' . key($options) . '" has a wrong value type');
@@ -46,7 +46,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throw_an_exception_when_a_wrong_default_language()
+    public function it_can_throw_an_exception_when_a_wrong_default_language(): void
     {
         $this->expectException(InvalidOptionValue::class);
         $this->expectExceptionMessage('The value "verywrong_language" is invalid');
@@ -57,7 +57,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_an_unknown_option_without_throwing_an_exception()
+    public function it_can_handle_an_unknown_option_without_throwing_an_exception(): void
     {
         $options = [
             'unknown_option' => false,
@@ -71,7 +71,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retain_the_original_header()
+    public function it_can_retain_the_original_header(): void
     {
         $options = [
             'http_accept_language' => 'en-US,en;q=0.5',
@@ -86,7 +86,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_a_default_language_when_no_header_and_no_options_are_provided()
+    public function it_can_retrieve_a_default_language_when_no_header_and_no_options_are_provided(): void
     {
         $service = new AcceptLanguage();
         $service->process();
@@ -102,7 +102,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_default_language_when_the_default_language_is_set(
         array $options,
         string $expected
-    ) {
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -238,7 +238,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_a_default_language_when_a_language_is_not_listed_in_accepted_languages()
+    public function it_can_retrieve_a_default_language_when_a_language_is_not_listed_in_accepted_languages(): void
     {
         $options = [
             'http_accept_language' => 'pp',
@@ -255,7 +255,7 @@ class AcceptLanguageTest extends TestCase
     /**
      * @test
      */
-    public function it_can_retrieve_a_preferred_language_when_a_language_is_listed_in_accepted_languages()
+    public function it_can_retrieve_a_preferred_language_when_a_language_is_listed_in_accepted_languages(): void
     {
         $options = [
             'default_language' => 'es',
@@ -276,7 +276,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_format_the_default_language_option_according_to_the_settings(
         array $options,
         string $expected
-    ) {
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -284,7 +284,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public static function provideDifferentDefaultLanguageOptionsWithFormatting()
+    public static function provideDifferentDefaultLanguageOptionsWithFormatting(): array
     {
         return [
             'a two-letter language tag with script and region results in the language' => [
@@ -314,7 +314,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_format_the_accepted_languages_option_according_to_the_settings(
         array $options,
         string $expected
-    ) {
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -322,7 +322,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public static function provideDifferentAcceptedLanguagesOptions()
+    public static function provideDifferentAcceptedLanguagesOptions(): array
     {
         return [
             'a two-letter language tag with script and region results in the language' => [
@@ -349,7 +349,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeaderValues
      */
-    public function it_can_retrieve_a_preferred_language(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language(array $options, string $expected): void
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -531,7 +531,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_preferred_language_when_the_accepted_languages_is_set(
         array $options,
         string $expected
-    ) {
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
         $result = $service->getPreferredLanguage();
@@ -648,7 +648,7 @@ class AcceptLanguageTest extends TestCase
      * @dataProvider provideDifferentMatchingOptions
      * @dataProvider provideDifferentSeparatorOptions
      */
-    public function it_can_retrieve_a_preferred_language_with_different_options(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language_with_different_options(array $options, string $expected): void
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -935,7 +935,7 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeadersWithDifferentLanguageLetterLength
      */
-    public function it_can_retrieve_a_preferred_language_of_different_length(array $options, string $expected)
+    public function it_can_retrieve_a_preferred_language_of_different_length(array $options, string $expected): void
     {
         $service = new AcceptLanguage($options);
         $service->process();
@@ -1064,7 +1064,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_preferred_language_when_the_header_is_malformed(
         array $options,
         string $expected
-    ) {
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
         $result = $service->getPreferredLanguage();
@@ -1118,10 +1118,8 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty()
+    /** @test */
+    public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty(): void
     {
         // This is an exceptional case where we want to handle an empty quality parameter value.
         $options = [
@@ -1136,7 +1134,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_cannot_log_activity_by_default()
+    public function it_cannot_log_activity_by_default(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1154,7 +1152,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_a_language_when_log_activity_is_enabled()
+    public function it_can_log_a_language_when_log_activity_is_enabled(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH',
@@ -1175,7 +1173,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_a_valid_language_all_the_stages_when_log_activity_is_enabled()
+    public function it_can_log_a_valid_language_all_the_stages_when_log_activity_is_enabled(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1210,7 +1208,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_an_invalid_language_all_the_stages_when_log_activity_is_enabled()
+    public function it_can_log_an_invalid_language_all_the_stages_when_log_activity_is_enabled(): void
     {
         $options = [
             'http_accept_language' => 'completely wrong',

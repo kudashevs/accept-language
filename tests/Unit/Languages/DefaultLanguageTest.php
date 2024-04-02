@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class DefaultLanguageTest extends TestCase
 {
     /** @test */
-    public function it_can_create_a_valid_language()
+    public function it_can_create_a_valid_language(): void
     {
         $language = DefaultLanguage::create('en', 1);
 
@@ -18,7 +18,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_an_invalid_language_from_valid_data()
+    public function it_can_create_an_invalid_language_from_valid_data(): void
     {
         $language = DefaultLanguage::createInvalid('en', 1);
 
@@ -28,7 +28,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_an_invalid_language_from_an_invalid_type()
+    public function it_can_create_an_invalid_language_from_an_invalid_type(): void
     {
         $language = DefaultLanguage::create(42, 1);
 
@@ -38,7 +38,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_an_invalid_language_from_an_invalid_language_string()
+    public function it_can_create_an_invalid_language_from_an_invalid_language_string(): void
     {
         $language = DefaultLanguage::create('verywrong_language', 1);
 
@@ -48,7 +48,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_valid_language_when_quality_is_string()
+    public function it_can_create_a_valid_language_when_quality_is_string(): void
     {
         $language = DefaultLanguage::create('en', '0.5');
 
@@ -58,7 +58,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_valid_language_when_quality_is_null()
+    public function it_can_create_a_valid_language_when_quality_is_null(): void
     {
         $language = DefaultLanguage::create('en', null);
 
@@ -75,7 +75,7 @@ class DefaultLanguageTest extends TestCase
         array $input,
         string $expectedTag,
         $expectedQuality
-    ) {
+    ): void {
         $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
@@ -127,7 +127,7 @@ class DefaultLanguageTest extends TestCase
         array $input,
         string $expectedTag,
         $expectedQuality
-    ) {
+    ): void {
         $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
@@ -184,7 +184,7 @@ class DefaultLanguageTest extends TestCase
         array $input,
         string $expectedTag,
         $expectedQuality
-    ) {
+    ): void {
         $language = DefaultLanguage::create(...$input);
 
         $this->assertSame($expectedTag, $language->getTag());
@@ -250,7 +250,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retain_the_provided_options()
+    public function it_can_retain_the_provided_options(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [
             'separator' => '~',
@@ -263,7 +263,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_subtags_of_a_tag()
+    public function it_can_retrieve_subtags_of_a_tag(): void
     {
         $expectedSubtags = ['de', 'Latn', 'DE'];
 
@@ -275,7 +275,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_a_primary_subtag()
+    public function it_can_retrieve_a_primary_subtag(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class LanguageQualityNormalizerTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $normalizer = new LanguageQualityNormalizer();
 
@@ -19,7 +19,7 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentQualityValues
      */
-    public function it_can_normalize_a_quality($quality, $expected)
+    public function it_can_normalize_a_quality($quality, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();
 
@@ -76,7 +76,7 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentQualityValuesWithFallback
      */
-    public function it_can_normalize_a_quality_with_fallback($quality, array $options, $expected)
+    public function it_can_normalize_a_quality_with_fallback($quality, array $options, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();
 
@@ -178,8 +178,11 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentAllowEmptyOptions
      */
-    public function it_can_normalize_an_empty_quality_with_different_options(string $quality, array $options, $expected)
-    {
+    public function it_can_normalize_an_empty_quality_with_different_options(
+        string $quality,
+        array $options,
+        $expected
+    ): void {
         $normalizer = new LanguageQualityNormalizer();
 
         $this->assertSame($expected, $normalizer->normalize($quality, $options));
@@ -211,7 +214,7 @@ class LanguageQualityNormalizerTest extends TestCase
      * @test
      * @dataProvider providedDifferentQualityBoundaryValues
      */
-    public function it_can_normalize_at_boundaries($quality, $expected)
+    public function it_can_normalize_at_boundaries($quality, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class LanguageTagTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $tag = new LanguageTag('en');
 
@@ -20,7 +20,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidLanguageValues
      */
-    public function it_can_handle_an_ivalid_language_tag(string $input, string $expected)
+    public function it_can_handle_an_ivalid_language_tag(string $input, string $expected): void
     {
         $quality = new LanguageTag($input);
 
@@ -54,7 +54,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentValidLanguageValues
      */
-    public function it_can_create_a_valid_language_tag_from_the_valid_data(string $input, string $expected)
+    public function it_can_create_a_valid_language_tag_from_the_valid_data(string $input, string $expected): void
     {
         $language = new LanguageTag($input, [
             'with_extlang' => true,
@@ -124,7 +124,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValuesWithDifferentSubtagOptions
      */
-    public function it_can_normalize_with_the_provided_options(string $input, array $options, string $expected)
+    public function it_can_normalize_with_the_provided_options(string $input, array $options, string $expected): void
     {
         $language = new LanguageTag($input, $options);
 
@@ -187,7 +187,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValuesWithDifferentSeparatorOption
      */
-    public function it_can_normalize_with_a_provided_separator(string $input, array $options, string $expected)
+    public function it_can_normalize_with_a_provided_separator(string $input, array $options, string $expected): void
     {
         $language = new LanguageTag($input, $options);
 
@@ -470,7 +470,7 @@ class LanguageTagTest extends TestCase
     /**
      * @test
      */
-    public function it_can_handle_an_empty_separator()
+    public function it_can_handle_an_empty_separator(): void
     {
         // The empty separator doesn't have a lot of sense, but let's consider it as a boundary case.
         $language = new LanguageTag('de-DE', [
@@ -485,7 +485,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValues
      */
-    public function it_can_retrieve_a_primary_subtag_and_subtags(string $input, array $options, array $expected)
+    public function it_can_retrieve_a_primary_subtag_and_subtags(string $input, array $options, array $expected): void
     {
         $language = new LanguageTag($input, $options);
 

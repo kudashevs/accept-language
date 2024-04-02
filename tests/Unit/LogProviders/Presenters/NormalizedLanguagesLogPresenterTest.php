@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class NormalizedLanguagesLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_present_an_event_with_data()
+    public function it_can_present_an_event_with_data(): void
     {
         $handler = new NormalizedLanguagesLogPresenter('retrieve_normalized_languages');
         $presentation = $handler->present(
@@ -20,7 +20,7 @@ class NormalizedLanguagesLogPresenterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_present_an_event_with_empty_data()
+    public function it_can_present_an_event_with_empty_data(): void
     {
         $presenter = new NormalizedLanguagesLogPresenter('retrieve_normalized_languages');
         $presentation = $presenter->present([]);

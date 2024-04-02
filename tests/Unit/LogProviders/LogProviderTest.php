@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 class LogProviderTest extends TestCase
 {
     /** @test */
-    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type()
+    public function it_can_throw_an_exception_when_an_option_of_the_wrong_type(): void
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('The option "log_only" has a wrong value type');
@@ -25,7 +25,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throw_an_exception_when_a_wrong_log_only_event()
+    public function it_can_throw_an_exception_when_a_wrong_log_only_event(): void
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessageMatches('/wrong.+is not/');
@@ -36,7 +36,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throw_an_exception_when_wrong_log_only_events()
+    public function it_can_throw_an_exception_when_wrong_log_only_events(): void
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessageMatches('/mistaken.+incorrect.+are not/');
@@ -53,7 +53,7 @@ class LogProviderTest extends TestCase
      * @test
      * @see LogProviderTest::it_can_handle_a_valid_log_level_option()
      */
-    public function it_can_throw_an_exception_when_a_wrong_log_level()
+    public function it_can_throw_an_exception_when_a_wrong_log_level(): void
     {
         $this->expectException(InvalidLogLevelName::class);
         $this->expectExceptionMessage('wrong');
@@ -64,7 +64,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throw_an_exception_when_a_wrong_event_name()
+    public function it_can_throw_an_exception_when_a_wrong_event_name(): void
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessage('wrong');
@@ -77,7 +77,7 @@ class LogProviderTest extends TestCase
      * @test
      * @see LogProviderTest::it_can_throw_an_exception_when_a_wrong_log_level()
      */
-    public function it_can_handle_a_valid_log_level_option()
+    public function it_can_handle_a_valid_log_level_option(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->once())
@@ -94,7 +94,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_skip_handling_an_event_not_listed_in_log_only()
+    public function it_can_skip_handling_an_event_not_listed_in_log_only(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->never())
@@ -109,7 +109,7 @@ class LogProviderTest extends TestCase
     }
 
     /** @test */
-    public function is_can_handle_only_an_event_listed_in_log_only()
+    public function is_can_handle_only_an_event_listed_in_log_only(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
         $loggerMock->expects($this->once())

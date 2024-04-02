@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class HeaderLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_present_an_event_with_data()
+    public function it_can_present_an_event_with_data(): void
     {
         $presenter = new HeaderLogPresenter('retrieve_header');
         $presentation = $presenter->present('fr-CH,fr;q=0.9');
@@ -17,7 +17,7 @@ class HeaderLogPresenterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_present_an_event_with_empty_data()
+    public function it_can_present_an_event_with_empty_data(): void
     {
         $presenter = new HeaderLogPresenter('retrieve_header');
         $presentation = $presenter->present('');

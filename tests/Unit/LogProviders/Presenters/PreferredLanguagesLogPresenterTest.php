@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class PreferredLanguagesLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_present_an_event_with_data()
+    public function it_can_present_an_event_with_data(): void
     {
         $presenter = new PreferredLanguagesLogPresenter('retrieve_preferred_languages');
         $presentation = $presenter->present(
@@ -20,7 +20,7 @@ class PreferredLanguagesLogPresenterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_present_an_event_with_empty_data()
+    public function it_can_present_an_event_with_empty_data(): void
     {
         $presenter = new PreferredLanguagesLogPresenter('retrieve_preferred_languages');
         $presentation = $presenter->present([]);

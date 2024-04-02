@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class RawLanguagesLogPresenterTest extends TestCase
 {
     /** @test */
-    public function it_can_present_an_event_with_data()
+    public function it_can_present_an_event_with_data(): void
     {
         $presenter = new RawLanguagesLogPresenter('retrieve_raw_languages');
         $presentation = $presenter->present(
@@ -20,7 +20,7 @@ class RawLanguagesLogPresenterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_present_an_event_with_empty_data()
+    public function it_can_present_an_event_with_empty_data(): void
     {
         $presenter = new RawLanguagesLogPresenter('retrieve_raw_languages');
         $presentation = $presenter->present([]);

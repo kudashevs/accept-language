@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class LanguageTagNormalizerTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $normalizer = new LanguageTagNormalizer();
 
@@ -19,7 +19,7 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageTags
      */
-    public function it_can_normalize_a_language_tag(string $tag, string $expected)
+    public function it_can_normalize_a_language_tag(string $tag, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();
         $defaultOptions = [
@@ -125,7 +125,7 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideLanguageTagsWithDifferentWithOptions
      */
-    public function it_can_normalize_with_provided_options(string $tag, array $options, string $expected)
+    public function it_can_normalize_with_provided_options(string $tag, array $options, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();
 
@@ -241,7 +241,7 @@ class LanguageTagNormalizerTest extends TestCase
      * @test
      * @dataProvider provideExceptionalCases
      */
-    public function it_can_normalize_an_exceptional_case(string $tag, string $expected)
+    public function it_can_normalize_an_exceptional_case(string $tag, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();
         $defaultOptions = [

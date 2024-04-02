@@ -11,7 +11,7 @@ class CaughtBugsTest extends ExtendedTestCase
     /**
      * @test
      */
-    public function it_can_handle_a_bug_in_the_retrieve_acceptable_languages_intersection()
+    public function it_can_handle_a_bug_in_the_retrieve_acceptable_languages_intersection(): void
     {
         /*
          * Bug found: 14.02.2021
@@ -32,7 +32,7 @@ class CaughtBugsTest extends ExtendedTestCase
     /**
      * @test
      */
-    public function it_can_handle_a_bug_in_the_parse_header()
+    public function it_can_handle_a_bug_in_the_parse_header(): void
     {
         /*
          * Bug found: 13.01.2022
@@ -51,7 +51,7 @@ class CaughtBugsTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_boolean_options_using_the_initial_config()
+    public function it_can_apply_boolean_options_using_the_initial_config(): void
     {
         /*
          * Bug found: 27.08.2023

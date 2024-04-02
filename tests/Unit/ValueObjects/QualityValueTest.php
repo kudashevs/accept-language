@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class QualityValueTest extends TestCase
 {
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $quality = new QualityValue(1);
 
@@ -20,7 +20,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidQualityValues
      */
-    public function it_can_handle_an_ivalid_quality($input, $expected)
+    public function it_can_handle_an_ivalid_quality($input, $expected): void
     {
         $quality = new QualityValue($input);
 
@@ -58,7 +58,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentValidQualityValues
      */
-    public function it_can_normalize_a_valid_quality($input, $expected)
+    public function it_can_normalize_a_valid_quality($input, $expected): void
     {
         $quality = new QualityValue($input);
 
@@ -108,7 +108,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider providedDifferentQualityBoundaryValues
      */
-    public function it_can_normalize_at_boundaries($input, $expected, bool $valid)
+    public function it_can_normalize_at_boundaries($input, $expected, bool $valid): void
     {
         $quality = new QualityValue($input);
 
@@ -156,7 +156,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentQualityValuesWithDifferentFallbacks
      */
-    public function it_can_normalize_an_ivalid_quality_with_fallback($input, array $options, $expected)
+    public function it_can_normalize_an_ivalid_quality_with_fallback($input, array $options, $expected): void
     {
         $quality = new QualityValue($input, $options);
 

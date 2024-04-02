@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class LanguageFactoryTest extends TestCase
 {
     /** @test */
-    public function it_can_hande_when_language_range_is_empty()
+    public function it_can_hande_when_language_range_is_empty(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageRange([], 1);
@@ -17,7 +17,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_when_language_range_is_suspicious()
+    public function it_can_handle_when_language_range_is_suspicious(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageRange(['en', 1, 'wrong', 42], 1);
@@ -26,7 +26,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_language_tag_from_a_valid_language_string()
+    public function it_can_create_a_language_tag_from_a_valid_language_string(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageString('en-US');
@@ -37,7 +37,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_language_from_an_invalid_language_string()
+    public function it_can_create_a_language_from_an_invalid_language_string(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageString('verywrong');
@@ -48,7 +48,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_language_tag_from_a_language_string_and_a_valid_quality()
+    public function it_can_create_a_language_tag_from_a_language_string_and_a_valid_quality(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageString('en-US', 0.8);
@@ -59,7 +59,7 @@ class LanguageFactoryTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_a_language_tag_from_a_language_range()
+    public function it_can_create_a_language_tag_from_a_language_range(): void
     {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageRange(['en'], 1);
@@ -77,7 +77,7 @@ class LanguageFactoryTest extends TestCase
         array $range,
         string $expectedTag,
         float $expectedQuality
-    ) {
+    ): void {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageRange($range, 1);
 
@@ -105,7 +105,7 @@ class LanguageFactoryTest extends TestCase
         array $range,
         string $expectedTag,
         float $expectedQuality
-    ) {
+    ): void {
         $service = new LanguageFactory();
         $language = $service->makeFromLanguageRange(...$range);
 

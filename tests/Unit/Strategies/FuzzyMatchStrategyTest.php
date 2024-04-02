@@ -7,7 +7,7 @@ use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 class FuzzyMatchStrategyTest extends TestCase
 {
     /** @test */
-    public function it_can_retrieve_the_matching_language()
+    public function it_can_retrieve_the_matching_language(): void
     {
         $languages = [
             $this->createLanguage('fr-CH', 0.5),
@@ -25,7 +25,7 @@ class FuzzyMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_weak_matching_language()
+    public function it_can_retrieve_the_weak_matching_language(): void
     {
         $languages = [
             $this->createLanguage('fr-Latn-CH', 0.5),
@@ -43,7 +43,7 @@ class FuzzyMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_matching_languages_from_languages()
+    public function it_can_retrieve_the_matching_languages_from_languages(): void
     {
         $languages = [
             $this->createLanguage('fr', 1),
@@ -67,7 +67,7 @@ class FuzzyMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_matching_languages_from_similar_languages()
+    public function it_can_retrieve_the_matching_languages_from_similar_languages(): void
     {
         $languages = [
             $this->createLanguage('fr', 1),
@@ -90,7 +90,7 @@ class FuzzyMatchStrategyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retrieve_the_weak_matching_language_from_languages()
+    public function it_can_retrieve_the_weak_matching_language_from_languages(): void
     {
         $languages = [
             $this->createLanguage('de', 1),
