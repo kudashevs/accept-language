@@ -6,7 +6,6 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements TagNormalizerInterface
 {
-    private const DEFAULT_SEPARATOR = '-';
 
     /**
      * 'separator' A string with a custom separator to use in a normalized tag.
@@ -115,8 +114,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
             $this->options['with_region'] ? $this->normalizeRegion($subtags['region']) : '',
         ];
 
+        // Subtags are distinguished and separated from one another by a hyphen.
+        // For more information about a separator see RFC 5646, Section 2.1.
         return implode(
-            self::DEFAULT_SEPARATOR,
+            '-',
             array_filter($normalizedSubtags, 'strlen')
         );
     }
