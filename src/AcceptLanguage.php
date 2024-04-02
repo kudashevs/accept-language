@@ -19,8 +19,8 @@ use Psr\Log\LoggerInterface;
 
 class AcceptLanguage
 {
-    // The length of the primary language subtag is limited from 2 to 3 letters.
-    // However, we might want to change these values in the future.
+    // The length of the primary subtag is limited to a range of 2 to 3 letters.
+    // However, these values might be changed in the future.
     protected const PRIMARY_SUBTAG_MIN_LENGTH = 2;
     protected const PRIMARY_SUBTAG_MAX_LENGTH = 3;
 
@@ -238,8 +238,8 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        // There are several situations when there is no need to continue
-        // further processing as they result into the default language.
+        // There are several situations that result into the default language
+        // so there is no need to continue the further header processing.
         if ($this->isDefaultLanguageCase($header)) {
             return $this->processDefaultLanguageCase();
         }
