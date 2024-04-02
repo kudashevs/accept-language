@@ -48,21 +48,21 @@ final class LanguageTag
      */
     public function __construct(string $tag, array $options = [])
     {
-        $this->initNormalizer($options);
+        $this->initNormalizer();
         $this->initOptions($options);
         $this->initSeparator($options);
 
         $this->initTag($tag);
     }
 
-    private function initNormalizer(array $options): void
+    private function initNormalizer(): void
     {
-        $this->normalizer = $this->createDefaultNormalizer($options);
+        $this->normalizer = $this->createDefaultNormalizer();
     }
 
-    private function createDefaultNormalizer(array $options): TagNormalizerInterface
+    private function createDefaultNormalizer(): TagNormalizerInterface
     {
-        return new LanguageTagNormalizer($options);
+        return new LanguageTagNormalizer();
     }
 
     /**
