@@ -13,6 +13,8 @@ class QualityValue
 
     private $quality;
 
+    private bool $valid = true;
+
     /**
      * 'fallback' int|float An int or float with a valid quality fallback value. See RFC 7231, Section 5.3.1.
      * 'allow_empty' bool A boolean that defines whether to handle an empty quality when a valid fallback is available.
@@ -23,8 +25,6 @@ class QualityValue
         'fallback' => -1,
         'allow_empty' => true,
     ];
-
-    private bool $valid = true;
 
     /**
      * @param int|float|string $quality
