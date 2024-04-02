@@ -96,7 +96,9 @@ final class LanguageTag
 
     private function prepareTag(string $tag): string
     {
-        return str_replace($this->retrieveSeparators(), self::DEFAULT_SEPARATOR, $tag);
+        // Subtags are distinguished and separated from one another by a hyphen.
+        // For more information about a separator see RFC 5646, Section 2.1.
+        return str_replace($this->retrieveSeparators(), '-', $tag);
     }
 
     private function retrieveSeparators(): array
