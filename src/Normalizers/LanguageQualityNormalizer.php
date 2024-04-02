@@ -43,13 +43,13 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         $this->initOptions($options);
 
         if ($this->isUndefinedQuality($quality)) {
-            return $this->generateForUndefined();
+            return $this->generateForUndefined($options);
         }
 
         // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
         // this is not a serious violation, we might want to handle this empty value when a fallback is available.
         if ($this->isEmptyQuality($quality) && $this->isEmptyAllowed($options)) {
-            return $this->generateForEmpty();
+            return $this->generateForEmpty($options);
         }
 
         if ($this->isValidQuality($quality)) {
@@ -64,22 +64,26 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return is_null($quality);
     }
 
-    private function generateForUndefined()
+    /**
+     * @param array<string, int|float> $options
+     * @return int|float
+     */
+    private function generateForUndefined(array $options)
     {
         // If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
         $quality = 1;
 
-        if ($this->isValidFallback()) {
-            $quality = $this->options['fallback'];
+        if (isset($options['fallback']) && $this->isValidFallback($options['fallback'])) {
+            $quality = $options['fallback'];
         }
 
         return $this->prepareQuality($quality);
     }
 
-    private function isValidFallback(): bool
+    private function isValidFallback($fallback): bool
     {
-        return isset($this->options['fallback'])
-            && $this->isValidQuality($this->options['fallback']);
+        return isset($fallback)
+            && $this->isValidQuality($fallback);
     }
 
     private function isValidQuality($quality): bool
@@ -121,14 +125,15 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     }
 
     /**
+     * @param array<string, int|float> $options
      * @return int|float
      */
-    private function generateForEmpty()
+    private function generateForEmpty(array $options)
     {
         $quality = self::NOT_ACCEPTABLE_QUALITY;
 
-        if ($this->isValidFallback()) {
-            $quality = $this->options['fallback'];
+        if (isset($options['fallback']) && $this->isValidFallback($options['fallback'])) {
+            $quality = $options['fallback'];
         }
 
         return $this->prepareQuality($quality);
