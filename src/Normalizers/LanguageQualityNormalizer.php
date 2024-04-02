@@ -12,6 +12,9 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
+    /**
+     * The value defines whether empty quality values after "q=" are acceptable.
+     */
     private const ALLOW_EMPTY_DEFAULT = true;
 
     public function __construct()
