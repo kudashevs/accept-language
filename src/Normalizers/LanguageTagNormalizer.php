@@ -14,7 +14,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     ];
 
     /**
-     * 'separator' A string with a custom separator to use in a normalized tag.
      * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
      * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
      * 'with_region' A boolean that defines whether to add a region subtag to a normalized tag.
@@ -117,19 +116,40 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     private function generateNormalizedTagFromSubtags(array $subtags, array $options): string
     {
-        $normalizedSubtags = [
-            $this->normalizePrimary($subtags['primary']),
-            isset($options['with_extlang']) && $options['with_extlang'] === true ? $this->normalizeExtlang($subtags['extlang']) : '',
-            isset($options['with_script']) && $options['with_script'] === true ? $this->normalizeScript($subtags['script']) : '',
-            isset($options['with_region']) && $options['with_region'] === true ? $this->normalizeRegion($subtags['region']) : '',
-        ];
+        $applicableSubtags = $this->retrieveApplicableSubtags($subtags, $options);
+
+        $normalizedSubtags = $this->normalizeSubtags($applicableSubtags);
 
         // Subtags are distinguished and separated from one another by a hyphen.
         // For more information about a separator see RFC 5646, Section 2.1.
         return implode(
             '-',
-            array_filter($normalizedSubtags, 'strlen')
+            $normalizedSubtags
         );
+    }
+
+    private function retrieveApplicableSubtags(array $subtags, array $options): array
+    {
+        return array_filter($subtags, function ($value, $key) use ($options) {
+            return !$this->isEmpty($value) && ($this->isPrimary($key) || $this->isRequired($key, $options));
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+
+    private function isEmpty(string $value): bool
+    {
+        return trim($value) === '';
+    }
+
+    private function isPrimary(string $subtag): bool
+    {
+        return $subtag === 'primary';
+    }
+
+    private function isRequired(string $key, array $options): bool
+    {
+        $optionKey = 'with_' . $key;
+
+        return isset($options[$optionKey]) && $options[$optionKey] === true;
     }
 
     private function normalizeSubtags(array $subtags): array
