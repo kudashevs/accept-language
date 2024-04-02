@@ -124,7 +124,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValuesWithDifferentSubtagOptions
      */
-    public function it_can_normalize_with_the_provided_options(array $options, string $input, string $expected)
+    public function it_can_normalize_with_the_provided_options(string $input, array $options, string $expected)
     {
         $language = new LanguageTag($input, $options);
 
@@ -136,48 +136,48 @@ class LanguageTagTest extends TestCase
     {
         return [
             'a two-letter language tag with all options disabled results in the language' => [
+                'de-gsg-Latn-DE',
                 [
                     'with_extlang' => false,
                     'with_script' => false,
                     'with_region' => false,
                 ],
-                'de-gsg-Latn-DE',
                 'de',
             ],
             'a two-letter language tag with extlang option results in the language' => [
+                'de-gsg-Latn-DE',
                 [
                     'with_extlang' => true,
                     'with_script' => false,
                     'with_region' => false,
                 ],
-                'de-gsg-Latn-DE',
                 'de-gsg',
             ],
             'a two-letter language tag with region option results in the language' => [
+                'de-gsg-Latn-DE',
                 [
                     'with_extlang' => false,
                     'with_script' => false,
                     'with_region' => true,
                 ],
-                'de-gsg-Latn-DE',
                 'de-DE',
             ],
             'a two-letter language tag with script option results in the language' => [
+                'de-gsg-Latn-DE',
                 [
                     'with_extlang' => false,
                     'with_script' => true,
                     'with_region' => false,
                 ],
-                'de-gsg-Latn-DE',
                 'de-Latn',
             ],
             'a two-letter language tag with all options enabled results in the language' => [
+                'de-gsg-Latn-DE',
                 [
                     'with_extlang' => true,
                     'with_script' => true,
                     'with_region' => true,
                 ],
-                'de-gsg-Latn-DE',
                 'de-gsg-Latn-DE',
             ],
         ];
@@ -187,7 +187,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValuesWithDifferentSeparatorOption
      */
-    public function it_can_normalize_with_a_provided_separator(array $options, string $input, string $expected)
+    public function it_can_normalize_with_a_provided_separator(string $input, array $options, string $expected)
     {
         $language = new LanguageTag($input, $options);
 
@@ -199,269 +199,269 @@ class LanguageTagTest extends TestCase
     {
         return [
             'a two-letter language tag results in no change' => [
+                'en',
                 [
                     'separator' => '_',
                 ],
-                'en',
                 'en',
             ],
             'a two-letter hyphenated language tag with script with hyphen separator results in no separator change' => [
+                'sr-Latn',
                 [
                     'separator' => '-',
                 ],
-                'sr-Latn',
                 'sr-Latn',
             ],
             'a two-letter hyphenated language tag with script and region with hyphen separator results in no separator change' => [
+                'sr-Latn-RS',
                 [
                     'separator' => '-',
                 ],
-                'sr-Latn-RS',
                 'sr-Latn-RS',
             ],
             'a two-letter hyphenated language tag with extlang, script, and region with hyphen separator remove extlang and no separator change' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '-',
                 ],
-                'zh-yue-Hant-CN',
                 'zh-Hant-CN',
             ],
             'a two-letter hyphenated language tag with script with underscore separator change the separator' => [
+                'sr-Latn',
                 [
                     'separator' => '_',
                 ],
-                'sr-Latn',
                 'sr_Latn',
             ],
             'a two-letter hyphenated language tag with script and region with underscore separator change the separator' => [
+                'sr-Latn-RS',
                 [
                     'separator' => '_',
                 ],
-                'sr-Latn-RS',
                 'sr_Latn_RS',
             ],
             'a two-letter hyphenated language tag with extlang, script, and region with underscore separator remove extlang and change the separator' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
                 ],
-                'zh-yue-Hant-CN',
                 'zh_Hant_CN',
             ],
             'a two-letter underscored language tag with script with underscore separator results in no separator change' => [
+                'sr_Latn',
                 [
                     'separator' => '_',
                 ],
-                'sr_Latn',
                 'sr_Latn',
             ],
             'a two-letter underscored language tag with script and region with underscore separator results in no separator change' => [
+                'sr_Latn_RS',
                 [
                     'separator' => '_',
                 ],
-                'sr_Latn_RS',
                 'sr_Latn_RS',
             ],
             'a two-letter underscored language tag with extlang, script, and region with underscore separator results in remove extlang and no separator change' => [
+                'zh_yue_Hant_CN',
                 [
                     'separator' => '_',
                 ],
-                'zh_yue_Hant_CN',
                 'zh_Hant_CN',
             ],
             'a two-letter underscored language tag with script with hyphen separator change the separator' => [
+                'sr_Latn',
                 [
                     'separator' => '-',
                 ],
-                'sr_Latn',
                 'sr-Latn',
             ],
             'a two-letter underscored language tag with script and region with hyphen separator change the separator' => [
+                'sr_Latn_RS',
                 [
                     'separator' => '-',
                 ],
-                'sr_Latn_RS',
                 'sr-Latn-RS',
             ],
             'a two-letter underscored language tag with extlang, script, and region with hyphen separator results in remove extlang and change the separator' => [
+                'zh_yue_Hant_CN',
                 [
                     'separator' => '-',
                 ],
-                'zh_yue_Hant_CN',
                 'zh-Hant-CN',
             ],
             'a two-letter hyphenated language tag with script with tilde separator change the separator' => [
+                'sr-Latn',
                 [
                     'separator' => '~',
                 ],
-                'sr-Latn',
                 'sr~Latn',
             ],
             'a two-letter hyphenated language tag with script and region with tilde separator change the separator' => [
+                'sr-Latn-RS',
                 [
                     'separator' => '~',
                 ],
-                'sr-Latn-RS',
                 'sr~Latn~RS',
             ],
             'a two-letter hyphenated language tag with extlang, script, and region with tilde separator results in remove extlang and change the separator' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '~',
                 ],
-                'zh-yue-Hant-CN',
                 'zh~Hant~CN',
             ],
             'a two-letter underscored language tag with script with tilde separator change the separator' => [
+                'sr_Latn',
                 [
                     'separator' => '~',
                 ],
-                'sr_Latn',
                 'sr~Latn',
             ],
             'a two-letter underscored language tag with script and region with tilde separator change the separator' => [
+                'sr_Latn_RS',
                 [
                     'separator' => '~',
                 ],
-                'sr_Latn_RS',
                 'sr~Latn~RS',
             ],
             'a two-letter underscored language tag with extlang, script, and region with tilde separator remove extlang and change the separator' => [
+                'zh_yue_Hant_CN',
                 [
                     'separator' => '~',
                 ],
-                'zh_yue_Hant_CN',
                 'zh~Hant~CN',
             ],
             'a three-letter language tag results in no change' => [
+                'sgn',
                 [
                     'separator' => '_',
                 ],
-                'sgn',
                 'sgn',
             ],
             'a three-letter hyphenated language tag with script with hyphen separator results in no separator change' => [
+                'sgn-Latn',
                 [
                     'separator' => '-',
                 ],
-                'sgn-Latn',
                 'sgn-Latn',
             ],
             'a three-letter hyphenated language tag with script and region with hyphen separator results in no separator change' => [
+                'sgn-Latn-RS',
                 [
                     'separator' => '-',
                 ],
-                'sgn-Latn-RS',
                 'sgn-Latn-RS',
             ],
             'a three-letter hyphenated language tag with extlang, script, and region with hyphen separator results in remove extlang and no separator change' => [
+                'sgn-ysl-Latn-RS',
                 [
                     'separator' => '-',
                 ],
-                'sgn-ysl-Latn-RS',
                 'sgn-Latn-RS',
             ],
             'a three-letter hyphenated language tag with script with underscore separator change the separator' => [
+                'sgn-Latn',
                 [
                     'separator' => '_',
                 ],
-                'sgn-Latn',
                 'sgn_Latn',
             ],
             'a three-letter hyphenated language tag with script and region with underscore separator change the separator' => [
+                'sgn-Latn-RS',
                 [
                     'separator' => '_',
                 ],
-                'sgn-Latn-RS',
                 'sgn_Latn_RS',
             ],
             'a three-letter hyphenated language tag with extlang, script, and region with underscore separator change the separator' => [
+                'sgn-ysl-Latn-RS',
                 [
                     'separator' => '_',
                 ],
-                'sgn-ysl-Latn-RS',
                 'sgn_Latn_RS',
             ],
             'a three-letter underscored language tag with script with underscore separator results in no separator change' => [
+                'sgn_Latn',
                 [
                     'separator' => '_',
                 ],
-                'sgn_Latn',
                 'sgn_Latn',
             ],
             'a three-letter underscored language tag with script and region with underscore separator results in no separator change' => [
+                'sgn_Latn_RS',
                 [
                     'separator' => '_',
                 ],
-                'sgn_Latn_RS',
                 'sgn_Latn_RS',
             ],
             'a three-letter underscored language tag with extlang, script, and region with underscore results in remove extlang and no separator change' => [
+                'sgn_ysl_Latn_RS',
                 [
                     'separator' => '_',
                 ],
-                'sgn_ysl_Latn_RS',
                 'sgn_Latn_RS',
             ],
             'a three-letter underscored language tag with script with hyphen separator change the separator' => [
+                'sgn_Latn',
                 [
                     'separator' => '-',
                 ],
-                'sgn_Latn',
                 'sgn-Latn',
             ],
             'a three-letter underscored language tag with script and region with hyphen separator change the separator' => [
+                'sgn_Latn_RS',
                 [
                     'separator' => '-',
                 ],
-                'sgn_Latn_RS',
                 'sgn-Latn-RS',
             ],
             'a three-letter underscored language tag with extlang, script, and region with hyphen separator change the separator' => [
+                'sgn_ysl_Latn_RS',
                 [
                     'separator' => '-',
                 ],
-                'sgn_ysl_Latn_RS',
                 'sgn-Latn-RS',
             ],
             'a three-letter hyphenated language tag with script with tilde separator change the separator' => [
+                'sgn-Latn',
                 [
                     'separator' => '~',
                 ],
-                'sgn-Latn',
                 'sgn~Latn',
             ],
             'a three-letter hyphenated language tag with script and region with tilde separator change the separator' => [
+                'sgn-Latn-RS',
                 [
                     'separator' => '~',
                 ],
-                'sgn-Latn-RS',
                 'sgn~Latn~RS',
             ],
             'a three-letter hyphenated language tag with extlang, script, and region with tilde separator change the separator' => [
+                'sgn-ysl-Latn-RS',
                 [
                     'separator' => '~',
                 ],
-                'sgn-ysl-Latn-RS',
                 'sgn~Latn~RS',
             ],
             'a three-letter underscored language tag with script with tilde separator change the separator' => [
+                'sgn_Latn',
                 [
                     'separator' => '~',
                 ],
-                'sgn_Latn',
                 'sgn~Latn',
             ],
             'a three-letter underscored language tag with script and region with tilde separator change the separator' => [
+                'sgn_Latn_RS',
                 [
                     'separator' => '~',
                 ],
-                'sgn_Latn_RS',
                 'sgn~Latn~RS',
             ],
             'a three-letter underscored language tag with extlang, script, and region with tilde separator change the separator' => [
+                'sgn_ysl_Latn_RS',
                 [
                     'separator' => '~',
                 ],
-                'sgn_ysl_Latn_RS',
                 'sgn~Latn~RS',
             ],
         ];
@@ -471,7 +471,7 @@ class LanguageTagTest extends TestCase
      * @test
      * @dataProvider provideDifferentLanguageValues
      */
-    public function it_can_retrieve_a_primary_subtag_and_subtags(array $options, string $input, array $expected)
+    public function it_can_retrieve_a_primary_subtag_and_subtags(string $input, array $options, array $expected)
     {
         $language = new LanguageTag($input, $options);
 
@@ -484,45 +484,45 @@ class LanguageTagTest extends TestCase
     {
         return [
             'a two-letter language tag results in the subtags' => [
+                'en',
                 [
                     'separator' => '-',
                 ],
-                'en',
                 ['en'],
             ],
             'a two-letter language tag with script with hyphen separator results in the subtags' => [
+                'sr-Latn',
                 [
                     'separator' => '-',
                 ],
-                'sr-Latn',
                 ['sr', 'Latn'],
             ],
             'a two-letter language tag with script and region with hyphen separator results in the subtags' => [
+                'sr-Latn-RS',
                 [
                     'separator' => '-',
                 ],
-                'sr-Latn-RS',
                 ['sr', 'Latn', 'RS'],
             ],
             'a two-letter language tag with extlang, script, and region with hyphen separator results in the subtags' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '-',
                 ],
-                'zh-yue-Hant-CN',
                 ['zh', 'Hant', 'CN'],
             ],
             'a two-letter language tag with extlang, script, and region with underscore separator results in the subtags' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '_',
                 ],
-                'zh-yue-Hant-CN',
                 ['zh', 'Hant', 'CN'],
             ],
             'a two-letter language tag with extlang, script, and region with tilde separator results in the subtags' => [
+                'zh-yue-Hant-CN',
                 [
                     'separator' => '~',
                 ],
-                'zh-yue-Hant-CN',
                 ['zh', 'Hant', 'CN'],
             ],
         ];
