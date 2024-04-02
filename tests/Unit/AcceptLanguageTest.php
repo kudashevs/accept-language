@@ -1123,10 +1123,7 @@ class AcceptLanguageTest extends TestCase
      */
     public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty()
     {
-        /**
-         * This is an exceptional case where we want to handle an empty quality parameter value.
-         * @see LanguageQualityNormalizer::normalizeWithFallback()
-         */
+        // This is an exceptional case where we want to handle an empty quality parameter value.
         $options = [
             'http_accept_language' => 'fr;q=,en;q=,gr',
             'accepted_languages' => ['fr', 'en'],
