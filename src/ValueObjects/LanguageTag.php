@@ -70,11 +70,6 @@ final class LanguageTag
         $this->options = array_merge($this->options, $allowed);
     }
 
-    private function initSeparator(array $options): void
-    {
-        $this->separator = $options['separator'] ?? self::DEFAULT_SEPARATOR;
-    }
-
     private function initTag(string $tag): void
     {
         $preparedTag = $this->prepareTag($tag);
