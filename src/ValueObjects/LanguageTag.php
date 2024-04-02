@@ -15,10 +15,6 @@ final class LanguageTag
     private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
     private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 8;
 
-    // Subtags are distinguished and separated from one another by a hyphen.
-    // For more information about a separator see RFC 5646, Section 2.1.
-    private const DEFAULT_SEPARATOR = '-';
-
     private const SUPPORTED_SEPARATORS = ['_', '-'];
 
     private TagNormalizerInterface $normalizer;
@@ -26,8 +22,6 @@ final class LanguageTag
     private string $tag;
 
     private bool $valid = true;
-
-    private string $separator;
 
     /**
      * 'separator' A string with a custom separator to use in a normalized tag.
@@ -52,7 +46,6 @@ final class LanguageTag
     {
         $this->initNormalizer();
         $this->initOptions($options);
-        $this->initSeparator($options);
 
         $this->initTag($tag);
     }
@@ -105,7 +98,7 @@ final class LanguageTag
 
     private function retrieveSeparators(): array
     {
-        return array_merge([$this->separator], self::SUPPORTED_SEPARATORS);
+        return array_merge([$this->options['separator']], self::SUPPORTED_SEPARATORS);
     }
 
     private function isValidTag(string $tag): bool
@@ -176,7 +169,7 @@ final class LanguageTag
 
     private function normalizeTag(string $tag): string
     {
-        return $this->normalizer->normalize($tag);
+        return $this->normalizer->normalize($tag, $this->options);
     }
 
     /**
@@ -184,7 +177,7 @@ final class LanguageTag
      */
     public function getTag(): string
     {
-        return str_replace('-', $this->separator, $this->tag);
+        return str_replace('-', $this->options['separator'], $this->tag);
     }
 
     /**
@@ -192,7 +185,7 @@ final class LanguageTag
      */
     public function getSubtags(): array
     {
-        return explode($this->separator, $this->tag);
+        return explode('-', $this->tag);
     }
 
     /**
