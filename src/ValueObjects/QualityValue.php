@@ -61,7 +61,7 @@ class QualityValue
     private function initQuality($quality): void
     {
         if ($this->isInvalidQuality($quality)) {
-            $this->quality = $this->prepareQuality($quality);
+            $this->quality = $this->prepareInvalidQuality($quality);
             $this->valid = false;
 
             return;
@@ -92,7 +92,7 @@ class QualityValue
         return is_numeric($quality) && $quality >= 0 && $quality <= 1;
     }
 
-    private function prepareQuality($quality)
+    private function prepareInvalidQuality($quality)
     {
         if ($this->isPlainString($quality) || $this->isLikeInteger($quality)) {
             return (int)$quality;
