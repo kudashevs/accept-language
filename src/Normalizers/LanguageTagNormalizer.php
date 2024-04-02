@@ -37,7 +37,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     public function normalize(string $tag, array $options = []): string
     {
-        $this->applyOptions($options);
+        $options = array_merge($this->options, $options);
 
         // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
         $subtags = $this->extractSubtags($tag);
@@ -46,7 +46,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
             return $tag;
         }
 
-        return $this->generateNormalizedTagFromSubtags($subtags);
+        return $this->generateNormalizedTagFromSubtags($subtags, $options);
     }
 
     /**
@@ -105,13 +105,17 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         return count($subtags) !== 4;
     }
 
-    private function generateNormalizedTagFromSubtags(array $subtags): string
+    /**
+     * @param array<string, string> $subtags
+     * @param array<string, bool> $options
+     */
+    private function generateNormalizedTagFromSubtags(array $subtags, array $options): string
     {
         $normalizedSubtags = [
             $this->normalizePrimary($subtags['primary']),
-            $this->options['with_extlang'] ? $this->normalizeExtlang($subtags['extlang']) : '',
-            $this->options['with_script'] ? $this->normalizeScript($subtags['script']) : '',
-            $this->options['with_region'] ? $this->normalizeRegion($subtags['region']) : '',
+            isset($options['with_extlang']) && $options['with_extlang'] === true ? $this->normalizeExtlang($subtags['extlang']) : '',
+            isset($options['with_script']) && $options['with_script'] === true ? $this->normalizeScript($subtags['script']) : '',
+            isset($options['with_region']) && $options['with_region'] === true ? $this->normalizeRegion($subtags['region']) : '',
         ];
 
         // Subtags are distinguished and separated from one another by a hyphen.
