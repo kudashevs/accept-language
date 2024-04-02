@@ -84,7 +84,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     private function isInvalidSetOfSubtags(array $subtags): bool
     {
-        return count($subtags) !== 4;
+        return count($subtags) !== count(self::SUBTAG_NORMALIZERS);
     }
 
     /**
