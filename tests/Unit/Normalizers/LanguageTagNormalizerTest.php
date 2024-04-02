@@ -22,8 +22,13 @@ class LanguageTagNormalizerTest extends TestCase
     public function it_can_normalize_a_language_tag(string $tag, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
+        $defaultOptions = [
+            'with_extlang' => false,
+            'with_script' => true,
+            'with_region' => true,
+        ];
 
-        $this->assertSame($expected, $normalizer->normalize($tag));
+        $this->assertSame($expected, $normalizer->normalize($tag, $defaultOptions));
     }
 
     public static function provideDifferentLanguageTags(): array
@@ -132,13 +137,19 @@ class LanguageTagNormalizerTest extends TestCase
         return [
             'returns a language tag without extlang, variant, extension and private-use subtags by default' => [
                 'zh-yue-Hant-CN-tongyong-u-co-phonebk-x-foobar',
-                [],
+                [
+                    'with_extlang' => false,
+                    'with_script' => true,
+                    'with_region' => true,
+                ],
                 'zh-Hant-CN',
             ],
             'returns a language tag with extlang when extlang option set to true' => [
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => true,
+                    'with_script' => true,
+                    'with_region' => true,
                 ],
                 'zh-yue-Hant-CN',
             ],
@@ -146,26 +157,34 @@ class LanguageTagNormalizerTest extends TestCase
                 'zh-yue-Hant-CN',
                 [
                     'with_extlang' => false,
+                    'with_script' => true,
+                    'with_region' => true,
                 ],
                 'zh-Hant-CN',
             ],
             'returns a language tag with script when script option set to true' => [
                 'zh-yue-Hant-CN',
                 [
+                    'with_extlang' => false,
                     'with_script' => true,
+                    'with_region' => true,
                 ],
                 'zh-Hant-CN',
             ],
             'returns a language tag without script when script option set to false' => [
                 'zh-yue-Hant-CN',
                 [
+                    'with_extlang' => false,
                     'with_script' => false,
+                    'with_region' => true,
                 ],
                 'zh-CN',
             ],
             'returns a language tag with region when region option set to true' => [
                 'zh-yue-Hant-CN',
                 [
+                    'with_extlang' => false,
+                    'with_script' => true,
                     'with_region' => true,
                 ],
                 'zh-Hant-CN',
@@ -173,6 +192,8 @@ class LanguageTagNormalizerTest extends TestCase
             'returns a language tag without region when region option set to false' => [
                 'zh-yue-Hant-CN',
                 [
+                    'with_extlang' => false,
+                    'with_script' => true,
                     'with_region' => false,
                 ],
                 'zh-Hant',
@@ -180,6 +201,8 @@ class LanguageTagNormalizerTest extends TestCase
             'returns a language tag with region in digits when region option set to true' => [
                 'zh-yue-Hant-005',
                 [
+                    'with_extlang' => false,
+                    'with_script' => true,
                     'with_region' => true,
                 ],
                 'zh-Hant-005',
@@ -187,6 +210,8 @@ class LanguageTagNormalizerTest extends TestCase
             'returns a language tag without region in digits when region option set to false' => [
                 'zh-yue-Hant-005',
                 [
+                    'with_extlang' => false,
+                    'with_script' => true,
                     'with_region' => false,
                 ],
                 'zh-Hant',
@@ -219,8 +244,13 @@ class LanguageTagNormalizerTest extends TestCase
     public function it_can_normalize_an_exceptional_case(string $tag, string $expected)
     {
         $normalizer = new LanguageTagNormalizer();
+        $defaultOptions = [
+            'with_extlang' => false,
+            'with_script' => true,
+            'with_region' => true,
+        ];
 
-        $this->assertSame($expected, $normalizer->normalize($tag));
+        $this->assertSame($expected, $normalizer->normalize($tag, $defaultOptions));
     }
 
     public static function provideExceptionalCases(): array

@@ -15,19 +15,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     private const OPTION_PREFIX = 'with_';
 
-    /**
-     * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
-     * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
-     * 'with_region' A boolean that defines whether to add a region subtag to a normalized tag.
-     *
-     * @var array{separator: string, with_extlang: bool, with_script: bool, with_region: bool}
-     */
-    private array $options = [
-        'with_extlang' => false,
-        'with_script' => true,
-        'with_region' => true,
-    ];
-
     public function __construct()
     {
     }
@@ -44,8 +31,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     public function normalize(string $tag, array $options = []): string
     {
-        $options = array_merge($this->options, $options);
-
         // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
         $subtags = $this->extractSubtags($tag);
 
@@ -54,16 +39,6 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         }
 
         return $this->generateNormalizedTagFromSubtags($subtags, $options);
-    }
-
-    /**
-     * @param array<string, string|bool> $options
-     */
-    private function applyOptions(array $options): void
-    {
-        $allowed = array_intersect_key($options, $this->options);
-
-        $this->options = array_merge($this->options, $allowed);
     }
 
     /**
