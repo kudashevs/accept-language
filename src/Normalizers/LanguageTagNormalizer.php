@@ -13,6 +13,9 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         'region' => 'normalizeRegion',
     ];
 
+    /**
+     * The value defines a prefix to find the required subtags in options.
+     */
     private const OPTION_PREFIX = 'with_';
 
     public function __construct()
