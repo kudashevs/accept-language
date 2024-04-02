@@ -46,7 +46,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
 
         // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
         // this is not a serious violation, we might want to handle this empty value when a fallback is available.
-        if ($this->isEmptyQuality($quality)) {
+        if ($this->isEmptyQuality($quality) && $this->isEmptyAllowed($options)) {
             return $this->generateForEmpty();
         }
 
@@ -103,6 +103,15 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return is_string($quality)
             && trim((string)$quality) === ''
             && $this->options['allow_empty'];
+    }
+
+    /**
+     * @param array<string, bool> $options
+     * @return bool
+     */
+    private function isEmptyAllowed(array $options): bool
+    {
+        return isset($options['allow_empty']) && $options['allow_empty'] === true;
     }
 
     /**
