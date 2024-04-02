@@ -11,7 +11,7 @@ class TestCase extends PHPUnitTestCase
 {
     /**
      * @param string $language
-     * @param int|float $quality
+     * @param float $quality
      * @return LanguageInterface
      */
     protected function createLanguage(string $language, float $quality = 1): LanguageInterface
