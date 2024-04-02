@@ -13,6 +13,8 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         'region' => 'normalizeRegion',
     ];
 
+    private const OPTION_PREFIX = 'with_';
+
     /**
      * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
      * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
@@ -147,7 +149,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
     private function isRequired(string $key, array $options): bool
     {
-        $optionKey = 'with_' . $key;
+        $optionKey = self::OPTION_PREFIX . $key;
 
         return isset($options[$optionKey]) && $options[$optionKey] === true;
     }
