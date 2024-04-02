@@ -12,6 +12,8 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
+    private const ALLOW_EMPTY_DEFAULT = true;
+
     /**
      * 'allow_empty' A boolean that defines whether to handle an empty quality when a fallback is available.
      *
@@ -111,7 +113,11 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private function isEmptyAllowed(array $options): bool
     {
-        return isset($options['allow_empty']) && $options['allow_empty'] === true;
+        if (isset($options['allow_empty'])) {
+            return $options['allow_empty'] === true;
+        }
+
+        return self::ALLOW_EMPTY_DEFAULT;
     }
 
     /**
