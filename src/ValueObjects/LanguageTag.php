@@ -25,17 +25,31 @@ final class LanguageTag
 
     private string $separator;
 
+    /**
+     * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
+     * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
+     * 'with_region' A boolean that defines whether to add a region subtag to a normalized tag.
+     *
+     * @var array{separator: string, with_extlang: bool, with_script: bool, with_region: bool}
+     */
+    private array $options = [
+        'with_extlang' => false,
+        'with_script' => true,
+        'with_region' => true,
+    ];
+
     private string $tag;
 
     private bool $valid = true;
 
     /**
      * @param string $tag
-     * @param array<string, bool|string> $options
+     * @param array<string, string|bool> $options
      */
     public function __construct(string $tag, array $options = [])
     {
         $this->initNormalizer($options);
+        $this->initOptions($options);
         $this->initSeparator($options);
 
         $this->initTag($tag);
@@ -49,6 +63,16 @@ final class LanguageTag
     private function createDefaultNormalizer(array $options): TagNormalizerInterface
     {
         return new LanguageTagNormalizer($options);
+    }
+
+    /**
+     * @param array<string, string|bool> $options
+     */
+    private function initOptions(array $options): void
+    {
+        $allowed = array_intersect_key($options, $this->options);
+
+        $this->options = array_merge($this->options, $allowed);
     }
 
     private function initSeparator(array $options): void
