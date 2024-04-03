@@ -25,11 +25,6 @@ final class LogProvider
      */
     private LoggerInterface $logger;
 
-    private array $options = [
-        'log_level' => 'info',
-        'log_only' => [],
-    ];
-
     /**
      * The list of supported events:
      * 'retrieve_header' occurs when an HTTP Accept-Language header was retrieved
@@ -52,6 +47,12 @@ final class LogProvider
         'retrieve_preferred_language' => PreferredLanguageLogPresenter::class,
     ];
 
+    private array $options = [
+        'log_level' => 'info',
+        'log_only' => [],
+    ];
+
+    /**
     /**
      * @param LoggerInterface $logger
      * @param array<string, string|array> $options
