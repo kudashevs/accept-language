@@ -31,7 +31,16 @@ final class LogProvider
     ];
 
     /**
-     * @var array
+     * The list of supported events:
+     * 'retrieve_header' occurs when an HTTP Accept-Language header was retrieved
+     * 'retrieve_default_language' => occurs when the default language was returned without further processing
+     * 'retrieve_raw_languages' occurs when raw languages were retrieved (happens before the normalization)
+     * 'retrieve_normalized_languages' occurs when normalized languages were retrieved (happens after the normalization)
+     * 'retrieve_accepted_languages' => occurs when accepted languages from the options were retrieved
+     * 'retrieve_preferred_languages' occurs when preferred languages that match the accepted languages were found
+     * 'retrieve_preferred_language' occurs when the preferred language was found
+     *
+     * @var array<string, class-string>
      */
     private array $presenters = [ // @note can be a mapper
         'retrieve_header' => HeaderLogPresenter::class,
@@ -169,13 +178,8 @@ final class LogProvider
     }
 
     /**
-     * Log an event with the provided data. The supported events are:
-     *
-     * 'retrieve_header' allows logging a retrieved HTTP Accept-Language header
-     * 'retrieve_raw_languages' allows logging retrieved languages before normalization process
-     * 'retrieve_normalized_languages' allows logging retrieved languages after normalization process
-     * 'retrieve_preferred_languages' allows logging the preferred languages that match the accepted languages
-     * 'retrieve_preferred_language' allows logging the resulting preferred language
+     * Log a specific event with the provided data.
+     * For more information @see LogProvider::presenters
      *
      * @param string $event
      * @param string|array $data
