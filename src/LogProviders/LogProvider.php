@@ -143,10 +143,6 @@ final class LogProvider
      */
     private function checkValidLogEvents(): void
     {
-        if (!$this->isLogOnlyListedEventsCase()) {
-            return;
-        }
-
         $logOnlyEvents = $this->retrieveLogOnlyEvents();
         $registeredEvents = array_flip($this->presenters);
 
