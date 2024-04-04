@@ -143,19 +143,19 @@ final class LogProvider
      */
     private function checkValidLogEvents(): void
     {
-        $logOnlyEvents = $this->retrieveLogOnlyEvents();
-        $registeredEvents = array_flip($this->presenters);
+        $providedLogEvents = $this->retrieveLogOnlyEvents();
+        $registeredLogEvents = array_flip($this->presenters);
 
-        $difference = array_diff($logOnlyEvents, $registeredEvents);
+        $discrepancies = array_diff($providedLogEvents, $registeredLogEvents);
 
-        if (count($difference) > 0) {
+        if (count($discrepancies) > 0) {
             throw new InvalidLogEventName(
                 sprintf(
                     'The log %s "%s" %s not registered. Use %s instead.',
-                    (count($difference) > 1) ? 'names' : 'name',
-                    implode(', ', $difference),
-                    (count($difference) > 1) ? 'are' : 'is',
-                    implode(', ', $registeredEvents),
+                    (count($discrepancies) > 1) ? 'names' : 'name',
+                    implode(', ', $discrepancies),
+                    (count($discrepancies) > 1) ? 'are' : 'is',
+                    implode(', ', $registeredLogEvents),
                 )
             );
         }
