@@ -62,7 +62,7 @@ final class LogProvider
     public function __construct(LoggerInterface $logger, array $options = [])
     {
         $this->initLogger($logger);
-        $this->initOptions($options);
+        $this->initOptionsWithTypeValidation($options);
 
         $this->checkValidLogLevel();
         $this->checkValidLogEvents();
@@ -76,7 +76,7 @@ final class LogProvider
     /**
      * @param array<string, string|array> $options
      */
-    private function initOptions(array $options): void
+    private function initOptionsWithTypeValidation(array $options): void
     {
         $validated = $this->retrieveValidOptions($options);
 
