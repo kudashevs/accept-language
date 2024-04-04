@@ -143,7 +143,7 @@ final class LogProvider
      */
     private function checkValidLogEvents(): void
     {
-        if (!$this->isLogOnlyCase()) {
+        if (!$this->isLogOnlyListedEventsCase()) {
             return;
         }
 
@@ -223,14 +223,14 @@ final class LogProvider
 
     private function isDesiredEvent(string $event): bool
     {
-        if ($this->isLogOnlyCase()) {
+        if ($this->isLogOnlyListedEventsCase()) {
             return in_array($event, $this->retrieveLogOnlyEvents());
         }
 
         return true;
     }
 
-    private function isLogOnlyCase(): bool
+    private function isLogOnlyListedEventsCase(): bool
     {
         return count($this->options['log_only']) > 0;
     }
