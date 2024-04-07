@@ -15,6 +15,9 @@ final class LanguageTag
     private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
     private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 8;
 
+    /**
+     * The separators that will be used to distinguish and separate subtags.
+     */
     private const SUPPORTED_SEPARATORS = ['_', '-'];
 
     private TagNormalizerInterface $normalizer;
@@ -24,7 +27,7 @@ final class LanguageTag
     private bool $valid = true;
 
     /**
-     * 'separator' A string with a custom separator to use in a normalized tag.
+     * 'separator' A string with a custom separator to use in the language tag.
      * 'with_extlang' A boolean that defines whether to add an extlang subtag to a normalized tag.
      * 'with_script' A boolean that defines whether to add a script subtag to a normalized tag.
      * 'with_region' A boolean that defines whether to add a region subtag to a normalized tag.
@@ -40,7 +43,7 @@ final class LanguageTag
 
     /**
      * @param string $tag
-     * @param array<string, string|bool> $options
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      */
     public function __construct(string $tag, array $options = [])
     {
@@ -61,7 +64,7 @@ final class LanguageTag
     }
 
     /**
-     * @param array<string, string|bool> $options
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      */
     private function initOptions(array $options): void
     {
@@ -72,6 +75,7 @@ final class LanguageTag
 
     private function initTag(string $tag): void
     {
+        // To perform a normalization process, the tag value should conform to the standard.
         $preparedTag = $this->prepareTag($tag);
 
         if (!$this->isValidTag($preparedTag)) {
@@ -84,6 +88,10 @@ final class LanguageTag
         $this->tag = $this->normalizeTag($preparedTag);
     }
 
+    /**
+     * Return a prepared language tag. The preparation process includes:
+     * - replacing all separators (including the provided one) with the standard separator
+     */
     private function prepareTag(string $tag): string
     {
         // Subtags are distinguished and separated from one another by a hyphen.
@@ -91,6 +99,9 @@ final class LanguageTag
         return str_replace($this->retrieveSeparators(), '-', $tag);
     }
 
+    /**
+     * @return array<array-key, string>
+     */
     private function retrieveSeparators(): array
     {
         return array_merge([$this->options['separator']], self::SUPPORTED_SEPARATORS);
@@ -176,7 +187,7 @@ final class LanguageTag
     }
 
     /**
-     * @return array
+     * @return array<array-key, string>
      */
     public function getSubtags(): array
     {
