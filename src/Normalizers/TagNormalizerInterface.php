@@ -13,6 +13,7 @@ interface TagNormalizerInterface
      * Perform a normalization process and return a normalized tag.
      *
      * @param string $tag
+     * @param array{with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      * @return string
      */
     public function normalize(string $tag, array $options): string;
