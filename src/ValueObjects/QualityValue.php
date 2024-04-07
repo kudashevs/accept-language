@@ -138,4 +138,12 @@ class QualityValue
     {
         return $this->valid;
     }
+
+    /**
+     * @return array{allow_empty: bool, fallback: int|float}
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
 }

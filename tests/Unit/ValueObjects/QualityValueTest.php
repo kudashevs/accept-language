@@ -204,4 +204,28 @@ class QualityValueTest extends TestCase
             ],
         ];
     }
+
+    /** @test */
+    public function it_can_return_default_options(): void
+    {
+        $quality = new QualityValue(1);
+
+        $options = $quality->getOptions();
+
+        $this->assertNotEmpty($options);
+        $this->assertContains(-1, $options);
+    }
+
+    /** @test */
+    public function it_can_update_default_options(): void
+    {
+        $quality = new QualityValue(1, [
+            'fallback' => 0.5,
+        ]);
+
+        $options = $quality->getOptions();
+
+        $this->assertNotEmpty($options);
+        $this->assertContains(0.5, $options);
+    }
 }
