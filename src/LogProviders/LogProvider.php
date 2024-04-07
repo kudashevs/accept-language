@@ -53,7 +53,7 @@ final class LogProvider
     ];
 
     /**
-    /**
+     * /**
      * @param LoggerInterface $logger
      * @param array<string, string|array> $options
      *
@@ -161,7 +161,7 @@ final class LogProvider
      */
     private function checkValidLogEvents(): void
     {
-        $requestedLogEvents = $this->retrieveLogOnlyEvents();
+        $requestedLogEvents = $this->retrieveRequestedLogEvents();
         $registeredLogEvents = $this->retrieveRegisteredLogEvents();
 
         $discrepancies = array_diff($requestedLogEvents, $registeredLogEvents);
@@ -182,7 +182,7 @@ final class LogProvider
     /**
      * @return array<int, string>
      */
-    private function retrieveLogOnlyEvents(): array
+    private function retrieveRequestedLogEvents(): array
     {
         return array_map(static function ($event) {
             return trim($event);
@@ -243,7 +243,7 @@ final class LogProvider
     private function isDesiredEvent(string $event): bool
     {
         if ($this->isLogOnlyListedEventsCase()) {
-            return in_array($event, $this->retrieveLogOnlyEvents());
+            return in_array($event, $this->retrieveRequestedLogEvents());
         }
 
         return true;
