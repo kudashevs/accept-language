@@ -323,7 +323,9 @@ class AcceptLanguage
     {
         // Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
         // to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
-        return preg_split('/;q=/i', trim($range));
+        $splitRange = preg_split('/;q=/i', trim($range));
+
+        return ($splitRange !== false) ? $splitRange : [];
     }
 
     /**
