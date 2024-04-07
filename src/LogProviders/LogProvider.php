@@ -180,6 +180,16 @@ final class LogProvider
     }
 
     /**
+     * @return array<int, string>
+     */
+    private function retrieveLogOnlyEvents(): array
+    {
+        return array_map(static function ($event) {
+            return trim($event);
+        }, $this->options['log_only']);
+    }
+
+    /**
      * Log a specific event with the provided data.
      * For more information @see LogProvider::presenters
      *
@@ -234,16 +244,6 @@ final class LogProvider
     private function isLogOnlyListedEventsCase(): bool
     {
         return count($this->options['log_only']) > 0;
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    private function retrieveLogOnlyEvents(): array
-    {
-        return array_map(static function ($event) {
-            return trim($event);
-        }, $this->options['log_only']);
     }
 
     private function initPresenter(string $event): LogPresenterInterface
