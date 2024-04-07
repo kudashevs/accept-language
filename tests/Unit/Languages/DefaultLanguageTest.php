@@ -228,7 +228,7 @@ class DefaultLanguageTest extends TestCase
                     '',
                     [
                         'allow_empty' => false,
-                        'fallback_value' => 0.5,
+                        'fallback' => 0.5,
                     ],
                 ],
                 'en',
@@ -240,7 +240,7 @@ class DefaultLanguageTest extends TestCase
                     0.5,
                     [
                         'allow_empty' => true,
-                        'fallback_value' => 0.5,
+                        'fallback' => 0.5,
                     ],
                 ],
                 'en',
@@ -254,7 +254,7 @@ class DefaultLanguageTest extends TestCase
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [
             'separator' => '~',
-            'fallback_value' => 0.5,
+            'fallback' => 0.5,
         ]);
 
         $this->assertContains('~', $language->getOptions());
