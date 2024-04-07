@@ -161,10 +161,10 @@ final class LogProvider
      */
     private function checkValidLogEvents(): void
     {
-        $requestedLogEvents = $this->retrieveRequestedLogEvents();
-        $registeredLogEvents = $this->retrieveRegisteredLogEvents();
+        $requestedEvents = $this->retrieveRequestedLogEvents();
+        $registeredEvents = $this->retrieveRegisteredLogEvents();
 
-        $discrepancies = array_diff($requestedLogEvents, $registeredLogEvents);
+        $discrepancies = array_diff($requestedEvents, $registeredEvents);
 
         if (count($discrepancies) > 0) {
             throw new InvalidLogEventName(
@@ -173,7 +173,7 @@ final class LogProvider
                     (count($discrepancies) > 1) ? 'names' : 'name',
                     implode(', ', $discrepancies),
                     (count($discrepancies) > 1) ? 'are' : 'is',
-                    implode(', ', $registeredLogEvents),
+                    implode(', ', $registeredEvents),
                 )
             );
         }
