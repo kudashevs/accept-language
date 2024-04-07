@@ -176,27 +176,6 @@ class AcceptLanguage
         }
     }
 
-    /**
-     * @throws InvalidOptionValue
-     */
-    protected function initDefaultLanguageFromOptions(): void
-    {
-        $defaultLanguage = $this->factory->makeFromLanguageString(
-            $this->options['default_language']
-        );
-
-        if (!$defaultLanguage->isValid()) {
-            throw new InvalidOptionValue(
-                sprintf(
-                    'The value "%s" is invalid. The option default_language should contain a valid language tag.',
-                    $this->options['default_language']
-                )
-            );
-        }
-
-        $this->defaultLanguage = $defaultLanguage;
-    }
-
     protected function initFactory(): void
     {
         $this->factory = $this->createFactory($this->options);
@@ -231,6 +210,27 @@ class AcceptLanguage
             'log_level' => $options['log_level'],
             'log_only' => $options['log_only'],
         ]);
+    }
+
+    /**
+     * @throws InvalidOptionValue
+     */
+    protected function initDefaultLanguageFromOptions(): void
+    {
+        $defaultLanguage = $this->factory->makeFromLanguageString(
+            $this->options['default_language']
+        );
+
+        if (!$defaultLanguage->isValid()) {
+            throw new InvalidOptionValue(
+                sprintf(
+                    'The value "%s" is invalid. The option default_language should contain a valid language tag.',
+                    $this->options['default_language']
+                )
+            );
+        }
+
+        $this->defaultLanguage = $defaultLanguage;
     }
 
     /**
