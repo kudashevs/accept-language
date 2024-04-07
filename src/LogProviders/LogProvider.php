@@ -7,6 +7,7 @@ namespace Kudashevs\AcceptLanguage\LogProviders;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
+use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\AcceptedLanguagesLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\DefaultLanguageLogPresenter;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\HeaderLogPresenter;
@@ -47,15 +48,17 @@ final class LogProvider
         'retrieve_preferred_language' => PreferredLanguageLogPresenter::class,
     ];
 
+    /**
+     * @var array{log_level: string, log_only: array<array-key, string>}
+     */
     private array $options = [
         'log_level' => 'info',
         'log_only' => [],
     ];
 
     /**
-     * /**
      * @param LoggerInterface $logger
-     * @param array<string, string|array> $options
+     * @param array{log_level?: string, log_only?: array<array-key, string>} $options
      *
      * @throws InvalidOptionType|InvalidLogLevelName|InvalidLogEventName
      */
@@ -74,7 +77,7 @@ final class LogProvider
     }
 
     /**
-     * @param array<string, string|array> $options
+     * @param array{log_level?: string, log_only?: array<array-key, string>} $options
      */
     private function initOptionsWithTypeValidation(array $options): void
     {
@@ -84,7 +87,8 @@ final class LogProvider
     }
 
     /**
-     * @return array<string, string|array>
+     * @param array{log_level?: string, log_only?: array<array-key, string>} $options
+     * @return array{log_level?: string, log_only?: array<array-key, string>}
      *
      * @throws InvalidOptionType
      */
@@ -100,6 +104,8 @@ final class LogProvider
     }
 
     /**
+     * @param string|array<array-key, string> $value
+     *
      * @throws InvalidOptionType
      */
     protected function validateOption(string $name, $value): void
@@ -180,7 +186,7 @@ final class LogProvider
     }
 
     /**
-     * @return array<int, string>
+     * @return array<array-key, string>
      */
     private function retrieveRequestedLogEvents(): array
     {
@@ -202,7 +208,7 @@ final class LogProvider
      * For more information @see LogProvider::presenters
      *
      * @param string $event
-     * @param string|array $data
+     * @param string|array<LanguageInterface> $data
      *
      * @throws InvalidLogEventName
      */
@@ -256,6 +262,7 @@ final class LogProvider
 
     private function initPresenter(string $event): LogPresenterInterface
     {
+        /** @var LogPresenterInterface $presenterClass */
         $presenterClass = $this->presenters[$event];
 
         return new $presenterClass($event);
