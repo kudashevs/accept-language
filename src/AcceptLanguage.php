@@ -113,9 +113,11 @@ class AcceptLanguage
      */
     protected function initOptionsWithTypeValidation(array $options): void
     {
-        $validated = $this->retrieveOptionsWithTypeValidation($options);
+        $allowedOptions = $this->retrieveAllowedOptions($options);
 
-        $this->options = array_merge($this->options, $validated);
+        $this->validateOptions($allowedOptions);
+
+        $this->options = array_merge($this->options, $allowedOptions);
     }
 
     /**
@@ -123,15 +125,19 @@ class AcceptLanguage
      *
      * @throws InvalidOptionType
      */
-    protected function retrieveOptionsWithTypeValidation(array $options): array
+    protected function retrieveAllowedOptions(array $options): array
     {
-        $allowedOptions = array_intersect_key($options, $this->options);
+        return array_intersect_key($options, $this->options);
+    }
 
-        foreach ($allowedOptions as $name => $value) {
+    /**
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
+     */
+    protected function validateOptions(array $options): void
+    {
+        foreach ($options as $name => $value) {
             $this->validateOption($name, $value);
         }
-
-        return $allowedOptions;
     }
 
     /**
