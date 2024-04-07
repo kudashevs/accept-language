@@ -103,11 +103,9 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private function isEmptyAllowed(array $options): bool
     {
-        if (isset($options['allow_empty'])) {
-            return $options['allow_empty'] === true;
-        }
-
-        return self::ALLOW_EMPTY_DEFAULT;
+        return array_key_exists('allow_empty', $options)
+            ? $options['allow_empty'] === true
+            : self::ALLOW_EMPTY_DEFAULT;
     }
 
     /**
