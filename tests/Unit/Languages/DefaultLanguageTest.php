@@ -254,8 +254,10 @@ class DefaultLanguageTest extends TestCase
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);
 
-        $this->assertContains('-', $language->getOptions());
-        $this->assertContains(-1, $language->getOptions());
+        $options = $language->getOptions();
+
+        $this->assertSame('-', $options['separator']);
+        $this->assertSame(-1, $options['fallback']);
         $this->assertTrue($language->isValid());
     }
 
@@ -267,8 +269,10 @@ class DefaultLanguageTest extends TestCase
             'fallback' => 0.5,
         ]);
 
-        $this->assertContains('~', $language->getOptions());
-        $this->assertContains(0.5, $language->getOptions());
+        $options = $language->getOptions();
+
+        $this->assertSame('~', $options['separator']);
+        $this->assertSame(0.5, $options['fallback']);
         $this->assertTrue($language->isValid());
     }
 
