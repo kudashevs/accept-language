@@ -57,8 +57,9 @@ If you need the original HTTP Accept-Language header, it is available via the `g
 $service->getHeader();
 ```
 
-**Important note!** The `AcceptLanguage` class can throw a few exceptions `InvalidOptionType`, `InvalidLogEventName`, `InvalidLogLevelName`.
-All these exceptions extend the `InvalidArgumentException` class, so they are simple to deal with.
+**Important note!** The `AcceptLanguage` class at the moment of creation can throw a few exceptions: `InvalidOptionType`,
+`InvalidOptionValue`, `InvalidLogEventName`, `InvalidLogLevelName`. All these exceptions extend the `InvalidArgumentException`
+class, so they are simple to deal with.
 
 
 ## Options
