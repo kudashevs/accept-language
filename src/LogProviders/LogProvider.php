@@ -162,7 +162,7 @@ final class LogProvider
     private function checkValidLogEvents(): void
     {
         $requestedLogEvents = $this->retrieveLogOnlyEvents();
-        $registeredLogEvents = array_flip($this->presenters);
+        $registeredLogEvents = $this->retrieveRegisteredLogEvents();
 
         $discrepancies = array_diff($requestedLogEvents, $registeredLogEvents);
 
@@ -187,6 +187,14 @@ final class LogProvider
         return array_map(static function ($event) {
             return trim($event);
         }, $this->options['log_only']);
+    }
+
+    /**
+     * @return array<array-key, string>
+     */
+    private function retrieveRegisteredLogEvents(): array
+    {
+        return array_flip($this->presenters);
     }
 
     /**
