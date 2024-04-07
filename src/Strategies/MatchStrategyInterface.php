@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\Strategies;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 /**
- * MatchStrategyInterface represents an abstraction that finds the matching preferred languages
+ * MatchStrategyInterface represents an abstraction that finds the matching preferred languages.
  */
 interface MatchStrategyInterface
 {
