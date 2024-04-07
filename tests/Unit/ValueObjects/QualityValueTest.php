@@ -20,7 +20,7 @@ class QualityValueTest extends TestCase
      * @test
      * @dataProvider provideDifferentInvalidQualityValues
      */
-    public function it_can_handle_an_ivalid_quality($input, $expected): void
+    public function it_can_handle_an_invalid_quality($input, $expected): void
     {
         $quality = new QualityValue($input);
 
