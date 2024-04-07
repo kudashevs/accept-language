@@ -12,7 +12,7 @@ interface LanguageInterface
     /**
      * Return the provided options.
      *
-     * @return array<string, string|bool>
+     * @return array{separator: string, with_extlang: bool, with_script: bool, with_region: bool, fallback: int|float}
      */
     public function getOptions(): array;
 
@@ -26,7 +26,7 @@ interface LanguageInterface
     /**
      * Return all subtags of the language tag.
      *
-     * @return array
+     * @return array<array-key, string>
      */
     public function getSubtags(): array;
 
