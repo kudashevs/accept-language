@@ -139,6 +139,19 @@ final class LogProvider
     }
 
     /**
+     * @return array<string, string>
+     */
+    private function retrieveValidLogLevels(): array
+    {
+        $levels = (new \ReflectionClass(LogLevel::class))
+            ->getConstants();
+
+        return array_map(function ($level) {
+            return strtolower($level);
+        }, $levels);
+    }
+
+    /**
      * @throws InvalidLogEventName
      */
     private function checkValidLogEvents(): void
@@ -159,19 +172,6 @@ final class LogProvider
                 )
             );
         }
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    private function retrieveValidLogLevels(): array
-    {
-        $levels = (new \ReflectionClass(LogLevel::class))
-            ->getConstants();
-
-        return array_map(function ($level) {
-            return strtolower($level);
-        }, $levels);
     }
 
     /**
