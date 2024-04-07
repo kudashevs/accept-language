@@ -42,12 +42,12 @@ class AcceptLanguage
     /**
      * Contain an original HTTP Accept-Language header.
      */
-    protected string $header;
+    protected string $header = '';
 
     /**
      * Contain a found language of preference.
      */
-    protected string $language;
+    protected string $language = '';
 
     /**
      * 'http_accept_language' string A string with a custom HTTP Accept-Language header.

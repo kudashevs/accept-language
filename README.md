@@ -37,8 +37,8 @@ composer require kudashevs/accept-language
 ## Usage
 
 To retrieve a preferred language you need to instantiate the `AcceptLanguage` class and call a `process` method on the
-instance. It should be done somewhere before the place where you want to get the user's preferred language (for example,
-in a front controller or in a middleware).
+instance. It is best to do it somewhere before the place where you want the user's preferred language (for example,
+in a front controller or in a middleware). If you don't call the `process` method, the values will remain empty.
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
