@@ -33,11 +33,17 @@ final class RawLanguagesLogPresenter implements LogPresenterInterface
         );
     }
 
+    /**
+     * @param array<LanguageInterface> $data
+     */
     private function isEmptyData(array $data): bool
     {
         return count($data) === 0;
     }
 
+    /**
+     * @param array<LanguageInterface> $languages
+     */
     private function processLanguages(array $languages): string
     {
         return implode(',', array_map(static function (LanguageInterface $lang) {
