@@ -63,7 +63,7 @@ All these exceptions extend the `InvalidArgumentException` class, so they are si
 
 ## Options
 
-The class accepts some options which help you to control the result:
+The class accepts some configuration options:
 ```
 'http_accept_language'      # A string with a custom HTTP Accept-Language header.
 'default_language'          # A string with a default preferred language value (default is 'en')¹.
@@ -79,8 +79,8 @@ The class accepts some options which help you to control the result:
 'log_only'                  # An array with a list of log events to log (default is []).
 ```
 <sub>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sub>  
-<sub>2 - the `accepted_languages` option should include valid Language Tags only</sub>  
-<sub>3 - the separator can accept any value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sub>
+<sub>2 - the `accepted_languages` option should include valid Language Tags only (the primary subtags are limited to 2-/3-letters for now)</sub>  
+<sub>3 - the separator can accept any string value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sub>
 
 ### Notes
 
