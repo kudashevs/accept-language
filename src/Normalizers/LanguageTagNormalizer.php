@@ -72,7 +72,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     }
 
     /**
-     * @param array<string, string> $subtags
+     * @param array<string, string|null> $subtags
      * @return array<string, string>
      */
     private function retrieveFoundSubtags(array $subtags): array
@@ -83,8 +83,8 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     }
 
     /**
-     * @param array<string, string> $subtags
-     * @return array<string, string>
+     * @param array<string, string|null> $subtags
+     * @return array<string, string|null>
      */
     private function collectNamedGroups(array $subtags): array
     {
