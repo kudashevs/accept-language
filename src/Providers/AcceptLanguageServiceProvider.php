@@ -40,7 +40,19 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     }
 
     /**
-     * @return array<string, string|array>
+     * @return array{
+     *     default_language: string,
+     *     accepted_languages: array<array-key, string>,
+     *     exact_match_only: bool,
+     *     two_letter_only: bool,
+     *     use_extlang_subtag: bool,
+     *     use_script_subtag: bool,
+     *     use_region_subtag: bool,
+     *     separator: string,
+     *     log_activity: bool,
+     *     log_level: string,
+     *     log_only: array<array-key, string>,
+     * }
      */
     private function getInitialConfig(): array
     {
