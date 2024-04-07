@@ -66,7 +66,7 @@ class AcceptLanguage
      * @var array{
      *     http_accept_language: string,
      *     default_language: string,
-     *     accepted_languages: array<int, string>,
+     *     accepted_languages: array<array-key, string>,
      *     exact_match_only: bool,
      *     two_letter_only: bool,
      *     use_extlang_subtag: bool,
@@ -75,7 +75,7 @@ class AcceptLanguage
      *     separator: string,
      *     log_activity: bool,
      *     log_level: string,
-     *     log_only: array<int, string>,
+     *     log_only: array<array-key, string>,
      * }
      */
     protected array $options = [
@@ -94,7 +94,20 @@ class AcceptLanguage
     ];
 
     /**
-     * @param array<string, bool|string|array> $options
+     * @param array{
+     *     http_accept_language?: string,
+     *     default_language?: string,
+     *     accepted_languages?: array<array-key, string>,
+     *     exact_match_only?: bool,
+     *     two_letter_only?: bool,
+     *     use_extlang_subtag?: bool,
+     *     use_script_subtag?: bool,
+     *     use_region_subtag?: bool,
+     *     separator?: string,
+     *     log_activity?: bool,
+     *     log_level?: string,
+     *     log_only?: array<array-key, string>,
+     * } $options
      *
      * @throws InvalidOptionType|InvalidOptionValue|InvalidLogLevelName|InvalidLogEventName
      */
@@ -109,6 +122,8 @@ class AcceptLanguage
     }
 
     /**
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
+     *
      * @throws InvalidOptionType
      */
     protected function initOptionsWithTypeValidation(array $options): void
@@ -121,9 +136,8 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<string, bool|string|array>
-     *
-     * @throws InvalidOptionType
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
+     * @return array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>}
      */
     protected function retrieveAllowedOptions(array $options): array
     {
@@ -141,6 +155,8 @@ class AcceptLanguage
     }
 
     /**
+     * @param string|bool|array<array-key, string> $value
+     *
      * @throws InvalidOptionType
      */
     protected function validateOption(string $name, $value): void
@@ -187,7 +203,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array<string, bool|string> $options
+     * @param array{separator: string, use_extlang_subtag: bool, use_script_subtag: bool, use_region_subtag: bool} $options
      * @return LanguageFactory
      */
     protected function createFactory(array $options): LanguageFactory
@@ -206,7 +222,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array<string, string> $options
+     * @param array{log_level: string, log_only: array<array-key, string>} $options
      * @return LogProvider
      */
     protected function createLogger(array $options): LogProvider
@@ -300,6 +316,9 @@ class AcceptLanguage
         return $this->retrieveRawLanguages($header);
     }
 
+    /**
+     * @return array<LanguageInterface>
+     */
     protected function retrieveRawLanguages(string $header): array
     {
         $fallbackQuality = 1;
@@ -323,7 +342,7 @@ class AcceptLanguage
     }
 
     /**
-     * @return array<int, string>
+     * @return array<array-key, string>
      */
     protected function splitLanguageRange(string $range): array
     {
@@ -337,6 +356,7 @@ class AcceptLanguage
     /**
      * Return valid languages sorted by the quality value.
      *
+     * @param array<LanguageInterface> $languages
      * @return array<LanguageInterface>
      */
     protected function normalizeLanguages(array $languages): array
@@ -351,6 +371,10 @@ class AcceptLanguage
         return $validLanguages;
     }
 
+    /**
+     * @param array<LanguageInterface> $languages
+     * @return array<LanguageInterface>
+     */
     protected function getValidLanguages(array $languages): array
     {
         return array_filter($languages, static function ($language) {
@@ -362,7 +386,7 @@ class AcceptLanguage
      * Return the found preferred languages. A preferred language is a
      * valid language that was accepted and met all matching criteria.
      *
-     * @param array $languages
+     * @param array<LanguageInterface> $languages
      * @return array<LanguageInterface>
      */
     protected function processNormalizedLanguages(array $languages): array
@@ -375,6 +399,7 @@ class AcceptLanguage
     }
 
     /**
+     * @param array<LanguageInterface> $languages
      * @return array<LanguageInterface>
      */
     protected function retrievePreferredLanguages(array $languages): array
@@ -392,6 +417,7 @@ class AcceptLanguage
     }
 
     /**
+     * @param array<LanguageInterface> $languages
      * @return array<LanguageInterface>
      */
     protected function retrieveAcceptedLanguages(array $languages): array
