@@ -250,6 +250,16 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_retrieve_default_options(): void
+    {
+        $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);
+
+        $this->assertContains('-', $language->getOptions());
+        $this->assertContains(-1, $language->getOptions());
+        $this->assertTrue($language->isValid());
+    }
+
+    /** @test */
     public function it_can_retain_the_provided_options(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [

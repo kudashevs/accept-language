@@ -87,12 +87,13 @@ final class DefaultLanguage implements LanguageInterface
 
     /**
      * {@inheritDoc}
-     *
-     * @return array<string, string|bool>
      */
     public function getOptions(): array
     {
-        return $this->options;
+        return array_merge(
+            $this->tag->getOptions(),
+            $this->quality->getOptions(),
+        );
     }
 
     /**
