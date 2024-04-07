@@ -188,7 +188,7 @@ final class LanguageTag
      */
     public function getPrimarySubtag(): string
     {
-        return current($this->getSubtags());
+        return array_values($this->getSubtags())[0];
     }
 
     /**
