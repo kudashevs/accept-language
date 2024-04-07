@@ -10,16 +10,22 @@ use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 final class LanguageFactory
 {
+    /**
+     * @var array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
+     */
     private array $options = [];
 
     /**
-     * @param array<string, bool|string> $options
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      */
     public function __construct(array $options = [])
     {
         $this->initOptions($options);
     }
 
+    /**
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
+     */
     private function initOptions(array $options): void
     {
         $this->options = $options;
@@ -36,7 +42,7 @@ final class LanguageFactory
     }
 
     /**
-     * @param array<int, string|mixed> $rawLanguageRange
+     * @param array<array-key, string|mixed> $rawLanguageRange
      * @param float $fallbackQuality
      * @return LanguageInterface
      *
