@@ -13,7 +13,7 @@ interface QualityNormalizerInterface
      * Perform a normalization process and return a normalized quality.
      *
      * @param int|float|string|null $quality
-     * @param array<string, int|float|bool> $options
+     * @param array{allow_empty?: bool, fallback?: int|float} $options
      * @return int|float
      */
     public function normalize($quality, array $options);
