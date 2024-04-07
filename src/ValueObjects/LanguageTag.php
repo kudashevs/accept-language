@@ -209,4 +209,12 @@ final class LanguageTag
     {
         return $this->valid;
     }
+
+    /**
+     * @return array{separator: string, with_extlang: bool, with_script: bool, with_region: bool}
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
 }

@@ -548,4 +548,28 @@ class LanguageTagTest extends TestCase
             ],
         ];
     }
+
+    /** @test */
+    public function it_can_return_default_options(): void
+    {
+        $language = new LanguageTag('en');
+
+        $options = $language->getOptions();
+
+        $this->assertNotEmpty($options);
+        $this->assertContains('-', $options);
+    }
+
+    /** @test */
+    public function it_can_update_default_options(): void
+    {
+        $language = new LanguageTag('en', [
+            'separator' => '_',
+        ]);
+
+        $options = $language->getOptions();
+
+        $this->assertNotEmpty($options);
+        $this->assertContains('_', $options);
+    }
 }
