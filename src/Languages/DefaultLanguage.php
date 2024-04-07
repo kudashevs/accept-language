@@ -13,6 +13,9 @@ final class DefaultLanguage implements LanguageInterface
 
     private QualityValue $quality;
 
+    /**
+     * @var array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool, allow_empty?: bool, fallback?: int|float}
+     */
     private array $options;
 
     private bool $valid = false;
@@ -20,7 +23,7 @@ final class DefaultLanguage implements LanguageInterface
     /**
      * @param string $tag
      * @param int|float|string|null $quality
-     * @param array<string, bool|string> $options
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool, allow_empty?: bool, fallback?: int|float} $options
      * @return DefaultLanguage
      */
     public static function create(string $tag, $quality, array $options = []): self
@@ -30,8 +33,8 @@ final class DefaultLanguage implements LanguageInterface
 
     /**
      * @param string $tag
-     * @param mixed $quality
-     * @param array<string, bool|string> $options
+     * @param int|float|string|null $quality
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool, allow_empty?: bool, fallback?: int|float} $options
      * @return DefaultLanguage
      */
     public static function createInvalid(string $tag, $quality, array $options = []): self
@@ -42,17 +45,28 @@ final class DefaultLanguage implements LanguageInterface
         return $language;
     }
 
+    /**
+     * @param string $tag
+     * @param int|float|string|null $quality
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool, allow_empty?: bool, fallback?: int|float} $options
+     */
     private function __construct(string $tag, $quality, array $options = [])
     {
         $this->initOptions($options);
         $this->initLanguage($tag, $quality);
     }
 
+    /**
+     * @param array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool, allow_empty?: bool, fallback?: int|float} $options
+     */
     private function initOptions(array $options): void
     {
         $this->options = $options;
     }
 
+    /**
+     * @param int|float|string|null $quality
+     */
     private function initLanguage(string $tag, $quality): void
     {
         [
@@ -86,7 +100,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getOptions(): array
     {
@@ -97,9 +111,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getTag(): string
     {
@@ -107,9 +119,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return array<int, string>
+     * @inheritDoc
      */
     public function getSubtags(): array
     {
@@ -117,9 +127,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getPrimarySubtag(): string
     {
@@ -127,9 +135,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return int|float
+     * @inheritDoc
      */
     public function getQuality()
     {
@@ -137,9 +143,7 @@ final class DefaultLanguage implements LanguageInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @return bool
+     * @inheritDoc
      */
     public function isValid(): bool
     {
