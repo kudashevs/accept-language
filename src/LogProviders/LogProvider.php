@@ -125,7 +125,7 @@ final class LogProvider
     private function checkValidLogLevel(): void
     {
         $validLevels = $this->retrieveValidLogLevels();
-        $requestedLevel = strtolower($this->options['log_level']);
+        $requestedLevel = $this->retrieveRequestedLogLevel();
 
         if (!in_array($requestedLevel, $validLevels, true)) {
             throw new InvalidLogLevelName(
@@ -149,6 +149,11 @@ final class LogProvider
         return array_map(function ($level) {
             return strtolower($level);
         }, $levels);
+    }
+
+    private function retrieveRequestedLogLevel(): string
+    {
+        return strtolower($this->options['log_level']);
     }
 
     /**
