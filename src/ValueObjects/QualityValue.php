@@ -7,7 +7,7 @@ namespace Kudashevs\AcceptLanguage\ValueObjects;
 use Kudashevs\AcceptLanguage\Normalizers\LanguageQualityNormalizer;
 use Kudashevs\AcceptLanguage\Normalizers\QualityNormalizerInterface;
 
-class QualityValue
+final class QualityValue
 {
     private QualityNormalizerInterface $normalizer;
 
