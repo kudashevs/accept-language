@@ -188,7 +188,7 @@ class AcceptLanguage
         if (!$defaultLanguage->isValid()) {
             throw new InvalidOptionValue(
                 sprintf(
-                    'The value "%s" is invalid. The option default_language should contain a valid Language tag.',
+                    'The value "%s" is invalid. The option default_language should contain a valid language tag.',
                     $this->options['default_language']
                 )
             );
