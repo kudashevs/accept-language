@@ -13,7 +13,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     private const NOT_ACCEPTABLE_QUALITY = 0;
 
     /**
-     * The value defines whether empty quality values after "q=" are acceptable.
+     * The constant defines whether empty quality values (empty "q" parameter values) are acceptable.
      */
     private const ALLOW_EMPTY_DEFAULT = true;
 
@@ -43,13 +43,16 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return self::NOT_ACCEPTABLE_QUALITY;
     }
 
+    /**
+     * @param int|float|string|null $quality
+     */
     private function isUndefinedQuality($quality): bool
     {
         return is_null($quality);
     }
 
     /**
-     * @param array<string, int|float> $options
+     * @param array{fallback?: int|float} $options
      * @return int|float
      */
     private function generateForUndefined(array $options)
@@ -64,6 +67,9 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return $this->prepareQuality($quality);
     }
 
+    /**
+     * @param int|float|string|null $quality
+     */
     private function isValidQuality($quality): bool
     {
         // The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
@@ -82,6 +88,9 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
         return $this->prepareQuality($quality);
     }
 
+    /**
+     * @param int|float|string|null $quality
+     */
     private function isEmptyQuality($quality): bool
     {
         return is_string($quality)
@@ -89,7 +98,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     }
 
     /**
-     * @param array<string, bool> $options
+     * @param array{allow_empty?: bool} $options
      * @return bool
      */
     private function isEmptyAllowed(array $options): bool
@@ -102,7 +111,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     }
 
     /**
-     * @param array<string, int|float> $options
+     * @param array{fallback?: int|float} $options
      * @return int|float
      */
     private function generateForEmpty(array $options)
@@ -117,6 +126,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     }
 
     /**
+     * @param int|float|string|null $quality
      * @return int|float
      */
     private function prepareQuality($quality)
