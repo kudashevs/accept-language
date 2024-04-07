@@ -6,6 +6,9 @@ namespace Kudashevs\AcceptLanguage\Normalizers;
 
 final class LanguageTagNormalizer implements TagNormalizerInterface
 {
+    /**
+     * The lookup table that binds the subtags to the corresponding normalization methods.
+     */
     private const SUBTAG_NORMALIZERS = [
         'primary' => 'normalizePrimary',
         'extlang' => 'normalizeExtlang',
@@ -14,7 +17,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     ];
 
     /**
-     * The value defines a prefix to find the required subtags in options.
+     * The prefix that will be used to identify whether a subtag is required.
      */
     private const OPTION_PREFIX = 'with_';
 
@@ -30,6 +33,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      * If the provided tag is not valid, it is returned unchanged.
      *
      * @param string $tag
+     * @param array{with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      * @return string
      */
     public function normalize(string $tag, array $options = []): string
@@ -68,6 +72,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     }
 
     /**
+     * @param array<string, string> $subtags
      * @return array<string, string>
      */
     private function retrieveFoundSubtags(array $subtags): array
@@ -77,6 +82,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         return array_map('strval', $groups);
     }
 
+    /**
+     * @param array<string, string> $subtags
+     * @return array<string, string>
+     */
     private function collectNamedGroups(array $subtags): array
     {
         return array_filter($subtags, 'is_string', ARRAY_FILTER_USE_KEY);
@@ -108,6 +117,11 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         );
     }
 
+    /**
+     * @param array<string, string> $subtags
+     * @param array<string, bool> $options
+     * @return array<string, string>
+     */
     private function retrieveApplicableSubtags(array $subtags, array $options): array
     {
         return array_filter($subtags, function ($value, $key) use ($options) {
@@ -125,6 +139,9 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         return $subtag === 'primary';
     }
 
+    /**
+     * @param array{with_extlang?: bool, with_script?: bool, with_region?: bool} $options
+     */
     private function isRequired(string $key, array $options): bool
     {
         $optionKey = self::OPTION_PREFIX . $key;
@@ -132,6 +149,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
         return isset($options[$optionKey]) && $options[$optionKey] === true;
     }
 
+    /**
+     * @param array<string, string> $subtags
+     * @return array<string, string>
+     */
     private function normalizeSubtags(array $subtags): array
     {
         $normalizedSubtags = [];
