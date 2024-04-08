@@ -57,7 +57,7 @@ class CaughtBugsTest extends ExtendedTestCase
          * Bug found: 27.08.2023
          * Details: The AcceptLanguageServiceProvider class was not able to apply the boolean options due to
          * a wrong assumption in the use of array_filter() function with the initial options. For more details
-         * @see AcceptLanguageServiceProvider::getInitialConfig()
+         * @see \Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider::getInitialConfig()
          */
         config()->set('accept-language.default_language', 'fr-Latn-CH');
         config()->set('accept-language.use_script_subtag', false);
