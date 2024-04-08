@@ -237,6 +237,44 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideDifferentDefaultLanguageOptionValuesWithFormatting
+     */
+    public function it_can_format_the_default_language_option_according_to_the_settings(
+        array $options,
+        string $expected
+    ): void {
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame($expected, $service->getPreferredLanguage());
+        $this->assertSame($expected, $service->getLanguage());
+    }
+
+    public static function provideDifferentDefaultLanguageOptionValuesWithFormatting(): array
+    {
+        return [
+            'a two-letter language tag with script and region results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['en', 'de', 'es'],
+                    'separator' => '~',
+                ],
+                'sr~RS',
+            ],
+            'a two-letter language tag with script and region with the use script subtag option set to true results in the language' => [
+                [
+                    'default_language' => 'sr-Latn-RS',
+                    'accepted_languages' => ['en', 'de', 'es'],
+                    'use_script_subtag' => true,
+                    'separator' => '~',
+                ],
+                'sr~Latn~RS',
+            ],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider provideDifferentcAcceptedLanguagesOptionValues
      */
     public function it_can_handle_the_accepted_languages_option(array $options, string $expected): void
@@ -271,44 +309,6 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['en', 'de', 'es'],
                 ],
                 'es',
-            ],
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider provideDifferentDefaultLanguageOptionValuesWithFormatting
-     */
-    public function it_can_format_the_default_language_option_according_to_the_settings(
-        array $options,
-        string $expected
-    ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
-
-        $this->assertSame($expected, $service->getPreferredLanguage());
-        $this->assertSame($expected, $service->getLanguage());
-    }
-
-    public static function provideDifferentDefaultLanguageOptionValuesWithFormatting(): array
-    {
-        return [
-            'a two-letter language tag with script and region results in the language' => [
-                [
-                    'default_language' => 'sr-Latn-RS',
-                    'accepted_languages' => ['en', 'de', 'es'],
-                    'separator' => '~',
-                ],
-                'sr~RS',
-            ],
-            'a two-letter language tag with script and region with the use script subtag option set to true results in the language' => [
-                [
-                    'default_language' => 'sr-Latn-RS',
-                    'accepted_languages' => ['en', 'de', 'es'],
-                    'use_script_subtag' => true,
-                    'separator' => '~',
-                ],
-                'sr~Latn~RS',
             ],
         ];
     }
