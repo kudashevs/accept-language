@@ -262,7 +262,7 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_retain_the_provided_options(): void
+    public function it_can_retain_provided_options(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [
             'separator' => '~',
