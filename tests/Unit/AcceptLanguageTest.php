@@ -286,7 +286,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public function provideDifferentcAcceptedLanguagesOptionValues(): array
+    public static function provideDifferentcAcceptedLanguagesOptionValues(): array
     {
         return [
             'it retrieves a first valid language when the accepted languages option is empty' => [
