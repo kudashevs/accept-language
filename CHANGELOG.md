@@ -2,6 +2,24 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.4.0 - 2024-04-08](https://github.com/kudashevs/accept-language/compare/v3.3.0...v3.4.0)
+
+- Increase the minimum supported `orchestra/testbench` version
+- Add a `phpstan/phpstan` dev dependency
+- Add a Github Action with PHPStan analysis tool
+- Add a new `retrieve_accepted_languages` log event
+- Add a validation for the `default_language` option
+- Add a new `InvalidOptionValue` exception for this validation
+- Change the project folders structure
+- Change Normalizers simplify the usage
+- Fix `DefaultLanguage` wrong fallback option name
+- Update PHPDoc types
+- Update README.md
+- Some improvements
+
+Note: this release changes the default behavior for the situation when the `process` method has not been called.
+Now the public methods will return empty values rather than throwing an error.
+
 ## [v3.3.0 - 2024-03-17](https://github.com/kudashevs/accept-language/compare/v3.2.0...v3.3.0)
 
 - Add support for PHP 8.3
