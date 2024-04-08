@@ -286,7 +286,7 @@ class AcceptLanguageTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideDifferentDefaultLanguageOptionsWithFormatting
+     * @dataProvider provideDifferentDefaultLanguageOptionValuesWithFormatting
      */
     public function it_can_format_the_default_language_option_according_to_the_settings(
         array $options,
@@ -299,7 +299,7 @@ class AcceptLanguageTest extends TestCase
         $this->assertSame($expected, $service->getLanguage());
     }
 
-    public static function provideDifferentDefaultLanguageOptionsWithFormatting(): array
+    public static function provideDifferentDefaultLanguageOptionValuesWithFormatting(): array
     {
         return [
             'a two-letter language tag with script and region results in the language' => [
