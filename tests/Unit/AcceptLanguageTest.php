@@ -235,53 +235,44 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
-    /** @test */
-    public function it_can_retrieve_a_first_language_when_the_accepted_languages_option_is_empty(): void
-    {
-        $options = [
-            'http_accept_language' => 'en-US,en;q=0.5',
-            'accepted_languages' => [],
-        ];
-
-        $service = new AcceptLanguage($options);
-        $service->process();
-
-        $this->assertSame('en_US', $service->getPreferredLanguage());
-        $this->assertSame('en_US', $service->getLanguage());
-    }
-
     /**
      * @test
+     * @dataProvider provideDifferentcAcceptedLanguagesOptionValues
      */
-    public function it_can_retrieve_a_default_language_when_a_language_is_not_listed_in_accepted_languages(): void
+    public function it_can_handle_the_accepted_languages_option(array $options, string $expected): void
     {
-        $options = [
-            'http_accept_language' => 'pp',
-            'accepted_languages' => ['en', 'de', 'fr'],
-        ];
-
         $service = new AcceptLanguage($options);
         $service->process();
 
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
-        $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertSame($expected, $service->getPreferredLanguage());
+        $this->assertSame($expected, $service->getLanguage());
     }
 
-    /**
-     * @test
-     */
-    public function it_can_retrieve_a_preferred_language_when_a_language_is_listed_in_accepted_languages(): void
+    public function provideDifferentcAcceptedLanguagesOptionValues(): array
     {
-        $options = [
-            'default_language' => 'es',
-            'accepted_languages' => ['en', 'de', 'es'],
+        return [
+            'it retrieves a first valid language when the accepted languages option is empty' => [
+                [
+                    'http_accept_language' => 'en-US,en;q=0.5',
+                    'accepted_languages' => [],
+                ],
+                'en_US',
+            ],
+            'it retrieves a default language when a language is not listed in the accepted languages option' => [
+                [
+                    'http_accept_language' => 'pp',
+                    'accepted_languages' => ['en', 'de', 'fr'],
+                ],
+                self::DEFAULT_LANGUAGE,
+            ],
+            'it retrieves a preferred language when a language is listed in the accepted languages option' => [
+                [
+                    'default_language' => 'es',
+                    'accepted_languages' => ['en', 'de', 'es'],
+                ],
+                'es',
+            ],
         ];
-
-        $service = new AcceptLanguage($options);
-        $service->process();
-
-        $this->assertSame($options['default_language'], $service->getPreferredLanguage());
-        $this->assertSame($options['default_language'], $service->getLanguage());
     }
 
     /**
