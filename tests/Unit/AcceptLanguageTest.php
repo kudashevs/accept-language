@@ -235,6 +235,21 @@ class AcceptLanguageTest extends TestCase
         ];
     }
 
+    /** @test */
+    public function it_can_retrieve_a_first_language_when_the_accepted_languages_option_is_empty(): void
+    {
+        $options = [
+            'http_accept_language' => 'en-US,en;q=0.5',
+            'accepted_languages' => [],
+        ];
+
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame('en_US', $service->getPreferredLanguage());
+        $this->assertSame('en_US', $service->getLanguage());
+    }
+
     /**
      * @test
      */
@@ -1116,6 +1131,21 @@ class AcceptLanguageTest extends TestCase
                 'de',
             ],
         ];
+    }
+
+    /** @test */
+    public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_uppercase(): void
+    {
+        // The quality parameter is case-insensitive. See RFC 7231, Section 5.3.1.
+        $options = [
+            'http_accept_language' => 'en,es;Q=0.9,fr;Q=0.8',
+            'accepted_languages' => ['fr'],
+        ];
+
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
     }
 
     /** @test */
