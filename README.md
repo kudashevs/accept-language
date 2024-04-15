@@ -46,20 +46,20 @@ $service = new AcceptLanguage();
 $service->process();
 ```
 
+**Note!** The `AcceptLanguage` class at the moment of creation can throw a few exceptions: `InvalidOptionType`,
+`InvalidOptionValue`, `InvalidLogEventName`, `InvalidLogLevelName`. All of these exceptions extend a common built-in
+`InvalidArgumentException` class, so they are easy to deal with.
+
 Once obtained, the preferred language value can be accessed in any part of your application by using one of these methods:
 ```php
 $service->getPreferredLanguage();   # Returns the user's preferred language
-$service->getLanguage();            # Does the same (an alias of the getPreferredLanguage() method)
+$service->getLanguage();            # An alias of the getPreferredLanguage()
 ```
 
 If you need the original HTTP Accept-Language header, it is available via the `getHeader` method.
 ```php
 $service->getHeader();
 ```
-
-**Important note!** The `AcceptLanguage` class at the moment of creation can throw a few exceptions: `InvalidOptionType`,
-`InvalidOptionValue`, `InvalidLogEventName`, `InvalidLogLevelName`. All these exceptions extend the `InvalidArgumentException`
-class, so they are simple to deal with.
 
 
 ## Options
