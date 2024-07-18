@@ -14,9 +14,9 @@ format of the language and the set of included subtags are customizable and can 
 Main package features:
 - it can use the default language value set by the `default_language` option
 - it can return a default language value when a client accepts any language (e.g., `Accept-Language: *`)
+- it can retrieve only the languages with the two-letter code by setting the `two_letter_only` option
 - it can retrieve only the languages that are listed in the `accepted_languages` option and their derivatives
-- it can retrieve only the languages that match exactly the `accepted_languages` by setting the `exact_match_only` option
-- it can retrieve only the two-letter language codes by setting the `two_letter_only` option
+- it can retrieve only the languages that exactly match the `accepted_languages` by setting the `exact_match_only` option
 - it can include extlang, script, and region subtags by setting the `use_<subtag-name>_subtag` options
 - it can set the default separator value by providing the `separator` option
 - it can log its activity for further examination by setting the `log_activity` option
