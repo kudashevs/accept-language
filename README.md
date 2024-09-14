@@ -23,7 +23,7 @@ Main package features:
 - it can log its activity at the specific log level by providing the `log_level` option
 - it can log only the events that are listed in the `log_only` option
 
-The package goes with the built-in Laravel framework support. For more information see [Laravel usage](#laravel-usage) section.
+The package goes with the built-in Laravel framework support. For more information see [Laravel integration](#laravel-integration) section.
 
 
 ## Installation
@@ -156,9 +156,10 @@ These options instruct the package to retrieve only the values that are listed i
 If one of the language tags in an HTTP Accept-Language header matches any of these values, it will be retained for
 the further processing. If none of them matches the listed values, the default language will be returned.
 
+
 ## Laravel integration
 
-If you don't use auto-discovery just add a ServiceProvider to the `config/app.php` file.
+Install the package. If you don't use auto-discovery just add a ServiceProvider to the `config/app.php` file.
 ```php
 'providers' => [
     Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider::class,
