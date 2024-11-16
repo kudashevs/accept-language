@@ -1194,7 +1194,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_a_valid_language_all_the_stages_when_log_activity_is_enabled(): void
+    public function it_can_log_a_valid_language_all_of_the_stages_when_log_activity_is_enabled(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1229,7 +1229,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_log_an_invalid_language_all_the_stages_when_log_activity_is_enabled(): void
+    public function it_can_log_an_invalid_language_all_of_the_stages_when_log_activity_is_enabled(): void
     {
         $options = [
             'http_accept_language' => 'completely wrong',
