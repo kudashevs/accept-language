@@ -18,12 +18,22 @@ class DefaultLanguageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_create_an_invalid_language(): void
+    {
+        $language = DefaultLanguage::createInvalid('', 0);
+
+        $this->assertSame('', $language->getTag());
+        $this->assertSame(0, $language->getQuality());
+        $this->assertFalse($language->isValid());
+    }
+
+    /** @test */
     public function it_can_create_an_invalid_language_from_valid_data(): void
     {
         $language = DefaultLanguage::createInvalid('en', 1);
 
         $this->assertNotEmpty($language->getTag());
-        $this->assertNotEmpty($language->getQuality());
+        $this->assertNotEmpty($language->getQuality());;
         $this->assertFalse($language->isValid());
     }
 
