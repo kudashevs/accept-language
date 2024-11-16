@@ -14,7 +14,7 @@ use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 class AcceptLanguageTest extends ExtendedTestCase
 {
     /** @test */
-    public function an_instance_can_throw_an_exception_when_a_wrong_option_provided(): void
+    public function it_throws_an_exception_when_a_wrong_option_is_provided(): void
     {
         $this->expectException(InvalidOptionType::class);
         $this->expectExceptionMessage('wrong value');
@@ -23,7 +23,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_throw_an_exceptions_when_a_wrong_default_language_provided(): void
+    public function it_throws_an_exception_when_a_wrong_default_language_is_provided(): void
     {
         $this->expectException(InvalidOptionValue::class);
         $this->expectExceptionMessage('verywrong_language');
@@ -32,7 +32,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_throw_an_exception_when_a_wrong_log_level_provided(): void
+    public function it_throws_an_exception_when_a_wrong_log_level_is_provided(): void
     {
         $this->expectException(InvalidLogLevelName::class);
         $this->expectExceptionMessage('wrong');
@@ -43,7 +43,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_throw_an_exception_when_a_wrong_log_event_name_provided(): void
+    public function it_throws_an_exception_when_a_wrong_log_event_name_is_provided(): void
     {
         $this->expectException(InvalidLogEventName::class);
         $this->expectExceptionMessage('wrong');
@@ -54,7 +54,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_retrieve_a_language(): void
+    public function it_can_retrieve_a_language(): void
     {
         $service = new AcceptLanguage();
         $service->process();
@@ -66,7 +66,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function a_facade_can_retrieve_a_language(): void
+    public function it_can_retrieve_a_language_through_a_facade(): void
     {
         $language = AcceptLanguageFacade::getLanguage();
 
@@ -75,7 +75,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_apply_separator_related_options(): void
+    public function it_can_apply_some_separator_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr_CH');
         app('config')->set('accept-language.separator', '-');
@@ -86,7 +86,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_apply_different_subtag_related_options(): void
+    public function it_can_apply_some_subtags_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr-Latn-CH');
         app('config')->set('accept-language.use_script_subtag', false);
@@ -98,7 +98,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function an_instance_can_apply_log_related_options(): void
+    public function it_can_apply_some_log_related_options(): void
     {
         $this->partialMock(Logger::class, function ($mock) {
             $mock->shouldReceive('debug')->atLeast(1);
