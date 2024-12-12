@@ -30,8 +30,10 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
             return $this->generateForUndefined($options);
         }
 
-        // Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
-        // this is not a serious violation, we might want to handle this empty value when a fallback is available.
+        /*
+         * Since some clients may omit the quality parameter (the value after "q=" in a request header field) and
+         * this is not a serious violation, we might want to handle this empty value when a fallback is available.
+         */
         if ($this->isEmptyQuality($quality) && $this->isEmptyAllowed($options)) {
             return $this->generateForEmpty($options);
         }
@@ -57,7 +59,9 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private function generateForUndefined(array $options)
     {
-        // If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
+        /*
+         * If no "q" parameter is present, the default weight is 1. See RFC 7231, Section 5.3.1.
+         */
         $quality = 1;
 
         if (isset($options['fallback']) && $this->isValidQuality($options['fallback'])) {
@@ -72,8 +76,10 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
      */
     private function isValidQuality($quality): bool
     {
-        // The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
-        // and 1 is the most preferred; a value of 0 means "not acceptable". See RFC 7231, Section 5.3.1.
+        /*
+         * The weight is normalized to a real number in the range 0 through 1, where 0.001 is the least preferred
+         * and 1 is the most preferred; a value of 0 means "not acceptable". See RFC 7231, Section 5.3.1.
+         */
         return is_numeric($quality)
             && $quality > 0
             && max(min($quality, 1), 0.001) === $quality;

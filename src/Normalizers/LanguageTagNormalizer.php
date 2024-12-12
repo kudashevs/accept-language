@@ -38,7 +38,9 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
      */
     public function normalize(string $tag, array $options = []): string
     {
-        // A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
+        /*
+         * A language tag is composed from a sequence of one or more "subtags". See RFC 5646, Section 2.2.1.
+         */
         $subtags = $this->extractSubtags($tag);
 
         if ($this->isInvalidSetOfSubtags($subtags)) {
@@ -109,8 +111,10 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
 
         $normalizedSubtags = $this->normalizeSubtags($applicableSubtags);
 
-        // Subtags are distinguished and separated from one another by a hyphen.
-        // For more information about a separator see RFC 5646, Section 2.1.
+        /*
+         * Subtags are distinguished and separated from one another by a hyphen.
+         * For more information about a separator see RFC 5646, Section 2.1.
+         */
         return implode(
             '-',
             $normalizedSubtags

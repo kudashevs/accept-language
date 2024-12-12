@@ -9,14 +9,16 @@ use Kudashevs\AcceptLanguage\Normalizers\TagNormalizerInterface;
 
 final class LanguageTag
 {
-    // The language range starts with the 1*8ALPHA notation which means that
-    // the minimum length is equal to 1 and the maximum length is equal to 8.
-    // For more information about language ranges see RFC 4647, Section 2.2.
+    /*
+     * The language range starts with the 1*8ALPHA notation which means that
+     * the minimum length is equal to 1 and the maximum length is equal to 8.
+     * For more information about language ranges see RFC 4647, Section 2.2.
+     */
     private const MINIMUM_PRIMARY_SUBTAG_LENGTH = 1;
     private const MAXIMUM_PRIMARY_SUBTAG_LENGTH = 8;
 
-    /**
-     * The separators that will be used to distinguish and separate subtags.
+    /*
+     * The separators that will be used to distinguish subtags.
      */
     private const SUPPORTED_SEPARATORS = ['_', '-'];
 
@@ -75,7 +77,9 @@ final class LanguageTag
 
     private function initTag(string $tag): void
     {
-        // To perform a normalization process, the tag value should conform to the standard.
+        /*
+         * To perform a normalization process, the tag value should conform to the standard.
+         */
         $preparedTag = $this->prepareTag($tag);
 
         if (!$this->isValidTag($preparedTag)) {
@@ -94,8 +98,10 @@ final class LanguageTag
      */
     private function prepareTag(string $tag): string
     {
-        // Subtags are distinguished and separated from one another by a hyphen.
-        // For more information about a separator see RFC 5646, Section 2.1.
+        /*
+         * Subtags are distinguished and separated from one another by a hyphen.
+         * For more information about a separator see RFC 5646, Section 2.1.
+        */
         return str_replace($this->retrieveSeparators(), '-', $tag);
     }
 
@@ -119,11 +125,13 @@ final class LanguageTag
 
     private function isValidLanguageTag(string $tag): bool
     {
-        // A language tag is a sequence of one or more case-insensitive subtags, each separated by a hyphen character
-        // ("-", %x2D). In most cases, a language tag consists of a primary language subtag that identifies a broad
-        // family of related languages (e.g., "en" = English), which is optionally followed by a series of subtags that
-        // refine or narrow that language's range (e.g., "en-CA" = the variety of English as communicated in Canada).
-        // Whitespace is not allowed within a language tag. See RFC 7231, Section 3.1.3.1.
+        /*
+         * A language tag is a sequence of one or more case-insensitive subtags, each separated by a hyphen character
+         * ("-", %x2D). In most cases, a language tag consists of a primary language subtag that identifies a broad
+         * family of related languages (e.g., "en" = English), which is optionally followed by a series of subtags that
+         * refine or narrow that language's range (e.g., "en-CA" = the variety of English as communicated in Canada).
+         * Whitespace is not allowed within a language tag. See RFC 7231, Section 3.1.3.1.
+        */
         return $this->isValidLength($tag) && $this->isValidCharacterRange($tag) && $this->isLikeLanguageTag($tag);
     }
 
@@ -144,7 +152,9 @@ final class LanguageTag
 
     private function isPrimarySubtag(string $tag): bool
     {
-        // The primary language subtag is the first subtag in a language tag. See RFC 5646, Section 2.2.1.
+        /*
+         * The primary language subtag is the first subtag in a language tag. See RFC 5646, Section 2.2.1.
+         */
         return strlen($tag) >= self::MINIMUM_PRIMARY_SUBTAG_LENGTH
             && strlen($tag) <= self::MAXIMUM_PRIMARY_SUBTAG_LENGTH
             && $this->isAlphaCharacterRange($tag)

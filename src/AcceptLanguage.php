@@ -19,8 +19,10 @@ use Psr\Log\LoggerInterface;
 
 class AcceptLanguage
 {
-    // The length of the primary subtag is limited to a range of 2 to 3 letters.
-    // However, these values might be changed in the future.
+    /*
+     * The length of the primary subtag is limited to a range of 2 to 3 letters.
+     * However, these values might be changed in the future.
+    */
     protected const PRIMARY_SUBTAG_MIN_LENGTH = 2;
     protected const PRIMARY_SUBTAG_MAX_LENGTH = 3;
 
@@ -260,8 +262,10 @@ class AcceptLanguage
 
     protected function findPreferredLanguage(string $header): string
     {
-        // There are several situations that result into the default language
-        // so there is no need to continue the further header processing.
+        /*
+         * There are several situations that result into the default language
+         * so there is no need to continue the header processing any further.
+         */
         if ($this->isDefaultLanguageCase($header)) {
             return $this->processDefaultLanguageCase();
         }
@@ -326,7 +330,9 @@ class AcceptLanguage
 
         $languages = [];
         foreach (explode(',', $header) as $languageRange) {
-            // For more information about language ranges see RFC 4647, Section 2.1.
+            /*
+             * For more information about language ranges see RFC 4647, Section 2.1.
+             */
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
             /** @var array<LanguageInterface> $languages */
@@ -346,8 +352,10 @@ class AcceptLanguage
      */
     protected function splitLanguageRange(string $range): array
     {
-        // Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
-        // to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
+        /*
+         * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
+         * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
+         */
         $splitRange = preg_split('/;q=/i', trim($range));
 
         return ($splitRange !== false) ? $splitRange : [];
@@ -363,7 +371,9 @@ class AcceptLanguage
     {
         $validLanguages = $this->getValidLanguages($languages);
 
-        // Sorting by quality is a part of the normalization process.
+        /*
+         * Sorting by quality is a part of the normalization process.
+         */
         usort($validLanguages, static function ($a, $b) {
             return $b->getQuality() <=> $a->getQuality();
         });

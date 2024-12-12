@@ -67,7 +67,9 @@ final class QualityValue
     private function initQuality($quality): void
     {
         if ($this->isInvalidQuality($quality)) {
-            // To conform to the expected type, the quality value should be cast even though it is invalid.
+            /*
+             * To conform to the expected type, the quality value should be cast even though it is invalid.
+             */
             $this->quality = $this->prepareInvalidQuality($quality);
             $this->valid = false;
 
