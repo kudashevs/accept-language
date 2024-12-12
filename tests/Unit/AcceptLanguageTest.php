@@ -580,13 +580,14 @@ class AcceptLanguageTest extends TestCase
      */
     public function it_can_retrieve_a_preferred_language_when_the_accepted_languages_is_set(
         array $options,
-        string $expected
+        string $expectedLanguage,
+        $expectedQuality,
     ): void {
         $service = new AcceptLanguage($options);
         $service->process();
-        $result = $service->getPreferredLanguage();
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedLanguage, $service->getPreferredLanguage());
+        $this->assertSame($expectedQuality, $service->getPreferredLanguageQuality());
     }
 
     public static function provideDifferentAcceptedLanguagesValues(): array
@@ -598,6 +599,7 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['de'],
                 ],
                 'de',
+                0.7,
             ],
             'a language that intersects with accepted_languages results in the accepted language when it is of quality 1' => [
                 [
@@ -605,6 +607,7 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['de', 'fr'],
                 ],
                 'fr',
+                1,
             ],
             'a language that intersects with accepted_languages results in the accepted language when it is of quality below 1' => [
                 [
@@ -612,6 +615,7 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['en', 'es'],
                 ],
                 'es',
+                0.333,
             ],
             'a language that intersects with accepted_languages with hyphen separator results in the accepted language' => [
                 [
@@ -619,6 +623,7 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['fr-CH'],
                 ],
                 'fr_CH',
+                1,
             ],
             'a language that intersects with accepted_languages with underscore separator results in the accepted language' => [
                 [
@@ -627,6 +632,7 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '_',
                 ],
                 'fr_CH',
+                1,
             ],
             'a language that intersects with accepted_languages with tilde separator results in the accepted language' => [
                 [
@@ -635,6 +641,7 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '~',
                 ],
                 'fr~CH',
+                1,
             ],
             'a language that intersects with accepted_languages formatted with hyphen separator and mixed letters results in the accepted language' => [
                 [
@@ -643,7 +650,7 @@ class AcceptLanguageTest extends TestCase
                     'use_script_subtag' => true,
                 ],
                 'fr_Latn_CH',
-
+                1,
             ],
             'a language that intersects with accepted_languages formatted with underscore separator and mixed letters results in the accepted language' => [
                 [
@@ -653,7 +660,7 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '_',
                 ],
                 'fr_Latn_CH',
-
+                1,
             ],
             'a language that intersects with accepted_languages formatted with tilde separator and mixed letters results in the accepted language' => [
                 [
@@ -663,7 +670,7 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '~',
                 ],
                 'fr~Latn~CH',
-
+                1,
             ],
             'a language that intersects with accepted_languages and a separator results in the accepted language' => [
                 [
@@ -673,20 +680,23 @@ class AcceptLanguageTest extends TestCase
                     'separator' => '_',
                 ],
                 'fr_CH',
+                1,
             ],
             'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality 1' => [
+                [
+                    'http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7',
+                    'accepted_languages' => ['da'],
+                ],
+                'da',
+                1,
+            ],
+            'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality below 1' => [
                 [
                     'http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7',
                     'accepted_languages' => ['en'],
                 ],
                 'en',
-            ],
-            'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality below 1' => [
-                [
-                    'http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7',
-                    'accepted_languages' => ['fr'],
-                ],
-                'fr',
+                0.8,
             ],
         ];
     }
