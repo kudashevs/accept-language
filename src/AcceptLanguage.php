@@ -603,4 +603,30 @@ class AcceptLanguage
     {
         return $this->getPreferredLanguage();
     }
+
+    /**
+     * Return a preferred language quality.
+     *
+     * @return int|float
+     */
+    public function getPreferredLanguageQuality()
+    {
+        $quality = $this->language->getQuality();
+
+        if ($quality === 0 || (int)$quality === 1) {
+            return (int)$quality;
+        }
+
+        return $quality;
+    }
+
+    /**
+     * Return a preferred language quality.
+     *
+     * @return int|float
+     */
+    public function getQuality()
+    {
+        return $this->getPreferredLanguageQuality();
+    }
 }

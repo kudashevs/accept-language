@@ -50,8 +50,10 @@ $service->process();
 
 Once obtained, the preferred language value can be accessed in any part of your application by using one of these methods:
 ```php
-$service->getPreferredLanguage();   # Returns the user's preferred language
-$service->getLanguage();            # An alias of the getPreferredLanguage()
+$service->getPreferredLanguage();           # Returns the user's preferred language
+$service->getLanguage();                    # An alias of the getPreferredLanguage()
+$service->getPreferredLanguageQuality();    # Returns a quality of the preferred language
+$service->getQuality();                     # An alias of the getPreferredLanguageQuality()
 ```
 
 If you need the original HTTP Accept-Language header, it is available via the `getHeader` method.

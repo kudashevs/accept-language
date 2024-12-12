@@ -12,6 +12,7 @@ class AcceptLanguageTest extends TestCase
 {
     protected const DEFAULT_LANGUAGE = 'en';
 
+    protected const DEFAULT_QUALITY = 1;
     /**
      * @test
      * @dataProvider provideDifferentWrongOptions
@@ -93,6 +94,8 @@ class AcceptLanguageTest extends TestCase
 
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getPreferredLanguage());
         $this->assertSame(self::DEFAULT_LANGUAGE, $service->getLanguage());
+        $this->assertSame(self::DEFAULT_QUALITY, $service->getPreferredLanguageQuality());
+        $this->assertSame(self::DEFAULT_QUALITY, $service->getQuality());
     }
 
     /**
@@ -355,13 +358,13 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeaderValues
      */
-    public function it_can_retrieve_a_preferred_language(array $options, string $expected): void
+    public function it_can_retrieve_a_preferred_language(array $options, string $expectedLanguage, $expectedQuality): void
     {
         $service = new AcceptLanguage($options);
         $service->process();
-        $result = $service->getPreferredLanguage();
 
-        $this->assertSame($expected, $result);
+        $this->assertSame($expectedLanguage, $service->getPreferredLanguage());
+        $this->assertSame($expectedQuality, $service->getPreferredLanguageQuality());
     }
 
     public static function provideDifferentRequestHeaderValues(): array
@@ -370,26 +373,32 @@ class AcceptLanguageTest extends TestCase
             'any language tag results in default' => [
                 ['http_accept_language' => '*'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'any language tag with highest quality results in default' => [
                 ['http_accept_language' => '*,de;q=0.7'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'any language tag and language tag with equal quality results in default' => [
                 ['http_accept_language' => '*,es,de;q=0.7'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'any language tag and language tag with equal quality results in the language' => [
                 ['http_accept_language' => 'es,*,de;q=0.7'],
                 'es',
+                1,
             ],
             'a two-letter language tag results in the language' => [
                 ['http_accept_language' => 'fr'],
                 'fr',
+                1,
             ],
             'a three-letter language tag results in default' => [
                 ['http_accept_language' => 'sgn'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a three-letter language tag with option results in default' => [
                 [
@@ -397,22 +406,27 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'sgn',
+                1,
             ],
             'a four letters language tag results in default' => [
                 ['http_accept_language' => 'test'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a two-letter language tag with region results in the language' => [
                 ['http_accept_language' => 'en-us'],
                 'en_US',
+                1,
             ],
             'a two-letter language tag with script and region results in the language' => [
                 ['http_accept_language' => 'zh-Hant-HK'],
                 'zh_HK',
+                1,
             ],
             'a two-letter language tag with 0 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a three-letter language tag with 0 quality language tag results in the language' => [
                 [
@@ -420,10 +434,12 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a two-letter language tag with 0.001 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=0.001'],
                 'de',
+                0.001,
             ],
             'a three-letter language tag with 0.001 quality language tag results in the language' => [
                 [
@@ -431,10 +447,12 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'sgn',
+                0.001,
             ],
             'a two-letter language tag with quality language tag results in the language' => [
                 ['http_accept_language' => 'de;q=0.5'],
                 'de',
+                0.5,
             ],
             'a three-letter language tag with quality language tag results in the language' => [
                 [
@@ -442,10 +460,12 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'sgn',
+                0.5,
             ],
-            'a two-letter language tag with 0.999 quality language tag results in default' => [
+            'a two-letter language tag with 0.999 quality language tag results in the language' => [
                 ['http_accept_language' => 'de;q=0.999'],
                 'de',
+                0.999,
             ],
             'a three-letter language tag with 0.999 quality language tag results in the language' => [
                 [
@@ -453,10 +473,12 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'sgn',
+                0.999,
             ],
-            'a two-letter language tag with 1 quality language tag results in default' => [
+            'a two-letter language tag with 1 quality language tag results in the language' => [
                 ['http_accept_language' => 'de;q=1'],
                 'de',
+                1,
             ],
             'a three-letter language tag with 1 quality language tag results in the language' => [
                 [
@@ -464,10 +486,12 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 'sgn',
+                1,
             ],
             'a two-letter language tag with 1.001 quality language tag results in default' => [
                 ['http_accept_language' => 'de;q=1.001'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a three-letter language tag with 1.001 quality language tag results in the language' => [
                 [
@@ -475,45 +499,63 @@ class AcceptLanguageTest extends TestCase
                     'two_letter_only' => false,
                 ],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a four letters language tag with quality language tag results in default' => [
                 ['http_accept_language' => 'test;q=0.5'],
                 self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
             ],
             'a sequence of language tags results in the language' => [
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
                 'de',
+                1,
             ],
             'an example all lowercase results in the language' => [
                 ['http_accept_language' => 'de,en-us;q=0.7,en;q=0.3'],
                 'de',
+                1,
             ],
             'an example part uppercase results in the language' => [
                 ['http_accept_language' => 'de-DE,de;q=0.9,en;q=0.8'],
                 'de_DE',
+                1,
             ],
             'the mozilla Accept-Language page a basic example results in the language' => [
                 ['http_accept_language' => 'de'],
                 'de',
+                1,
             ],
             'the mozilla Accept-Language page a hyphenated example results in the language' => [
                 ['http_accept_language' => 'de-CH'],
                 'de_CH',
+                1,
             ],
             'the mozilla Accept-Language page a complex example results in the language' => [
                 ['http_accept_language' => 'en-US,en;q=0.5'],
                 'en_US',
+                1,
             ],
             'the mozilla Accept-Language page a complex example with space results in the language' => [
                 ['http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5'],
                 'fr_CH',
+                1,
             ],
-            'the mozilla Accept-Language page a complex example with space and not present accept language results in predefined default' => [
+            'the mozilla Accept-Language page a complex example with space and not present accept language results in default' => [
                 [
                     'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
                     'accepted_languages' => ['gr'],
                 ],
+                self::DEFAULT_LANGUAGE,
+                self::DEFAULT_QUALITY,
+            ],
+            'the mozilla Accept-Language page a complex example with space results and present accept language results in the language' => [
+                [
+                    'http_accept_language' => 'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+                    'accepted_languages' => ['en'],
+                ],
                 'en',
+                0.8,
             ],
             'the mozilla Accept-Language page a complex example with space and default and not present accept language results in provided default' => [
                 [
@@ -522,10 +564,12 @@ class AcceptLanguageTest extends TestCase
                     'accepted_languages' => ['gr'],
                 ],
                 'es',
+                1,
             ],
             'the RFC 2616 14.4 Accept-Language example results in the language' => [
                 ['http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7'],
                 'da',
+                1,
             ],
         ];
     }
