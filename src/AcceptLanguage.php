@@ -9,6 +9,7 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
+use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
@@ -49,7 +50,7 @@ class AcceptLanguage
     /**
      * Contain a found language of preference.
      */
-    protected string $language;
+    protected LanguageInterface $language;
 
     /**
      * 'http_accept_language' string A string with a custom HTTP Accept-Language header.
@@ -218,7 +219,7 @@ class AcceptLanguage
     protected function initResultingState(): void
     {
         $this->header = '';
-        $this->language = '';
+        $this->language = DefaultLanguage::createInvalid('', 0);
     }
 
     /**
@@ -267,7 +268,7 @@ class AcceptLanguage
         return trim($header);
     }
 
-    protected function findPreferredLanguage(string $header): string
+    protected function findPreferredLanguage(string $header): LanguageInterface
     {
         /*
          * There are several situations that result into the default language
@@ -289,11 +290,11 @@ class AcceptLanguage
         return $header === '' || $header === '*';
     }
 
-    protected function processDefaultLanguageCase(): string
+    protected function processDefaultLanguageCase(): LanguageInterface
     {
         $defaultLanguage = $this->retrieveDefaultLanguage();
 
-        $this->logger->log('retrieve_default_language', $defaultLanguage);
+        $this->logger->log('retrieve_default_language', $defaultLanguage->getTag());
 
         return $defaultLanguage;
     }
@@ -478,7 +479,7 @@ class AcceptLanguage
      * @param array<LanguageInterface> $languages
      * @return string
      */
-    protected function processPreferredLanguages(array $languages): string
+    protected function processPreferredLanguages(array $languages): LanguageInterface
     {
         return $this->retrievePreferredLanguage($languages);
     }
@@ -487,7 +488,7 @@ class AcceptLanguage
      * @param array<LanguageInterface> $languages
      * @return string
      */
-    protected function retrievePreferredLanguage(array $languages): string
+    protected function retrievePreferredLanguage(array $languages): LanguageInterface
     {
         foreach ($languages as $language) {
             if ($this->isAnyLanguage($language)) {
@@ -502,25 +503,25 @@ class AcceptLanguage
         return $this->processLanguageNotFoundCase();
     }
 
-    protected function processAnyLanguageCase(): string
+    protected function processAnyLanguageCase(): LanguageInterface
     {
         $preferredLanguage = $this->retrieveDefaultLanguage();
 
-        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
+        $this->logger->log('retrieve_preferred_language', $preferredLanguage->getTag());
 
         return $preferredLanguage;
     }
 
-    protected function processAppropriateLanguageCase(LanguageInterface $language): string
+    protected function processAppropriateLanguageCase(LanguageInterface $language): LanguageInterface
     {
-        $preferredLanguage = $language->getTag();
+        $preferredLanguage = $language;
 
-        $this->logger->log('retrieve_preferred_language', $preferredLanguage);
+        $this->logger->log('retrieve_preferred_language', $preferredLanguage->getTag());
 
         return $preferredLanguage;
     }
 
-    protected function processLanguageNotFoundCase(): string
+    protected function processLanguageNotFoundCase(): LanguageInterface
     {
         $this->logger->log('retrieve_preferred_language', '');
 
@@ -551,9 +552,9 @@ class AcceptLanguage
         return $this->options['two_letter_only'];
     }
 
-    protected function retrieveDefaultLanguage(): string
+    protected function retrieveDefaultLanguage(): LanguageInterface
     {
-        return $this->defaultLanguage->getTag();
+        return $this->defaultLanguage;
     }
 
     /**
@@ -584,17 +585,17 @@ class AcceptLanguage
     }
 
     /**
-     * Return a preferred language from an HTTP Accept-Language header.
+     * Return a preferred language value.
      *
      * @return string
      */
     public function getPreferredLanguage(): string
     {
-        return $this->language;
+        return $this->language->getTag();
     }
 
     /**
-     * Return a preferred language from an HTTP Accept-Language header.
+     * Return a preferred language value.
      *
      * @return string
      */
