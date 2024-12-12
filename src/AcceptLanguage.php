@@ -44,12 +44,12 @@ class AcceptLanguage
     /**
      * Contain an original HTTP Accept-Language header.
      */
-    protected string $header = '';
+    protected string $header;
 
     /**
      * Contain a found language of preference.
      */
-    protected string $language = '';
+    protected string $language;
 
     /**
      * 'http_accept_language' string A string with a custom HTTP Accept-Language header.
@@ -120,6 +120,7 @@ class AcceptLanguage
         $this->initFactory();
         $this->initLogger();
 
+        $this->initResultingState();
         $this->initDefaultLanguageFromOptions();
     }
 
@@ -212,6 +213,12 @@ class AcceptLanguage
             'log_level' => $options['log_level'],
             'log_only' => $options['log_only'],
         ]);
+    }
+
+    protected function initResultingState(): void
+    {
+        $this->header = '';
+        $this->language = '';
     }
 
     /**
