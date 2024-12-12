@@ -676,14 +676,14 @@ class AcceptLanguageTest extends TestCase
             ],
             'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality 1' => [
                 [
-                    'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
+                    'http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7',
                     'accepted_languages' => ['en'],
                 ],
                 'en',
             ],
             'RFC 2616 14.4 Accept-Language example returns the accepted language when it is of quality below 1' => [
                 [
-                    'http_accept_language' => 'da, en-gb, fr;q=0.8, en;q=0.7',
+                    'http_accept_language' => 'da, en-gb;q=0.8, en;q=0.7',
                     'accepted_languages' => ['fr'],
                 ],
                 'fr',
