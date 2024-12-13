@@ -8,7 +8,6 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
-use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
 class AcceptLanguageTest extends ExtendedTestCase
@@ -269,9 +268,13 @@ class AcceptLanguageTest extends ExtendedTestCase
     /** @test */
     public function it_can_apply_some_separator_related_options(): void
     {
-        app('config')->set('accept-language.default_language', 'fr_CH');
-        app('config')->set('accept-language.separator', '-');
-        $language = AcceptLanguageFacade::getLanguage();
+        $service = new AcceptLanguage([
+            'default_language' => 'fr_CH',
+            'separator' => '-',
+        ]);
+        $service->process();
+
+        $language = $service->getLanguage();
 
         $this->assertNotEmpty($language);
         $this->assertSame('fr-CH', $language);
@@ -280,10 +283,14 @@ class AcceptLanguageTest extends ExtendedTestCase
     /** @test */
     public function it_can_apply_some_subtags_related_options(): void
     {
-        app('config')->set('accept-language.default_language', 'fr-Latn-CH');
-        app('config')->set('accept-language.use_script_subtag', false);
-        app('config')->set('accept-language.use_region_subtag', false);
-        $language = AcceptLanguageFacade::getLanguage();
+        $service = new AcceptLanguage([
+            'default_language' => 'fr-Latn-CH',
+            'use_script_subtag' => false,
+            'use_region_subtag' => false,
+        ]);
+        $service->process();
+
+        $language = $service->getLanguage();
 
         $this->assertNotEmpty($language);
         $this->assertSame('fr', $language);
@@ -292,13 +299,18 @@ class AcceptLanguageTest extends ExtendedTestCase
     /** @test */
     public function it_can_apply_some_log_related_options(): void
     {
-        $this->partialMock(Logger::class, function ($mock) {
-            $mock->shouldReceive('debug')->atLeast(1);
-        });
+        $mock = $this->createMock(Logger::class);
+        $mock->expects($this->atLeastOnce())
+            ->method('debug');
 
-        app('config')->set('accept-language.log_activity', true);
-        app('config')->set('accept-language.log_level', 'debug');
-        $language = AcceptLanguageFacade::getLanguage();
+        $service = new AcceptLanguage([
+            'log_activity' => true,
+            'log_level' => 'debug',
+        ]);
+        $service->useLogger($mock);
+        $service->process();
+
+        $language = $service->getLanguage();
 
         $this->assertNotEmpty($language);
         $this->assertSame('en', $language);
