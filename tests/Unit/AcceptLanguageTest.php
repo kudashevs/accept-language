@@ -579,7 +579,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_preferred_language_when_the_accepted_languages_is_set(
         array $options,
         string $expectedLanguage,
-        $expectedQuality,
+        $expectedQuality
     ): void {
         $service = new AcceptLanguage($options);
         $service->process();
