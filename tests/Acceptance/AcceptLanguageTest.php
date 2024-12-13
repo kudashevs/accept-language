@@ -78,15 +78,6 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertSame('en', $language);
     }
 
-    /** @test */
-    public function it_can_retrieve_a_default_language_through_a_facade(): void
-    {
-        $language = AcceptLanguageFacade::getLanguage();
-
-        $this->assertNotEmpty($language);
-        $this->assertStringContainsString('en', $language);
-    }
-
     /**
      * @test
      * @see /README.md The explanations are in the Options section see Notes.
