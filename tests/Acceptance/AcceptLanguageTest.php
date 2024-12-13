@@ -161,7 +161,7 @@ class AcceptLanguageTest extends ExtendedTestCase
 
         $service = new AcceptLanguage([
             'http_accept_language' => $header,
-            'accepted_languages' => ['fr-CH'],
+            'accepted_languages' => ['fr-CH', 'en'],
             'exact_match_only' => true,
         ]);
         $service->process();
