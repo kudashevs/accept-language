@@ -67,7 +67,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_retrieve_a_language(): void
+    public function it_can_retrieve_a_default_language(): void
     {
         $service = new AcceptLanguage();
         $service->process();
@@ -79,7 +79,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_retrieve_a_language_through_a_facade(): void
+    public function it_can_retrieve_a_default_language_through_a_facade(): void
     {
         $language = AcceptLanguageFacade::getLanguage();
 
