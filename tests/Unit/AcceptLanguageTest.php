@@ -184,7 +184,6 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'sgn_RS',
             ],
-
             'a three-letter hyphenated language tag with script subtag remove script subtag' => [
                 [
                     'default_language' => 'sgn-Latn',
@@ -213,7 +212,6 @@ class AcceptLanguageTest extends TestCase
                 ],
                 'sgn_RS',
             ],
-
             'a three-letter underscored language tag with script subtag remove script subtag' => [
                 [
                     'default_language' => 'sgn_Latn',
