@@ -13,6 +13,22 @@ use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
 
 class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
 {
+    private string $header;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->header = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
+    }
+
+    protected function tearDown(): void
+    {
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $this->header;
+
+        parent::tearDown();
+    }
+
     /** @test */
     public function it_throws_an_exception_when_a_wrong_option_is_provided(): void
     {
@@ -89,9 +105,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
      */
     public function it_can_retrieve_a_non_exact_match_language(): void
     {
-        $header = 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5';
+        $this->setAcceptLanguageHeader('de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5');
 
-        app('config')->set('accept-language.http_accept_language', $header);
         app('config')->set('accept-language.accepted_languages', ['fr', 'en']);
         AcceptLanguageFacade::getLanguage();
 
@@ -105,9 +120,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
      */
     public function it_can_retrieve_a_non_exact_match_language_and_a_subtag(): void
     {
-        $header = 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5';
+        $this->setAcceptLanguageHeader('de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5');
 
-        app('config')->set('accept-language.http_accept_language', $header);
         app('config')->set('accept-language.accepted_languages', ['fr-CH', 'en']);
         AcceptLanguageFacade::getLanguage();
 
@@ -121,9 +135,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
      */
     public function it_can_retrieve_a_non_exact_match_derivative(): void
     {
-        $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
+        $this->setAcceptLanguageHeader('de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5');
 
-        app('config')->set('accept-language.http_accept_language', $header);
         app('config')->set('accept-language.accepted_languages', ['fr', 'en']);
         AcceptLanguageFacade::getLanguage();
 
@@ -137,9 +150,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
      */
     public function it_can_retrieve_an_exact_match_language(): void
     {
-        $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
+        $this->setAcceptLanguageHeader('de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5');
 
-        app('config')->set('accept-language.http_accept_language', $header);
         app('config')->set('accept-language.accepted_languages', ['fr', 'en']);
         app('config')->set('accept-language.exact_match_only', true);
         AcceptLanguageFacade::getLanguage();
@@ -154,9 +166,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
      */
     public function it_can_retrieve_an_exact_match_language_and_a_subtag(): void
     {
-        $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
+        $this->setAcceptLanguageHeader('de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5');
 
-        app('config')->set('accept-language.http_accept_language', $header);
         app('config')->set('accept-language.accepted_languages',['fr-CH', 'en']);
         app('config')->set('accept-language.exact_match_only', true);
         AcceptLanguageFacade::getLanguage();
@@ -201,5 +212,10 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
 
         $this->assertNotEmpty($language);
         $this->assertSame('en', $language);
+    }
+
+    private function setAcceptLanguageHeader(string $value): void
+    {
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $value;
     }
 }
