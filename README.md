@@ -87,20 +87,37 @@ The class accepts some configuration options:
 
 Some options require additional explanations:
 
-- the `default_language` option should contain a valid Language Tag. This default value may be written in any case (as the standard says).
-Different separators may be used too (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']). 
+- the `default_language` option must contain a valid Language Tag. This default value can be written in any case (as the standard says).
+Different separators can be used too (for example, ['en-GB', 'en-ca', 'en_GB', 'en_ca']). 
 
 **Important note!** the package supports the `-` and `_` separators by default. If you want to use any other separator, use the `separator` option. 
 
-- the `accepted_languages` option should include valid Language Tags only. These values may be written in any case (as the standard says).
-Different separators may be used too (for example, ['en-GB', 'en-CA'] may be written as ['en_GB', 'en_ca']). If the `accepted_languages`
-is empty, the package will retrieve a return the first valid language from an HTTP Accept-Language header as a preferred language. 
+- the `accepted_languages` option must include valid Language Tags only. These values can be written in any case (as the standard says).
+Different separators can be used too (for example, ['en-GB', 'en-ca', 'en_GB', 'en_ca']). If the `accepted_languages` is empty,
+the package will retrieve and use the first valid language from an HTTP Accept-Language header. 
 
 **Important note!** the values of the `accepted_languages` option will be formatted according to the settings. Therefore,
 if you want to retrieve languages including script subtags you should enable the `use_script_subtag` option.
 
 - the `exact_match_only` option instructs the matching algorithm to retrieve only the languages that exactly match the languages listed
 in the `accepted_languages` option. By default, the matching algorithm is more flexible and retrieves a language and its derivatives.
+
+Let's dig deeper in the match behavior. Let's assume that the HTTP Accept-Language header is `fr-CH, fr;q=0.9, *;q=0.5`:
+- when the `exact_match_only` set to `false` (default behavior):
+  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1 (derivative case).
+  - and the `accepted_languages` set to `['fr-ch']` it is going to match the first tag with the quality 1.
+- when the `exact_match_only` set to `true`:
+  - and the `accepted_languages` set to `['fr']` it is going to match the second tag with the quality 0.9.
+  - and the `accepted_languages` set to `['fr-ch']` it is going to match the first tag with the quality 1.
+, but, when we swap the first two tags and the HTTP Accept-Language header becomes `fr, fr-CH;q=0.9, *;q=0.5`:
+- when the `exact_match_only` set to `false` (default behavior):
+  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1.
+  - and the `accepted_languages` set to `['fr-ch']` it is going to match the second tag with the quality 0.9.
+- when the `exact_match_only` set to `true`:
+  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1.
+  - and the `accepted_languages` set to `['fr-ch']` it is going to match the second tag with the quality 0.9.
+
+With the `exact_match_only` option set to `true` the 
 
 - the `two_letter_only` option is set to `true` by default. When set to `true`, it orders the instance to retrieve only the languages
 with the two-letter primary subtag. This option has a **higher priority** than the `accepted_languages` option. Thus, if you want to
