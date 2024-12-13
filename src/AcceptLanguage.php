@@ -477,7 +477,7 @@ class AcceptLanguage
      * the languages were appropriate, the default language will be returned.
      *
      * @param array<LanguageInterface> $languages
-     * @return string
+     * @return LanguageInterface
      */
     protected function processPreferredLanguages(array $languages): LanguageInterface
     {
@@ -486,7 +486,7 @@ class AcceptLanguage
 
     /**
      * @param array<LanguageInterface> $languages
-     * @return string
+     * @return LanguageInterface
      */
     protected function retrievePreferredLanguage(array $languages): LanguageInterface
     {
