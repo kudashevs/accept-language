@@ -14,7 +14,7 @@ final class QualityValue
     /**
      * @var int|float
      */
-    private $quality;
+    private int|float $quality;
 
     private bool $valid = true;
 
