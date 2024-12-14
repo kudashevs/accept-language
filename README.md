@@ -102,20 +102,21 @@ if you want to retrieve languages including script subtags you should enable the
 - the `exact_match_only` option instructs the matching algorithm to retrieve only the languages that exactly match the languages listed
 in the `accepted_languages` option. By default, the matching algorithm is more flexible and retrieves a language and its derivatives.
 
-Let's dig deeper in the match behavior. Let's assume that the HTTP Accept-Language header is `fr-CH, fr;q=0.9, *;q=0.5`:
-- when the `exact_match_only` set to `false` (default behavior):
-  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1 (derivative case).
-  - and the `accepted_languages` set to `['fr-ch']` it is going to match the first tag with the quality 1.
-- when the `exact_match_only` set to `true`:
-  - and the `accepted_languages` set to `['fr']` it is going to match the second tag with the quality 0.9.
-  - and the `accepted_languages` set to `['fr-ch']` it is going to match the first tag with the quality 1.
-, but, when we swap the first two tags and the HTTP Accept-Language header becomes `fr, fr-CH;q=0.9, *;q=0.5`:
-- when the `exact_match_only` set to `false` (default behavior):
-  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1.
-  - and the `accepted_languages` set to `['fr-ch']` it is going to match the second tag with the quality 0.9.
-- when the `exact_match_only` set to `true`:
-  - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1.
-  - and the `accepted_languages` set to `['fr-ch']` it is going to match the second tag with the quality 0.9.
+Let's dig deeper in the matching behavior. Let's assume that the Accept-Language header is `fr-CH, fr;q=0.9, *;q=0.5`:
+| `exact_match_only` option | `accepted_languages` option | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the result language |
+|:-------------------------:|:---------------------------:|----------------------------------------------------|
+|           false           |            ['fr']           | the first tag with the quality 1 (derivative case) |
+|           false           |           ['fr-ch']         | the first tag with the quality 1 |
+|           true            |            ['fr']           | the second tag with the quality 0.9 |
+|           true            |           ['fr-ch']         | the first tag with the quality 1 |
+
+, but, when we swap the first two tags and the Accept-Language header becomes `fr, fr-CH;q=0.9, *;q=0.5`:
+| `exact_match_only` option | `accepted_languages` option | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the result language |
+|:-------------------------:|:---------------------------:|----------------------------------------------------|
+|           false           |            ['fr']           | the first tag with the quality 1 |
+|           false           |           ['fr-ch']         | the second tag with the quality 0.9 |
+|           true            |            ['fr']           | the first tag with the quality 1 |
+|           true            |           ['fr-ch']         | the second tag with the quality 0.9 |
 
 - the `two_letter_only` option is set to `true` by default. When set to `true`, it orders the instance to retrieve only the languages
 with the two-letter primary subtag. This option has a **higher priority** than the `accepted_languages` option. Thus, if you want to
