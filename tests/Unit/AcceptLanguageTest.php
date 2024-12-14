@@ -13,6 +13,7 @@ class AcceptLanguageTest extends TestCase
     protected const DEFAULT_LANGUAGE = 'en';
 
     protected const DEFAULT_QUALITY = 1;
+
     /**
      * @test
      * @dataProvider provideDifferentWrongOptions
