@@ -35,8 +35,8 @@ composer require kudashevs/accept-language
 ## Usage
 
 To retrieve a preferred language you need to instantiate the `AcceptLanguage` class and call a `process` method on the
-instance. It is best to do it somewhere before the place where you want the user's preferred language (for example,
-in a front controller or in a middleware). If you don't call the `process` method, the values will remain empty.
+instance. This should be done before the point where you want the user's preferred language (for example, in a front
+controller or in a middleware). **Note:** if you don't call the `process` method, the values will remain empty.
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
@@ -44,11 +44,11 @@ $service = new AcceptLanguage();
 $service->process();
 ```
 
-**Note!** The `AcceptLanguage` class at the moment of creation can throw a few exceptions: `InvalidOptionType`,
+**Note:** The `AcceptLanguage` class, at the moment of instantiation, can throw a few exceptions: `InvalidOptionType`,
 `InvalidOptionValue`, `InvalidLogEventName`, `InvalidLogLevelName`. All of these exceptions extend a common built-in
 `InvalidArgumentException` class, so they are easy to deal with.
 
-Once obtained, the preferred language value can be accessed in any part of your application by using one of these methods:
+Once obtained, the preferred language value can be accessed in any part of your application through these methods:
 ```php
 $service->getPreferredLanguage();           # Returns the user's preferred language
 $service->getLanguage();                    # An alias of the getPreferredLanguage()
