@@ -117,8 +117,6 @@ Let's dig deeper in the match behavior. Let's assume that the HTTP Accept-Langua
   - and the `accepted_languages` set to `['fr']` it is going to match the first tag with the quality 1.
   - and the `accepted_languages` set to `['fr-ch']` it is going to match the second tag with the quality 0.9.
 
-With the `exact_match_only` option set to `true` the 
-
 - the `two_letter_only` option is set to `true` by default. When set to `true`, it orders the instance to retrieve only the languages
 with the two-letter primary subtag. This option has a **higher priority** than the `accepted_languages` option. Thus, if you want to
 accept languages with three-letter primary subtag (by listing them in the `accepted_languages`), don't forget to disable this option.
