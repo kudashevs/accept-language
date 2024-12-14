@@ -2,6 +2,13 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v3.5.0 - 2024-12-14](https://github.com/kudashevs/accept-language/compare/v3.4.0...v3.5.0)
+
+- Add support for PHP 8.4
+- Add new `getPreferredLanguageQuality` and `getQuality` methods
+- Update and refactor Acceptance tests
+- Some improvements
+
 ## [v3.4.0 - 2024-04-08](https://github.com/kudashevs/accept-language/compare/v3.3.0...v3.4.0)
 
 - Increase the minimum supported `orchestra/testbench` version
