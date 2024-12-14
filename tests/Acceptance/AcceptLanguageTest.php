@@ -177,7 +177,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     public function it_can_retrieve_a_language_with_exact_match_options(
         array $options,
         string $expectedLanguage,
-        $expectedQuality
+        int|float $expectedQuality,
     ): void {
         $service = new AcceptLanguage($options);
         $service->process();
