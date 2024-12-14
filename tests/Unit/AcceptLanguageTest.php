@@ -357,8 +357,11 @@ class AcceptLanguageTest extends TestCase
      * @test
      * @dataProvider provideDifferentRequestHeaderValues
      */
-    public function it_can_retrieve_a_preferred_language(array $options, string $expectedLanguage, $expectedQuality): void
-    {
+    public function it_can_retrieve_a_preferred_language(
+        array $options,
+        string $expectedLanguage,
+        int|float $expectedQuality
+    ): void {
         $service = new AcceptLanguage($options);
         $service->process();
 
@@ -580,7 +583,7 @@ class AcceptLanguageTest extends TestCase
     public function it_can_retrieve_a_preferred_language_when_the_accepted_languages_is_set(
         array $options,
         string $expectedLanguage,
-        $expectedQuality
+        int|float $expectedQuality,
     ): void {
         $service = new AcceptLanguage($options);
         $service->process();
