@@ -24,7 +24,7 @@ final class LanguageQualityNormalizer implements QualityNormalizerInterface
     /**
      * @inheritDoc
      */
-    public function normalize($quality, array $options = [])
+    public function normalize($quality, array $options = []): int|float
     {
         if ($this->isUndefinedQuality($quality)) {
             return $this->generateForUndefined($options);

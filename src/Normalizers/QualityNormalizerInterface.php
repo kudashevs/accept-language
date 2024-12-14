@@ -16,5 +16,5 @@ interface QualityNormalizerInterface
      * @param array{allow_empty?: bool, fallback?: int|float} $options
      * @return int|float
      */
-    public function normalize($quality, array $options);
+    public function normalize($quality, array $options): int|float;
 }
