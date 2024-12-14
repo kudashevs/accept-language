@@ -1205,6 +1205,7 @@ class AcceptLanguageTest extends TestCase
         $service->process();
 
         $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(1, $service->getQuality());
     }
 
     /** @test */
