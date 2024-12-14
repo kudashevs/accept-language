@@ -183,9 +183,10 @@ Install the package. If you don't use auto-discovery just add a ServiceProvider 
 ];
 ```
 
-Once added, the `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class, apply some initial configuration
-settings, and call the `process` method. After finishing the setup process, it binds the instance into the Laravel service container.
-Thus, the instance becomes accessible through a dependency injection mechanism or an alias (e.g `app('acceptlanguage')`).
+The `AcceptLanguageServiceProvider` will instantiate the `AcceptLanguage` class and apply some initial configuration settings.
+Then, it will call the `process` method. However, you can comment it and call the `proccess` method in whatever place you want.
+After being registered, the `AcceptLanguage` instance becomes accessible via the Laravel's service container. The instance
+can be accessed by the class name or through an alias (e.g `app('acceptlanguage')`).
 
 If you want to add a Laravel Facade just add it to the aliases array in the `config/app.php` file.
 ```php
@@ -194,7 +195,7 @@ If you want to add a Laravel Facade just add it to the aliases array in the `con
 ];
 ```
 
-All of the available configuration settings are located in the `config/accept-language.php` file.
+The configuration settings are located in the `config/accept-language.php` file.
 ```
 'default_language' => 'string'      # Set the `default_language` option value (default is `en`)
 'accepted_languages' => []          # Set the `accepted_languages` option value (default is [])
@@ -206,7 +207,7 @@ All of the available configuration settings are located in the `config/accept-la
 ```
 <sub>for more information about different options, please refer to the [Options](#options) section</sub>
 
-If you want to change the defaults, don't forget to publish the configuration file.
+If you want to change the default values, don't forget to publish the configuration file.
 ```bash
 php artisan vendor:publish --provider="Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider"
 ```
