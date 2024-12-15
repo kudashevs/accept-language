@@ -1212,7 +1212,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     /** @test */
-    public function it_cannot_log_activity_by_default(): void
+    public function it_can_log_activity_by_default(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1221,7 +1221,7 @@ class AcceptLanguageTest extends TestCase
         ];
 
         $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->never())
+        $loggerMock->expects($this->atLeast(1))
             ->method('info');
 
         $service = new AcceptLanguage($options);
