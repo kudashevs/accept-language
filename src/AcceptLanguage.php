@@ -64,7 +64,6 @@ class AcceptLanguage
      * 'use_script_subtag' bool A boolean that defines whether to include a script subtag in the result or not.
      * 'use_region_subtag' bool A boolean that defines whether to include a region subtag in the result or not.
      * 'separator' string A string with a character that will be used as a separator in the result.
-     * 'log_activity' bool A boolean that defines whether to log the activity of the package or not.
      * 'log_level' string A string with a PSR-3 compatible log level value.
      * 'log_only' array An array with a list of log only events.
      *
@@ -78,7 +77,6 @@ class AcceptLanguage
      *     use_script_subtag: bool,
      *     use_region_subtag: bool,
      *     separator: string,
-     *     log_activity: bool,
      *     log_level: string,
      *     log_only: array<array-key, string>,
      * }
@@ -109,7 +107,6 @@ class AcceptLanguage
      *     use_script_subtag?: bool,
      *     use_region_subtag?: bool,
      *     separator?: string,
-     *     log_activity?: bool,
      *     log_level?: string,
      *     log_only?: array<array-key, string>,
      * } $options
@@ -128,7 +125,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
      *
      * @throws InvalidOptionType
      */
@@ -142,8 +139,8 @@ class AcceptLanguage
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
-     * @return array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>}
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
+     * @return array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>}
      */
     protected function retrieveAllowedOptions(array $options): array
     {
@@ -151,7 +148,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_activity?: bool, log_level?: string, log_only?: array<array-key, string>} $options
+     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
      */
     protected function validateOptions(array $options): void
     {

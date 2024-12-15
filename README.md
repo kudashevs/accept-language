@@ -17,7 +17,6 @@ Main package features:
 - it can retrieve only the languages that exactly match the `accepted_languages` by setting the `exact_match_only` option
 - it can include extlang, script, and region subtags by setting the `use_<subtag-name>_subtag` options
 - it can set the default separator value by providing the `separator` option
-- it can log its activity for further examination by setting the `log_activity` option
 - it can log its activity at the specific log level by providing the `log_level` option
 - it can log only the events that are listed in the `log_only` option
 
@@ -75,7 +74,6 @@ The class accepts some configuration options:
 'use_script_subtag'         # A boolean defines whether to include a script subtag in the result (default is false).
 'use_region_subtag'         # A boolean defines whether to include a region subtag in the result (default is true).
 'separator'                 # A string with a character that will be used as a separator in the result (default is '_')³.
-'log_activity'              # A boolean defines whether to log the activity of the package or not (default if false).
 'log_level'                 # A string with a PSR-3 compatible log level (default is 'info').
 'log_only'                  # An array with a list of log events to log (default is []).
 ```
@@ -125,8 +123,8 @@ accept languages with three-letter primary subtag (by listing them in the `accep
 
 ## Logging
 
-There is the possibility to log information gathered throughout the execution process. To start logging set the configuration
-option `log_activity` to `true` and provide an instance of `Psr\Log\LoggerInterface` implementation through the `useLogger` method.
+The package is capable to log information gathered throughout the execution process. To start the logging process, you must
+provide an instance of `Psr\Log\LoggerInterface` implementation to the `useLogger` method.
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
