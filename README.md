@@ -5,9 +5,9 @@ This PHP package retrieves a user's language of preference from the HTTP Accept-
 
 ## Features
 
-By default, the retrieved language of preference comes in the format pretty similar to the Unicode Locale Identifier. This
-format consists of a mandatory 2-/3-letter primary language and region subtags separated with an underscore (e.g., `en_GB`).
-However, the format of retrieved language is configurable, as the set of subtags included in the final result.
+By default, the retrieved language uses the format similar to the Unicode Locale Identifier. This format consists of a
+mandatory 2-/3-letter primary language and a region subtag separated with an underscore (e.g., `en_GB`). However, the format
+is configurable and can be changed, as the set of subtags included in the final result.
 
 Main package features:
 - it can use the default language value set by the `default_language` option
