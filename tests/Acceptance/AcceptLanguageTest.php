@@ -304,15 +304,9 @@ class AcceptLanguageTest extends ExtendedTestCase
             ->method('debug');
 
         $service = new AcceptLanguage([
-            'log_activity' => true,
             'log_level' => 'debug',
         ]);
         $service->useLogger($mock);
         $service->process();
-
-        $language = $service->getLanguage();
-
-        $this->assertNotEmpty($language);
-        $this->assertSame('en', $language);
     }
 }

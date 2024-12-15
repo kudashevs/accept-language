@@ -564,14 +564,7 @@ class AcceptLanguage
      */
     public function useLogger(LoggerInterface $logger): void
     {
-        if ($this->isLogActivityAllowed()) {
-            $this->logger = new LogProvider($logger, $this->options);
-        }
-    }
-
-    protected function isLogActivityAllowed(): bool
-    {
-        return $this->options['log_activity'] === true;
+        $this->logger = new LogProvider($logger, $this->options);
     }
 
     /**
