@@ -31,7 +31,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
             $service = new AcceptLanguage($this->getInitialConfig());
 
             return tap($service, function (AcceptLanguage $service) {
-                if ($this->shouldLogEvents($this->getInitialConfig())) {
+                if ($this->shouldLogEvents()) {
                     $service->useLogger($this->getLogger());
                 }
 
@@ -79,13 +79,12 @@ class AcceptLanguageServiceProvider extends ServiceProvider
         ];
     }
 
-    /**
-     * @param array{log_activity: bool} $options
-     * @return bool
-     */
-    private function shouldLogEvents(array $options): bool
+    private function shouldLogEvents(): bool
     {
-        return isset($options['log_activity']) && $options['log_activity'] === true;
+        $configuration = $this->getInitialConfig();
+
+        return isset($configuration['log_activity'])
+            && $configuration['log_activity'] === true;
     }
 
     private function getLogger(): LoggerInterface
