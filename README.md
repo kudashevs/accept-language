@@ -137,8 +137,8 @@ $service->process();
 
 ### Log events
 
-To distinguish the stages of the execution process the package introduces the **log events**. If you want to log only specific
-events, please add these events to the `log_only` option. If the `log_only` set to empty, the package logs all known events.
+To distinguish different stages of the execution process the package introduces **log events**. If you want to log specific
+events only, please add these events to the `log_only` option. If the `log_only` is empty, the package logs all known events.
 
 - `retrieve_header` occurs after retrieving an HTTP Accept-Language header. It logs a raw Accept-Language header value.
 - `retrieve_default_language` occurs when it returns the default language without further processing (the default language case).
