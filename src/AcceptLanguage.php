@@ -20,6 +20,8 @@ use Psr\Log\LoggerInterface;
 
 class AcceptLanguage
 {
+    protected const DEFAULT_LOGGER = DummyLogger::class;
+
     /*
      * The length of the primary subtag is limited to a range of 2 to 3 letters.
      * However, these values might be changed in the future.
@@ -210,7 +212,7 @@ class AcceptLanguage
      */
     protected function createLogger(array $options): LogProvider
     {
-        return new LogProvider(new DummyLogger(), [
+        return new LogProvider(new (self::DEFAULT_LOGGER)(), [
             'log_level' => $options['log_level'],
             'log_only' => $options['log_only'],
         ]);
