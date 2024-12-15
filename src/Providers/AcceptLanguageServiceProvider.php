@@ -13,7 +13,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     /**
      * Bootstrap any package services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/../../config/accept-language.php' => config_path('accept-language.php'),
@@ -25,7 +25,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(AcceptLanguage::class, function () {
             $service = new AcceptLanguage($this->getInitialConfig());
