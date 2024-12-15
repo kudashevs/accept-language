@@ -164,7 +164,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_separator_related_options(): void
+    public function it_can_apply_the_separator_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr_CH');
         app('config')->set('accept-language.separator', '-');
@@ -175,7 +175,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_subtags_related_options(): void
+    public function it_can_apply_the_subtag_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr-Latn-CH');
         app('config')->set('accept-language.use_script_subtag', false);
