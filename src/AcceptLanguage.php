@@ -120,8 +120,8 @@ class AcceptLanguage
 
         $this->initFactory();
         $this->initLogger();
+        $this->initState();
 
-        $this->initResultingState();
         $this->initDefaultLanguageFromOptions();
     }
 
@@ -216,7 +216,7 @@ class AcceptLanguage
         ]);
     }
 
-    protected function initResultingState(): void
+    protected function initState(): void
     {
         $this->header = '';
         $this->language = DefaultLanguage::createInvalid('', 0);
