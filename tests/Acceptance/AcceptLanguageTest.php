@@ -266,7 +266,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_separator_related_options(): void
+    public function it_can_apply_the_separator_related_options(): void
     {
         $service = new AcceptLanguage([
             'default_language' => 'fr_CH',
@@ -281,7 +281,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_subtags_related_options(): void
+    public function it_can_apply_the_subtag_related_options(): void
     {
         $service = new AcceptLanguage([
             'default_language' => 'fr-Latn-CH',
@@ -297,7 +297,7 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_log_related_options(): void
+    public function it_can_log_gathered_information_by_default(): void
     {
         $mock = $this->createMock(Logger::class);
         $mock->expects($this->atLeastOnce())
