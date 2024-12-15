@@ -2,6 +2,16 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v4.0.0 - 2024-12-15](https://github.com/kudashevs/accept-language/compare/v3.5.0...v4.0.0)
+
+- Increase the minimum PHP version to 8.1
+- Increase the minimum PHPUnit version to 9.5
+- Remove the `log_activity` option
+- Update README.md
+- Some improvements
+
+Note: from now, the `log_acitivity` option is available in the Laravel configuration only.
+
 ## [v3.5.0 - 2024-12-14](https://github.com/kudashevs/accept-language/compare/v3.4.0...v3.5.0)
 
 - Add support for PHP 8.4
