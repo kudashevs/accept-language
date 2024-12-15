@@ -128,9 +128,7 @@ provide an instance of `Psr\Log\LoggerInterface` implementation to the `useLogge
 ```php
 use \Kudashevs\AcceptLanguage\AcceptLanguage;
 
-$service = new AcceptLanguage([
-    'log_activity' => true,
-]);
+$service = new AcceptLanguage();
 $service->useLogger(new PsrCompatibleLogger());
 $service->process();
 ```
