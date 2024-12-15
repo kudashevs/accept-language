@@ -83,8 +83,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     {
         $configuration = $this->getInitialConfig();
 
-        return isset($configuration['log_activity'])
-            && $configuration['log_activity'] === true;
+        return $configuration['log_activity'] === true;
     }
 
     private function getLogger(): LoggerInterface
