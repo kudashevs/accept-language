@@ -29,10 +29,14 @@ class AcceptLanguageServiceProvider extends ServiceProvider
     {
         $this->app->singleton(AcceptLanguage::class, function () {
             $service = new AcceptLanguage($this->getInitialConfig());
-            $service->useLogger($this->getLogger());
-            $service->process();
 
-            return $service;
+            return tap($service, function (AcceptLanguage $service) {
+                if ($this->shouldLogEvents($this->getInitialConfig())) {
+                    $service->useLogger($this->getLogger());
+                }
+
+                $service->process();
+            });
         });
         $this->app->alias(AcceptLanguage::class, 'acceptlanguage');
 
@@ -73,6 +77,15 @@ class AcceptLanguageServiceProvider extends ServiceProvider
             'log_level' => config('accept-language.log_level', 'info'),
             'log_only' => config('accept-language.log_only', []),
         ];
+    }
+
+    /**
+     * @param array{log_activity: bool} $options
+     * @return bool
+     */
+    private function shouldLogEvents(array $options): bool
+    {
+        return isset($options['log_activity']) && $options['log_activity'] === true;
     }
 
     private function getLogger(): LoggerInterface

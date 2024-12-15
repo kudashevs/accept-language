@@ -2,14 +2,13 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Acceptance;
 
-use Illuminate\Log\Logger;
-use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogEventName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
+use Psr\Log\LoggerInterface;
 
 class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
 {
@@ -187,17 +186,31 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /** @test */
-    public function it_can_apply_some_log_related_options(): void
+    public function it_cannot_log_gathered_information_by_default(): void
     {
-        $this->partialMock(Logger::class, function ($mock) {
-            $mock->shouldReceive('debug')->atLeast(1);
-        });
+        $defaultLevel = app('config')->get('accept-language.log_level');
+
+        $this->instance('log',
+            $this->partialMock(LoggerInterface::class, function ($mock) use ($defaultLevel) {
+                $mock->shouldReceive($defaultLevel)->never();
+            })
+        );
+
+        AcceptLanguageFacade::getLanguage();
+    }
+
+    /** @test */
+    public function it_can_log_gathered_information_when_the_option_is_provided(): void
+    {
+        $defaultLevel = app('config')->get('accept-language.log_level');
+
+        $this->instance('log',
+            $this->partialMock(LoggerInterface::class, function ($mock) use ($defaultLevel) {
+                $mock->shouldReceive($defaultLevel)->atLeast()->times(1);
+            })
+        );
 
         app('config')->set('accept-language.log_activity', true);
-        app('config')->set('accept-language.log_level', 'debug');
-        $language = AcceptLanguageFacade::getLanguage();
-
-        $this->assertNotEmpty($language);
-        $this->assertSame('en', $language);
+        AcceptLanguageFacade::getLanguage();
     }
 }
