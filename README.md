@@ -183,12 +183,14 @@ Then, it will call the `process` method. However, you can comment it and call th
 After being registered, the `AcceptLanguage` instance becomes accessible via the Laravel's service container. The instance
 can be accessed by the class name or through an alias (e.g `app('acceptlanguage')`).
 
-If you want to add a Laravel Facade just add it to the aliases array in the `config/app.php` file.
+If you want to add a Laravel Facade, add it to the aliases array in the `config/app.php` file.
 ```php
 'aliases' => [
     'AcceptLanguage' => Kudashevs\AcceptLanguage\Facades\AcceptLanguage::class,
 ];
 ```
+
+If you want to log the execution process, don't forget to set the `log_activity` option to `true`.
 
 The configuration settings are located in the `config/accept-language.php` file.
 ```
