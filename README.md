@@ -1,4 +1,8 @@
-# Accept-Language ![test workflow](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)
+# Accept-Language
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kudashevs/accept-language.svg)](https://packagist.org/packages/kudashevs/accept-language)
+[![Run Tests](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml/badge.svg)](https://github.com/kudashevs/accept-language/actions/workflows/run-tests.yml)
+[![License MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
 This PHP package retrieves a user's language of preference from the HTTP Accept-Language request-header field.
 
