@@ -3,11 +3,13 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\ValueObjects;
 
 use Kudashevs\AcceptLanguage\ValueObjects\LanguageTag;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTagTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $tag = new LanguageTag('en');
@@ -16,10 +18,8 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($tag->isValid());
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentInvalidLanguageValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentInvalidLanguageValues')]
     public function it_can_handle_an_ivalid_language_tag(string $input, string $expected): void
     {
         $quality = new LanguageTag($input);
@@ -50,10 +50,8 @@ class LanguageTagTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentValidLanguageValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentValidLanguageValues')]
     public function it_can_create_a_valid_language_tag_from_the_valid_data(string $input, string $expected): void
     {
         $language = new LanguageTag($input, [
@@ -120,10 +118,8 @@ class LanguageTagTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentLanguageValuesWithDifferentSubtagOptions
-     */
+    #[Test]
+    #[DataProvider('provideDifferentLanguageValuesWithDifferentSubtagOptions')]
     public function it_can_normalize_with_the_provided_options(string $input, array $options, string $expected): void
     {
         $language = new LanguageTag($input, $options);
@@ -183,10 +179,8 @@ class LanguageTagTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentLanguageValuesWithDifferentSeparatorOption
-     */
+    #[Test]
+    #[DataProvider('provideDifferentLanguageValuesWithDifferentSeparatorOption')]
     public function it_can_normalize_with_a_provided_separator(string $input, array $options, string $expected): void
     {
         $language = new LanguageTag($input, $options);
@@ -467,9 +461,7 @@ class LanguageTagTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_handle_an_empty_separator(): void
     {
         // The empty separator doesn't have a lot of sense, but let's consider it as a boundary case.
@@ -481,10 +473,8 @@ class LanguageTagTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentLanguageValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentLanguageValues')]
     public function it_can_retrieve_a_primary_subtag_and_subtags(string $input, array $options, array $expected): void
     {
         $language = new LanguageTag($input, $options);
@@ -549,7 +539,7 @@ class LanguageTagTest extends TestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_can_return_default_options(): void
     {
         $language = new LanguageTag('en');
@@ -560,7 +550,7 @@ class LanguageTagTest extends TestCase
         $this->assertContains('-', $options);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_default_options(): void
     {
         $language = new LanguageTag('en', [

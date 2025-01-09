@@ -4,11 +4,12 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\LogProviders\Presenters;
 
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\LogProviders\Presenters\PreferredLanguagesLogPresenter;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class PreferredLanguagesLogPresenterTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_present_an_event_with_data(): void
     {
         $presenter = new PreferredLanguagesLogPresenter('retrieve_preferred_languages');
@@ -19,7 +20,7 @@ class PreferredLanguagesLogPresenterTest extends TestCase
         $this->assertMatchesRegularExpression('/fr-CH.*retrieve_preferred_languages/', $presentation);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_present_an_event_with_empty_data(): void
     {
         $presenter = new PreferredLanguagesLogPresenter('retrieve_preferred_languages');

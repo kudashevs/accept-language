@@ -3,11 +3,13 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Normalizers;
 
 use Kudashevs\AcceptLanguage\Normalizers\LanguageTagNormalizer;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTagNormalizerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $normalizer = new LanguageTagNormalizer();
@@ -15,10 +17,8 @@ class LanguageTagNormalizerTest extends TestCase
         $this->assertNotEmpty($normalizer->normalize('en'));
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentLanguageTags
-     */
+    #[Test]
+    #[DataProvider('provideDifferentLanguageTags')]
     public function it_can_normalize_a_language_tag(string $tag, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();
@@ -121,10 +121,8 @@ class LanguageTagNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideLanguageTagsWithDifferentWithOptions
-     */
+    #[Test]
+    #[DataProvider('provideLanguageTagsWithDifferentWithOptions')]
     public function it_can_normalize_with_provided_options(string $tag, array $options, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();
@@ -237,10 +235,8 @@ class LanguageTagNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideExceptionalCases
-     */
+    #[Test]
+    #[DataProvider('provideExceptionalCases')]
     public function it_can_normalize_an_exceptional_case(string $tag, string $expected): void
     {
         $normalizer = new LanguageTagNormalizer();

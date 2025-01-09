@@ -3,11 +3,13 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Normalizers;
 
 use Kudashevs\AcceptLanguage\Normalizers\LanguageQualityNormalizer;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class LanguageQualityNormalizerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $normalizer = new LanguageQualityNormalizer();
@@ -15,10 +17,8 @@ class LanguageQualityNormalizerTest extends TestCase
         $this->assertNotEmpty($normalizer->normalize(1));
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentQualityValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentQualityValues')]
     public function it_can_normalize_a_quality($quality, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();
@@ -72,10 +72,8 @@ class LanguageQualityNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentQualityValuesWithFallback
-     */
+    #[Test]
+    #[DataProvider('provideDifferentQualityValuesWithFallback')]
     public function it_can_normalize_a_quality_with_fallback($quality, array $options, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();
@@ -174,10 +172,8 @@ class LanguageQualityNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentAllowEmptyOptions
-     */
+    #[Test]
+    #[DataProvider('provideDifferentAllowEmptyOptions')]
     public function it_can_normalize_an_empty_quality_with_different_options(
         string $quality,
         array $options,
@@ -210,10 +206,8 @@ class LanguageQualityNormalizerTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider providedDifferentQualityBoundaryValues
-     */
+    #[Test]
+    #[DataProvider('providedDifferentQualityBoundaryValues')]
     public function it_can_normalize_at_boundaries($quality, $expected): void
     {
         $normalizer = new LanguageQualityNormalizer();

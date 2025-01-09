@@ -3,10 +3,11 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
+use PHPUnit\Framework\Attributes\Test;
 
 class ExactMatchStrategyTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_exact_matching_language(): void
     {
         $languages = [
@@ -24,7 +25,7 @@ class ExactMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_exact_matching_language_from_languages(): void
     {
         $languages = [
@@ -45,7 +46,7 @@ class ExactMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_exact_matching_language_from_similar_languages(): void
     {
         $languages = [
@@ -66,7 +67,7 @@ class ExactMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.9], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_exact_matching_languages_from_languages(): void
     {
         $languages = [

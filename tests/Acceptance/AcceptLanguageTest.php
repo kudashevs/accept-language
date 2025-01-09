@@ -9,10 +9,12 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidLogLevelName;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 class AcceptLanguageTest extends ExtendedTestCase
 {
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_option_is_provided(): void
     {
         $this->expectException(InvalidOptionType::class);
@@ -21,7 +23,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         new AcceptLanguage(['separator' => 42]);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_default_language_is_provided(): void
     {
         $this->expectException(InvalidOptionValue::class);
@@ -30,7 +32,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         new AcceptLanguage(['default_language' => 'verywrong_language']);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_log_level_is_provided(): void
     {
         $this->expectException(InvalidLogLevelName::class);
@@ -41,7 +43,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_log_event_name_is_provided(): void
     {
         $this->expectException(InvalidLogEventName::class);
@@ -53,9 +55,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Usage section see a Note.
      */
+    #[Test]
     public function it_returns_empty_result_when_it_is_not_processed(): void
     {
         $service = new AcceptLanguage();
@@ -65,7 +67,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertEmpty($language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_a_default_language(): void
     {
         $service = new AcceptLanguage();
@@ -78,9 +80,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_language(): void
     {
         $header = 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5';
@@ -96,9 +98,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_language_and_a_subtag(): void
     {
         $header = 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5';
@@ -114,9 +116,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_derivative(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -132,9 +134,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_an_exact_match_language(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -151,9 +153,9 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_an_exact_match_language_and_a_subtag(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -170,10 +172,10 @@ class AcceptLanguageTest extends ExtendedTestCase
     }
 
     /**
-     * @test
-     * @dataProvider provideExactMatchCasesFromReadme
      * @see          /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
+    #[DataProvider('provideExactMatchCasesFromReadme')]
     public function it_can_retrieve_a_language_with_exact_match_options(
         array $options,
         string $expectedLanguage,
@@ -265,7 +267,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_can_apply_the_separator_related_options(): void
     {
         $service = new AcceptLanguage([
@@ -280,7 +282,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertSame('fr-CH', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_apply_the_subtag_related_options(): void
     {
         $service = new AcceptLanguage([
@@ -296,7 +298,7 @@ class AcceptLanguageTest extends ExtendedTestCase
         $this->assertSame('fr', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_log_gathered_information_by_default(): void
     {
         $mock = $this->createMock(Logger::class);

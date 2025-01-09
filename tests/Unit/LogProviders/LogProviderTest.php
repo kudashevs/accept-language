@@ -8,12 +8,14 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Loggers\DummyLogger;
 use Kudashevs\AcceptLanguage\LogProviders\LogProvider;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 class LogProviderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_throw_an_exception_when_an_option_of_the_wrong_type(): void
     {
         $this->expectException(InvalidOptionType::class);
@@ -24,7 +26,7 @@ class LogProviderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_throw_an_exception_when_a_wrong_log_only_event(): void
     {
         $this->expectException(InvalidLogEventName::class);
@@ -35,7 +37,7 @@ class LogProviderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_throw_an_exception_when_wrong_log_only_events(): void
     {
         $this->expectException(InvalidLogEventName::class);
@@ -50,9 +52,9 @@ class LogProviderTest extends TestCase
     }
 
     /**
-     * @test
      * @see LogProviderTest::it_can_handle_a_valid_log_level_option()
      */
+    #[Test]
     public function it_can_throw_an_exception_when_a_wrong_log_level(): void
     {
         $this->expectException(InvalidLogLevelName::class);
@@ -63,7 +65,7 @@ class LogProviderTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_throw_an_exception_when_a_wrong_event_name(): void
     {
         $this->expectException(InvalidLogEventName::class);
@@ -74,9 +76,9 @@ class LogProviderTest extends TestCase
     }
 
     /**
-     * @test
      * @see LogProviderTest::it_can_throw_an_exception_when_a_wrong_log_level()
      */
+    #[Test]
     public function it_can_handle_a_valid_log_level_option(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
@@ -93,7 +95,7 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_header', 'anything');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_skip_handling_an_event_not_listed_in_log_only(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
@@ -108,7 +110,7 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_raw_languages', 'anything');
     }
 
-    /** @test */
+    #[Test]
     public function is_can_handle_only_an_event_listed_in_log_only(): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);
@@ -127,10 +129,8 @@ class LogProviderTest extends TestCase
         $provider->log('retrieve_preferred_language', 'en');
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentEvents
-     */
+    #[Test]
+    #[DataProvider('provideDifferentEvents')]
     public function it_can_handle_an_event(string $event, $data, string $expected): void
     {
         $loggerMock = $this->createMock(LoggerInterface::class);

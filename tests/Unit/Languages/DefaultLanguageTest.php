@@ -3,11 +3,13 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Languages;
 
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class DefaultLanguageTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_create_a_valid_language(): void
     {
         $language = DefaultLanguage::create('en', 1);
@@ -17,7 +19,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_invalid_language(): void
     {
         $language = DefaultLanguage::createInvalid('', 0);
@@ -27,7 +29,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_invalid_language_from_valid_data(): void
     {
         $language = DefaultLanguage::createInvalid('en', 1);
@@ -37,7 +39,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_invalid_language_from_an_invalid_type(): void
     {
         $language = DefaultLanguage::create(42, 1);
@@ -47,7 +49,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_an_invalid_language_from_an_invalid_language_string(): void
     {
         $language = DefaultLanguage::create('verywrong_language', 1);
@@ -57,7 +59,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertFalse($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_valid_language_when_quality_is_string(): void
     {
         $language = DefaultLanguage::create('en', '0.5');
@@ -67,7 +69,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_a_valid_language_when_quality_is_null(): void
     {
         $language = DefaultLanguage::create('en', null);
@@ -77,10 +79,8 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentValidLanguageAndQualityValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentValidLanguageAndQualityValues')]
     public function it_can_create_a_valid_language_from_the_valid_data(
         array $input,
         string $expectedTag,
@@ -129,10 +129,8 @@ class DefaultLanguageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentInvalidLanguageAndQualityValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentInvalidLanguageAndQualityValues')]
     public function it_can_create_an_invalid_language_from_the_invalid_data(
         array $input,
         string $expectedTag,
@@ -186,10 +184,8 @@ class DefaultLanguageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentLanguageAndQualityValuesWithDifferentOptions
-     */
+    #[Test]
+    #[DataProvider('provideDifferentLanguageAndQualityValuesWithDifferentOptions')]
     public function it_can_create_a_valid_language_with_different_options(
         array $input,
         string $expectedTag,
@@ -259,7 +255,7 @@ class DefaultLanguageTest extends TestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_default_options(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);
@@ -271,7 +267,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retain_provided_options(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1, [
@@ -286,7 +282,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_subtags_of_a_tag(): void
     {
         $expectedSubtags = ['de', 'Latn', 'DE'];
@@ -298,7 +294,7 @@ class DefaultLanguageTest extends TestCase
         $this->assertTrue($language->isValid());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_a_primary_subtag(): void
     {
         $language = DefaultLanguage::create('zh-yue-Hant-CN', 1);

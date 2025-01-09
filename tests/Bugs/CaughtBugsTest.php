@@ -5,12 +5,11 @@ namespace Kudashevs\AcceptLanguage\Tests\Bugs;
 use Kudashevs\AcceptLanguage\AcceptLanguage;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class CaughtBugsTest extends ExtendedTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_handle_a_bug_in_the_retrieve_acceptable_languages_intersection(): void
     {
         /*
@@ -29,9 +28,7 @@ class CaughtBugsTest extends ExtendedTestCase
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_handle_a_bug_in_the_parse_header(): void
     {
         /*
@@ -50,7 +47,7 @@ class CaughtBugsTest extends ExtendedTestCase
         $this->assertSame('en', $service->getPreferredLanguage());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_apply_boolean_options_using_the_initial_config(): void
     {
         /*

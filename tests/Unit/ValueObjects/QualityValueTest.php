@@ -3,11 +3,13 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\ValueObjects;
 
 use Kudashevs\AcceptLanguage\ValueObjects\QualityValue;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class QualityValueTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $quality = new QualityValue(1);
@@ -16,10 +18,8 @@ class QualityValueTest extends TestCase
         $this->assertTrue($quality->isValid());
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentInvalidQualityValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentInvalidQualityValues')]
     public function it_can_handle_an_invalid_quality($input, $expected): void
     {
         $quality = new QualityValue($input);
@@ -54,10 +54,8 @@ class QualityValueTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentValidQualityValues
-     */
+    #[Test]
+    #[DataProvider('provideDifferentValidQualityValues')]
     public function it_can_normalize_a_valid_quality($input, $expected): void
     {
         $quality = new QualityValue($input);
@@ -104,10 +102,8 @@ class QualityValueTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider providedDifferentQualityBoundaryValues
-     */
+    #[Test]
+    #[DataProvider('providedDifferentQualityBoundaryValues')]
     public function it_can_normalize_at_boundaries($input, $expected, bool $valid): void
     {
         $quality = new QualityValue($input);
@@ -152,10 +148,8 @@ class QualityValueTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provideDifferentQualityValuesWithDifferentFallbacks
-     */
+    #[Test]
+    #[DataProvider('provideDifferentQualityValuesWithDifferentFallbacks')]
     public function it_can_normalize_an_ivalid_quality_with_fallback($input, array $options, $expected): void
     {
         $quality = new QualityValue($input, $options);
@@ -205,7 +199,7 @@ class QualityValueTest extends TestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_can_return_default_options(): void
     {
         $quality = new QualityValue(1);
@@ -216,7 +210,7 @@ class QualityValueTest extends TestCase
         $this->assertContains(-1, $options);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_default_options(): void
     {
         $quality = new QualityValue(1, [

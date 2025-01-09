@@ -8,11 +8,12 @@ use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionType;
 use Kudashevs\AcceptLanguage\Exceptions\InvalidOptionValue;
 use Kudashevs\AcceptLanguage\Facades\AcceptLanguage as AcceptLanguageFacade;
 use Kudashevs\AcceptLanguage\Tests\ExtendedTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Log\LoggerInterface;
 
 class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
 {
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_option_is_provided(): void
     {
         $this->expectException(InvalidOptionType::class);
@@ -22,7 +23,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         AcceptLanguageFacade::getLanguage();
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_default_language_is_provided(): void
     {
         $this->expectException(InvalidOptionValue::class);
@@ -32,7 +33,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         AcceptLanguageFacade::getLanguage();
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_log_level_is_provided(): void
     {
         $this->expectException(InvalidLogLevelName::class);
@@ -42,7 +43,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         AcceptLanguageFacade::getLanguage();
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_a_wrong_log_event_name_is_provided(): void
     {
         $this->expectException(InvalidLogEventName::class);
@@ -53,9 +54,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Usage section see a Note.
      */
+    #[Test]
     public function it_cannot_return_empty_result_because_it_is_processed_by_default(): void
     {
         $language = AcceptLanguageFacade::getLanguage();
@@ -64,7 +65,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame('en', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_a_default_language(): void
     {
         $language = AcceptLanguageFacade::getLanguage();
@@ -73,7 +74,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame('en', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_a_default_language_through_a_facade(): void
     {
         $language = AcceptLanguageFacade::getLanguage();
@@ -83,9 +84,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_language(): void
     {
         app('config')->set('accept-language.http_accept_language', 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5');
@@ -97,9 +98,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_language_and_a_subtag(): void
     {
         $header = 'de, fr;q=0.9, fr-CH;q=0.8, en;q=0.7, *;q=0.5';
@@ -113,9 +114,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_a_non_exact_match_derivative(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -129,9 +130,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_an_exact_match_language(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -146,9 +147,9 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     /**
-     * @test
      * @see /README.md The explanations are in the Options section see Notes.
      */
+    #[Test]
     public function it_can_retrieve_an_exact_match_language_and_a_subtag(): void
     {
         $header = 'de, fr-CH;q=0.9, fr;q=0.8, en;q=0.7, *;q=0.5';
@@ -162,7 +163,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame(0.9, app('acceptlanguage')->getQuality());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_apply_the_separator_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr_CH');
@@ -173,7 +174,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame('fr-CH', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_apply_the_subtag_related_options(): void
     {
         app('config')->set('accept-language.default_language', 'fr-Latn-CH');
@@ -185,7 +186,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame('fr', $language);
     }
 
-    /** @test */
+    #[Test]
     public function it_cannot_log_gathered_information_by_default(): void
     {
         $defaultLevel = app('config')->get('accept-language.log_level');
@@ -199,7 +200,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         AcceptLanguageFacade::getLanguage();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_log_gathered_information_when_the_option_is_provided(): void
     {
         $defaultLevel = app('config')->get('accept-language.log_level');

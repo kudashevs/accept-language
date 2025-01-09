@@ -3,10 +3,11 @@
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
+use PHPUnit\Framework\Attributes\Test;
 
 class FuzzyMatchStrategyTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_matching_language(): void
     {
         $languages = [
@@ -24,7 +25,7 @@ class FuzzyMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_weak_matching_language(): void
     {
         $languages = [
@@ -42,7 +43,7 @@ class FuzzyMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.5], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_matching_languages_from_languages(): void
     {
         $languages = [
@@ -66,7 +67,7 @@ class FuzzyMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['en-US', 0.8], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_matching_languages_from_similar_languages(): void
     {
         $languages = [
@@ -89,7 +90,7 @@ class FuzzyMatchStrategyTest extends TestCase
         $this->assertContainsLanguage(['fr-CH', 0.7], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_retrieve_the_weak_matching_language_from_languages(): void
     {
         $languages = [
