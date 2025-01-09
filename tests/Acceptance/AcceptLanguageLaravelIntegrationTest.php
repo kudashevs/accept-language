@@ -191,7 +191,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     {
         $defaultLevel = app('config')->get('accept-language.log_level');
 
-        $this->instance('log',
+        $this->instance(
+            'log',
             $this->partialMock(LoggerInterface::class, function ($mock) use ($defaultLevel) {
                 $mock->shouldReceive($defaultLevel)->never();
             })
@@ -205,7 +206,8 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     {
         $defaultLevel = app('config')->get('accept-language.log_level');
 
-        $this->instance('log',
+        $this->instance(
+            'log',
             $this->partialMock(LoggerInterface::class, function ($mock) use ($defaultLevel) {
                 $mock->shouldReceive($defaultLevel)->atLeast()->times(1);
             })
