@@ -34,6 +34,11 @@ You can install the package via composer:
 composer require kudashevs/accept-language
 ```
 
+You may also want to publish the [configuration](#configuration) file (optional).
+```php
+php artisan vendor:publish --provider="Kudashevs\AcceptLanguage\Providers\AcceptLanguageServiceProvider"
+```
+
 
 ## Usage
 
@@ -65,11 +70,12 @@ $service->getHeader();
 ```
 
 
-## Options
+## Configuration
 
-The class accepts some configuration options:
+The configuration settings are located in the `config/accept-language.php` file.
+
+There configuration options are currently available:
 ```
-'http_accept_language'      # A string with a custom HTTP Accept-Language header.
 'default_language'          # A string with a default preferred language value (default is 'en')¹.
 'accepted_languages'        # An array with a list of accepted languages (default is [])².
 'exact_match_only'          # A boolean defines whether to retrieve only languages that match exactly a supported languages (default is false).
