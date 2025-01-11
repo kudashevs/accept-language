@@ -91,21 +91,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Log activity
-    |--------------------------------------------------------------------------
-    |
-    | This option defines whether to log the activity of the package or not. If
-    | set to `true`, it will log the information gathered throughout different
-    | stages of the execution process.
-    |
-    | For more information, refer to the Logging section in README.md.
-    |
-    */
-
-    'log_activity' => false,
-
-    /*
-    |--------------------------------------------------------------------------
     | Log level
     |--------------------------------------------------------------------------
     |
