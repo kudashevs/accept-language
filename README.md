@@ -72,7 +72,7 @@ $service->getHeader();
 
 ## Configuration
 
-The configuration settings are located in the `config/accept-language.php` file.
+After [publishing](#installation), the configuration settings are located in the `config/accept-language.php` file.
 
 There configuration options are currently available:
 ```
