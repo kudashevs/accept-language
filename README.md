@@ -74,7 +74,7 @@ $service->getHeader();
 
 After [publishing](#installation), the configuration settings are located in the `config/accept-language.php` file.
 
-There configuration options are currently available:
+There configuration options are currently supported:
 ```
 'default_language'          # A string with a default preferred language value (default is 'en')¹.
 'accepted_languages'        # An array with a list of accepted languages (default is [])².
