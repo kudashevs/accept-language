@@ -1192,7 +1192,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
-    public function it_can_log_activity_by_default(): void
+    public function it_can_log_by_default(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
@@ -1272,7 +1272,6 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'completely wrong',
             'accepted_languages' => ['de', 'en'],
             'separator' => '_',
-            'log_activity' => true,
         ];
         $expectedArguments = [
             'completely wrong',

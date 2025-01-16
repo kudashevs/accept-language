@@ -91,7 +91,6 @@ class AcceptLanguage
         'use_script_subtag' => false,
         'use_region_subtag' => true,
         'separator' => '_',
-        'log_activity' => false,
         'log_level' => 'info',
         'log_only' => [],
     ];
