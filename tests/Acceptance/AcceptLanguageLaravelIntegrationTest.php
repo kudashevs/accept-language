@@ -187,22 +187,7 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
     }
 
     #[Test]
-    public function it_cannot_log_gathered_information_by_default(): void
-    {
-        $defaultLevel = app('config')->get('accept-language.log_level');
-
-        $this->instance(
-            'log',
-            $this->partialMock(LoggerInterface::class, function ($mock) use ($defaultLevel) {
-                $mock->shouldReceive($defaultLevel)->never();
-            })
-        );
-
-        AcceptLanguageFacade::getLanguage();
-    }
-
-    #[Test]
-    public function it_can_log_gathered_information_when_the_option_is_provided(): void
+    public function it_can_log_gathered_information_by_default(): void
     {
         $defaultLevel = app('config')->get('accept-language.log_level');
 
@@ -213,7 +198,6 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
             })
         );
 
-        app('config')->set('accept-language.log_activity', true);
         AcceptLanguageFacade::getLanguage();
     }
 }

@@ -1210,34 +1210,12 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
-    public function it_can_log_a_language_when_log_activity_is_enabled(): void
-    {
-        $options = [
-            'http_accept_language' => 'fr-CH',
-            'accepted_languages' => [],
-            'separator' => '_',
-            'log_activity' => true,
-            'log_only' => ['retrieve_header'],
-        ];
-
-        $loggerMock = $this->createMock(LoggerInterface::class);
-        $loggerMock->expects($this->once())
-            ->method('info')
-            ->with($this->stringContains('fr-CH'));
-
-        $service = new AcceptLanguage($options);
-        $service->useLogger($loggerMock);
-        $service->process();
-    }
-
-    #[Test]
-    public function it_can_log_a_valid_language_all_of_the_stages_when_log_activity_is_enabled(): void
+    public function it_can_log_a_valid_language_all_of_the_stages(): void
     {
         $options = [
             'http_accept_language' => 'fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5',
             'accepted_languages' => ['de', 'en'],
             'separator' => '_',
-            'log_activity' => true,
         ];
         $expectedArguments = [
             'fr-CH',
@@ -1266,7 +1244,7 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
-    public function it_can_log_an_invalid_language_all_of_the_stages_when_log_activity_is_enabled(): void
+    public function it_can_log_an_invalid_language_all_of_the_stages(): void
     {
         $options = [
             'http_accept_language' => 'completely wrong',
