@@ -2,6 +2,7 @@
 
 namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
+use InvalidArgumentException;
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
@@ -46,7 +47,7 @@ class StrategyTestCase extends PHPUnitTestCase
         }
 
         if (!isset($found)) {
-            throw new Exception('The needle of a wrong type.');
+            throw new InvalidArgumentException('The needle of a wrong type.');
         }
 
         $this->assertCount(1, $found);
