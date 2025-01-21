@@ -57,12 +57,7 @@ final class LanguageTag
 
     private function initNormalizer(): void
     {
-        $this->normalizer = $this->createDefaultNormalizer();
-    }
-
-    private function createDefaultNormalizer(): TagNormalizerInterface
-    {
-        return new LanguageTagNormalizer();
+        $this->normalizer = new LanguageTagNormalizer();
     }
 
     /**
