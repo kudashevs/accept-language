@@ -53,12 +53,7 @@ final class QualityValue
 
     private function initNormalizer(): void
     {
-        $this->normalizer = $this->createDefaultNormalizer();
-    }
-
-    private function createDefaultNormalizer(): QualityNormalizerInterface
-    {
-        return new LanguageQualityNormalizer();
+        $this->normalizer = new LanguageQualityNormalizer();
     }
 
     /**
