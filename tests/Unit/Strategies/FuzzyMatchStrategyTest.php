@@ -5,7 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 use Kudashevs\AcceptLanguage\Strategies\FuzzyMatchStrategy;
 use PHPUnit\Framework\Attributes\Test;
 
-class FuzzyMatchStrategyTest extends TestCase
+class FuzzyMatchStrategyTest extends StrategyTestCase
 {
     #[Test]
     public function it_can_retrieve_the_matching_language(): void

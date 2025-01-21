@@ -5,7 +5,7 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 use Kudashevs\AcceptLanguage\Strategies\ExactMatchStrategy;
 use PHPUnit\Framework\Attributes\Test;
 
-class ExactMatchStrategyTest extends TestCase
+class ExactMatchStrategyTest extends StrategyTestCase
 {
     #[Test]
     public function it_can_retrieve_the_exact_matching_language(): void

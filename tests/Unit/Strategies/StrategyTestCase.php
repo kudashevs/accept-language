@@ -4,10 +4,9 @@ namespace Kudashevs\AcceptLanguage\Tests\Unit\Strategies;
 
 use Kudashevs\AcceptLanguage\Factories\LanguageFactory;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
-use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
-class TestCase extends PHPUnitTestCase
+class StrategyTestCase extends PHPUnitTestCase
 {
     /**
      * @param string $language
