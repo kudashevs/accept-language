@@ -2,6 +2,14 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v5.0.0 - 2026-05-01](https://github.com/kudashevs/accept-language/compare/v4.0.0...v5.0.0)
+
+- Add support for PHP 8.5
+- Increase the minimum Laravel version to 12.0
+- Increase the minimum PHP version to 8.2
+- Increase the minimum PHPUnit version to 11.0
+- Some improvements
+
 ## [v4.0.0 - 2024-12-15](https://github.com/kudashevs/accept-language/compare/v3.5.0...v4.0.0)
 
 - Increase the minimum PHP version to 8.1
