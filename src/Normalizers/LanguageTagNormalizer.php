@@ -51,7 +51,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     }
 
     /**
-     * @return array<string, string>
+     * @return array<int|string, string>
      */
     private function extractSubtags(string $tag): array
     {
@@ -74,7 +74,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
     }
 
     /**
-     * @param array<string, string|null> $subtags
+     * @param array<int|string, string|null> $subtags
      * @return array<string, string>
      */
     private function retrieveFoundSubtags(array $subtags): array
