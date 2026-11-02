@@ -63,7 +63,7 @@ final class LanguageTagNormalizer implements TagNormalizerInterface
                         (-(?<region>[a-z]{2}|[0-9]{3})?)?
                         (-([a-z][a-z0-9]{4,}|[0-9][a-z0-9]{3,})?)?      # variant subtag
                         (-([a-z]-[a-z-]+)?)?                            # extension subtag
-                        (-(x-[[a-z-]+)?)?                               # private subtag
+                        (-(x-[a-z-]+)?)?                                # private subtag
                     $/iSx',
             $tag,
             $subtags,
