@@ -234,6 +234,108 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_skips_element_with_wrong_characters_around_element(): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage("fr \r , \t de;q=0.5");
+
+        $this->assertSame('de', $service->getPreferredLanguage());
+        $this->assertSame(0.5, $service->getPreferredLanguageQuality());
+    }
+
+    #[Test]
+    #[DataProvider('provideElementsSurroundedByOWS')]
+    public function it_ignores_ows_around_elements(string $header): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage($header);
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(1, $service->getPreferredLanguageQuality());
+    }
+
+    public static function provideElementsSurroundedByOWS(): array
+    {
+        return [
+            'no space' => ['fr,en,de'],
+            'space before the comma' => ['fr ,en ,de'],
+            'space after the comma' => ['fr, en, de'],
+            'spaces around the comma' => ['fr , en , de'],
+            'tab before the comma' => ["fr\t,en\t,de"],
+            'tab after the comma' => ["fr,\ten,\tde"],
+            'space and tab before the comma' => ["fr \t,en \t,de"],
+            'space and tab after the comma' => ["fr, \ten, \tde"],
+            'the spec test matrix header' => ["fr \t , \t de;q=0.5"],
+        ];
+    }
+
+    #[Test]
+    public function it_skips_element_with_wrong_characters_around_weight(): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage("fr\r ; \t q=0.8,de;q=0.5");
+
+        $this->assertSame('de', $service->getPreferredLanguage());
+        $this->assertSame(0.5, $service->getPreferredLanguageQuality());
+    }
+
+    #[Test]
+    #[DataProvider('provideWeightsSurroundedByOWS')]
+    public function it_ignores_ows_around_weights(string $header): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage($header);
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(0.5, $service->getPreferredLanguageQuality());
+    }
+
+    public static function provideWeightsSurroundedByOWS(): array
+    {
+        return [
+            'no space' => ['fr;q=0.5'],
+            'space before the semicolon' => ['fr ;q=0.5'],
+            'space after the semicolon' => ['fr; q=0.5'],
+            'spaces around the semicolon' => ['fr ; q=0.5'],
+            'tab before the semicolon' => ["fr\t;q=0.5"],
+            'tab after the semicolon' => ["fr;\tq=0.5"],
+            'space and tab before the semicolon' => ["fr \t;q=0.5"],
+            'space and tab after the semicolon' => ["fr; \tq=0.5"],
+            'the spec test matrix header' => ["fr \t ; \t q=0.5 , de;q=0.4"],
+        ];
+    }
+
+    #[Test]
+    public function it_skips_element_with_wrong_characters_around_quality(): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage("fr;q \r = \t 0.8,de;q=0.5");
+
+        $this->assertSame('de', $service->getPreferredLanguage());
+        $this->assertSame(0.5, $service->getPreferredLanguageQuality());
+    }
+
+    #[Test]
+    #[DataProvider('provideQualitiesSurroundedByOWS')]
+    public function it_ignores_ows_inside_qualities(string $header): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage($header);
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(0.5, $service->getPreferredLanguageQuality());
+    }
+
+    public static function provideQualitiesSurroundedByOWS(): array
+    {
+        return [
+            'no space' => ['fr;q=0.5'],
+            'space before the semicolon' => ['fr;q =0.5'],
+            'space after the semicolon' => ['fr;q= 0.5'],
+            'spaces around the semicolon' => ['fr;q = 0.5'],
+            'tab before the semicolon' => ["fr;q\t=0.5"],
+            'tab after the semicolon' => ["fr;q=\t0.5"],
+            'space and tab before the semicolon' => ["fr;q \t=0.5"],
+            'space and tab after the semicolon' => ["fr; \tq= \t0.5"],
+            'the spec test matrix header' => ["fr \t ; \t q \t = \t 0.5 , de;q=0.4"],
+        ];
+    }
+
+    #[Test]
     #[DataProvider('provideDifferentDefaultLanguageOptionValuesWithFormatting')]
     public function it_can_format_the_default_language_option_according_to_the_settings(
         array $options,
@@ -1176,6 +1278,21 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_can_retrieve_a_preferred_language_when_ows_around(): void
+    {
+        $options = [
+            'http_accept_language' => 'en,es ; q=0.9,fr;q=0.8',
+            'accepted_languages' => ['es', 'fr'],
+        ];
+
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        $this->assertSame('es', $service->getPreferredLanguage());
+        $this->assertSame(0.9, $service->getQuality());
+    }
+
+    #[Test]
     public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty(): void
     {
         // This is an exceptional case where we want to handle an empty quality parameter value.
@@ -1275,6 +1392,17 @@ class AcceptLanguageTest extends TestCase
         $service = new AcceptLanguage($options);
         $service->useLogger($loggerMock);
         $service->process();
+    }
+
+    private function processHeaderWithDefaultLanguage(string $header): AcceptLanguage
+    {
+        $service = new AcceptLanguage([
+            'http_accept_language' => $header,
+            'default_language' => self::DEFAULT_LANGUAGE,
+        ]);
+        $service->process();
+
+        return $service;
     }
 
     private function resolveInvocations(\PHPUnit\Framework\MockObject\Rule\InvocationOrder $matcher): int

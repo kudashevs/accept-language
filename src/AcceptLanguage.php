@@ -368,10 +368,17 @@ class AcceptLanguage
     protected function splitLanguageRange(string $range): array
     {
         /*
+         * OWS (optional whitespace) is zero or more spaces or horizontal tabs, OWS = *( SP / HTAB ). It is allowed:
+         * - around the commas that separate elements, #element => [ element ] *( OWS "," OWS [ element ] ).
+         *   See RFC 9110, Section 5.6.1. Therefore, the range itself is trimmed of spaces and tabs (e.g., "de , en");
+         * - around the semicolon of a weight, weight = OWS ";" OWS "q=" qvalue. See RFC 9110, Section 12.4.2.
+         *   Therefore, the range is split on a semicolon surrounded by any amount of spaces or tabs (e.g., "de ; q=0.5").
+         * Whitespace around "=" is accepted too for leniency, although the grammar does not allow it. See RFC 9110, Section 5.6.3.
+         *
          * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
          * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
          */
-        $splitRange = preg_split('/;q=/i', trim($range));
+        $splitRange = preg_split('/[ \t]*;[ \t]*q[ \t]*=[ \t]*/i', trim($range, " \t"));
 
         return ($splitRange !== false) ? $splitRange : [];
     }
