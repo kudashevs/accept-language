@@ -79,8 +79,7 @@ class AcceptLanguageTest extends TestCase
             'http_accept_language' => 'en-US,en;q=0.5',
         ];
 
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame('en-US,en;q=0.5', $service->getHeader());
     }
@@ -103,8 +102,7 @@ class AcceptLanguageTest extends TestCase
         array $options,
         string $expected
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expected, $service->getPreferredLanguage());
         $this->assertSame($expected, $service->getLanguage());
@@ -341,8 +339,7 @@ class AcceptLanguageTest extends TestCase
         array $options,
         string $expected
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expected, $service->getPreferredLanguage());
         $this->assertSame($expected, $service->getLanguage());
@@ -375,8 +372,7 @@ class AcceptLanguageTest extends TestCase
     #[DataProvider('provideDifferentcAcceptedLanguagesOptionValues')]
     public function it_can_handle_the_accepted_languages_option(array $options, string $expected): void
     {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expected, $service->getPreferredLanguage());
         $this->assertSame($expected, $service->getLanguage());
@@ -415,8 +411,7 @@ class AcceptLanguageTest extends TestCase
         array $options,
         string $expected
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expected, $service->getPreferredLanguage());
         $this->assertSame($expected, $service->getLanguage());
@@ -452,8 +447,7 @@ class AcceptLanguageTest extends TestCase
         string $expectedLanguage,
         int|float $expectedQuality
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expectedLanguage, $service->getPreferredLanguage());
         $this->assertSame($expectedQuality, $service->getPreferredLanguageQuality());
@@ -673,8 +667,7 @@ class AcceptLanguageTest extends TestCase
         string $expectedLanguage,
         int|float $expectedQuality,
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame($expectedLanguage, $service->getPreferredLanguage());
         $this->assertSame($expectedQuality, $service->getPreferredLanguageQuality());
@@ -798,8 +791,7 @@ class AcceptLanguageTest extends TestCase
     #[DataProvider('provideDifferentSeparatorOptions')]
     public function it_can_retrieve_a_preferred_language_with_different_options(array $options, string $expected): void
     {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -1083,8 +1075,7 @@ class AcceptLanguageTest extends TestCase
     #[DataProvider('provideDifferentRequestHeadersWithDifferentLanguageLetterLength')]
     public function it_can_retrieve_a_preferred_language_of_different_length(array $options, string $expected): void
     {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -1209,8 +1200,7 @@ class AcceptLanguageTest extends TestCase
         array $options,
         string $expected
     ): void {
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
         $result = $service->getPreferredLanguage();
 
         $this->assertSame($expected, $result);
@@ -1271,8 +1261,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['fr'],
         ];
 
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame('fr', $service->getPreferredLanguage());
     }
@@ -1285,8 +1274,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['es', 'fr'],
         ];
 
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame('es', $service->getPreferredLanguage());
         $this->assertSame(0.9, $service->getQuality());
@@ -1301,8 +1289,7 @@ class AcceptLanguageTest extends TestCase
             'accepted_languages' => ['fr', 'en'],
         ];
 
-        $service = new AcceptLanguage($options);
-        $service->process();
+        $service = $this->processHeaderWithOptions($options);
 
         $this->assertSame('fr', $service->getPreferredLanguage());
         $this->assertSame(1, $service->getQuality());
@@ -1392,6 +1379,14 @@ class AcceptLanguageTest extends TestCase
         $service = new AcceptLanguage($options);
         $service->useLogger($loggerMock);
         $service->process();
+    }
+
+    private function processHeaderWithOptions(array $options): AcceptLanguage
+    {
+        $service = new AcceptLanguage($options);
+        $service->process();
+
+        return $service;
     }
 
     private function processHeaderWithDefaultLanguage(string $header): AcceptLanguage
