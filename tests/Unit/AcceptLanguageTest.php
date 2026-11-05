@@ -357,6 +357,27 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('provideMalformedQualityValues')]
+    public function it_drops_a_language_range_with_a_malformed_quality_value(string $header): void
+    {
+        /* qvalue = ( "0" [ "." 0*3DIGIT ] ) / ( "1" [ "." 0*3("0") ] ) */
+        $service = $this->processHeaderWithDefaultLanguage($header . ', fr;q=0.05');
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(0.05, $service->getPreferredLanguageQuality());
+    }
+
+    public static function provideMalformedQualityValues(): array
+    {
+        return [
+            'four decimal places' => ['en-US;q=0.7532'],
+            'an exponent notation' => ['en-US;q=1e-1'],
+            'a missing leading zero' => ['en-US;q=.5'],
+            'a leading plus sign' => ['en-US;q=+0.5'],
+        ];
+    }
+
+    #[Test]
     #[DataProvider('provideDifferentDefaultLanguageOptionValuesWithFormatting')]
     public function it_can_format_the_default_language_option_according_to_the_settings(
         array $options,

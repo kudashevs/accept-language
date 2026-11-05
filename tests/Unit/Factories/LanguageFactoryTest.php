@@ -118,6 +118,27 @@ class LanguageFactoryTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('provideMalformedQualityValues')]
+    public function it_drops_a_language_range_with_a_malformed_quality_value(array $range): void
+    {
+        /* qvalue = ( "0" [ "." 0*3DIGIT ] ) / ( "1" [ "." 0*3("0") ] ) */
+        $service = new LanguageFactory();
+        $language = $service->makeFromLanguageRange($range, 1);
+
+        $this->assertFalse($language->isValid());
+    }
+
+    public static function provideMalformedQualityValues(): array
+    {
+        return [
+            'four decimal places' => [['en-US', '0.7532']],
+            'an exponent notation' => [['en-US', '1e-1']],
+            'a missing leading zero' => [['en-US', '.5']],
+            'a leading plus sign' => [['en-US', '+0.5']],
+        ];
+    }
+
+    #[Test]
     #[DataProvider('provideDifferentValidLanguageRanges')]
     public function it_can_convert_the_valid_language_range_to_a_valid_language(
         array $range,

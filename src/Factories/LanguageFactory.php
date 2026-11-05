@@ -68,6 +68,11 @@ final class LanguageFactory
             return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
         }
 
+        // handles the situations when the quality is invalid
+        if (!empty($rawLanguageRange[1]) && !preg_match('/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/', (string)$rawLanguageRange[1])) {
+            return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
+        }
+
         /*
          * For more information about possible types of $tag and $quality variables,
          * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage::create()
