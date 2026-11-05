@@ -244,6 +244,7 @@ class AcceptLanguageTest extends TestCase
     #[DataProvider('provideElementsSurroundedByOWS')]
     public function it_ignores_ows_around_elements(string $header): void
     {
+        /* OWS in elements: #element => [ element *( OWS "," OWS element ) ] */
         $service = $this->processHeaderWithDefaultLanguage($header);
 
         $this->assertSame('fr', $service->getPreferredLanguage());
@@ -268,6 +269,7 @@ class AcceptLanguageTest extends TestCase
     #[Test]
     public function it_skips_element_with_wrong_characters_around_weight(): void
     {
+        /* OWS in weights: weight = OWS ";" OWS "q=" qvalue */
         $service = $this->processHeaderWithDefaultLanguage("fr\r ; \t q=0.8,de;q=0.5");
 
         $this->assertSame('de', $service->getPreferredLanguage());
@@ -312,6 +314,7 @@ class AcceptLanguageTest extends TestCase
     #[DataProvider('provideQualitiesSurroundedByOWS')]
     public function it_ignores_ows_inside_qualities(string $header): void
     {
+        /* BWS in qualities: invalid but should be accepted for leniency */
         $service = $this->processHeaderWithDefaultLanguage($header);
 
         $this->assertSame('fr', $service->getPreferredLanguage());
@@ -325,10 +328,10 @@ class AcceptLanguageTest extends TestCase
             'space before the semicolon' => ['fr;q =0.5'],
             'space after the semicolon' => ['fr;q= 0.5'],
             'spaces around the semicolon' => ['fr;q = 0.5'],
-            'tab before the semicolon' => ["fr;q\t=0.5"],
-            'tab after the semicolon' => ["fr;q=\t0.5"],
-            'space and tab before the semicolon' => ["fr;q \t=0.5"],
-            'space and tab after the semicolon' => ["fr; \tq= \t0.5"],
+            'tab before the equal sign' => ["fr;q\t=0.5"],
+            'tab after the equal sign' => ["fr;q=\t0.5"],
+            'space and tab before the equal sign' => ["fr;q \t=0.5"],
+            'space and tab after the euqal sign' => ["fr; \tq= \t0.5"],
             'the spec test matrix header' => ["fr \t ; \t q \t = \t 0.5 , de;q=0.4"],
         ];
     }
