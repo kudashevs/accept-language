@@ -98,6 +98,26 @@ class LanguageFactoryTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('provideMalformedLanguageRanges')]
+    public function it_drops_a_malformed_language_range(array $range): void
+    {
+        /* language-range  = (1*8ALPHA *("-" 1*8alphanum)) / "*" */
+        $service = new LanguageFactory();
+        $language = $service->makeFromLanguageRange($range, 1);
+
+        $this->assertFalse($language->isValid());
+    }
+
+    public static function provideMalformedLanguageRanges(): array
+    {
+        return [
+            'consecutive hyphens' => [['en--us', 1]],
+            'a trailing hyphen' => [['en-', 1]],
+            'a subtag longer than 8 characters' => [['en-abcdefghi', 1]],
+        ];
+    }
+
+    #[Test]
     #[DataProvider('provideDifferentValidLanguageRanges')]
     public function it_can_convert_the_valid_language_range_to_a_valid_language(
         array $range,

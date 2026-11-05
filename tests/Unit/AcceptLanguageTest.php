@@ -337,6 +337,26 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('provideMalformedLanguageRanges')]
+    public function it_drops_a_malformed_language_range(string $header): void
+    {
+        /* language-range = (1*8ALPHA *("-" 1*8alphanum)) / "*" */
+        $service = $this->processHeaderWithDefaultLanguage($header . ', fr;q=0.8');
+
+        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame(0.8, $service->getPreferredLanguageQuality());
+    }
+
+    public static function provideMalformedLanguageRanges(): array
+    {
+        return [
+            'consecutive hyphens' => ['en--us'],
+            'a trailing hyphen' => ['en-'],
+            'a subtag longer than 8 characters' => ['en-abcdefghi'],
+        ];
+    }
+
+    #[Test]
     #[DataProvider('provideDifferentDefaultLanguageOptionValuesWithFormatting')]
     public function it_can_format_the_default_language_option_according_to_the_settings(
         array $options,

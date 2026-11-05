@@ -63,6 +63,11 @@ final class LanguageFactory
             return DefaultLanguage::createInvalid($possibleTag, $possibleQuality, $this->options);
         }
 
+        // handles the situations when the language range is invalid
+        if (!preg_match('/^[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*$/i', (string)$rawLanguageRange[0])) {
+            return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
+        }
+
         /*
          * For more information about possible types of $tag and $quality variables,
          * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage::create()
