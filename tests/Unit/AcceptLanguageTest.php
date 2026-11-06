@@ -752,6 +752,14 @@ class AcceptLanguageTest extends TestCase
                 'fr',
                 1,
             ],
+            'a language with a mixed up order result in the language with the highest quality' => [
+                [
+                    'http_accept_language' => 'en;q=0.3,es;q=1',
+                    'accepted_languages' => ['en', 'es'],
+                ],
+                'es',
+                1,
+            ],
             'a language that intersects with accepted_languages results in the accepted language when it is of quality below 1' => [
                 [
                     'http_accept_language' => 'de;q=0.7,fr;q=0.333,es;q=0.333',
@@ -1273,6 +1281,14 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => ''],
                 self::DEFAULT_LANGUAGE,
             ],
+            'one language tag with a very long segment results in default' => [
+                ['http_accept_language' => 'abcdefghi'],
+                self::DEFAULT_LANGUAGE,
+            ],
+            'one language tag with illegal characters results in default' => [
+                ['http_accept_language' => 'e1'],
+                self::DEFAULT_LANGUAGE,
+            ],
             'one empty language tag with empty quality tag results in default' => [
                 ['http_accept_language' => ';q='],
                 self::DEFAULT_LANGUAGE,
@@ -1293,6 +1309,10 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'es;q=dd'],
                 self::DEFAULT_LANGUAGE,
             ],
+            'one language with some gibberish in between language and quality tag results in default' => [
+                ['http_accept_language' => 'es;level=1;q=0.5'],
+                self::DEFAULT_LANGUAGE,
+            ],
             'two languages with missing delimiter' => [
                 ['http_accept_language' => 'en-US en-GB'],
                 self::DEFAULT_LANGUAGE,
@@ -1308,10 +1328,6 @@ class AcceptLanguageTest extends TestCase
             'two languages with wrong delimiter' => [
                 ['http_accept_language' => 'es;en-US'],
                 self::DEFAULT_LANGUAGE,
-            ],
-            'two languages with wrong quality order result to the language with the highest quality' => [
-                ['http_accept_language' => 'en;q=0.3,es;q=1'],
-                'es',
             ],
             'one language with two quality values in a row results in default' => [
                 ['http_accept_language' => 'fr;q=0.5;q=0.3'],
