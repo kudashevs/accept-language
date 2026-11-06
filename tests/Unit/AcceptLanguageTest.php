@@ -311,6 +311,15 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_assigns_the_quality_of_1_to_a_language_range_without_a_weight(): void
+    {
+        $service = $this->processHeaderWithDefaultLanguage('fr;q=0.95, en');
+
+        $this->assertSame('en', $service->getPreferredLanguage());
+        $this->assertSame(1, $service->getPreferredLanguageQuality());
+    }
+
+    #[Test]
     #[DataProvider('provideQualitiesSurroundedByOWS')]
     public function it_ignores_ows_inside_qualities(string $header): void
     {
