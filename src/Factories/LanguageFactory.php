@@ -55,8 +55,11 @@ final class LanguageFactory
      */
     public function makeFromLanguageRange(array $rawLanguageRange): LanguageInterface
     {
-        // handles the situation when the language range is empty
-        if (count($rawLanguageRange) === 0) {
+        // handles the situation when the language range is empty or very wrong
+        if (
+            count($rawLanguageRange) === 0
+            || (isset($rawLanguageRange[0]) && !is_scalar($rawLanguageRange[0]))
+        ) {
             return DefaultLanguage::createInvalid('', self::DEFAULT_FOR_INVALID_QUALITY, $this->options);
         }
 
