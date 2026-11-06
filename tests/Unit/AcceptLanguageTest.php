@@ -62,6 +62,110 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_can_throw_an_exception_when_a_wrong_fallback_language(): void
+    {
+        $this->expectException(InvalidOptionValue::class);
+        $this->expectExceptionMessage('The option fallback_language should contain a valid language tag');
+
+        new AcceptLanguage([
+            'fallback_language' => 'verywrong_language',
+        ]);
+    }
+
+    #[Test]
+    #[DataProvider('provideDifferentRejectedDefaultLanguageOptions')]
+    public function it_can_retrieve_a_fallback_language_when_the_default_language_is_rejected(
+        array $options,
+        string $expected,
+    ): void {
+        $service = $this->processHeaderWithOptions($options);
+
+        $this->assertSame($expected, $service->getPreferredLanguage());
+    }
+
+    public static function provideDifferentRejectedDefaultLanguageOptions(): array
+    {
+        return [
+            'a rejected default language results in the fallback language' => [
+                ['http_accept_language' => 'de;q=0', 'default_language' => 'de', 'fallback_language' => 'en'],
+                'en',
+            ],
+            'a wildcard with a rejected default language results in the fallback language' => [
+                ['http_accept_language' => '*;q=0.5, de;q=0', 'default_language' => 'de', 'fallback_language' => 'en'],
+                'en',
+            ],
+            'a leading wildcard with a rejected default language results in the fallback language' => [
+                ['http_accept_language' => '*, de;q=0', 'default_language' => 'de', 'fallback_language' => 'en'],
+                'en',
+            ],
+            'no match and a rejected default language without fallback results in the first accepted language' => [
+                [
+                    'http_accept_language' => 'de;q=0, es',
+                    'default_language' => 'de',
+                    'accepted_languages' => ['de', 'fr'],
+                ],
+                'fr',
+            ],
+            'a wildcard and a rejected default language without fallback results in the first accepted language' => [
+                [
+                    'http_accept_language' => '*;q=0.5, de;q=0',
+                    'default_language' => 'de',
+                    'accepted_languages' => ['de', 'fr'],
+                ],
+                'fr',
+            ],
+            'a rejected fallback language results in the default language' => [
+                [
+                    'http_accept_language' => '*;q=0.5, de;q=0, en;q=0',
+                    'default_language' => 'de',
+                    'fallback_language' => 'en',
+                ],
+                'de',
+            ],
+            'all rejected accepted languages without fallback results in the default language' => [
+                [
+                    'http_accept_language' => '*;q=0.5, de;q=0, fr;q=0',
+                    'default_language' => 'de',
+                    'accepted_languages' => ['de', 'fr'],
+                ],
+                'de',
+            ],
+            'no fallback and no accepted languages results in the default language' => [
+                [
+                    'http_accept_language' => '*;q=0.5, de;q=0',
+                    'default_language' => 'de',
+                ],
+                'de',
+            ],
+            'a rejected language range rejects a more specific default language' => [
+                [
+                    'http_accept_language' => 'de;q=0',
+                    'default_language' => 'de-AT',
+                    'fallback_language' => 'en',
+                ],
+                'en',
+            ],
+            'a rejected more specific language range does not reject the default language' => [
+                [
+                    'http_accept_language' => 'de-AT;q=0, *;q=0.5',
+                    'default_language' => 'de',
+                    'fallback_language' => 'en',
+                ],
+                'de',
+            ],
+            'a not rejected default language results in the default language' => [
+                [
+                    'http_accept_language' => 'es',
+                    'default_language' => 'de',
+                    'accepted_languages' => ['de', 'fr'],
+                    'fallback_language' => 'en',
+                ],
+                'de',
+            ],
+        ];
+    }
+
+    #[Test]
     public function it_can_handle_an_unknown_option_without_throwing_an_exception(): void
     {
         $options = [

@@ -296,6 +296,7 @@ class AcceptLanguage
         $header = $this->retrieveHeaderValue();
 
         $this->header = $header;
+        $this->rejectedLanguages = [];
         $this->language = $this->findPreferredLanguage($header);
     }
 
@@ -352,6 +353,8 @@ class AcceptLanguage
         $rawLanguages = $this->parseHeaderValue($header);
 
         $this->logger->log('retrieve_raw_languages', $rawLanguages);
+
+        $this->rejectedLanguages = $this->getRejectedLanguages($rawLanguages);
 
         $normalizedLanguages = $this->normalizeLanguages($rawLanguages);
 
@@ -593,9 +596,74 @@ class AcceptLanguage
         return $this->options['two_letter_only'];
     }
 
+    /**
+     * Return the default language. When the header explicitly rejects the default language (q=0),
+     * the fallback language is returned. When no fallback language is acceptable, the header is
+     * disregarded and the default language is returned anyway. See RFC 9110, Section 12.5.4.
+     */
     protected function retrieveDefaultLanguage(): LanguageInterface
     {
-        return $this->defaultLanguage;
+        if (!$this->isRejectedLanguage($this->defaultLanguage)) {
+            return $this->defaultLanguage;
+        }
+
+        return $this->retrieveFallbackLanguage() ?? $this->defaultLanguage;
+    }
+
+    /**
+     * Return the fallback language if it is set and not rejected. When the fallback language
+     * is not set, return the first of the accepted languages which is not rejected.
+     */
+    protected function retrieveFallbackLanguage(): ?LanguageInterface
+    {
+        if (
+            $this->fallbackLanguage->isValid()
+            && !$this->isRejectedLanguage($this->fallbackLanguage)
+        ) {
+            return $this->fallbackLanguage;
+        }
+
+        foreach ($this->prepareAcceptedLanguagesForMatching() as $language) {
+            if ($language->isValid() && !$this->isRejectedLanguage($language)) {
+                return $language;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * A quality value of 0 means "not acceptable". See RFC 9110, Section 12.4.2.
+     *
+     * @param array<LanguageInterface> $languages
+     * @return array<LanguageInterface>
+     */
+    protected function getRejectedLanguages(array $languages): array
+    {
+        return array_values(array_filter($languages, function ($language) {
+            return $language->isValid()
+                && $language->getQuality() == 0
+                && !$this->isAnyLanguage($language);
+        }));
+    }
+
+    /**
+     * A rejected language range also rejects all the languages it matches (e.g., "de;q=0" rejects "de-AT"),
+     * but not the less specific ones (e.g., "de-AT;q=0" does not reject "de"). See RFC 4647, Section 3.3.1.
+     */
+    protected function isRejectedLanguage(LanguageInterface $language): bool
+    {
+        $languageSubtags = array_map('strtolower', $language->getSubtags());
+
+        foreach ($this->rejectedLanguages as $rejected) {
+            $rejectedSubtags = array_map('strtolower', $rejected->getSubtags());
+
+            if (array_slice($languageSubtags, 0, count($rejectedSubtags)) === $rejectedSubtags) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
