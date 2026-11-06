@@ -83,6 +83,16 @@ class AcceptLanguageLaravelIntegrationTest extends ExtendedTestCase
         $this->assertSame('en', $language);
     }
 
+    #[Test]
+    public function it_can_retrieve_a_fallback_language_when_the_default_language_is_rejected(): void
+    {
+        app('config')->set('accept-language.http_accept_language', '*;q=0.5, de;q=0');
+        app('config')->set('accept-language.default_language', 'de');
+        app('config')->set('accept-language.fallback_language', 'en');
+
+        $this->assertSame('en', app('acceptlanguage')->getLanguage());
+    }
+
     /**
      * @see /README.md The explanations are in the Options section see Notes.
      */

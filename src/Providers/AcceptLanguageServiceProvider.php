@@ -44,6 +44,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
      * @return array{
      *     http_accept_language: string,
      *     default_language: string,
+     *     fallback_language: string,
      *     accepted_languages: array<array-key, string>,
      *     exact_match_only: bool,
      *     two_letter_only: bool,
@@ -62,6 +63,7 @@ class AcceptLanguageServiceProvider extends ServiceProvider
         return [
             'http_accept_language' => config('accept-language.http_accept_language', ''),
             'default_language' => config('accept-language.default_language', $fallbackLanguage),
+            'fallback_language' => config('accept-language.fallback_language', ''),
             'accepted_languages' => config('accept-language.accepted_languages', []),
             'exact_match_only' => config('accept-language.exact_match_only', false),
             'two_letter_only' => config('accept-language.two_letter_only', true),

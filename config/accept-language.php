@@ -18,6 +18,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fallback language
+    |--------------------------------------------------------------------------
+    |
+    | If an HTTP Accept-Language header explicitly rejects the default language
+    | (e.g., `de;q=0`), this fallback value is returned instead. If it is empty,
+    | the first accepted language that is not rejected is used. If there is no
+    | such language, the default language is returned anyway.
+    |
+    */
+
+    'fallback_language' => '',
+
+    /*
+    |--------------------------------------------------------------------------
     | Accepted languages
     |--------------------------------------------------------------------------
     |
