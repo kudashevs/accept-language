@@ -77,6 +77,7 @@ After [publishing](#installation), the configuration settings are located in the
 There configuration options are currently supported:
 ```
 'default_language'          # A string with a default preferred language value (default is 'en')¹.
+'fallback_language'         # A string with a language used when the header rejects the default language (default is '')¹.
 'accepted_languages'        # An array with a list of accepted languages (default is [])².
 'exact_match_only'          # A boolean defines whether to retrieve only languages that match exactly a supported languages (default is false).
 'two_letter_only'           # A boolean defines whether to retrieve only two-letter primary subtags (default is true).
@@ -87,7 +88,7 @@ There configuration options are currently supported:
 'log_level'                 # A string with a PSR-3 compatible log level (default is 'info').
 'log_only'                  # An array with a list of log events to log (default is []).
 ```
-<sub>1 - the `default_language` option should contain a valid Language Tag (it will be formatted according to the settings)</sub>  
+<sub>1 - the `default_language` and `fallback_language` options should contain a valid Language Tag (it will be formatted according to the settings)</sub>  
 <sub>2 - the `accepted_languages` option should include valid Language Tags only (the primary subtags are limited to 2-/3-letters for now)</sub>  
 <sub>3 - the separator can accept any string value, however it is recommended to use the [URL Safe Alphabet](https://datatracker.ietf.org/doc/html/rfc4648#section-5).</sub>
 
@@ -99,6 +100,11 @@ Some options require additional explanations:
 Different separators can be used too (for example, ['en-GB', 'en-ca', 'en_GB', 'en_ca']). 
 
 **Important note!** the package supports the `-` and `_` separators by default. If you want to use any other separator, use the `separator` option. 
+
+- the `fallback_language` option is used only when an HTTP Accept-Language header explicitly rejects the default language
+with a zero quality value (e.g., `de;q=0` when the `default_language` is `de`). A rejected language range also rejects its
+more specific languages (e.g., `de;q=0` rejects `de-AT`). If the `fallback_language` is empty, the first language from the
+`accepted_languages` that is not rejected is used. If there is no such language, the default language is returned anyway.
 
 - the `accepted_languages` option must include valid Language Tags only. These values can be written in any case (as the standard says).
 Different separators can be used too (for example, ['en-GB', 'en-ca', 'en_GB', 'en_ca']). If the `accepted_languages` is empty,
