@@ -140,7 +140,7 @@ class LanguageFactoryTest extends TestCase
 
     #[Test]
     #[DataProvider('provideDifferentValidLanguageRanges')]
-    public function it_can_convert_the_valid_language_range_to_a_valid_language(
+    public function it_can_convert_valid_language_range_to_a_valid_language(
         array $range,
         string $expectedTag,
         float $expectedQuality
@@ -156,27 +156,27 @@ class LanguageFactoryTest extends TestCase
     public static function provideDifferentValidLanguageRanges(): array
     {
         return [
-            'a language range without a quality results in the default quality' => [
+            'a language range without a quality results into the no quality' => [
                 [['en']],
                 'en',
                 LanguageFactory::DEFAULT_FOR_NO_QUALITY,
             ],
-            'a language range with an empty quality results in the language with fallback' => [
+            'a language range with an empty quality results into the invalid quality' => [
                 [['en', '']],
                 'en',
                 0,
             ],
-            'a language range with a minimum quality results in the language' => [
+            'a language range with a minimum quality results into the same' => [
                 [['en', 0]],
                 'en',
                 0,
             ],
-            'a language range with a valid quality results in the language' => [
+            'a language range with a valid quality results in the same' => [
                 [['en', 0.5]],
                 'en',
                 0.5,
             ],
-            'a language range with a maximum quality results in the language' => [
+            'a language range with a maximum quality results in the same' => [
                 [['en', 1]],
                 'en',
                 1,
