@@ -72,8 +72,12 @@ final class LanguageFactory
         }
 
         // handles the situations when the language range is invalid
-        if (!preg_match('/^[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*$/i', (string)$rawLanguageRange[0])) {
-            return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
+        if (!preg_match('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*|\*)$/i', (string)$rawLanguageRange[0])) {
+            return DefaultLanguage::createInvalid(
+                (string)$rawLanguageRange[0],
+                $rawLanguageRange[1] ?? self::DEFAULT_FOR_INVALID_QUALITY,
+                $this->options
+            );
         }
 
         // handles the situations when the quality not null but empty

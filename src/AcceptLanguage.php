@@ -285,7 +285,7 @@ class AcceptLanguage
 
     protected function isDefaultLanguageCase(string $header): bool
     {
-        return $header === '' || $header === '*' || preg_match('/^\*[ \t]*,/', $header);
+        return $header === '' || $header === '*';
     }
 
     protected function processDefaultLanguageCase(): LanguageInterface
