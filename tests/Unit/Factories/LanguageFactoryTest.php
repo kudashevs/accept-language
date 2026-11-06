@@ -156,28 +156,28 @@ class LanguageFactoryTest extends TestCase
     public static function provideDifferentValidLanguageRanges(): array
     {
         return [
-            'a language range without a quality results in the language with fallback' => [
-                [['en'], 0.5],
+            'a language range without a quality results in the default quality' => [
+                [['en']],
                 'en',
-                0.5,
+                LanguageFactory::DEFAULT_FOR_NO_QUALITY,
             ],
             'a language range with an empty quality results in the language with fallback' => [
-                [['en', ''], 0.5],
+                [['en', '']],
                 'en',
-                0.5,
+                0,
             ],
             'a language range with a minimum quality results in the language' => [
-                [['en', 0], 1],
+                [['en', 0]],
                 'en',
                 0,
             ],
             'a language range with a valid quality results in the language' => [
-                [['en', 0.5], 1],
+                [['en', 0.5]],
                 'en',
                 0.5,
             ],
             'a language range with a maximum quality results in the language' => [
-                [['en', 1], 1],
+                [['en', 1]],
                 'en',
                 1,
             ],

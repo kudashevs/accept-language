@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Kudashevs\AcceptLanguage\Factories;
 
-use Kudashevs\AcceptLanguage\Exceptions\InvalidFactoryArgument;
 use Kudashevs\AcceptLanguage\Languages\DefaultLanguage;
 use Kudashevs\AcceptLanguage\Languages\LanguageInterface;
 
 final class LanguageFactory
 {
+    /*
+     * If no "q" parameter is present, the default weight is 1. See RFC 9110, Section 12.4.2.
+     * Languages with equal weights keep the header order, because the sorting is stable.
+     */
+    public const DEFAULT_FOR_NO_QUALITY = 1;
+
+    private const DEFAULT_FOR_INVALID_QUALITY = 0;
+
     /**
      * @var array{separator?: string, with_extlang?: bool, with_script?: bool, with_region?: bool} $options
      */
@@ -43,16 +50,14 @@ final class LanguageFactory
 
     /**
      * @param array<array-key, string|mixed> $rawLanguageRange
-     * @param float $fallbackQuality
      * @return LanguageInterface
      *
-     * @throws InvalidFactoryArgument
      */
-    public function makeFromLanguageRange(array $rawLanguageRange, float $fallbackQuality): LanguageInterface
+    public function makeFromLanguageRange(array $rawLanguageRange): LanguageInterface
     {
         // handles the situation when the language range is empty
         if (count($rawLanguageRange) === 0) {
-            return DefaultLanguage::createInvalid('', 0, $this->options);
+            return DefaultLanguage::createInvalid('', self::DEFAULT_FOR_INVALID_QUALITY, $this->options);
         }
 
         // handles the situation when the language range is suspicious
@@ -69,7 +74,12 @@ final class LanguageFactory
         }
 
         // handles the situations when the quality is invalid
-        if (!empty($rawLanguageRange[1]) && !preg_match('/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/', (string)$rawLanguageRange[1])) {
+        if (
+            !empty($rawLanguageRange[1])
+            && !preg_match(
+                '/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/',
+                (string)$rawLanguageRange[1]
+            )) {
             return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
         }
 
@@ -78,11 +88,8 @@ final class LanguageFactory
          * @see \Kudashevs\AcceptLanguage\Languages\DefaultLanguage::create()
          */
         $tag = (string)$rawLanguageRange[0];
-        $quality = $rawLanguageRange[1] ?? null;
-        $optionsWithFallback = array_merge($this->options, [
-            'fallback' => $fallbackQuality,
-        ]);
+        $quality = $rawLanguageRange[1] ?? self::DEFAULT_FOR_NO_QUALITY;
 
-        return DefaultLanguage::create($tag, $quality, $optionsWithFallback);
+        return DefaultLanguage::create($tag, $quality, $this->options);
     }
 }
