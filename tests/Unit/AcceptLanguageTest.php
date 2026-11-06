@@ -35,6 +35,9 @@ class AcceptLanguageTest extends TestCase
             'a default_language option with a wrong value' => [
                 ['default_language' => null],
             ],
+            'a fallback_language option with a wrong value' => [
+                ['fallback_language' => null],
+            ],
             'an accepted_languages option with a wrong value' => [
                 ['accepted_languages' => null],
             ],

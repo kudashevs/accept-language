@@ -45,6 +45,18 @@ class AcceptLanguage
     protected LanguageInterface $defaultLanguage;
 
     /**
+     * Contain a fallback language for the cases when the default language was rejected.
+     */
+    protected LanguageInterface $fallbackLanguage;
+
+    /**
+     * Contain the languages that were explicitly rejected (q=0) in the header.
+     *
+     * @var array<LanguageInterface>
+     */
+    protected array $rejectedLanguages;
+
+    /**
      * Contain an original HTTP Accept-Language header.
      */
     protected string $header;
@@ -57,6 +69,7 @@ class AcceptLanguage
     /**
      * 'http_accept_language' string A string with a custom HTTP Accept-Language header.
      * 'default_language' string A string with a default preferred language value.
+     * 'fallback_language' string A string with a language to use when the default language was rejected by the header.
      * 'accepted_languages' array An array with a list of supported languages.
      * 'exact_match_only' bool A boolean that defines whether to retrieve only languages that match exactly the supported languages.
      * 'two_letter_only' bool A boolean that defines whether to retrieve only two-letter primary subtag or not.
@@ -70,6 +83,7 @@ class AcceptLanguage
      * @var array{
      *     http_accept_language: string,
      *     default_language: string,
+     *     fallback_language: string,
      *     accepted_languages: array<array-key, string>,
      *     exact_match_only: bool,
      *     two_letter_only: bool,
@@ -84,6 +98,7 @@ class AcceptLanguage
     protected array $options = [
         'http_accept_language' => '',
         'default_language' => 'en',
+        'fallback_language' => '',
         'accepted_languages' => [],
         'exact_match_only' => false,
         'two_letter_only' => true,
@@ -99,6 +114,7 @@ class AcceptLanguage
      * @param array{
      *     http_accept_language?: string,
      *     default_language?: string,
+     *     fallback_language?: string,
      *     accepted_languages?: array<array-key, string>,
      *     exact_match_only?: bool,
      *     two_letter_only?: bool,
@@ -121,10 +137,11 @@ class AcceptLanguage
         $this->initState();
 
         $this->initDefaultLanguageFromOptions();
+        $this->initFallbackLanguageFromOptions();
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
+     * @param array{http_accept_language?: string, default_language?: string, fallback_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
      *
      * @throws InvalidOptionType
      */
@@ -138,8 +155,8 @@ class AcceptLanguage
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
-     * @return array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>}
+     * @param array{http_accept_language?: string, default_language?: string, fallback_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
+     * @return array{http_accept_language?: string, default_language?: string, fallback_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>}
      */
     protected function retrieveAllowedOptions(array $options): array
     {
@@ -147,7 +164,7 @@ class AcceptLanguage
     }
 
     /**
-     * @param array{http_accept_language?: string, default_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
+     * @param array{http_accept_language?: string, default_language?: string, fallback_language?: string, accepted_languages?: array<array-key, string>, exact_match_only?: bool, two_letter_only?: bool, use_extlang_subtag?: bool, use_script_subtag?: bool, use_region_subtag?: bool, separator?: string, log_level?: string, log_only?: array<array-key, string>} $options
      */
     protected function validateOptions(array $options): void
     {
@@ -218,6 +235,7 @@ class AcceptLanguage
     {
         $this->header = '';
         $this->language = DefaultLanguage::createInvalid('', 0);
+        $this->rejectedLanguages = [];
     }
 
     /**
@@ -239,6 +257,32 @@ class AcceptLanguage
         }
 
         $this->defaultLanguage = $defaultLanguage;
+    }
+
+    /**
+     * @throws InvalidOptionValue
+     */
+    protected function initFallbackLanguageFromOptions(): void
+    {
+        $fallbackLanguage = $this->factory->makeFromLanguageString(
+            $this->options['fallback_language']
+        );
+
+        if (!$fallbackLanguage->isValid() && $this->isNotEmptyFallback()) {
+            throw new InvalidOptionValue(
+                sprintf(
+                    'The value "%s" is invalid. The option fallback_language should contain a valid language tag.',
+                    $this->options['fallback_language']
+                )
+            );
+        }
+
+        $this->fallbackLanguage = $fallbackLanguage;
+    }
+
+    protected function isNotEmptyFallback(): bool
+    {
+        return $this->options['fallback_language'] !== '';
     }
 
     /**
