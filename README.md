@@ -229,7 +229,7 @@ composer test
 
 ## References
 
-- [RFC 7231 Hypertext Transfer Protocol (HTTP/1.1)](https://datatracker.ietf.org/doc/html/rfc7231#section-5.3.5)
+- [RFC 9110 HTTP Semantics](https://datatracker.ietf.org/doc/html/rfc9110#section-12.5.4)
 - [RFC 5646 Tags for Identifying Languages](https://datatracker.ietf.org/doc/html/rfc5646#section-2)
 - [RFC 4647 Matching of Language Tags](https://datatracker.ietf.org/doc/html/rfc4647#section-2)
 

@@ -376,7 +376,7 @@ class AcceptLanguage
          * Whitespace around "=" is accepted too for leniency, although the grammar does not allow it. See RFC 9110, Section 5.6.3.
          *
          * Many of the request header fields for proactive negotiation use a common parameter, named "q" (case-insensitive),
-         * to assign a relative "weight" to the preference for that associated kind of content. See RFC 7231, Section 5.3.1.
+         * to assign a relative "weight" to the preference for that associated kind of content. See RFC 9110, Section 12.4.2.
          */
         $splitRange = preg_split('/[ \t]*;[ \t]*q[ \t]*=[ \t]*/i', trim($range, " \t"));
 

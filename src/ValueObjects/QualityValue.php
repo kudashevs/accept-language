@@ -20,7 +20,7 @@ final class QualityValue
 
     /**
      * 'allow_empty' bool A boolean that defines whether to handle an empty quality when a valid fallback is available.
-     * 'fallback' int|float An integer or a float with a valid quality fallback value. See RFC 7231, Section 5.3.1.
+     * 'fallback' int|float An integer or a float with a valid quality fallback value. See RFC 9110, Section 12.4.2.
      *
      * @var array{allow_empty: bool, fallback: int|float}
      */
