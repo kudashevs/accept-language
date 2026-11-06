@@ -73,6 +73,20 @@ final class LanguageFactory
             return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
         }
 
+        // handles the situations when the quality not null but empty
+        if (
+            isset($rawLanguageRange[1])
+            && !is_null($rawLanguageRange[1])
+            && is_string($rawLanguageRange[1])
+            && strlen(trim($rawLanguageRange[1])) === 0
+        ) {
+            return DefaultLanguage::createInvalid(
+                (string)$rawLanguageRange[0],
+                self::DEFAULT_FOR_INVALID_QUALITY,
+                $this->options
+            );
+        }
+
         // handles the situations when the quality is invalid
         if (
             !empty($rawLanguageRange[1])

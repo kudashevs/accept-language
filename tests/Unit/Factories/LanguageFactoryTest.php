@@ -94,6 +94,52 @@ class LanguageFactoryTest extends TestCase
                 'en',
                 42,
             ],
+            'a language range with an empty quality results into the invalid quality' => [
+                ['en', ''],
+                'en',
+                0,
+            ],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('provideDifferentValidLanguageRanges')]
+    public function it_can_convert_valid_language_range_to_a_valid_language(
+        array $range,
+        string $expectedTag,
+        float $expectedQuality
+    ): void {
+        $service = new LanguageFactory();
+        $language = $service->makeFromLanguageRange(...$range);
+
+        $this->assertEquals($expectedTag, $language->getTag());
+        $this->assertEquals($expectedQuality, $language->getQuality());
+        $this->assertTrue($language->isValid());
+    }
+
+    public static function provideDifferentValidLanguageRanges(): array
+    {
+        return [
+            'a language range without a quality results into the no quality' => [
+                [['en']],
+                'en',
+                LanguageFactory::DEFAULT_FOR_NO_QUALITY,
+            ],
+            'a language range with a minimum quality results into the same' => [
+                [['en', 0]],
+                'en',
+                0,
+            ],
+            'a language range with a valid quality results in the same' => [
+                [['en', 0.5]],
+                'en',
+                0.5,
+            ],
+            'a language range with a maximum quality results in the same' => [
+                [['en', 1]],
+                'en',
+                1,
+            ],
         ];
     }
 
@@ -135,52 +181,6 @@ class LanguageFactoryTest extends TestCase
             'an exponent notation' => [['en-US', '1e-1']],
             'a missing leading zero' => [['en-US', '.5']],
             'a leading plus sign' => [['en-US', '+0.5']],
-        ];
-    }
-
-    #[Test]
-    #[DataProvider('provideDifferentValidLanguageRanges')]
-    public function it_can_convert_valid_language_range_to_a_valid_language(
-        array $range,
-        string $expectedTag,
-        float $expectedQuality
-    ): void {
-        $service = new LanguageFactory();
-        $language = $service->makeFromLanguageRange(...$range);
-
-        $this->assertEquals($expectedTag, $language->getTag());
-        $this->assertEquals($expectedQuality, $language->getQuality());
-        $this->assertTrue($language->isValid());
-    }
-
-    public static function provideDifferentValidLanguageRanges(): array
-    {
-        return [
-            'a language range without a quality results into the no quality' => [
-                [['en']],
-                'en',
-                LanguageFactory::DEFAULT_FOR_NO_QUALITY,
-            ],
-            'a language range with an empty quality results into the invalid quality' => [
-                [['en', '']],
-                'en',
-                0,
-            ],
-            'a language range with a minimum quality results into the same' => [
-                [['en', 0]],
-                'en',
-                0,
-            ],
-            'a language range with a valid quality results in the same' => [
-                [['en', 0.5]],
-                'en',
-                0.5,
-            ],
-            'a language range with a maximum quality results in the same' => [
-                [['en', 1]],
-                'en',
-                1,
-            ],
         ];
     }
 }
