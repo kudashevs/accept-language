@@ -370,10 +370,17 @@ class AcceptLanguageTest extends TestCase
     public static function provideMalformedQualityValues(): array
     {
         return [
+            'an empty quality value' => ['en-US;q='],
+            'a missing assignment' => ['en-US;q'],
             'four decimal places' => ['en-US;q=0.7532'],
             'an exponent notation' => ['en-US;q=1e-1'],
+            'an out of range in tenths' => ['en-US;q=1.1'],
+            'an out of range in thousandths' => ['en-US;q=1.001'],
+            'an excessive precision' => ['en-US;q=1.0000'],
+            'a dangling decimal point' => ['en-US;q=0.'],
             'a missing leading zero' => ['en-US;q=.5'],
             'a leading plus sign' => ['en-US;q=+0.5'],
+            'a trailing separator' => ['en-US;q=0.5;'],
         ];
     }
 
@@ -1277,6 +1284,22 @@ class AcceptLanguageTest extends TestCase
                 ['http_accept_language' => 'es;q=dd'],
                 self::DEFAULT_LANGUAGE,
             ],
+            'two languages with missing delimiter' => [
+                ['http_accept_language' => 'en-US en-GB'],
+                self::DEFAULT_LANGUAGE,
+            ],
+            'two languages with dangling leading delimiter' => [
+                ['http_accept_language' => ',es,en-US'],
+                'es',
+            ],
+            'two languages with dangling trailing delimiter' => [
+                ['http_accept_language' => 'es,en-US,'],
+                'es',
+            ],
+            'two languages with wrong delimiter' => [
+                ['http_accept_language' => 'es;en-US'],
+                self::DEFAULT_LANGUAGE,
+            ],
             'two languages with wrong quality order result to the language with the highest quality' => [
                 ['http_accept_language' => 'en;q=0.3,es;q=1'],
                 'es',
@@ -1325,17 +1348,16 @@ class AcceptLanguageTest extends TestCase
     }
 
     #[Test]
-    public function it_can_retrieve_a_preferred_language_when_the_header_quality_parameter_is_empty(): void
+    public function it_ignores_a_preferred_language_when_the_header_quality_parameter_is_empty(): void
     {
-        // This is an exceptional case where we want to handle an empty quality parameter value.
         $options = [
-            'http_accept_language' => 'fr;q=,en;q=,gr',
+            'http_accept_language' => 'fr;q=,en,gr',
             'accepted_languages' => ['fr', 'en'],
         ];
 
         $service = $this->processHeaderWithOptions($options);
 
-        $this->assertSame('fr', $service->getPreferredLanguage());
+        $this->assertSame('en', $service->getPreferredLanguage());
         $this->assertSame(1, $service->getQuality());
     }
 
