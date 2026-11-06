@@ -66,13 +66,15 @@ class CaughtBugsTest extends ExtendedTestCase
     }
 
     #[Test]
-    public function it_can_retain_the_order_of_a_long_header_without_quality_values(): void
+    public function it_can_retrieve_the_first_accepted_language_from_a_long_header_without_quality_values(): void
     {
         /*
          * Bug found: 02.11.2026
          * Details: The fallback quality was decreased by 0.1 for each language range without a quality value.
          * Starting from the 11th language range, the fallback quality became invalid, so the quality value
          * was reset to 1, and the language took precedence over all the previous ones (except the first one).
+         * Update: the position-based fallback quality was replaced with the default quality of 1 for all ranges
+         * without a quality value (RFC 9110, Section 12.4.2). The header order is retained by the stable sorting.
          * @see \Kudashevs\AcceptLanguage\AcceptLanguage::retrieveRawLanguages()
          */
         $options = [
@@ -83,35 +85,18 @@ class CaughtBugsTest extends ExtendedTestCase
         $service->process();
 
         $this->assertSame('bb', $service->getPreferredLanguage());
-        $this->assertSame(0.9, $service->getPreferredLanguageQuality());
+        $this->assertSame(1, $service->getPreferredLanguageQuality());
     }
 
     #[Test]
-    public function it_can_retrieve_a_fallback_quality_without_floating_point_errors(): void
+    public function it_can_retain_the_header_order_of_languages_with_the_same_default_quality(): void
     {
         /*
          * Bug found: 02.11.2026
-         * Details: The repeated subtraction of the fallback quality step accumulated floating point errors,
-         * so the returned quality value was 0.7000000000000001 instead of 0.7.
-         */
-        $options = [
-            'http_accept_language' => 'aa,bb,cc,dd',
-            'accepted_languages' => ['dd'],
-        ];
-        $service = new AcceptLanguage($options);
-        $service->process();
-
-        $this->assertSame('dd', $service->getPreferredLanguage());
-        $this->assertSame(0.7, $service->getPreferredLanguageQuality());
-    }
-
-    #[Test]
-    public function it_can_retain_the_order_of_languages_with_the_minimum_fallback_quality(): void
-    {
-        /*
-         * Bug found: 02.11.2026
-         * Details: All the language ranges starting from the 11th one get the minimum fallback quality.
+         * Details: All the language ranges starting from the 11th one got the minimum fallback quality.
          * They must keep the order of the HTTP Accept-Language header among themselves.
+         * Update: all ranges without a quality value get the default quality of 1 (RFC 9110, Section 12.4.2).
+         * Languages with the same quality keep the order of the HTTP Accept-Language header (stable sorting).
          */
         $options = [
             'http_accept_language' => 'aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll',
@@ -121,6 +106,6 @@ class CaughtBugsTest extends ExtendedTestCase
         $service->process();
 
         $this->assertSame('kk', $service->getPreferredLanguage());
-        $this->assertSame(0.001, $service->getPreferredLanguageQuality());
+        $this->assertSame(1, $service->getPreferredLanguageQuality());
     }
 }
