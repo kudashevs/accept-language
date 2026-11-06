@@ -331,32 +331,15 @@ class AcceptLanguage
      */
     protected function retrieveRawLanguages(string $header): array
     {
-        $fallbackQuality = 1;
-        $fallbackQualityStep = 0.1;
-        $fallbackQualityMinimum = 0.001;
-
         $languages = [];
-        foreach (explode(',', $header) as $position => $languageRange) {
+        foreach (explode(',', $header) as $languageRange) {
             /*
              * For more information about language ranges see RFC 4647, Section 2.1.
              */
             $splitLanguageRange = $this->splitLanguageRange($languageRange);
 
-            /*
-             * The fallback quality is calculated from the position (not accumulated) to avoid floating point errors.
-             * It never goes below the lowest valid quality value, so a language at the end of a long header never
-             * becomes more preferred than the languages listed before it. See RFC 7231, Section 5.3.1.
-             */
-            $positionFallbackQuality = max(
-                round($fallbackQuality - $position * $fallbackQualityStep, 3),
-                $fallbackQualityMinimum
-            );
-
             /** @var array<LanguageInterface> $languages */
-            $languages[] = $this->factory->makeFromLanguageRange(
-                $splitLanguageRange,
-                $positionFallbackQuality
-            );
+            $languages[] = $this->factory->makeFromLanguageRange($splitLanguageRange);
         }
 
         return $languages;
