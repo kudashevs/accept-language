@@ -55,24 +55,22 @@ final class LanguageFactory
      */
     public function makeFromLanguageRange(array $rawLanguageRange): LanguageInterface
     {
-        // handles the situation when the language range is empty or very wrong
-        if (
-            count($rawLanguageRange) === 0
-            || (isset($rawLanguageRange[0]) && !is_scalar($rawLanguageRange[0]))
-        ) {
+        if ($this->isEmptyLanguageRange($rawLanguageRange)) {
             return DefaultLanguage::createInvalid('', self::DEFAULT_FOR_INVALID_QUALITY, $this->options);
         }
 
-        // handles the situation when the language range is suspicious
-        if (count($rawLanguageRange) > 2) {
+        if ($this->isSuspiciousLanguageRange($rawLanguageRange)) {
             $possibleTag = (string)$rawLanguageRange[0];
             $possibleQuality = $rawLanguageRange[1];
 
             return DefaultLanguage::createInvalid($possibleTag, $possibleQuality, $this->options);
         }
 
-        // handles the situations when the language range is invalid
-        if (!preg_match('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*|\*)$/i', (string)$rawLanguageRange[0])) {
+        if ($this->hasInvalidLanguageType($rawLanguageRange)) {
+            return DefaultLanguage::createInvalid('', self::DEFAULT_FOR_INVALID_QUALITY, $this->options);
+        }
+
+        if ($this->hasInvalidLanguage($rawLanguageRange)) {
             return DefaultLanguage::createInvalid(
                 (string)$rawLanguageRange[0],
                 $rawLanguageRange[1] ?? self::DEFAULT_FOR_INVALID_QUALITY,
@@ -80,13 +78,7 @@ final class LanguageFactory
             );
         }
 
-        // handles the situations when the quality not null but empty
-        if (
-            isset($rawLanguageRange[1])
-            && !is_null($rawLanguageRange[1])
-            && is_string($rawLanguageRange[1])
-            && strlen(trim($rawLanguageRange[1])) === 0
-        ) {
+        if ($this->hasEmptyQuality($rawLanguageRange)) {
             return DefaultLanguage::createInvalid(
                 (string)$rawLanguageRange[0],
                 self::DEFAULT_FOR_INVALID_QUALITY,
@@ -94,13 +86,7 @@ final class LanguageFactory
             );
         }
 
-        // handles the situations when the quality is invalid
-        if (
-            !empty($rawLanguageRange[1])
-            && !preg_match(
-                '/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/',
-                (string)$rawLanguageRange[1]
-            )) {
+        if ($this->hasInvalidQuality($rawLanguageRange)) {
             return DefaultLanguage::createInvalid((string)$rawLanguageRange[0], $rawLanguageRange[1], $this->options);
         }
 
@@ -112,5 +98,69 @@ final class LanguageFactory
         $quality = $rawLanguageRange[1] ?? self::DEFAULT_FOR_NO_QUALITY;
 
         return DefaultLanguage::create($tag, $quality, $this->options);
+    }
+
+    /**
+     * @param array $rawLanguageRange
+     * @return bool
+     */
+    private function isEmptyLanguageRange(array $rawLanguageRange): bool
+    {
+        return count($rawLanguageRange) === 0;
+    }
+
+    /**
+     * @param array $rawLanguageRange
+     * @return bool
+     */
+    private function isSuspiciousLanguageRange(array $rawLanguageRange): bool
+    {
+        return count($rawLanguageRange) > 2;
+    }
+
+    /**
+     * @param array $rawLanguageRange
+     * @return bool
+     */
+    private function hasInvalidLanguageType(array $rawLanguageRange): bool
+    {
+        return isset($rawLanguageRange[0])
+            && !is_scalar($rawLanguageRange[0]);
+    }
+
+    /**
+     * @param $rawLanguageRange
+     * @return bool
+     */
+    private function hasInvalidLanguage(array $rawLanguageRange): bool
+    {
+        return isset($rawLanguageRange[0])
+            && !preg_match('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z0-9]{1,8})*|\*)$/i', (string)$rawLanguageRange[0]);
+    }
+
+    /**
+     * @param array $rawLanguageRange
+     * @return bool
+     */
+    private function hasEmptyQuality(array $rawLanguageRange): bool
+    {
+        return isset($rawLanguageRange[1])
+            && !is_null($rawLanguageRange[1])
+            && is_string($rawLanguageRange[1])
+            && strlen(trim($rawLanguageRange[1])) === 0;
+    }
+
+    /**
+     * @param array $rawLanguageRange
+     * @return bool
+     */
+    private function hasInvalidQuality(array $rawLanguageRange): bool
+    {
+        return isset($rawLanguageRange[1])
+            && !empty($rawLanguageRange[1])
+            && !preg_match(
+                '/^(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)$/',
+                (string)$rawLanguageRange[1]
+            );
     }
 }
