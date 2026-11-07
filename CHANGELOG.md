@@ -2,6 +2,18 @@
 
 All Notable changes to `accept-language` will be documented in this file
 
+## [v6.0.0 - 2026-11-07](https://github.com/kudashevs/accept-language/compare/v5.0.0...v6.0.0)
+
+- Switch to the weight-based order as described int the standard (it was position-based before)
+- Add a new `fallback_language` option (used when the header explicitly rejects the default language with `q=0`)
+- Add support for optional whitespace (OWS) around commas and semicolons in the header
+- Improve the validation of language ranges and quality values according to RFC 9110 and RFC 4647
+- Update the outdated RFC 7231 references to RFC 9110
+- Update README.md
+- Some improvements
+
+Note: languages without an explicit quality now share the quality of 1 and keep their header order.
+
 ## [v5.0.0 - 2026-05-01](https://github.com/kudashevs/accept-language/compare/v4.0.0...v5.0.0)
 
 - Add support for PHP 8.5
